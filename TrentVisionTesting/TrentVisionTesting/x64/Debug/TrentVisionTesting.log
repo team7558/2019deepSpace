@@ -1,3 +1,4 @@
 ﻿  TrentVisionTesting.cpp
-c:\dev\2019deepspace\trentvisiontesting\trentvisiontesting\trentvisiontesting.cpp(49): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\dev\2019deepspace\trentvisiontesting\trentvisiontesting\trentvisiontesting.cpp(53): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\dev\2019deepspace\trentvisiontesting\trentvisiontesting\trentvisiontesting.cpp(92): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   TrentVisionTesting.vcxproj -> C:\Dev\2019deepSpace\TrentVisionTesting\x64\Debug\TrentVisionTesting.exe
