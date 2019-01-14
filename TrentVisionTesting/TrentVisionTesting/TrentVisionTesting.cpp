@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <opencv2/opencv.hpp>
 #include <iostream>
+//#include <windows.h>
 
 using namespace std;
 using namespace cv;
@@ -43,7 +44,7 @@ int main() {
 		findContours(canny, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
 		vector<Rect> bounders;
-
+		
 		for (int i = 0; i < contours.size(); i++) {
 			int area = contourArea(contours[i]);
 			if (area < max_area && area > min_area) {
@@ -51,14 +52,48 @@ int main() {
 			}
 		}
 
-		Mat imgBox = imgRgb.clone();
-		for (int i = 0; i < bounders.size(); i++) {
-			rectangle(imgBox, bounders[i], Scalar(0, 0, 255), 2);
-			circle(imgBox, Point(bounders[i].x + bounders[i].width / 2, bounders[i].y + bounders[i].height / 2), 10, Scalar(0, 0, 255), 2);
-		}
 
-		imshow("grey", imgBox);
-		if (waitKey(30) == 27) break;
+		
+		Mat imgBox = imgRgb.clone();
+		//for (int i = 0; i < bounders.size(); i++) {
+			Rect r1 = bounders[0];		
+			rectangle(imgBox, bounders[0], Scalar(0, 0, 255), 2);	
+
+			circle(imgBox, Point(r1.x + r1.width / 2, r1.y + r1.height / 2), 10, Scalar(0, 0, 255), 2);
+
+			Rect r2 = bounders[1];
+			rectangle(imgBox, bounders[1], Scalar(0, 0, 255), 2);
+
+			circle(imgBox, Point(r2.x + r2.width / 2, r2.y + r2.height / 2), 10, Scalar(0, 0, 255), 2);
+			
+			//line(imgBox, Point(r2.x + r2.width / 2, r2.y + r2.height / 2), Point(r1.x + r1.width / 2, r1.y + r1.height / 2), Scalar(0, 0, 255));
+			
+
+			//finding the center of the two rectangles 
+			Point p1 = Point(r1.x + r1.width / 2, r1.y + r1.height / 2);
+			Point p2 = Point(r2.x + r2.width / 2, r2.y + r2.height / 2);
+
+			Point center = (p1 + p2) / 2;
+			double centerX = (r1.x + r1.width / 2 + r2.x + r2.width / 2) / 2;
+			//int totalWidth = GetSystemMetrics(SM_CXSCREEN);
+			int totalWidth = imgBox.size().width;
+			//cout << totalWidth + "                 ";
+			cout << centerX << endl;
+
+			circle(imgBox, center, 10, Scalar(0, 0, 255), 2);
+
+			//Yaw equation -((target-1/2*Totalx)/1/2*totalX)
+
+			double yaw = -1 * ((centerX - (0.5 * totalWidth) / (0.5 * totalWidth)));
+			//cout << yaw; 
+
+
+		
+		//}
+	
+
+		//imshow("grey", imgBox);
+		//if (waitKey(30) == 27) break;
 	}
 
 }
