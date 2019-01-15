@@ -17,9 +17,9 @@ int min_area = 1500, max_area = 10000000;
 float kp, ki, kd = 0;
 
 int main() {
-	VideoCapture cap(2); // open the default camera
-	if (!cap.isOpened())  // check if we succeeded
-		return -1;
+	//VideoCapture cap(2); // open the default camera
+	//if (!cap.isOpened())  // check if we succeeded
+		//return -1;
 
 	//namedWindow("bars", 1);
 
@@ -35,7 +35,7 @@ int main() {
 
 	//Mat imgRgb = imread("color2.jpg");
 
-	//Mat imgRgb = imread("color3.jpg");
+	Mat imgRgb = imread("color3.jpg");
 	//imshow("test", imgRgb);
 
 	
@@ -44,16 +44,15 @@ int main() {
 
 	for (;;) {
 
-	Mat frame;
-		cap >> frame; // get a new frame from camera
+	//Mat frame;
+		//cap >> frame; // get a new frame from camera
 		Mat imgGrey;
 
 		Mat imgHsv;
-		cvtColor(frame, imgHsv, COLOR_BGR2HSV);
+		cvtColor(imgRgb, imgHsv, COLOR_BGR2HSV);
 	
 
 		inRange(imgHsv, Scalar(hue_min, sat_min, val_min), Scalar(hue_max, sat_max, val_max), imgGrey);
-		;
 		Mat canny;
 		Canny(imgGrey, canny, 10, 100);
 		
@@ -73,7 +72,7 @@ int main() {
 		}
 		
 		
-		Mat imgBox = frame.clone();
+		Mat imgBox = imgRgb.clone();
 		for (int i = 0; i < bounders.size(); i++) {
 			//cout << bounders.size();
 			//if (bounders.size() == 2) {
@@ -107,14 +106,10 @@ int main() {
 			float yaw = -1 * (n1 / n2);
 			cout << yaw << endl;
 
-
 			float error = 0 - yaw;
 			float correction = (error * kp) + (error * ki) + (error*kd);
 
-		}
-		
-		//}
-	
+		}	
 
 		imshow("grey", imgBox);
 		if (waitKey(30) == 27) break;
