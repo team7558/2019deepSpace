@@ -26,7 +26,7 @@ int main() {
 	createTrackbar("Val_Max", "bars", &val_max, 255);
 	*/
 
-	Mat imgRgb = imread("color.jpg");
+	Mat imgRgb = imread("color2.jpg");
 
 	
 	Mat imgHsv;
