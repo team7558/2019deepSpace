@@ -28,13 +28,12 @@ int main() {
 	createTrackbar("Val_Max", "bars", &val_max, 255);
 	*/
 
-<<<<<<< HEAD
-	Mat imgRgb = imread("color2.jpg");
 
-=======
+	//Mat imgRgb = imread("color2.jpg");
+
 	Mat imgRgb = imread("color3.jpg");
 	imshow("test", imgRgb);
->>>>>>> da94b4081367b98cbdfc027ca35b8776f871b3d7
+
 	
 	Mat imgHsv;
 	cvtColor(imgRgb, imgHsv, COLOR_BGR2HSV);

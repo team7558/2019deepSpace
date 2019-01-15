@@ -106,15 +106,15 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>Z:\Softwares\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\trossos\Documents\opencv\build\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>opencv_world400d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>Z:\Softwares\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world401d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\trossos\Documents\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
