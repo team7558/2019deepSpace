@@ -9,6 +9,7 @@
 using namespace std;
 using namespace cv;
 
+
 int hue_min = 64, hue_max = 94, sat_min = 157, sat_max = 255, val_min = 121, val_max = 223;
 
 int min_area = 1500, max_area = 10000000;
@@ -16,6 +17,9 @@ int min_area = 1500, max_area = 10000000;
 float kp, ki, kd = 0;
 
 int main() {
+	VideoCapture cap(2); // open the default camera
+	if (!cap.isOpened())  // check if we succeeded
+		return -1;
 
 	//namedWindow("bars", 1);
 
@@ -31,18 +35,23 @@ int main() {
 
 	//Mat imgRgb = imread("color2.jpg");
 
-	Mat imgRgb = imread("color3.jpg");
-	imshow("test", imgRgb);
+	//Mat imgRgb = imread("color3.jpg");
+	//imshow("test", imgRgb);
 
-	
-	Mat imgHsv;
-	cvtColor(imgRgb, imgHsv, COLOR_BGR2HSV);
 	
 	//if (waitKey(30) == 27) 
 
 
 	for (;;) {
+
+	Mat frame;
+		cap >> frame; // get a new frame from camera
 		Mat imgGrey;
+
+		Mat imgHsv;
+		cvtColor(frame, imgHsv, COLOR_BGR2HSV);
+	
+
 		inRange(imgHsv, Scalar(hue_min, sat_min, val_min), Scalar(hue_max, sat_max, val_max), imgGrey);
 		;
 		Mat canny;
@@ -64,7 +73,7 @@ int main() {
 		}
 		
 		
-		Mat imgBox = imgRgb.clone();
+		Mat imgBox = frame.clone();
 		for (int i = 0; i < bounders.size(); i++) {
 			//cout << bounders.size();
 			//if (bounders.size() == 2) {
@@ -142,7 +151,7 @@ using namespace std;
 
 int main(int, char**)
 {
-	VideoCapture cap(0); // open the default camera
+	VideoCapture cap(2); // open the default camera
 	if (!cap.isOpened())  // check if we succeeded
 		return -1;
 
