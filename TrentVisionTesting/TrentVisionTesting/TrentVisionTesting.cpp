@@ -11,7 +11,9 @@ using namespace cv;
 
 int hue_min = 64, hue_max = 94, sat_min = 157, sat_max = 255, val_min = 121, val_max = 223;
 
-int min_area = 10000, max_area = 10000000;
+int min_area = 1500, max_area = 10000000;
+
+float kp, ki, kd = 0;
 
 int main() {
 
@@ -26,8 +28,8 @@ int main() {
 	createTrackbar("Val_Max", "bars", &val_max, 255);
 	*/
 
-	Mat imgRgb = imread("color.jpg");
-
+	Mat imgRgb = imread("color3.jpg");
+	imshow("test", imgRgb);
 	
 	Mat imgHsv;
 	cvtColor(imgRgb, imgHsv, COLOR_BGR2HSV);
@@ -89,8 +91,13 @@ int main() {
 
 			double n1 = centerX - 0.5*totalWidth;
 			double n2 = 0.5*totalWidth;
-			int yaw = -1 * (n1 / n2);
+			float yaw = -1 * (n1 / n2);
 			cout << yaw << endl;
+
+
+			float error = 0 - yaw;
+			float correction = (error * kp) + (error * ki) + (error*kd);
+
 		}
 		
 		//}
