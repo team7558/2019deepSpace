@@ -1,0 +1,333 @@
+body{
+  font-family: Courier New, Roboto, sans-serif;
+  font-size: 16px;
+}
+
+
+#playfield {
+  margin: 0px;
+  margin-top: 75px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#playfieldrow {
+  margin: 0px;
+  display: table-row
+}
+
+.scorespaces, .rocketleveldisplay {
+  width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  margin-top: 10px;
+  text-align: center;
+  border: 2px solid black;
+  position: absolute;
+
+  font-size: 14px;
+  font-weight: 100px;
+}
+
+.scorespaces {
+  background-color: #C2C2C2;
+  left: 400px;
+}
+
+.rocketleveldislay {
+  background-color: #E2E2E2;
+}
+
+
+
+#pickup {
+  margin: 0px;
+  width: 200px;
+  display: table-cell;
+  height: 400px;
+}
+
+#habstart, #habend {
+  margin: 0px;
+  width: 200px;
+  display: table-cell;
+  height: 400px;
+}
+
+#habend {
+  display: none;
+}
+
+#gamemap {
+  margin: 0px;
+  background-image: url("photos/FRCGameMap2.png");
+  background-repeat: no-repeat;
+  background-size: 800px 400px;
+  width: 800px;
+  display: table-cell;
+  height: 400px;
+}
+
+.btnheader {
+  top: 40px;
+  text-align: center;
+}
+
+.itempickups, .hablevels {
+  margin-left: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  height: 60px;
+  width: 140px;
+  border: 2px solid black;
+  background: #E2E2E2;
+
+  font-size: 16px;
+  font-weight: 100px;
+}
+
+.cancel {
+  margin-left: 45px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  height: 40px;
+  width: 110px;
+  border: 2px solid black;
+  background-color: #C2C2C2;
+
+  font-size: 12px;
+  font-weight: 100px;
+}
+
+.btnheader {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.itemgrabtag, .habsandstormtag {
+  font-size: 12px;
+}
+
+#scoringrocket1, #scoringrocket2, #scoringship {
+  display: block;
+}
+
+
+
+
+/*All Different Scoring Spaces and Rockets*/
+#rocketleveldisplay1 {
+  left: 375px;
+  top: 75px;
+}
+
+#rocketleveldisplay2 {
+  left: 375px;
+  top: 375px;
+}
+
+#scorespace0, #scorespace1, #scorespace2, 
+#scorespace3, #scorespace4, #scorespace5 {
+  top: 75px;
+}
+
+#scorespace6, #scorespace7, #scorespace8, 
+#scorespace9, #scorespace10, #scorespace11 {
+  top: 375px;
+}
+
+#scorespace0 {   /*Top Rocket - Level 1 - Left*/
+  left: 275px;
+  display:block;
+}
+
+#scorespace1 {  /*Top Rocket - Level 1 - Right*/
+  left: 475px;
+  display:block;
+}
+
+#scorespace2 {  /*Top Rocket - Level 2 - Left*/
+  left: 275px;
+  display:block;
+}
+
+#scorespace3 {   /*Top Rocket - Level 2 - Right*/
+  left: 475px;
+  display:block;
+}
+#scorespace4 {  /*Top Rocket - Level 3 - Left*/
+  left: 275px;
+  display:block;
+}
+
+#scorespace5 {  /*Top Rocket - Level 3 - Right*/
+  left: 475px;
+  display:block;
+}
+
+#scorespace6 { /*Bottom Rocket - Level 1 - Left*/
+  left: 275px;
+  display:block;
+}
+
+#scorespace7 {  /*Bottom Rocket - Level 1 - Right*/
+  left: 475px;
+  display:block;
+}
+
+#scorespace8 {  /*Bottom Rocket - Level 2 - Left*/
+  left: 275px;
+  display:block;
+}
+
+#scorespace9 { /*Bottom Rocket - Level 2 - Right*/
+  left: 475px;
+  display:block;
+}
+#scorespace10 {  /*Bottom Rocket - Level 3 - Left*/
+  left: 275px;
+  display:block;
+}
+
+#scorespace11 {  /*Bottom Rocket - Level 3 - Right*/
+  left: 475px;
+  display:block;
+}
+
+#scorespace12 { /*Alliance-facing Ship - Upper*/
+  left: 675px;
+  top: 175px;
+  display:block;
+}
+
+#scorespace13 { /*Alliance-facing Ship - Lower*/
+  left: 675px;
+  top: 275px;
+  display:block;
+}
+
+#scorespace14 { /*Top of Ship - Left*/
+  left: 775px;
+  top: 75px;
+  display:block;
+}
+
+#scorespace15 { /*Bottom of Ship - Left*/
+  left: 775px;
+  top: 375px;
+  display:block;
+}
+
+#scorespace16 { /*Top of Ship - mid*/
+  left: 875px;
+  top: 75px;
+  display:block;
+}
+
+#scorespace17 { /*Bottom of Ship - mid*/
+  left: 875px;
+  top: 375px;
+  display:block;
+}
+
+#scorespace18 { /*Top of Ship - right*/
+  left: 975px;
+  top: 75px;
+  display:block;
+}
+
+#scorespace19 { /*Bottom of Ship - right*/
+  left: 975px;
+  top: 375px;
+  display:block;
+}
+
+
+
+
+
+
+
+.modelbl {
+  left: 0px;
+  position: fixed;
+  width: 100%;
+  background-color: #D57217;
+}
+
+#modelbltop {
+  top: 0px;
+}
+
+#modelblbtm {
+  margin-top: 16px;
+}
+
+.modelbl p {
+  font-size: 48px;
+  font-weight: 600;
+  margin: 0px;
+  color: white;
+  text-align: center;
+}
+
+
+
+
+#modetable {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 24px;
+  margin-bottom: 0px;
+}
+
+#moderow {
+  display: table-row;
+  width: 600px;
+}
+
+.modebtns {
+  margin: 20px;
+  vertical-align: middle;
+  text-align: center;
+  width: 200px;
+  height: 120px;
+  border: 2px solid black;
+  background-color: #C2C2C2;
+
+  font-size: 16px;
+  font-weight: 100px;
+}
+
+#modeleft, #modemid, #moderight {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  display: table-cell;
+  margin: 0px;
+}
+
+#sandstormmodebtn {
+  font-size: 20px;
+  background-color: #D57217;
+  font-weight: 100px;
+}
+
+
+
+
+#displayinfo {
+  margin-top: 100px;
+}
+
+#displayinfo p {
+  display: inline;
+}
+
+button {
+  cursor: pointer;
+}
