@@ -49,6 +49,20 @@ body{
   background-color: #C2C2C2;
 }
 
+#flipsides {
+  position: relative;
+  vertical-align: middle;
+  display: table-cell;
+  width: 120px;
+  margin-left: 30px;
+  margin-right: 30px;
+  border: 2px solid black;
+  height: 80px;
+
+  font-size: 16px;
+  background-color: #E2E2E2;
+}
+
 #stationR1, #stationR2, #stationR3, #stationB1, #stationB2, #stationB3 {
   height: 60px;
 }
@@ -105,15 +119,21 @@ body{
   display: none;
 }
 
+#gamearea {
+  margin: 0px;
+  width: 800px;
+  display: table-cell;
+  height: 520px;
+}
+
 #gamemap {
   image-rendering: pixelated;
-  margin: 0px;
   background-image: url("photos/FRCGameMapL.png");
   background-repeat: no-repeat;
   background-size: 800px 520px;
   width: 800px;
-  display: table-cell;
   height: 520px;
+  transform: scaleX(1);
 }
 
 .btnheader {
@@ -140,7 +160,7 @@ body{
   margin-top: 15px;
   margin-bottom: 15px;
   text-align: center;
-  height: 40px;
+  height: 60px;
   width: 110px;
   border: 2px solid black;
   background-color: #C2C2C2;
@@ -168,22 +188,22 @@ body{
 /*All Different Scoring Spaces and Rockets*/
 #rocketleveldisplay1 {
   left: 425px;
-  top: 150px;
+  top: 170px;
 }
 
 #rocketleveldisplay2 {
   left: 425px;
-  top: 590px;
+  top: 610px;
 }
 
 #scorespace0, #scorespace1, #scorespace2, 
 #scorespace3, #scorespace4, #scorespace5 {
-  top: 150px;
+  top: 170px;
 }
 
 #scorespace6, #scorespace7, #scorespace8, 
 #scorespace9, #scorespace10, #scorespace11 {
-  top: 590px;
+  top: 610px;
 }
 
 #scorespace0 {   /*Top Rocket - Level 1 - Left*/
@@ -234,6 +254,7 @@ body{
   left: 505px;
   display:block;
 }
+
 #scorespace10 {  /*Bottom Rocket - Level 3 - Left*/
   left: 345px;
   display:block;
@@ -246,49 +267,49 @@ body{
 
 #scorespace12 { /*Alliance-facing Ship - Upper*/
   left: 505px;
-  top: 310px;
+  top: 330px;
   display:block;
 }
 
 #scorespace13 { /*Alliance-facing Ship - Lower*/
   left: 505px;
-  top: 430px;
+  top: 450px;
   display:block;
 }
 
 #scorespace14 { /*Top of Ship - Left*/
   left: 625px;
-  top: 270px;
+  top: 290px;
   display:block;
 }
 
 #scorespace15 { /*Bottom of Ship - Left*/
   left: 625px;
-  top: 470px;
+  top: 490px;
   display:block;
 }
 
 #scorespace16 { /*Top of Ship - mid*/
   left: 745px;
-  top: 270px;
+  top: 290px;
   display:block;
 }
 
 #scorespace17 { /*Bottom of Ship - mid*/
   left: 745px;
-  top: 470px;
+  top: 490px;
   display:block;
 }
 
 #scorespace18 { /*Top of Ship - right*/
   left: 865px;
-  top: 270px;
+  top: 290px;
   display:block;
 }
 
 #scorespace19 { /*Bottom of Ship - right*/
   left: 865px;
-  top: 470px;
+  top: 490px;
   display:block;
 }
 
@@ -303,7 +324,7 @@ body{
   left: 0px;
   position: fixed;
   width: 100%;
-  background-color: #D57217;
+  background-color: #6CCC12;
 }
 
 #modelbltop {
@@ -352,7 +373,7 @@ body{
   font-weight: 100px;
 }
 
-#modeleft, #modemid, #moderight {
+#modepreload, #modesandstorm, #modeteleop, #modemisc {
   width: 200px;
   height: 60px;
   position: relative;
@@ -360,9 +381,9 @@ body{
   margin: 0px;
 }
 
-#sandstormmodebtn {
+#preloadmodebtn {
   font-size: 24px;
-  background-color: #D57217;
+  background-color: #6CCC12;
   font-weight: 100px;
 }
 
