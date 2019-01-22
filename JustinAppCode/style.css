@@ -75,7 +75,7 @@ body{
 
 
 
-.scorespaces, .rocketleveldisplay {
+.scorespaces, .rocketleveldisplay, #robotscorespace {
   width: 80px;
   height: 80px;
   margin-left: 10px;
@@ -88,7 +88,12 @@ body{
   font-weight: 100px;
 }
 
-.scorespaces {
+#robotscorespace {
+  height: 120px;
+  width: 120px;
+}
+
+.scorespaces, #robotscorespace {
   background-color: #C2C2C2;
   left: 400px;
 }
@@ -99,7 +104,20 @@ body{
 
 
 
+#pickup, #pickuppreload {
+  vertical-align: middle;
+  margin: 0px;
+  width: 200px;
+  display: table-cell;
+  height: 400px;
+}
+
 #pickup {
+  display: none;
+}
+
+
+#habstart, #habend, #habpreload {
   vertical-align: middle;
   margin: 0px;
   width: 200px;
@@ -108,16 +126,10 @@ body{
 }
 
 #habstart, #habend {
-  vertical-align: middle;
-  margin: 0px;
-  width: 200px;
-  display: table-cell;
-  height: 400px;
-}
-
-#habend {
   display: none;
 }
+
+
 
 #gamearea {
   margin: 0px;
@@ -141,7 +153,7 @@ body{
   text-align: center;
 }
 
-.itempickups, .hablevels {
+.itempickups, .hablevels, #preloaditem {
   margin-left: 30px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -194,6 +206,11 @@ body{
 #rocketleveldisplay2 {
   left: 425px;
   top: 610px;
+}
+
+#robotscorespace {
+  left: 305px;
+  top: 370px;
 }
 
 #scorespace0, #scorespace1, #scorespace2, 

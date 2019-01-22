@@ -25,8 +25,7 @@
          <div id="playfieldrow">
 
             <div id="habpreload">
-               <p class="btnheader">HAB Levels</p>
-               <button class="hablevels" id="" onclick="">Preloaded Item<br><span class="habsandstormtag">(Null Hatch Panel))</span></button>
+               <p class="btnheader">Preload Setting</p>
                <button class="hablevels" id="habLevel01" onclick="leaveHAB(1, 0);">Started on HAB Level 1<br><span class="habsandstormtag">(During Preload)</span></button>
                <button class="hablevels" id="habLevel02" onclick="leaveHAB(2, 0);">Started on HAB Level 2<br><span class="habsandstormtag">(During Preload)</span></button>
                <button class="hablevels" id="habLevel03" onclick="leaveHAB(3, 0);">Started on HAB Level 3<br><span class="habsandstormtag">(During Preload)</span></button>
@@ -34,7 +33,7 @@
             </div>
 
             <div id="habstart">
-               <p class="btnheader">HAB Levels</p>
+               <p class="btnheader">HAB Activity</p>
                <button class="hablevels" id="habLevel10" onclick="leaveHAB(0, 1);">Stayed on HAB<br><span class="habsandstormtag">(During Sandstorm)</span></button>
                <button class="hablevels" id="habLevel11" onclick="leaveHAB(1, 1);">Left HAB Level 1<br><span class="habsandstormtag">(During Sandtorm)</span></button>
                <button class="hablevels" id="habLevel12" onclick="leaveHAB(2, 1);">Left HAB Level 2<br><span class="habsandstormtag">(During Sandtorm)</span></button>
@@ -43,7 +42,7 @@
             </div>
 
             <div id="habend">
-               <p class="btnheader">HAB Levels</p>
+               <p class="btnheader">HAB Activity</p>
                <button class="hablevels" id="habLevel20" onclick="leaveHAB(0, 2);">Remained on Field<br><span class="habsandstormtag">(During Endgame)</span></button>
                <button class="hablevels" id="habLevel21" onclick="leaveHAB(1, 2);">Entered HAB Level 1<br><span class="habsandstormtag">(During Endgame)</span></button>
                <button class="hablevels" id="habLevel22" onclick="leaveHAB(2, 2);">Entered HAB Level 2<br><span class="habsandstormtag">(During Endgame)</span></button>
@@ -53,6 +52,9 @@
 
             <div id="gamearea">
                <div id="gamemap"></div>
+
+               <button id="robotscorespace" onclick="preloadRobot();">Your Robot<br>is Holding:<br><br>Nothing</button>
+
                <div id="scoringrocket1">
                   <button class="rocketleveldisplay" id="rocketleveldisplay1" onclick="changeRocket();">Level 1</button>
 
@@ -102,6 +104,13 @@
                </div>
             </div>
 
+
+            <div id="pickuppreload">
+               <p class="btnheader">Item Pickup</p>
+               <button class="itempickups" id="cargoFloor" onclick="getCargoFloor();">Cargo</button>
+               <button class="itempickups" id="panelFloor" onclick="getPanelFloor();">Hatch Panel</button>
+               <button class="cancel" onclick="dropItem();">Drop Item</button>
+            </div>
 
             <div id="pickup">
                <p class="btnheader">Item Pickup</p>

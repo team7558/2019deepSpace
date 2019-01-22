@@ -1,5 +1,5 @@
-var gameMode = "preload", habLevelStart = 0, habLevelEnd = 0, holdingItem = false, itemType = "cargo", rocketLevel = 1,
-cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, station = "R1", xscale = 1;
+var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
+cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, station = "R1", xscale = 1, preloadedItem = "Nothing";
 
 var scoreSheet = [ //Cargo, panel, cargoDuringSandstorm, panelDuringSandstorm - index is listed below
 	//will be no, yes, or try (only temporary)
@@ -53,7 +53,9 @@ var buttonPlacement = [ //For each button, then the rocket displays
 	[865,385],
 
 	[425,825],
-	[425,825]
+	[425,825],
+
+	[305, 905]
 
 ];
 
@@ -84,10 +86,12 @@ function changeButtonPlacement() {
 		document.getElementById("rocketleveldisplay1").style.left = buttonPlacement[20][0];
 		document.getElementById("rocketleveldisplay2").style.left = buttonPlacement[21][0];
 		document.getElementById("gamemap").style.transform = "scaleX(1)";
+		document.getElementById("robotscorespace").style.left = buttonPlacement[22][0];
 	} else {
 		document.getElementById("rocketleveldisplay1").style.left = buttonPlacement[20][1];
 		document.getElementById("rocketleveldisplay2").style.left = buttonPlacement[21][1];
 		document.getElementById("gamemap").style.transform = "scaleX(-1)";
+		document.getElementById("robotscorespace").style.left = buttonPlacement[22][1];
 	}
 		
 }
@@ -130,9 +134,11 @@ function updateMode(mode) {
 
 	if(gameMode == "preload") {
 
-		document.getElementById("habstart").style.display = "table-cell";
+		document.getElementById("habpreload").style.display = "table-cell";
+		document.getElementById("habstart").style.display = "none";
 		document.getElementById("habend").style.display = "none";
-		document.getElementById("pickup").style.display = "table-cell";
+		document.getElementById("pickuppreload").style.display = "table-cell";
+		document.getElementById("pickup").style.display = "none";
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
@@ -150,8 +156,10 @@ function updateMode(mode) {
 
 	} else if(gameMode == "sandstorm") {
 
+		document.getElementById("habpreload").style.display = "none";
 		document.getElementById("habstart").style.display = "table-cell";
 		document.getElementById("habend").style.display = "none";
+		document.getElementById("pickuppreload").style.display = "none";
 		document.getElementById("pickup").style.display = "table-cell";
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
@@ -169,8 +177,11 @@ function updateMode(mode) {
 		}
 
 	} else if(gameMode == "teleop") {
+		
+		document.getElementById("habpreload").style.display = "none";
 		document.getElementById("habstart").style.display = "none";
 		document.getElementById("habend").style.display = "table-cell";
+		document.getElementById("pickuppreload").style.display = "none";
 		document.getElementById("pickup").style.display = "table-cell";
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
@@ -186,8 +197,11 @@ function updateMode(mode) {
 			y[i].style.backgroundColor = teleopCol;
 		}
 	} else {
+		
+		document.getElementById("habpreload").style.display = "none";
 		document.getElementById("habstart").style.display = "none";
 		document.getElementById("habend").style.display = "none";
+		document.getElementById("pickuppreload").style.display = "none";
 		document.getElementById("pickup").style.display = "none";
 		document.getElementById("scoringrocket1").style.display = "none";
 		document.getElementById("scoringrocket2").style.display = "none";
@@ -295,6 +309,22 @@ function updateButtonLook() {
 		}
 	}
 
+	//Preload robot specific
+	var bot = document.getElementById("robotscorespace");
+	if(preloadedItem == "Nothing") {
+		if(!holdingItem) {
+			makeButtonStop(bot);
+			bot.innerHTML = "Your Robot<br>is Holding:<br><br>Nothing";
+		} else {
+			makeButtonNorm(bot);
+			bot.innerHTML = "Empty";
+		}
+	} else {
+		bot.innerHTML = "Your Robot<br>is Holding:<br><br>" + preloadedItem;
+		makeButtonStop(bot);
+		
+	}
+
 
 	var y = document.getElementsByClassName("rocketleveldisplay");
 	for(i = 0; i < y.length; i++) {
@@ -310,16 +340,35 @@ function changeRocket() {
 	updateButtonLook();
 }
 
+function preloadRobot() {
+	if(preloadedItem == "Nothing") {
+		if(holdingItem) {
+			if(itemType == "cargo") {
+				preloadedItem = "Cargo";
+			} else if(itemType == "panel") {
+				preloadedItem = "Panel";
+			}
+			dropItem();
+		}
+	}
+	updateButtonLook();
+}
+
 function score(place) { //Actually scores on a given position
 	var cargoState = scoreSheet[place][0];
 	var panelState = scoreSheet[place][1];
 	var x = document.getElementsByClassName("scorespaces");
-	var pos = x[i];
 
 	if(holdingItem) {
 		if(itemType == "cargo") {
 			if(cargoState == "no") {
 				scoreSheet[place][0] = "try";
+
+				//No attempt during preload
+				if(gameMode == "preload") {
+					scoreSheet[place][0] = "yes";
+					dropItem();
+				}
 			} else if(cargoState == "try") {
 				scoreSheet[place][0] = "yes";
 				if(gameMode=="sandstorm") scoreSheet[place][2] = true;
@@ -328,6 +377,12 @@ function score(place) { //Actually scores on a given position
 		} else {
 			if(panelState == "no") {
 				scoreSheet[place][1] = "try";
+
+				//No attempt during preload
+				if(gameMode == "preload") {
+					scoreSheet[place][1] = "yes";
+					dropItem();
+				}
 			} else if(panelState == "try") {
 				scoreSheet[place][1] = "yes";
 				if(gameMode=="sandstorm") scoreSheet[place][3] = true;
@@ -340,23 +395,35 @@ function score(place) { //Actually scores on a given position
 
 function leaveHAB(level, type) {
 
-	if(type == 0) {
-		if(level >= 0 && habLevelStart==0) {
-			habLevelStart = level;
-			changeLevel(level, type);
-			document.getElementById("habLevel"+type+habLevelStart).style.background = checkCol;
+	if(level == -1 || (type==0&&habLevelPreload==-1) || (type==1&&habLevelStart==-1) || (type==2&&habLevelEnd==-1)) {
+
+		if(type == 0) {
+			if(level >= 0 && habLevelPreload==-1) {
+				habLevelPreload = level;
+				changeLevel(level, type);
+				document.getElementById("habLevel"+type+habLevelPreload).style.background = checkCol;
+			} else {
+				habLevelPreload = -1;
+				changeLevel(level,type);
+			}
+		} else if(type == 1) {
+			if(level >= 0 && habLevelStart==-1) {
+				habLevelStart = level;
+				changeLevel(level, type);
+				document.getElementById("habLevel"+type+habLevelStart).style.background = checkCol;
+			} else {
+				habLevelStart = -1;
+				changeLevel(level,type);
+			}
 		} else {
-			habLevelStart = 0;
-			changeLevel(level,type);
-		}
-	} else {
-		if(level >= 0 && habLevelEnd==0) {
-			habLevelEnd = level;
-			changeLevel(level, type);
-			document.getElementById("habLevel"+type+habLevelEnd).style.background = checkCol;
-		} else {
-			habLevelEnd = 0;
-			changeLevel(level,type);
+			if(level >= 0 && habLevelEnd==-1) {
+				habLevelEnd = level;
+				changeLevel(level, type);
+				document.getElementById("habLevel"+type+habLevelEnd).style.background = checkCol;
+			} else {
+				habLevelEnd = -1;
+				changeLevel(level,type);
+			}
 		}
 	}
 }
@@ -417,28 +484,36 @@ function changeLevel(level, type) {
 	if(level >= 0) {
 		var x = document.getElementsByClassName("hablevels");
 		for(i = 0; i < x.length; i++) {
-			if(type == 0 && i <= 3)	makeButtonStop(x[i]);
-			if(type == 1 && i > 3) makeButtonStop(x[i]);
+			if(type == 0 && i <= 2)	makeButtonStop(x[i]);
+			if(type == 1 && i > 2 && i <= 6) makeButtonStop(x[i]);
+			if(type == 2 && i > 6) makeButtonStop(x[i]);
 		}
-		if(gameMode=="sandstorm") {
+		if(gameMode=="preload") {
 			makeButtonNorm(document.getElementsByClassName("cancel")[0]);
 			document.getElementsByClassName("cancel")[0].style.fontSize = "16px";
-		} else {
+		} else if(gameMode=="sandstorm") {
 			makeButtonNorm(document.getElementsByClassName("cancel")[1]);
 			document.getElementsByClassName("cancel")[1].style.fontSize = "16px";
+		} else {
+			makeButtonNorm(document.getElementsByClassName("cancel")[2]);
+			document.getElementsByClassName("cancel")[2].style.fontSize = "16px";
 		}
 	} else {
 		var x = document.getElementsByClassName("hablevels");
 		for(i = 0; i < x.length; i++) {
-			if(type == 0 && i <= 3)	makeButtonNorm(x[i]);
-			if(type == 1 && i > 3) makeButtonNorm(x[i]);
+			if(type == 0 && i <= 2)	makeButtonNorm(x[i]);
+			if(type == 1 && i > 2 && i <= 6) makeButtonNorm(x[i]);
+			if(type == 2 && i > 6) makeButtonNorm(x[i]);
 		}
-		if(gameMode=="sandstorm") {
+		if(gameMode=="preload") {
 			makeButtonStop(document.getElementsByClassName("cancel")[0]);
 			document.getElementsByClassName("cancel")[0].style.fontSize = "12px";
-		} else {
+		} else if(gameMode=="sandstorm") {
 			makeButtonStop(document.getElementsByClassName("cancel")[1]);
 			document.getElementsByClassName("cancel")[1].style.fontSize = "12px";
+		} else {
+			makeButtonStop(document.getElementsByClassName("cancel")[2]);
+			document.getElementsByClassName("cancel")[2].style.fontSize = "12px";
 		}
 	}
 }
