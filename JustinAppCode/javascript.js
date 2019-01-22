@@ -142,6 +142,7 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
+		document.getElementById("robotscorespace").style.display = "block";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -164,6 +165,7 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
+		document.getElementById("robotscorespace").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -186,6 +188,7 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
+		document.getElementById("robotscorespace").style.display = "none";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -206,6 +209,7 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "none";
 		document.getElementById("scoringrocket2").style.display = "none";
 		document.getElementById("scoringship").style.display = "none";
+		document.getElementById("robotscorespace").style.display = "none";
 	}
 
 	updateGameStats();
@@ -349,6 +353,18 @@ function preloadRobot() {
 				preloadedItem = "Panel";
 			}
 			dropItem();
+
+			//Make it so that the item has been selected
+			holdingItem = false;
+			if(preloadedItem == "Cargo") {
+				getCargoHuman();
+				cargoGrabbedHuman--;
+			} else if(preloadedItem == "Panel") {
+				getPanelHuman();
+				panelGrabbedHuman--;
+			}
+			makeButtonStop(document.getElementsByClassName("cancel")[3]);
+			document.getElementsByClassName("cancel")[3].style.fontSize = "12px";
 		}
 	}
 	updateButtonLook();
@@ -469,8 +485,29 @@ function getPanelFloor() {
 	}
 }
 
+function getCargoPreload() {
+	if(!holdingItem && preloadedItem=="Nothing") {
+		itemType = "cargo";
+		holdingItem = true;
+		changePickup("grab");
+		document.getElementById("cargoPreload").style.background = checkCol;
+	}
+}
+
+function getPanelPreload() {
+	if(!holdingItem && preloadedItem=="Nothing") {
+		itemType = "panel";
+		holdingItem = true;
+		changePickup("grab");
+		document.getElementById("panelPreload").style.background = checkCol;
+	}
+}
+
+
+
+
 function dropItem() {
-	if(holdingItem) {
+	if(holdingItem && !(gameMode=="preload" && preloadedItem!="Nothing")) {
 		itemType = "";
 		holdingItem = false;
 		changePickup("drop");
@@ -548,18 +585,30 @@ function changePickup(type) {
 		}
 
 		//Change drop item
-		makeButtonNorm(document.getElementsByClassName("cancel")[2]);
-		document.getElementsByClassName("cancel")[2].style.fontSize = "16px";
+		if(gameMode == "preload" && preloadedItem == "Nothing") {
+			makeButtonNorm(document.getElementsByClassName("cancel")[3]);
+			document.getElementsByClassName("cancel")[3].style.fontSize = "16px";
+		} else {
+			makeButtonNorm(document.getElementsByClassName("cancel")[4]);
+			document.getElementsByClassName("cancel")[4].style.fontSize = "16px";
+		}
+		
 	} else {
 		//Change pickups
 		var x = document.getElementsByClassName("itempickups");
 		for(i = 0; i < x.length; i++) {
 			makeButtonNorm(x[i]);
+			if(i < 2 && preloadedItem!="Nothing") makeButtonStop(x[i]);
 		}
 
 		//Change drop item
-		makeButtonStop(document.getElementsByClassName("cancel")[2]);
-		document.getElementsByClassName("cancel")[2].style.fontSize = "12px";
+		if(gameMode == "preload" && preloadedItem == "Nothing") {
+			makeButtonStop(document.getElementsByClassName("cancel")[3]);
+			document.getElementsByClassName("cancel")[3].style.fontSize = "12px";
+		} else {
+			makeButtonStop(document.getElementsByClassName("cancel")[4]);
+			document.getElementsByClassName("cancel")[4].style.fontSize = "12px";
+		}
 	}
 }
 
