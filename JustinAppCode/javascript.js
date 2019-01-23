@@ -26,8 +26,6 @@ var scoreSheet = [ //Cargo, panel, cargoWhen, panelWhen, nullPanel - index is li
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
-	["no", "no", "notscored", "notscored", false],
-	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false]
 ];
 
@@ -107,7 +105,7 @@ function print2D(arr) {
 		for(j = 0; j < arr[i].length; j++) {
 			msg+=arr[i][j]+"   ";
 		}
-		msg+="<br>";
+		msg+="\n";
 	}
 	alert(msg);
 }
@@ -246,7 +244,6 @@ function switchDefense(level) {
 	var y = document.getElementById("defense"+level);
 	y.style.background = checkCol;
 	defenseLevel = level;
-	alert(defenseLevel);
 }
 
 function switchCarryBot(level) {
@@ -255,7 +252,6 @@ function switchCarryBot(level) {
 	var y = document.getElementById("carrybot"+level);
 	y.style.background = checkCol;
 	carryBotNumber = level;
-	alert(carryBotNumber);
 }
 
 function switchWasCarried() {
@@ -401,7 +397,7 @@ function preloadRobot() {
 				preloadedItem = "Panel";
 			}
 			dropItem();
-			print2D(scoreSheet);
+			//print2D(scoreSheet);
 /*
 			//Make it so that the item has been selected
 			holdingItem = false;
