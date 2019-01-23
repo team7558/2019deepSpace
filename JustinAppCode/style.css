@@ -139,6 +139,7 @@ body{
 }
 
 #gamemap {
+  display: block;
   image-rendering: pixelated;
   background-image: url("photos/FRCGameMapL.png");
   background-repeat: no-repeat;
@@ -147,6 +148,56 @@ body{
   height: 520px;
   transform: scaleX(1);
 }
+
+#miscellaneous {
+  display: none;
+}
+
+#miscellaneousrow {
+  display: table-row;
+}
+
+#miscellaneousleft {
+  text-align: center;
+  display: table-cell;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid black;
+  width: 250px;
+  height: 400px;
+}
+
+#defensebuttons {
+  margin-bottom: 48px;
+}
+
+.switchdefense, .switchcarrybot {
+  background-color: #E2E2E2;
+  margin: 0px;
+  width: 40px;
+  height: 30px;
+  font-size: 16px;
+  border: 0px;
+  margin: -5px;
+}
+
+#defense0, #carrybot0 {
+  background-color: #66FF46;
+}
+
+#wascarried {
+  text-align: center;
+  background-color: #E2E2E2;
+  margin-top: 20px;
+  margin-bottom: 48px;
+  width: 120px;
+  height: 80px;
+  font-size: 16px;
+  border: 0px;
+}
+
+
+
 
 .btnheader {
   top: 40px;

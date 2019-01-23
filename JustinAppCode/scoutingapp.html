@@ -93,8 +93,8 @@
 
                
                <div id="scoringship">
-                  <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                  <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br>Panel: &#x2716</button>
+                  <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace14" onclick="score(14);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace15" onclick="score(15);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace16" onclick="score(16);">Cargo: &#x2716<br>Panel: &#x2716</button>
@@ -108,9 +108,22 @@
 
 
                <div id="miscellaneous">
-                  <div id="miscellaneousleft">
-                     <p class="btnheader">Robot Defense Activity</p>
-                     <
+                  <div id="miscellaneousrow">
+                     <div id="miscellaneousleft">
+                        <p class="btnheader">Robot Defense Activity</p>
+                        <div id="defensebuttons">
+                           <button class="switchdefense" id="defense0" onclick="switchDefense(0);">0</button>
+                           <button class="switchdefense" id="defense1" onclick="switchDefense(1);">1</button>
+                           <button class="switchdefense" id="defense2" onclick="switchDefense(2);">2</button>
+                        </div>
+                        <p class="btnheader">Number of Bots Carried</p>
+                        <div id="carrybotbuttons">
+                           <button class="switchcarrybot" id="carrybot0" onclick="switchCarryBot(0);">0</button>
+                           <button class="switchcarrybot" id="carrybot1" onclick="switchCarryBot(1);">1</button>
+                           <button class="switchcarrybot" id="carrybot2" onclick="switchCarryBot(2);">2</button>
+                        </div>
+                        <button id="wascarried" onclick="switchWasCarried();">Was Carried</button>
+                     </div>
                   </div>
                </div>
             </div>

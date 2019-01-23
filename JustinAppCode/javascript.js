@@ -1,6 +1,8 @@
 var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
 cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, station = "R1", xscale = 1, preloadedItem = "Nothing";
 
+var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
+
 var scoreSheet = [ //Cargo, panel, cargoDuringSandstorm, panelDuringSandstorm - index is listed below
 	//will be no, yes, or try (only temporary)
 	["no", "no", false, false],
@@ -15,8 +17,8 @@ var scoreSheet = [ //Cargo, panel, cargoDuringSandstorm, panelDuringSandstorm - 
 	["no", "no", false, false],
 	["no", "no", false, false],
 	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
+	["yes", "no", false, false],
+	["yes", "no", false, false],
 	["no", "no", false, false],
 	["no", "no", false, false],
 	["no", "no", false, false],
@@ -143,6 +145,8 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
 		document.getElementById("robotscorespace").style.display = "block";
+		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("miscellaneous").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -166,6 +170,8 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
 		document.getElementById("robotscorespace").style.display = "none";
+		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("miscellaneous").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -189,6 +195,8 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
 		document.getElementById("robotscorespace").style.display = "none";
+		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("miscellaneous").style.display = "none";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -210,11 +218,37 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket2").style.display = "none";
 		document.getElementById("scoringship").style.display = "none";
 		document.getElementById("robotscorespace").style.display = "none";
+		document.getElementById("gamemap").style.display = "none";
+		document.getElementById("miscellaneous").style.display = "table";
 	}
 
 	updateGameStats();
 }
 
+
+function switchDefense(level) {
+	var x = document.getElementsByClassName("switchdefense");
+	for(i = 0; i < x.length; i++) x[i].style.background = normCol;
+	var y = document.getElementById("defense"+level);
+	y.style.background = checkCol;
+	defenseLevel = level;
+	alert(defenseLevel);
+}
+
+function switchCarryBot(level) {
+	var x = document.getElementsByClassName("switchcarrybot");
+	for(i = 0; i < x.length; i++) x[i].style.background = normCol;
+	var y = document.getElementById("carrybot"+level);
+	y.style.background = checkCol;
+	carryBotNumber = level;
+	alert(carryBotNumber);
+}
+
+function switchWasCarried() {
+	wasCarried = !wasCarried;
+	document.getElementById("wascarried").style.background = normCol;
+	if(wasCarried) document.getElementById("wascarried").style.background = checkCol
+}
 
 
 function updateButtonLook() {
