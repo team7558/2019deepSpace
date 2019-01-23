@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,6 +17,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,6 +38,13 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+  private static DifferentialDrive m_robotDrive;
+  private static SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
+  private static Joystick m_controller_1;
+  private static final int CONTROLLER_1 = 0;
+
+  private static VictorSPX m_intake_1, m_intake_2;
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -36,9 +52,18 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.addDefault("Default Auto", new ExampleCommand());
-    // chooser.addObject("My Auto", new MyAutoCommand());
+    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    m_leftMotorGroup = new SpeedControllerGroup(new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless), new CANSparkMax(RobotMap.LEFT_MOTOR_2, MotorType.kBrushless));
+    m_rightMotorGroup = new SpeedControllerGroup(new CANSparkMax(RobotMap.RIGHT_MOTOR_1, MotorType.kBrushless), new CANSparkMax(RobotMap.RIGHT_MOTOR_2, MotorType.kBrushless));
+    m_robotDrive = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
+    m_controller_1 = new Joystick(CONTROLLER_1);
+    
+    m_intake_1 = new VictorSPX(4);
+    m_intake_2 = new VictorSPX(5);
+    
   }
 
   /**
@@ -119,6 +144,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    double speed = m_controller_1.getY();
+    //m_leftMotorGroup.set(speed);
+    m_robotDrive.tankDrive(speed, speed);
     Scheduler.getInstance().run();
   }
 
@@ -127,5 +155,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    double speed = m_controller_1.getY();
+    m_intake_1.set(ControlMode.PercentOutput, speed);
+    m_intake_2.set(ControlMode.PercentOutput, -speed);
   }
 }
