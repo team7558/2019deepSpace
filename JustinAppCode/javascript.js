@@ -3,30 +3,32 @@ cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbe
 
 var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
 
-var scoreSheet = [ //Cargo, panel, cargoDuringSandstorm, panelDuringSandstorm - index is listed below
+var scoreSheet = [ //Cargo, panel, cargoWhen, panelWhen, nullPanel - index is listed below
 	//will be no, yes, or try (only temporary)
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["yes", "no", false, false],
-	["yes", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false]
+	//cargoWhen and panelWhen will be "notscored", "preload", "sandstorm", or"teleop"
+	//nullPanel can only be true for one position
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["yes", "no", "preload", "notscored", false],
+	["yes", "no", "preload", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false]
 ];
 
 var buttonPlacement = [ //For each button, then the rocket displays
@@ -96,6 +98,18 @@ function changeButtonPlacement() {
 		document.getElementById("robotscorespace").style.left = buttonPlacement[22][1];
 	}
 		
+}
+
+
+function print2D(arr) {
+	var msg = "";
+	for(i = 0; i < arr.length; i++) {
+		for(j = 0; j < arr[i].length; j++) {
+			msg+=arr[i][j]+"   ";
+		}
+		msg+="<br>";
+	}
+	alert(msg);
 }
 
 
@@ -387,7 +401,8 @@ function preloadRobot() {
 				preloadedItem = "Panel";
 			}
 			dropItem();
-
+			print2D(scoreSheet);
+/*
 			//Make it so that the item has been selected
 			holdingItem = false;
 			if(preloadedItem == "Cargo") {
@@ -398,7 +413,7 @@ function preloadRobot() {
 				panelGrabbedHuman--;
 			}
 			makeButtonStop(document.getElementsByClassName("cancel")[3]);
-			document.getElementsByClassName("cancel")[3].style.fontSize = "12px";
+			document.getElementsByClassName("cancel")[3].style.fontSize = "12px";*/
 		}
 	}
 	updateButtonLook();
@@ -417,11 +432,14 @@ function score(place) { //Actually scores on a given position
 				//No attempt during preload
 				if(gameMode == "preload") {
 					scoreSheet[place][0] = "yes";
+					scoreSheet[place][2] = gameMode;
+
 					dropItem();
 				}
 			} else if(cargoState == "try") {
 				scoreSheet[place][0] = "yes";
-				if(gameMode=="sandstorm") scoreSheet[place][2] = true;
+				
+				scoreSheet[place][2] = gameMode;
 				dropItem();
 			}
 		} else {
@@ -431,11 +449,14 @@ function score(place) { //Actually scores on a given position
 				//No attempt during preload
 				if(gameMode == "preload") {
 					scoreSheet[place][1] = "yes";
+					scoreSheet[place][3] = gameMode;
+
+					scoreSheet[place][4] = true;
 					dropItem();
 				}
 			} else if(panelState == "try") {
 				scoreSheet[place][1] = "yes";
-				if(gameMode=="sandstorm") scoreSheet[place][3] = true;
+				scoreSheet[place][3] = gameMode;
 				dropItem();
 			}
 		}
@@ -520,7 +541,7 @@ function getPanelFloor() {
 }
 
 function getCargoPreload() {
-	if(!holdingItem && preloadedItem=="Nothing") {
+	if(!holdingItem) {
 		itemType = "cargo";
 		holdingItem = true;
 		changePickup("grab");
@@ -529,7 +550,7 @@ function getCargoPreload() {
 }
 
 function getPanelPreload() {
-	if(!holdingItem && preloadedItem=="Nothing") {
+	if(!holdingItem) {
 		itemType = "panel";
 		holdingItem = true;
 		changePickup("grab");
@@ -541,7 +562,7 @@ function getPanelPreload() {
 
 
 function dropItem() {
-	if(holdingItem && !(gameMode=="preload" && preloadedItem!="Nothing")) {
+	if(holdingItem) {
 		itemType = "";
 		holdingItem = false;
 		changePickup("drop");
@@ -619,7 +640,7 @@ function changePickup(type) {
 		}
 
 		//Change drop item
-		if(gameMode == "preload" && preloadedItem == "Nothing") {
+		if(gameMode == "preload") {
 			makeButtonNorm(document.getElementsByClassName("cancel")[3]);
 			document.getElementsByClassName("cancel")[3].style.fontSize = "16px";
 		} else {
@@ -632,11 +653,10 @@ function changePickup(type) {
 		var x = document.getElementsByClassName("itempickups");
 		for(i = 0; i < x.length; i++) {
 			makeButtonNorm(x[i]);
-			if(i < 2 && preloadedItem!="Nothing") makeButtonStop(x[i]);
 		}
 
 		//Change drop item
-		if(gameMode == "preload" && preloadedItem == "Nothing") {
+		if(gameMode == "preload") {
 			makeButtonStop(document.getElementsByClassName("cancel")[3]);
 			document.getElementsByClassName("cancel")[3].style.fontSize = "12px";
 		} else {
