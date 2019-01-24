@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Solenoid;
+
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -49,10 +49,10 @@ public class Robot extends TimedRobot {
   private static VictorSPX m_intake_1, m_intake_2;
 
   private static Solenoid m_testSolenoid;
+  
 
-  private static boolean toggleOn;
-  private static boolean togglePressed;
-  private static Compressor c;
+
+  private static Compressor m_testCompressor;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -76,9 +76,9 @@ public class Robot extends TimedRobot {
     m_intake_2 = new VictorSPX(5);
 
     m_testSolenoid = new Solenoid(3);
+    
 
-    toggleOn = false;
-    togglePressed = false;
+    m_testCompressor = new Compressor();
   }
 
   /**
@@ -142,6 +142,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    if(m_controller_1.getRawButton(1))
+      System.out.println("ok");
     Scheduler.getInstance().run();
   }
 
@@ -156,44 +158,85 @@ public class Robot extends TimedRobot {
     }
   }
 
+
+
+
+
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
-    //turn compressor on until the pressure swtich triggers
-    c.setClosedLoopControl(true);
+    
+    if (m_controller_1.getRawButton(3)){ // b button
+      m_testCompressor.start();
+      m_testCompressor.setClosedLoopControl(true);
+    }else{
+      m_testCompressor.stop();
+    }
+    if (m_controller_1.getRawButton(8)){ // RT button push it out
+      m_testSolenoid.set(false);
+    }else{
+      m_testSolenoid.set(true); 
+    }
     double speed = m_controller_1.getY();
+    m_intake_1.set(ControlMode.PercentOutput, speed);
+    m_intake_2.set(ControlMode.PercentOutput, -speed);
 
+    
+    // turn compressor on until the pressure swtich triggers
+   /* double speed = m_controller_1.getY();
     speed *= 0.6;
+    //c.start();
+    //System.out.println("hello");   
+
+    
 
     // m_testMotor.set(speed);
-    //toggle switch instead now
-    if (!m_controller_1.getRawButton(3)) {
-      if (!togglePressed) {
-        toggleOn = !toggleOn;
-        togglePressed = true;
-        System.out.println("gotten");
-        // testSolenoid.set(DoubleSolenoid.Value.kOff);
-        m_testSolenoid.set(false);
-        // testSolenoid.set(DoubleSolenoid.Value.kReverse);
-      }
+    // toggle switch instead now
+    if (m_controller_1.getRawButton(3)) {
+      //System.out.println("gotten");
+      // testSolenoid.set(DoubleSolenoid.Value.kOff);
+      //m_testSolenoid.set(false);
+      // testSolenoid.set(DoubleSolenoid.Value.kReverse);
+      m_testCompressor.start();
+      System.out.println("tedt");
     } else {
-      togglePressed = false;
-      m_testSolenoid.set(true);
+     // m_testSolenoid.set(true);
     }
 
-    m_robotDrive.tankDrive(speed, speed);
+    m_robotDrive.tankDrive(speed, speed);*/
     Scheduler.getInstance().run();
+
   }
-                                                  
+
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
+    /*
     double speed = m_controller_1.getY();
     m_intake_1.set(ControlMode.PercentOutput, speed);
     m_intake_2.set(ControlMode.PercentOutput, -speed);
+    */
+    if (m_controller_1.getRawButton(3)){ // b button
+      m_testCompressor.start();
+      m_testCompressor.setClosedLoopControl(true);
+    }else{
+      m_testCompressor.stop();
+    }
+    if (m_controller_1.getRawButton(2)){ // a button push it out
+      m_testSolenoid.set(false);
+    }else{
+      m_testSolenoid.set(true); 
+    }
+    if(m_controller_1.getRawButton(1)){ //x button retrackt should be useless
+      //System.out.println("hello");
+      m_testSolenoid.set(true);
+    }
+
+ 
+   // m_testCompressor.stop();
   }
 }
