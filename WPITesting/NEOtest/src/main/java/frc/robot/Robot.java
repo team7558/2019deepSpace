@@ -19,7 +19,9 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -45,6 +47,9 @@ public class Robot extends TimedRobot {
 
   private static VictorSPX m_intake_1, m_intake_2;
 
+  private static Solenoid m_testSolenoid;
+
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -60,10 +65,12 @@ public class Robot extends TimedRobot {
     m_rightMotorGroup = new SpeedControllerGroup(new CANSparkMax(RobotMap.RIGHT_MOTOR_1, MotorType.kBrushless), new CANSparkMax(RobotMap.RIGHT_MOTOR_2, MotorType.kBrushless));
     m_robotDrive = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
     m_controller_1 = new Joystick(CONTROLLER_1);
-    
+
     m_intake_1 = new VictorSPX(4);
     m_intake_2 = new VictorSPX(5);
-    
+
+    m_testSolenoid = new Solenoid(3);
+  
   }
 
   /**
@@ -145,7 +152,21 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     double speed = m_controller_1.getY();
-    //m_leftMotorGroup.set(speed);
+
+    speed*=0.6;
+
+   // m_testMotor.set(speed);
+
+    
+   if(!m_controller_1.getRawButton(3)){
+     System.out.println("gotten");
+    //testSolenoid.set(DoubleSolenoid.Value.kOff);
+    m_testSolenoid.set(false);
+    //testSolenoid.set(DoubleSolenoid.Value.kReverse);
+   } else {
+    m_testSolenoid.set(true); 
+   }
+
     m_robotDrive.tankDrive(speed, speed);
     Scheduler.getInstance().run();
   }
