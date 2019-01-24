@@ -165,6 +165,7 @@ body{
 .btnheader {
   top: 40px;
   text-align: center;
+  font-family: Courier New, Roboto, sans-serif;
 }
 
 .itempickups, .hablevels, #preloaditem {
@@ -216,7 +217,7 @@ body{
 }
 
 .btnheader {
-  text-decoration: underline;
+  padding: 2px;
   font-weight: bold;
 }
 
@@ -227,9 +228,6 @@ body{
 #scoringrocket1, #scoringrocket2, #scoringship {
   display: block;
 }
-
-
-
 
 /*All Different Scoring Spaces and Rockets*/
 #rocketleveldisplay1 {
@@ -444,12 +442,66 @@ body{
 
 #displayinfo {
   margin-top: 100px;
+  margin-left: 50px;
+  font-family: Courier New, Roboto, sans-serif;
 }
 
 #displayinfo p {
-  display: inline;
+  display: inline; 
 }
 
 button {
   cursor: pointer;
+}
+
+#miscellaneous {
+  display: none;
+  color: white;
+}
+
+#miscellaneousrow {
+  display: table-row;
+}
+
+#miscellaneousleft {
+  padding-top: 5px;
+  text-align: center;
+  display: table-cell;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid rgb(56, 129, 220, 0.85);
+  border-radius: 5px;
+  width: 50%;
+  height: 400px;
+}
+
+#defensebuttons {
+  margin-bottom: 48px;
+}
+
+.switchdefense, .switchcarrybot {
+  background-color: #8fc1e2;
+  border-radius: 5px;
+  margin: 0px;
+  width: 40px;
+  height: 30px;
+  font-size: 16px;
+  border: 0px;
+  margin: -5px;
+}
+
+#defense0, #carrybot0 {
+  background-color: rgb(56, 129, 220, 0.85);
+}
+
+#wascarried {
+  text-align: center;
+  background-color: rgb(56, 129, 220, 0.85);
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 120px;
+  height: 80px;
+  font-size: 16px;
+  border: 0px;
+  border-radius: 5px;
 }
