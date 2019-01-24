@@ -10,7 +10,6 @@ body{
   display: table;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid red;
 
   padding-right: 18px;
 }
@@ -28,7 +27,7 @@ body{
   margin-left: auto; 
   margin-right: auto;
   margin-bottom: 0px;
-  margin-top: 78px;
+  margin-top: 80px;
   display: table;
   height: 60px;
 }
@@ -261,12 +260,12 @@ body{
 /*All Different Scoring Spaces and Rockets*/
 #rocketleveldisplay1 {
   left: 425px;
-  top: 169px;
+  top: 170px;
 }
 
 #rocketleveldisplay2 {
   left: 425px;
-  top: 609px;
+  top: 610px;
 }
 
 #robotscorespace {
@@ -276,7 +275,7 @@ body{
 
 #scorespace0, #scorespace1, #scorespace2, 
 #scorespace3, #scorespace4, #scorespace5 {
-  top: 169px;
+  top: 170px;
 }
 
 #scorespace6, #scorespace7, #scorespace8, 
