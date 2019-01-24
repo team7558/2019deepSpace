@@ -1,30 +1,34 @@
 var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
 cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, station = "R1", xscale = 1, preloadedItem = "Nothing";
 
-var scoreSheet = [ //Cargo, panel, cargoDuringSandstorm, panelDuringSandstorm - index is listed below
+var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
+
+var scoreSheet = [ //Cargo, panel, cargoWhen, panelWhen, nullPanel - index is listed below
 	//will be no, yes, or try (only temporary)
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false],
-	["no", "no", false, false]
+	//cargoWhen and panelWhen will be "notscored", "preload", "sandstorm", or"teleop"
+	//nullPanel can only be true for one position
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["yes", "no", "preload", "notscored", false],
+	["yes", "no", "preload", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false]
 ];
 
 var buttonPlacement = [ //For each button, then the rocket displays
@@ -59,7 +63,7 @@ var buttonPlacement = [ //For each button, then the rocket displays
 
 ];
 
-var normCol = "#E2E2E2", stopCol = "#C2C2C2", checkCol = "#66FF46", tryCol = "#FFCA32", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
+var normCol = "#8fc1e2", stopCol = "#8fc1e2", checkCol = "rgb(56, 129, 220, 0.85)", tryCol = "#FFCA32", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
 
 //Run a few methods at the very beginning of the game
 
@@ -94,6 +98,18 @@ function changeButtonPlacement() {
 		document.getElementById("robotscorespace").style.left = buttonPlacement[22][1];
 	}
 		
+}
+
+
+function print2D(arr) {
+	var msg = "";
+	for(i = 0; i < arr.length; i++) {
+		for(j = 0; j < arr[i].length; j++) {
+			msg+=arr[i][j]+"   ";
+		}
+		msg+="<br>";
+	}
+	alert(msg);
 }
 
 
@@ -142,6 +158,9 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
+		document.getElementById("robotscorespace").style.display = "block";
+		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("miscellaneous").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -164,6 +183,9 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
+		document.getElementById("robotscorespace").style.display = "none";
+		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("miscellaneous").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -186,6 +208,9 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "block";
 		document.getElementById("scoringrocket2").style.display = "block";
 		document.getElementById("scoringship").style.display = "block";
+		document.getElementById("robotscorespace").style.display = "none";
+		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("miscellaneous").style.display = "none";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -206,11 +231,38 @@ function updateMode(mode) {
 		document.getElementById("scoringrocket1").style.display = "none";
 		document.getElementById("scoringrocket2").style.display = "none";
 		document.getElementById("scoringship").style.display = "none";
+		document.getElementById("robotscorespace").style.display = "none";
+		document.getElementById("gamemap").style.display = "none";
+		document.getElementById("miscellaneous").style.display = "table";
 	}
 
 	updateGameStats();
 }
 
+
+function switchDefense(level) {
+	var x = document.getElementsByClassName("switchdefense");
+	for(i = 0; i < x.length; i++) x[i].style.background = normCol;
+	var y = document.getElementById("defense"+level);
+	y.style.background = checkCol;
+	defenseLevel = level;
+	alert(defenseLevel);
+}
+
+function switchCarryBot(level) {
+	var x = document.getElementsByClassName("switchcarrybot");
+	for(i = 0; i < x.length; i++) x[i].style.background = normCol;
+	var y = document.getElementById("carrybot"+level);
+	y.style.background = checkCol;
+	carryBotNumber = level;
+	alert(carryBotNumber);
+}
+
+function switchWasCarried() {
+	wasCarried = !wasCarried;
+	document.getElementById("wascarried").style.background = normCol;
+	if(wasCarried) document.getElementById("wascarried").style.background = checkCol
+}
 
 
 function updateButtonLook() {
@@ -349,6 +401,19 @@ function preloadRobot() {
 				preloadedItem = "Panel";
 			}
 			dropItem();
+			print2D(scoreSheet);
+/*
+			//Make it so that the item has been selected
+			holdingItem = false;
+			if(preloadedItem == "Cargo") {
+				getCargoHuman();
+				cargoGrabbedHuman--;
+			} else if(preloadedItem == "Panel") {
+				getPanelHuman();
+				panelGrabbedHuman--;
+			}
+			makeButtonStop(document.getElementsByClassName("cancel")[3]);
+			document.getElementsByClassName("cancel")[3].style.fontSize = "12px";*/
 		}
 	}
 	updateButtonLook();
@@ -367,11 +432,14 @@ function score(place) { //Actually scores on a given position
 				//No attempt during preload
 				if(gameMode == "preload") {
 					scoreSheet[place][0] = "yes";
+					scoreSheet[place][2] = gameMode;
+
 					dropItem();
 				}
 			} else if(cargoState == "try") {
 				scoreSheet[place][0] = "yes";
-				if(gameMode=="sandstorm") scoreSheet[place][2] = true;
+				
+				scoreSheet[place][2] = gameMode;
 				dropItem();
 			}
 		} else {
@@ -381,11 +449,14 @@ function score(place) { //Actually scores on a given position
 				//No attempt during preload
 				if(gameMode == "preload") {
 					scoreSheet[place][1] = "yes";
+					scoreSheet[place][3] = gameMode;
+
+					scoreSheet[place][4] = true;
 					dropItem();
 				}
 			} else if(panelState == "try") {
 				scoreSheet[place][1] = "yes";
-				if(gameMode=="sandstorm") scoreSheet[place][3] = true;
+				scoreSheet[place][3] = gameMode;
 				dropItem();
 			}
 		}
@@ -469,6 +540,27 @@ function getPanelFloor() {
 	}
 }
 
+function getCargoPreload() {
+	if(!holdingItem) {
+		itemType = "cargo";
+		holdingItem = true;
+		changePickup("grab");
+		document.getElementById("cargoPreload").style.background = checkCol;
+	}
+}
+
+function getPanelPreload() {
+	if(!holdingItem) {
+		itemType = "panel";
+		holdingItem = true;
+		changePickup("grab");
+		document.getElementById("panelPreload").style.background = checkCol;
+	}
+}
+
+
+
+
 function dropItem() {
 	if(holdingItem) {
 		itemType = "";
@@ -548,8 +640,14 @@ function changePickup(type) {
 		}
 
 		//Change drop item
-		makeButtonNorm(document.getElementsByClassName("cancel")[2]);
-		document.getElementsByClassName("cancel")[2].style.fontSize = "16px";
+		if(gameMode == "preload") {
+			makeButtonNorm(document.getElementsByClassName("cancel")[3]);
+			document.getElementsByClassName("cancel")[3].style.fontSize = "16px";
+		} else {
+			makeButtonNorm(document.getElementsByClassName("cancel")[4]);
+			document.getElementsByClassName("cancel")[4].style.fontSize = "16px";
+		}
+		
 	} else {
 		//Change pickups
 		var x = document.getElementsByClassName("itempickups");
@@ -558,8 +656,13 @@ function changePickup(type) {
 		}
 
 		//Change drop item
-		makeButtonStop(document.getElementsByClassName("cancel")[2]);
-		document.getElementsByClassName("cancel")[2].style.fontSize = "12px";
+		if(gameMode == "preload") {
+			makeButtonStop(document.getElementsByClassName("cancel")[3]);
+			document.getElementsByClassName("cancel")[3].style.fontSize = "12px";
+		} else {
+			makeButtonStop(document.getElementsByClassName("cancel")[4]);
+			document.getElementsByClassName("cancel")[4].style.fontSize = "12px";
+		}
 	}
 }
 
