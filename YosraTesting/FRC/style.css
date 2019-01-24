@@ -4,7 +4,6 @@ body{
   background-image: url("spacewallpaper.png");
 }
 
-
 #playfield {
   margin: 0px;
   margin-top: 20px;
@@ -17,9 +16,6 @@ body{
   margin: 0px;
   display: table-row
 }
-
-
-
 
 #stations {
   vertical-align: middle;
@@ -88,9 +84,6 @@ body{
   background-color: #F94F42;
 }
 
-
-
-
 .scorespaces, .rocketleveldisplay, #robotscorespace {
   width: 80px;
   height: 80px;
@@ -112,7 +105,6 @@ body{
   color: white; 
   border: 2px;
   border-radius: 5px;
-  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 #robotscorespace {
@@ -129,8 +121,6 @@ body{
   background-color: #E2E2E2;
 }
 
-
-
 #pickup, #pickuppreload {
   vertical-align: middle;
   margin: 0px;
@@ -142,7 +132,6 @@ body{
 #pickup {
   display: none;
 }
-
 
 #habstart, #habend, #habpreload {
   vertical-align: middle;
@@ -156,8 +145,6 @@ body{
   display: none;
 }
 
-
-
 #gamearea {
   margin: 0px;
   width: 800px;
@@ -167,12 +154,12 @@ body{
 
 #gamemap {
   image-rendering: pixelated;
-  background-image: url("photos/FRCGameMapL.png");
-  background-repeat: no-repeat;
-  background-size: 800px 520px;
+  background-color: rgb(56, 129, 220, 0.85);
+  opacity: 60%;
   width: 800px;
   height: 520px;
   transform: scaleX(1);
+  border-radius: 30px;
 }
 
 .btnheader {
@@ -377,30 +364,18 @@ body{
   display:block;
 }
 
-
-
-
-
-
-
 .modelbl {
   z-index: 2;
   left: 0px;
   position: fixed;
   width: 100%;
 
-  background-color: #8fc1e2;
+  background-color: rgb(143, 193, 226);
   color: white; 
-  border: 2px solid rgb(33, 150, 243);
 }
 
 #modelbltop {
   top: 0px;
-}
-
-#modelblbtm {
-  margin-top: 16px;
-  bottom: 0px;
 }
 
 .modelbl p {
@@ -410,9 +385,6 @@ body{
   color: white;
   text-align: center;
 }
-
-
-
 
 #modetable {
   display: table;
@@ -469,9 +441,6 @@ body{
   border-radius: 4px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
-
-
-
 
 #displayinfo {
   margin-top: 100px;

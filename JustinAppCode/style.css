@@ -10,6 +10,8 @@ body{
   display: table;
   margin-left: auto;
   margin-right: auto;
+
+  padding-right: 18px;
 }
 
 #playfieldrow {
@@ -151,24 +153,31 @@ body{
 
 #miscellaneous {
   display: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #miscellaneousrow {
   display: table-row;
 }
 
-#miscellaneousleft {
+#miscellaneousleft, #miscellaneousright {
+  padding-top: 20px;
   text-align: center;
   display: table-cell;
-  margin-left: auto;
-  margin-right: auto;
+  width: 600px;
+  height: 520px;
   border: 2px solid black;
-  width: 250px;
-  height: 400px;
 }
 
+#commentbox {
+  resize: none;
+  width: 250px;
+  height: 160px;
+}
+ 
 #defensebuttons {
-  margin-bottom: 48px;
+  margin-bottom: 20px;
 }
 
 .switchdefense, .switchcarrybot {
@@ -189,7 +198,7 @@ body{
   text-align: center;
   background-color: #E2E2E2;
   margin-top: 20px;
-  margin-bottom: 48px;
+  margin-bottom: 20px;
   width: 120px;
   height: 80px;
   font-size: 16px;
@@ -261,7 +270,7 @@ body{
 
 #robotscorespace {
   left: 305px;
-  top: 370px;
+  top: 369px;
 }
 
 #scorespace0, #scorespace1, #scorespace2, 
@@ -459,7 +468,9 @@ body{
 
 
 #displayinfo {
-  margin-top: 100px;
+  top: 20px;
+  display:none;
+  margin-left: 90px;
 }
 
 #displayinfo p {
