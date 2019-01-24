@@ -10,6 +10,9 @@ body{
   display: table;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid red;
+
+  padding-right: 18px;
 }
 
 #playfieldrow {
@@ -25,7 +28,7 @@ body{
   margin-left: auto; 
   margin-right: auto;
   margin-bottom: 0px;
-  margin-top: 80px;
+  margin-top: 78px;
   display: table;
   height: 60px;
 }
@@ -151,23 +154,31 @@ body{
 
 #miscellaneous {
   display: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #miscellaneousrow {
   display: table-row;
 }
 
-#miscellaneousleft {
+#miscellaneousleft, #miscellaneousright {
+  padding-top: 20px;
   text-align: center;
   display: table-cell;
-  margin-left: auto;
-  margin-right: auto;
-  width: 250px;
-  height: 400px;
+  width: 600px;
+  height: 520px;
+  border: 2px solid black;
 }
 
+#commentbox {
+  resize: none;
+  width: 250px;
+  height: 160px;
+}
+ 
 #defensebuttons {
-  margin-bottom: 48px;
+  margin-bottom: 20px;
 }
 
 .switchdefense, .switchcarrybot {
@@ -188,7 +199,7 @@ body{
   text-align: center;
   background-color: #E2E2E2;
   margin-top: 20px;
-  margin-bottom: 48px;
+  margin-bottom: 20px;
   width: 120px;
   height: 80px;
   font-size: 16px;
@@ -250,22 +261,22 @@ body{
 /*All Different Scoring Spaces and Rockets*/
 #rocketleveldisplay1 {
   left: 425px;
-  top: 170px;
+  top: 169px;
 }
 
 #rocketleveldisplay2 {
   left: 425px;
-  top: 610px;
+  top: 609px;
 }
 
 #robotscorespace {
   left: 305px;
-  top: 370px;
+  top: 369px;
 }
 
 #scorespace0, #scorespace1, #scorespace2, 
 #scorespace3, #scorespace4, #scorespace5 {
-  top: 170px;
+  top: 169px;
 }
 
 #scorespace6, #scorespace7, #scorespace8, 
@@ -458,7 +469,9 @@ body{
 
 
 #displayinfo {
-  margin-top: 100px;
+  top: 20px;
+  display:none;
+  margin-left: 90px;
 }
 
 #displayinfo p {
