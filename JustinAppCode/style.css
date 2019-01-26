@@ -10,8 +10,6 @@ body{
   display: table;
   margin-left: auto;
   margin-right: auto;
-
-  padding-right: 18px;
 }
 
 #playfieldrow {
@@ -259,17 +257,17 @@ body{
 
 /*All Different Scoring Spaces and Rockets*/
 #rocketleveldisplay1 {
-  left: 425px;
+  left: 434px;
   top: 170px;
 }
 
 #rocketleveldisplay2 {
-  left: 425px;
+  left: 434px;
   top: 610px;
 }
 
 #robotscorespace {
-  left: 305px;
+  left: 314px;
   top: 369px;
 }
 
@@ -284,108 +282,108 @@ body{
 }
 
 #scorespace0 {   /*Top Rocket - Level 1 - Left*/
-  left: 345px;
+  left: 354px;
   display:block;
 }
 
 #scorespace1 {  /*Top Rocket - Level 1 - Right*/
-  left: 505px;
+  left: 514px;
   display:block;
 }
 
 #scorespace2 {  /*Top Rocket - Level 2 - Left*/
-  left: 345px;
+  left: 354px;
   display:block;
 }
 
 #scorespace3 {   /*Top Rocket - Level 2 - Right*/
-  left: 505px;
+  left: 514px;
   display:block;
 }
 #scorespace4 {  /*Top Rocket - Level 3 - Left*/
-  left: 345px;
+  left: 354px;
   display:block;
 }
 
 #scorespace5 {  /*Top Rocket - Level 3 - Right*/
-  left: 505px;
+  left: 514px;
   display:block;
 }
 
 #scorespace6 { /*Bottom Rocket - Level 1 - Left*/
-  left: 345px;
+  left: 354px;
   display:block;
 }
 
 #scorespace7 {  /*Bottom Rocket - Level 1 - Right*/
-  left: 505px;
+  left: 514px;
   display:block;
 }
 
 #scorespace8 {  /*Bottom Rocket - Level 2 - Left*/
-  left: 345px;
+  left: 354px;
   display:block;
 }
 
 #scorespace9 { /*Bottom Rocket - Level 2 - Right*/
-  left: 505px;
+  left: 514px;
   display:block;
 }
 
 #scorespace10 {  /*Bottom Rocket - Level 3 - Left*/
-  left: 345px;
+  left: 354px;
   display:block;
 }
 
 #scorespace11 {  /*Bottom Rocket - Level 3 - Right*/
-  left: 505px;
+  left: 514px;
   display:block;
 }
 
 #scorespace12 { /*Alliance-facing Ship - Upper*/
-  left: 505px;
+  left: 514px;
   top: 330px;
   display:block;
 }
 
 #scorespace13 { /*Alliance-facing Ship - Lower*/
-  left: 505px;
+  left: 514px;
   top: 450px;
   display:block;
 }
 
 #scorespace14 { /*Top of Ship - Left*/
-  left: 625px;
+  left: 634px;
   top: 290px;
   display:block;
 }
 
 #scorespace15 { /*Bottom of Ship - Left*/
-  left: 625px;
+  left: 634px;
   top: 490px;
   display:block;
 }
 
 #scorespace16 { /*Top of Ship - mid*/
-  left: 745px;
+  left: 754px;
   top: 290px;
   display:block;
 }
 
 #scorespace17 { /*Bottom of Ship - mid*/
-  left: 745px;
+  left: 754px;
   top: 490px;
   display:block;
 }
 
 #scorespace18 { /*Top of Ship - right*/
-  left: 865px;
+  left: 874px;
   top: 290px;
   display:block;
 }
 
 #scorespace19 { /*Bottom of Ship - right*/
-  left: 865px;
+  left: 874px;
   top: 490px;
   display:block;
 }
