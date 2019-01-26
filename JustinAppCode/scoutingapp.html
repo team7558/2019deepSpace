@@ -61,36 +61,26 @@
                   <!--Top Rocket Level 1-->
                   <button class="scorespaces" id="scorespace0" onclick="score(0);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace1" onclick="score(1);">Cargo: &#x2716<br>Panel: &#x2716</button>
-
                   <!--Top Rocket Level 2-->
                   <button class="scorespaces" id="scorespace0" onclick="score(2);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace1" onclick="score(3);">Cargo: &#x2716<br>Panel: &#x2716</button>
-
                   <!--Top Rocket Level 3-->
                   <button class="scorespaces" id="scorespace0" onclick="score(4);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace1" onclick="score(5);">Cargo: &#x2716<br>Panel: &#x2716</button>
-
-
                </div>
-
                <div id="scoringrocket2">
                   <button class="rocketleveldisplay" id="rocketleveldisplay2" onclick="changeRocket();">Level 1</button>
 
                   <!--Bottom Rocket Level 1-->
                   <button class="scorespaces" id="scorespace6" onclick="score(6);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace7" onclick="score(7);">Cargo: &#x2716<br>Panel: &#x2716</button>
-
                   <!--Bottom Rocket Level 2-->
                   <button class="scorespaces" id="scorespace8" onclick="score(8);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace9" onclick="score(9);">Cargo: &#x2716<br>Panel: &#x2716</button>
-
                   <!--Bottom Rocket Level 3-->
                   <button class="scorespaces" id="scorespace10" onclick="score(10);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace11" onclick="score(11);">Cargo: &#x2716<br>Panel: &#x2716</button>
-
-
                </div>
-
                
                <div id="scoringship">
                   <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br>Panel: &#x2716</button>
@@ -102,11 +92,6 @@
                   <button class="scorespaces" id="scorespace18" onclick="score(18);">Cargo: &#x2716<br>Panel: &#x2716</button>
                   <button class="scorespaces" id="scorespace19" onclick="score(19);">Cargo: &#x2716<br>Panel: &#x2716</button>
                </div>
-
-
-
-
-
                <div id="miscellaneous">
                   <div id="miscellaneousrow">
                      <div id="miscellaneousleft">
@@ -128,13 +113,30 @@
                      </div>
                      <div id="miscellaneousright">
                         <div id="displayinfo">
-                           <p class="btnheader">Game Statistics</p><br>
-                           Gamemode: <p id="gamemode">sandstorm <br></p>
-                           Holding Item: <p id="holdingitem">0 <br></p>
-                           Panels from Floor: <p id="panelsfromfloor">0 <br></p>
-                           Panels from Human Station: <p id="panelsfromhuman">0 <br></p>
-                           Cargo from Floor: <p id="cargofromfloor">0 <br></p>
-                           Cargo from Human Station: <p id="cargofromhuman">0 <br></p>
+                           <p class="btnheader">Game Statistics</p>
+                           <br>
+                           Preloaded Item: <span id="infopreloadeditem" class="infotag">Null Hatch Panel</span><br>
+                           Start Position: <span id="infohabstart" class="infotag">Level 1</span><br>
+                           Sandstorm Activity: <span id="infohabsandstorm" class="infotag">Stayed on Level 1</span><br>
+                           Endgame Position: <span id="infohabendgame" class="infotag">Climbed to Level 1</span><br>
+                           <br>
+                           Cargo from Floor: <span id="infocargofloor" class="infotag">0</span><br>
+                           Cargo from Loading Station:<span id="infocargostation" class="infotag">0</span><br>
+                           Panels from Floor: <span id="infopanelsfloor" class="infotag">0</span><br>
+                           Panels from Loading Station: <span id="infopanelsstation" class="infotag">0</span><br>
+                           Cargo dropped: <span id="infocargodropped" class="infotag">0</span><br>
+                           Panels dropped: <span id="infopanelsdropped" class="infotag">0</span><br>
+                           <br>
+                           Panel Scored: <span id="infopanelsscored" class="infotag">0</span><br>
+                           Cargo Scored: <span id="infocargoscored" class="infotag">0</span><br>
+                           Cargo Unsecured: <span id="infocargounsecured" class="infotag">2</span><br>
+                           <br>
+                           Rocket 1 Cargo: <span id="inforocket1cargo" class="infotag">0</span><br>
+                           Rocket 1 Panels: <span id="inforocket1panels" class="infotag">0</span><br>
+                           Rocket 2 Cargo: <span id="inforocket2cargo" class="infotag">0</span><br>
+                           Rocket 2 Panels: <span id="inforocket2panels" class="infotag">0</span><br>
+                           Ship Cargo: <span id="infoshipcargo" class="infotag">0</span><br>
+                           Ship Panels: <span id="infoshippanels" class="infotag">0</span><br>
                         </div>
                      </div>
                   </div>

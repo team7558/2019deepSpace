@@ -67,12 +67,7 @@ var normCol = "#E2E2E2", stopCol = "#C2C2C2", checkCol = "#66FF46", tryCol = "#F
 
 
 function updateGameStats() {
-	document.getElementById("panelsfromfloor").innerHTML = panelGrabbedFloor + "<br>";
-	document.getElementById("panelsfromhuman").innerHTML = panelGrabbedHuman + "<br>";
-	document.getElementById("cargofromfloor").innerHTML = cargoGrabbedFloor + "<br>";
-	document.getElementById("cargofromhuman").innerHTML = cargoGrabbedHuman + "<br>";
-	document.getElementById("holdingitem").innerHTML = itemType + "<br>";
-	document.getElementById("gamemode").innerHTML = gameMode + "<br>";
+	
 }
 
 function changeButtonPlacement() {

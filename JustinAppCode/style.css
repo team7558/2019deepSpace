@@ -153,6 +153,7 @@ body{
   display: none;
   margin-left: auto;
   margin-right: auto;
+  width: 900px;
 }
 
 #miscellaneousrow {
@@ -163,7 +164,7 @@ body{
   padding-top: 20px;
   text-align: center;
   display: table-cell;
-  width: 600px;
+  width: 50%;
   height: 520px;
   border: 2px solid black;
 }
@@ -467,13 +468,15 @@ body{
 
 #displayinfo {
   top: 20px;
-  display:none;
-  margin-left: 90px;
+  display:block;
+  font-style: italic;
+  font-weight: bold;
 }
 
-#displayinfo p {
-  display: inline;
+.infotag {
+    font-weight: normal;
 }
+
 
 button {
   cursor: pointer;
