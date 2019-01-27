@@ -1,6 +1,7 @@
 body{
   font-family: Courier New, Roboto, sans-serif;
   font-size: 16px;
+  background-image: url("photos/spacewallpaper.png");
 }
 
 
@@ -49,11 +50,18 @@ body{
   width: 100px;
   margin-left: 20px;
   margin-right: 20px;
-  border: 2px solid black;
   height: 60px;
 
   font-size: 12px;
-  background-color: #C2C2C2;
+  background-color: #8fc1e2;
+
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white; 
+  border: 2px;
+  border-radius: 4px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 #flipsides {
@@ -67,7 +75,15 @@ body{
   height: 80px;
 
   font-size: 16px;
-  background-color: #E2E2E2;
+  background-color: #8fc1e2;
+
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white; 
+  border: 2px;
+  border-radius: 4px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 #stationR1, #stationR2, #stationR3, #stationB1, #stationB2, #stationB3 {
@@ -88,11 +104,20 @@ body{
   margin-left: 10px;
   margin-top: 10px;
   text-align: center;
-  border: 2px solid black;
   position: absolute;
 
   font-size: 14px;
   font-weight: 100px;
+
+  border: none;
+  color: white;
+  text-decoration: none;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white; 
+  border: 2px;
+  border-radius: 5px;
 }
 
 #robotscorespace {
@@ -100,13 +125,13 @@ body{
   width: 120px;
 }
 
-.scorespaces, #robotscorespace {
-  background-color: #C2C2C2;
-  left: 400px;
+.rocketleveldisplay {
+  background-color: #2196F3;
 }
 
-.rocketleveldislay {
-  background-color: #E2E2E2;
+.scorespaces, #robotscorespace {
+  background-color: #8FC1E2;
+  left: 400px;
 }
 
 
@@ -148,9 +173,12 @@ body{
 #gamemap {
   display: block;
   image-rendering: pixelated;
-  background-image: url("photos/FRCGameMapL.png");
+  /*background-image: url("photos/FRCGameMapL.png");
   background-repeat: no-repeat;
-  background-size: 800px 520px;
+  background-size: 800px 520px;*/
+  background-color: #68A8E8;
+  border-radius: 30px;
+  opacity: 0.75;
   width: 800px;
   height: 520px;
   transform: scaleX(1);
@@ -161,6 +189,7 @@ body{
   margin-left: auto;
   margin-right: auto;
   width: 900px;
+  color: white;
 }
 
 #miscellaneousrow {
@@ -168,12 +197,13 @@ body{
 }
 
 #miscellaneousleft, #miscellaneousright {
-  padding-top: 20px;
+  padding-top: 5px;
   text-align: center;
   display: table-cell;
   width: 50%;
   height: 520px;
-  border: 2px solid black;
+  border: 2px solid #3881DC;
+  border-radius: 5px;
 }
 
 #commentbox {
@@ -187,28 +217,32 @@ body{
 }
 
 .switchdefense, .switchcarrybot {
-  background-color: #E2E2E2;
+  background-color: #8FC1E2;
+  border-radius: 5px;
   margin: 0px;
   width: 40px;
   height: 30px;
   font-size: 16px;
   border: 0px;
   margin: -5px;
+  color: white;
 }
 
 #defense0, #carrybot0 {
-  background-color: #66FF46;
+  background-color: #3881DC;
 }
 
 #wascarried {
   text-align: center;
-  background-color: #E2E2E2;
+  background-color: #3881DC;
   margin-top: 20px;
   margin-bottom: 20px;
   width: 120px;
   height: 80px;
   font-size: 16px;
   border: 0px;
+  border-radius: 5px;
+  color: white;
 }
 
 
@@ -226,11 +260,21 @@ body{
   text-align: center;
   height: 60px;
   width: 140px;
-  border: 2px solid black;
-  background: #E2E2E2;
 
   font-size: 16px;
   font-weight: 100px;
+
+  background: #2196F3;
+  border: none;
+  color: white;
+  text-decoration: none;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white; 
+  border: 2px;
+  border-radius: 5px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 .cancel {
@@ -240,15 +284,25 @@ body{
   text-align: center;
   height: 60px;
   width: 110px;
-  border: 2px solid black;
-  background-color: #C2C2C2;
 
   font-size: 12px;
   font-weight: 100px;
+
+  background: #8FC1E2;
+  border: none;
+  color: white;
+  text-decoration: none;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white; 
+  border: 2px;
+  border-radius: 5px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 .btnheader {
-  text-decoration: underline;
+  padding: 2px;
   font-weight: bold;
 }
 
@@ -407,7 +461,8 @@ body{
   left: 0px;
   position: fixed;
   width: 100%;
-  background-color: #6CCC12;
+  background-color: #8FC1E2;
+  color: white;
 }
 
 #modelbltop {
@@ -449,11 +504,18 @@ body{
   text-align: center;
   width: 200px;
   height: 60px;
-  border: 2px solid black;
-  background-color: #C2C2C2;
 
   font-size: 20px;
   font-weight: 100px;
+
+  background-color: #8fc1e2;
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white; 
+  border: 2px;
+  border-radius: 4px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 #modepreload, #modesandstorm, #modeteleop, #modemisc {
@@ -468,6 +530,14 @@ body{
   font-size: 24px;
   background-color: #6CCC12;
   font-weight: 100px;
+
+  -webkit-transition-duration: 0.4s; 
+  transition-duration: 0.4s;
+  cursor: pointer;
+  color: white; 
+  border: 2px;
+  border-radius: 4px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 

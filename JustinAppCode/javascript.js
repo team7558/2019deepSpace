@@ -1,5 +1,5 @@
 var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
-cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, station = "R1", xscale = 1, preloadedItem = "Nothing";
+cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, cargoDropped = 0, panelDropped = 0, station = "R1", xscale = 1, preloadedItem = "Nothing";
 
 var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
 
@@ -61,13 +61,12 @@ var buttonPlacement = [ //For each button, then the rocket displays
 
 ];
 
-var normCol = "#E2E2E2", stopCol = "#C2C2C2", checkCol = "#66FF46", tryCol = "#FFCA32", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
+var normCol = "#2196F3", stopCol = "#8FC1E2", checkCol = "#167BCC", tryCol = "#FFCA32", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
 
 //Run a few methods at the very beginning of the game
 
 
 function updateGameStats() {
-	
 }
 
 function changeButtonPlacement() {
@@ -227,6 +226,16 @@ function updateMode(mode) {
 		document.getElementById("robotscorespace").style.display = "none";
 		document.getElementById("gamemap").style.display = "none";
 		document.getElementById("miscellaneous").style.display = "table";
+
+		var y = document.getElementsByClassName("modelbl");
+		for(i = 0; i < y.length; i++) {
+			y[i].innerHTML = "MISCELLANEOUS PERIOD";
+			y[i].style.fontSize = "48px";
+			y[i].style.fontWeight = "600";
+			y[i].style.textAlign = "center";
+			y[i].style.color = "white";
+			y[i].style.backgroundColor = miscCol;
+		}
 	}
 
 	updateGameStats();
@@ -389,7 +398,7 @@ function preloadRobot() {
 			if(itemType == "cargo") {
 				preloadedItem = "Cargo";
 			} else if(itemType == "panel") {
-				preloadedItem = "Panel";
+				preloadedItem = "Null Hatch Panel";
 			}
 			dropItem();
 			//print2D(scoreSheet);
@@ -408,6 +417,7 @@ function preloadRobot() {
 		}
 	}
 	updateButtonLook();
+	updateGameStats();
 }
 
 function score(place) { //Actually scores on a given position
@@ -621,7 +631,6 @@ function changeStation(col, num) {
 }
 
 function changePickup(type) {
-	updateGameStats();
 	updateButtonLook();
 	if(type=="grab") {
 		//Change pickups
@@ -655,6 +664,7 @@ function changePickup(type) {
 			document.getElementsByClassName("cancel")[4].style.fontSize = "12px";
 		}
 	}
+	updateGameStats();
 }
 
 function makeButtonNorm(button) {
