@@ -8,12 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Cargo;
 import frc.robot.Robot;
 
 public class ShootCargo extends Command {
 
   public int num = 0;
+
   public ShootCargo() {
     super();
     requires(Robot.m_Cargo);
@@ -21,35 +21,34 @@ public class ShootCargo extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() { 
-    num = 0; 
-    Robot.m_Cargo.shootCargo();
-    setTimeout(3);
+  protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    num++;
-    System.out.println("Execute " + num);
+    Robot.m_Cargo.shoot();
   }
 
   // Make this return true when this Command no longer needs to run execute()
+  // Not required when using whileHeld
   @Override
   protected boolean isFinished() {
-    boolean timedOut = isTimedOut();
-    System.out.println(timedOut);
-    return timedOut;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_Cargo.stopShoot();
+
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+
   }
 }
