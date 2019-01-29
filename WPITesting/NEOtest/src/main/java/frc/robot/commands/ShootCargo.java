@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Cargo;
 import frc.robot.Robot;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class ShootCargo extends Command {
 
@@ -32,6 +33,8 @@ public class ShootCargo extends Command {
   protected void execute() {
     num++;
     System.out.println("Execute " + num);
+    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

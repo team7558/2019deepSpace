@@ -15,6 +15,8 @@ int min_area = 0, max_area = 10000000;
 
 int main() {
 
+
+
 	//namedWindow("bars", 1);
 
 	/*
@@ -71,6 +73,8 @@ int main() {
 			double height = (bounders[i].y + bounders[i].height) - bounders[i].y;
 			double aspectRatio = width / height;
 			cout << aspectRatio << endl;
+
+			//Equation is y=-118.94x + 109.9
 		}
 			imshow("grey", imgBox);
 		if (waitKey(30) == 27) break;

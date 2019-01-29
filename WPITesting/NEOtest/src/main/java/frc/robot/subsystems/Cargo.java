@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  * Add your docs here.
@@ -19,6 +21,8 @@ public class Cargo extends Subsystem {
   }
   
   public void shootCargo(){
+   
+
     System.out.println("Trent");
   }
 

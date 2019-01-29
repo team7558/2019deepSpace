@@ -28,7 +28,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.subsystems.*;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -43,7 +42,6 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-
   private static SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   public static Joystick m_controller_1;
   private static final int CONTROLLER_1 = 0;
@@ -56,6 +54,7 @@ public class Robot extends TimedRobot {
   private Joystick m_driveStick;
   private double m_speed;
   public static Cargo m_Cargo = new Cargo();
+  public static double speed;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -73,11 +72,9 @@ public class Robot extends TimedRobot {
     m_encoders[1] = new CANEncoder(m_motors[1]);
     m_encoders[2] = new CANEncoder(m_motors[2]);
 
-    m_leftMotorGroup = new SpeedControllerGroup(m_motors[1],
-        m_motors[2]);
+    m_leftMotorGroup = new SpeedControllerGroup(m_motors[1], m_motors[2]);
     m_rightMotorGroup = new SpeedControllerGroup(new CANSparkMax(RobotMap.RIGHT_MOTOR_1, MotorType.kBrushless),
         new CANSparkMax(RobotMap.RIGHT_MOTOR_2, MotorType.kBrushless));
-
 
     m_myRobot = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
     m_controller_1 = new Joystick(CONTROLLER_1);
@@ -86,18 +83,12 @@ public class Robot extends TimedRobot {
     m_intake_2 = new VictorSPX(5);
 
     m_testSolenoid = new Solenoid(3);
-    
 
     m_testCompressor = new Compressor();
-
 
     // m_myRobot = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
     m_driveStick = new Joystick(0);
 
-    
-    
-
-    
   }
 
   /**
@@ -161,7 +152,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    if(m_controller_1.getRawButton(1))
+    if (m_controller_1.getRawButton(1))
       System.out.println("ok");
     Scheduler.getInstance().run();
   }
@@ -177,10 +168,6 @@ public class Robot extends TimedRobot {
     }
   }
 
-
-
-
-
   /**
    * This function is called periodically during operator control.
    */
@@ -188,41 +175,34 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     double power = 0.2;
     double turnPower = 0.2;
-    
-    if (m_controller_1.getRawButton(3)){ // b button
+
+    if (m_controller_1.getRawButton(3)) { // b button
       m_testCompressor.start();
       m_testCompressor.setClosedLoopControl(true);
-    }else{
+    } else {
       m_testCompressor.stop();
     }
-    
-    double speed = m_controller_1.getY();
+
+    speed = m_controller_1.getY();
     m_intake_1.set(ControlMode.PercentOutput, speed);
     m_intake_2.set(ControlMode.PercentOutput, -speed);
     m_myRobot.arcadeDrive(m_driveStick.getY() * power, m_driveStick.getZ() * turnPower);
-    
+
     // turn compressor on until the pressure swtich triggers
-   /* double speed = m_controller_1.getY();
-    speed *= 0.6;
-    //c.start();
-    //System.out.println("hello");   
-
-    
-
-    // m_testMotor.set(speed);
-    // toggle switch instead now
-    if (m_controller_1.getRawButton(3)) {
-      //System.out.println("gotten");
-      // testSolenoid.set(DoubleSolenoid.Value.kOff);
-      //m_testSolenoid.set(false);
-      // testSolenoid.set(DoubleSolenoid.Value.kReverse);
-      m_testCompressor.start();
-      System.out.println("tedt");
-    } else {
-     // m_testSolenoid.set(true);
-    }
-
-    m_robotDrive.tankDrive(speed, speed);*/
+    /*
+     * double speed = m_controller_1.getY(); speed *= 0.6; //c.start();
+     * //System.out.println("hello");
+     * 
+     * 
+     * 
+     * // m_testMotor.set(speed); // toggle switch instead now if
+     * (m_controller_1.getRawButton(3)) { //System.out.println("gotten"); //
+     * testSolenoid.set(DoubleSolenoid.Value.kOff); //m_testSolenoid.set(false); //
+     * testSolenoid.set(DoubleSolenoid.Value.kReverse); m_testCompressor.start();
+     * System.out.println("tedt"); } else { // m_testSolenoid.set(true); }
+     * 
+     * m_robotDrive.tankDrive(speed, speed);
+     */
     Scheduler.getInstance().run();
 
   }
@@ -233,27 +213,26 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     /*
-    double speed = m_controller_1.getY();
-    m_intake_1.set(ControlMode.PercentOutput, speed);
-    m_intake_2.set(ControlMode.PercentOutput, -speed);
-    */
-    if (m_controller_1.getRawButton(3)){ // b button
+     * double speed = m_controller_1.getY();
+     * m_intake_1.set(ControlMode.PercentOutput, speed);
+     * m_intake_2.set(ControlMode.PercentOutput, -speed);
+     */
+    if (m_controller_1.getRawButton(3)) { // b button
       m_testCompressor.start();
       m_testCompressor.setClosedLoopControl(true);
-    }else{
-      //m_testCompressor.stop();
+    } else {
+      // m_testCompressor.stop();
     }
-    if (m_controller_1.getRawButton(2)){ // a button push it out
+    if (m_controller_1.getRawButton(2)) { // a button push it out
       m_testSolenoid.set(false);
-    }else{
-      m_testSolenoid.set(true); 
+    } else {
+      m_testSolenoid.set(true);
     }
-    if(m_controller_1.getRawButton(1)){ //x button retrackt should be useless
-      //System.out.println("hello");
+    if (m_controller_1.getRawButton(1)) { // x button retrackt should be useless
+      // System.out.println("hello");
       m_testSolenoid.set(true);
     }
 
- 
-   // m_testCompressor.stop();
+    // m_testCompressor.stop();
   }
 }
