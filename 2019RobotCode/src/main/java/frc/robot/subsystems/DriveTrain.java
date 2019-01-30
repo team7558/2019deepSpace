@@ -15,24 +15,26 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
+import frc.robot.Robot;
 
 /**
  * Add your docs here.
  */
 public class DriveTrain extends PIDSubsystem {
-  private PigeonIMU m_pidgey = new PigeonIMU(3); // 3 is can ID
+  private PigeonIMU m_pidgey = new PigeonIMU(RobotMap.DRIVE_PIGEON); // 3 is can ID
   private double[] ypr = new double[3];
   private CANSparkMax[] m_motors = new CANSparkMax[7];
   private CANEncoder[] m_motorEncoders = new CANEncoder[7];
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   private DifferentialDrive m_driveTrain;
+  private double targetHeading = 0; 
   /**
    * Add your docs here.
    */
   public DriveTrain() {
     // Intert a subsystem name and PID values here
     super("DriveTrain", 1, 2, 3);  // kp, ki, kd
-    setSetpoint(0);
+    setSetpoint(targetHeading);
     enable();
 
     m_motors[1] = new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless);
@@ -66,8 +68,10 @@ public class DriveTrain extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    // Use output to drive your system, like a motor
-    // e.g. yourMotor.set(output);
-    
+    targetHeading += Robot.m_oi.m_controller_1.getZ();
+    setSetpoint(targetHeading);
+
+    m_driveTrain.arcadeDrive(Robot.m_oi.m_controller_1.getX(), output);
+
   }
 }
