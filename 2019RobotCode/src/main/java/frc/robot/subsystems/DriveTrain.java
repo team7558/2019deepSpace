@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
+import frc.robot.commands.JoyDrive;
 import frc.robot.Robot;
 
 /**
@@ -27,13 +28,14 @@ public class DriveTrain extends PIDSubsystem {
   private CANEncoder[] m_motorEncoders = new CANEncoder[7];
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   private DifferentialDrive m_driveTrain;
-  private double targetHeading = 0; 
+  private double targetHeading = 0;
+
   /**
    * Add your docs here.
    */
   public DriveTrain() {
     // Intert a subsystem name and PID values here
-    super("DriveTrain", 1, 2, 3);  // kp, ki, kd
+    super("DriveTrain", 1, 2, 3); // kp, ki, kd
     setSetpoint(targetHeading);
     enable();
 
@@ -55,23 +57,44 @@ public class DriveTrain extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new JoyDrive());
   }
 
   @Override
   protected double returnPIDInput() {
     // Return your input value for the PID loop
-    m_pidgey.getYawPitchRoll(ypr); // get yaw, pitch, roll and store in ypr array
-    // We should add something to check if the value we return makes sense.
-    return ypr[0];
+    // get yaw, pitch, roll and store in ypr array
+    // We should add something to check if the value we return makes sense so that the robot doesnt make any jerking motions.
+    return getGyroYaw();
   }
 
   @Override
   protected void usePIDOutput(double output) {
     targetHeading += Robot.m_oi.m_controller_1.getZ();
     setSetpoint(targetHeading);
-
     m_driveTrain.arcadeDrive(Robot.m_oi.m_controller_1.getX(), output);
 
   }
+
+  public void stop() {
+    m_leftMotorGroup.set(0);
+    m_rightMotorGroup.set(0);
+  }
+
+  public double getLeftDistance() {
+    return (m_motorEncoders[1].getPosition() + m_motorEncoders[2].getPosition() + m_motorEncoders[3].getPosition()) / 3;
+  }
+
+  public double getRightDistance() {
+    return (m_motorEncoders[4].getPosition() + m_motorEncoders[5].getPosition() + m_motorEncoders[6].getPosition()) / 3;
+  }
+  public double getGyroYaw(){
+    m_pidgey.getYawPitchRoll(ypr);
+    return ypr[0];
+  }
+
+  public void resetGyroYaw(){
+    m_pidgey.setYaw(0);
+  }
+
 }

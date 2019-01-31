@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
   public static Claw m_claw;
   public static Elbow m_elbow;
   public static EndGame m_endGame;
+  public static DriveTrain m_driveTrain;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
