@@ -8,40 +8,27 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import frc.robot.RobotMap;
-import frc.robot.commands.DriveElbow;
 
 /**
  * Add your docs here.
  */
-public class Elbow extends PIDSubsystem {
-  public static final double ENCODER_TO_ANGLE = 10;
-  public static double currentAngle;
-  public CANSparkMax elbowController; 
-  public CANEncoder elbowEncoder;
+public class LineFollow extends PIDSubsystem {
   /**
    * Add your docs here.
    */
-  public Elbow() {
+  public LineFollow() {
     // Intert a subsystem name and PID values here
-    super("Elbow", 1, 2, 3);
+    super("SubsystemName", 1, 2, 3);
     // Use these to get going:
-    setSetpoint(0);
+    // setSetpoint() - Sets where the PID controller should move the system
     // to
-    
-
-    elbowController = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
-    elbowEncoder = new CANEncoder(elbowController);
-
+    // enable() - Enables the PID controller.
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DriveElbow());
+    // setDefaultCommand(new MySpecialCommand());
   }
 
   @Override
@@ -49,26 +36,12 @@ public class Elbow extends PIDSubsystem {
     // Return your input value for the PID loop
     // e.g. a sensor, like a potentiometer:
     // yourPot.getAverageVoltage() / kYourMaxVoltage;
-    currentAngle = ENCODER_TO_ANGLE*elbowEncoder.getPosition();
-    return currentAngle;
+    return 0.0;
   }
 
   @Override
   protected void usePIDOutput(double output) {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
-    elbowController.set(output);
-  }
-
-  protected void setAngle(double targetAngle){
-    setSetpoint(targetAngle);
-  }
-
-  public void stop(){
-    elbowController.set(0);
-  }
-
-  public double getDistance(){
-    return elbowEncoder.getPosition();
   }
 }

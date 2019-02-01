@@ -8,31 +8,17 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class EndGame extends Subsystem {
-  private Solenoid endGameSolenoid; 
+public class Jetson extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public EndGame(){
-    endGameSolenoid = new Solenoid(RobotMap.END_GAME_SOLENOID); // Two smaller end game pistons
-  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-  }
-
-  public void extend(){
-    endGameSolenoid.set(true);
-  }
-  // This should only be called in case of emergency, and not when deploying end game arm
-  public void retract(){
-    endGameSolenoid.set(false);
   }
 }

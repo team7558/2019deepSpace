@@ -2,15 +2,17 @@
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
+/* the project.*/
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-
+                                                               
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -29,6 +31,7 @@ public class DriveTrain extends PIDSubsystem {
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   private DifferentialDrive m_driveTrain;
   private double targetHeading = 0;
+  private Solenoid m_shifter;
 
   /**
    * Add your docs here.
@@ -37,7 +40,7 @@ public class DriveTrain extends PIDSubsystem {
     // Intert a subsystem name and PID values here
     super("DriveTrain", 1, 2, 3); // kp, ki, kd
     setSetpoint(targetHeading);
-    enable();
+    
 
     m_motors[1] = new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless);
     m_motors[2] = new CANSparkMax(RobotMap.LEFT_MOTOR_2, MotorType.kBrushless);
@@ -51,7 +54,7 @@ public class DriveTrain extends PIDSubsystem {
     m_leftMotorGroup = new SpeedControllerGroup(m_motors[1], m_motors[2], m_motors[3]);
     m_rightMotorGroup = new SpeedControllerGroup(m_motors[4], m_motors[5], m_motors[6]);
     m_driveTrain = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
-
+    m_shifter = new Solenoid(RobotMap.SHIFTER);
   }
 
   @Override
@@ -72,8 +75,16 @@ public class DriveTrain extends PIDSubsystem {
   protected void usePIDOutput(double output) {
     targetHeading += Robot.m_oi.m_controller_1.getZ();
     setSetpoint(targetHeading);
+    if(Robot.m_oi.m_controller_1.getX() > 0.75){
+      Robot.m_driveTrain.setSolenoid(true);
+    } else if(Robot.m_oi.m_controller_1.getX() < -0.75){
+      Robot.m_driveTrain.setSolenoid(true);
+    }else{
+      Robot.m_driveTrain.setSolenoid(false);
+    }
     m_driveTrain.arcadeDrive(Robot.m_oi.m_controller_1.getX(), output);
 
+    System.out.println(output);
   }
 
   public void stop() {
@@ -95,6 +106,10 @@ public class DriveTrain extends PIDSubsystem {
 
   public void resetGyroYaw(){
     m_pidgey.setYaw(0);
+  }
+
+  public void setSolenoid(boolean a){
+    m_shifter.set(a);
   }
 
 }

@@ -20,7 +20,7 @@ import frc.robot.RobotMap;
 public class Claw extends Subsystem {
   public VictorSPX m_intake_1, m_intake_2; // Cargo
   public Solenoid m_solenoid_1; // Cargo 
-  public Solenoid m_solenoid_2, m_solenoid_3, m_solenoid_4; // Hatch 
+  public Solenoid m_solenoid_2; // Hatch 
 
   public Claw(){
     m_intake_1 = new VictorSPX(RobotMap.INTAKE_1);
@@ -54,12 +54,12 @@ public class Claw extends Subsystem {
   }
 
   public void extendHatch(){
-    m_solenoid_3.set(true);
+    m_solenoid_2.set(true);
 
   }
 
   public void retractHatch(){
-    m_solenoid_3.set(false);
+    m_solenoid_2.set(false);
   }
 
 }

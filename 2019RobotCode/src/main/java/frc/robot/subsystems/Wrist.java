@@ -8,19 +8,21 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class EndGame extends Subsystem {
-  private Solenoid endGameSolenoid; 
+public class Wrist extends Subsystem {
+  public VictorSPX m_wristMotor;
+  
+  public Wrist(){
+    m_wristMotor = new VictorSPX(RobotMap.WRIST_MOTOR);
+  }
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public EndGame(){
-    endGameSolenoid = new Solenoid(RobotMap.END_GAME_SOLENOID); // Two smaller end game pistons
-  }
 
   @Override
   public void initDefaultCommand() {
@@ -28,11 +30,16 @@ public class EndGame extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void extend(){
-    endGameSolenoid.set(true);
+  public void driveWrist(double speed){
+    m_wristMotor.set(ControlMode.PercentOutput, speed);
   }
-  // This should only be called in case of emergency, and not when deploying end game arm
-  public void retract(){
-    endGameSolenoid.set(false);
+
+  public void stop(){
+    m_wristMotor.set(ControlMode.PercentOutput, 0);
   }
+
+  public double getWristSpeed(){
+    return m_wristMotor.getMotorOutputPercent();
+  }
+
 }

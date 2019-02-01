@@ -10,15 +10,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class JoyDrive extends Command {
-  public JoyDrive() {
+public class RetractEndGame extends Command {
+  public RetractEndGame() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_driveTrain);
+    requires(Robot.m_endGame);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_endGame.retract();
   }
 
   // Called repeatedly when this Command is scheduled to run

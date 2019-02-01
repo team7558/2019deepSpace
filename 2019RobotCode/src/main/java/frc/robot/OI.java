@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
   public Joystick m_controller_1 = new Joystick(0); 
+  public Joystick m_controller_2 = new Joystick(1);
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

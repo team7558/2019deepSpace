@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.*;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +33,7 @@ public class Robot extends TimedRobot {
   public static Elbow m_elbow;
   public static EndGame m_endGame;
   public static DriveTrain m_driveTrain;
+  public static Compressor m_Compressor;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -45,6 +48,11 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);    
+
+    m_Compressor = new Compressor(RobotMap.COMPRESSOR);
+    m_Compressor.start();
+    m_Compressor.setClosedLoopControl(true);
+
   }
 
   /**
@@ -107,6 +115,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    
   }
 
   @Override
@@ -118,6 +127,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_elbow.enable();
   }
 
   /**
@@ -133,6 +143,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-
+    
   }
 }
