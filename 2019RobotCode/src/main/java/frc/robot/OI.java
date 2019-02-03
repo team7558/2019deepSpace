@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,6 +19,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
   public Joystick m_controller_1 = new Joystick(0); 
   public Joystick m_controller_2 = new Joystick(1);
+  public int shootHatchButton = 1;
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -23,7 +27,9 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   public OI(){
-     
+
+    Button b1 = new JoystickButton(m_controller_1, shootHatchButton);
+    b1.whenPressed(new ShootHatch());
   }
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to

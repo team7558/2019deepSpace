@@ -7,10 +7,15 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -29,11 +34,14 @@ public class Robot extends TimedRobot {
 
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
-  public static Claw m_claw;
+  public static Claw m_claw = new Claw();
   public static Elbow m_elbow;
   public static EndGame m_endGame;
   public static DriveTrain m_driveTrain;
+  public static DifferentialDrive m_diffDrive;
   public static Compressor m_Compressor;
+  private CANSparkMax[] m_motors = new CANSparkMax[7];
+  private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -45,6 +53,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    m_elbow = new Elbow();
+    m_driveTrain = new DriveTrain();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);    
@@ -74,6 +84,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    m_driveTrain.disable();
   }
 
   @Override
@@ -127,7 +138,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_elbow.enable();
+    m_driveTrain.enable();
+    m_driveTrain.resetGyroYaw();
   }
 
   /**
@@ -143,6 +155,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    
+    //System.out.println(Robot.m_oi.m_controller_1.getX());
+    // m_diffDrive.arcadeDrive(Robot.m_oi.m_controller_1.getY(), Robot.m_oi.m_controller_1.getX());
+    //m_motors[6].set(0.5);
+    //m_motors[1].set(0.5);
   }
 }

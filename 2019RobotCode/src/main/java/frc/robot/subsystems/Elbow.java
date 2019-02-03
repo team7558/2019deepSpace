@@ -31,7 +31,8 @@ public class Elbow extends PIDSubsystem {
     // Use these to get going:
     setSetpoint(0);
     // to
-    
+    setAbsoluteTolerance(0.05);
+    getPIDController().setContinuous(false);
 
     elbowController = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     elbowEncoder = new CANEncoder(elbowController);
@@ -41,7 +42,7 @@ public class Elbow extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DriveElbow());
+    // setDefaultCommand(new DriveElbow());
   }
 
   @Override
@@ -58,17 +59,18 @@ public class Elbow extends PIDSubsystem {
     // Use output to drive your system, like a motor
     // e.g. yourMotor.set(output);
     elbowController.set(output);
+    
   }
 
   protected void setAngle(double targetAngle){
     setSetpoint(targetAngle);
   }
 
-  public void stop(){
-    elbowController.set(0);
-  }
+//  public void stop(){
+//    elbowController.set(0);
+//  }
 
-  public double getDistance(){
-    return elbowEncoder.getPosition();
-  }
+//  public double getDistance(){
+//    return elbowEncoder.getPosition();
+//  }
 }

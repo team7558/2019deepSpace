@@ -25,23 +25,23 @@ import frc.robot.Robot;
  */
 public class DriveTrain extends PIDSubsystem {
   private PigeonIMU m_pidgey = new PigeonIMU(RobotMap.DRIVE_PIGEON); // 3 is can ID
-  private double[] ypr = new double[3];
+  public double[] ypr = new double[3];
   private CANSparkMax[] m_motors = new CANSparkMax[7];
   private CANEncoder[] m_motorEncoders = new CANEncoder[7];
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   private DifferentialDrive m_driveTrain;
   private double targetHeading = 0;
   private Solenoid m_shifter;
+  public double previousControllerY;
 
   /**
    * Add your docs here.
    */
   public DriveTrain() {
     // Intert a subsystem name and PID values here
-    super("DriveTrain", 1, 2, 3); // kp, ki, kd
+    super("DriveTrain", 0.03, 0, 0.06); // kp, ki, kd
     setSetpoint(targetHeading);
     
-
     m_motors[1] = new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless);
     m_motors[2] = new CANSparkMax(RobotMap.LEFT_MOTOR_2, MotorType.kBrushless);
     m_motors[3] = new CANSparkMax(RobotMap.LEFT_MOTOR_3, MotorType.kBrushless);
@@ -53,7 +53,7 @@ public class DriveTrain extends PIDSubsystem {
     }
     m_leftMotorGroup = new SpeedControllerGroup(m_motors[1], m_motors[2], m_motors[3]);
     m_rightMotorGroup = new SpeedControllerGroup(m_motors[4], m_motors[5], m_motors[6]);
-    m_driveTrain = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
+    m_driveTrain = new DifferentialDrive(m_rightMotorGroup, m_leftMotorGroup);
     m_shifter = new Solenoid(RobotMap.SHIFTER);
   }
 
@@ -69,22 +69,29 @@ public class DriveTrain extends PIDSubsystem {
     // get yaw, pitch, roll and store in ypr array
     // We should add something to check if the value we return makes sense so that the robot doesnt make any jerking motions.
     return getGyroYaw();
+    
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    targetHeading += Robot.m_oi.m_controller_1.getZ();
+    double inputX = 1.25 * Robot.m_oi.m_controller_1.getRawAxis(3);
+    targetHeading += -inputX;
     setSetpoint(targetHeading);
-    if(Robot.m_oi.m_controller_1.getX() > 0.75){
+
+    // Shift to High gear when joystick passes 75%
+    if(Robot.m_oi.m_controller_1.getY() > 0.75){
       Robot.m_driveTrain.setSolenoid(true);
-    } else if(Robot.m_oi.m_controller_1.getX() < -0.75){
+    } else if(Robot.m_oi.m_controller_1.getY() < -0.75){
       Robot.m_driveTrain.setSolenoid(true);
     }else{
       Robot.m_driveTrain.setSolenoid(false);
     }
-    m_driveTrain.arcadeDrive(Robot.m_oi.m_controller_1.getX(), output);
 
-    System.out.println(output);
+
+    previousControllerY = inputX;
+    System.out.println("Output: " + output + " TargetHeading: " + targetHeading);
+    m_driveTrain.arcadeDrive(-Robot.m_oi.m_controller_1.getRawAxis(1)*0.75, output);
+
   }
 
   public void stop() {

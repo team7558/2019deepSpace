@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ShootHatch extends Command {
+  public boolean isF;
   public ShootHatch() {
+    super();
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_claw);
   }
@@ -30,7 +32,7 @@ public class ShootHatch extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return !Robot.m_oi.m_controller_1.getRawButton(Robot.m_oi.shootHatchButton);
   }
 
   // Called once after isFinished returns true
