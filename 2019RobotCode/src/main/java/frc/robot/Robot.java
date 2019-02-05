@@ -7,11 +7,8 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -40,8 +37,6 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_driveTrain;
   public static DifferentialDrive m_diffDrive;
   public static Compressor m_Compressor;
-  private CANSparkMax[] m_motors = new CANSparkMax[7];
-  private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();

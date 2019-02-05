@@ -77,15 +77,6 @@ public class DriveTrain extends PIDSubsystem {
     double inputX = 1.25 * Robot.m_oi.m_controller_1.getRawAxis(3);
     targetHeading += -inputX;
     setSetpoint(targetHeading);
-
-    // Shift to High gear when joystick passes 75%
-    if(Robot.m_oi.m_controller_1.getRawButton(8)){
-      Robot.m_driveTrain.setSolenoid(true);
-    } else{
-      Robot.m_driveTrain.setSolenoid(false);
-    }
-
-
     previousControllerY = inputX;
     // System.out.println("Output: " + output + " TargetHeading: " + targetHeading);
     m_driveTrain.arcadeDrive(-Robot.m_oi.m_controller_1.getRawAxis(1)*0.75, output);
@@ -115,6 +106,14 @@ public class DriveTrain extends PIDSubsystem {
 
   public void setSolenoid(boolean a){
     m_shifter.set(a);
+  }
+
+  public void shiftUp(){
+    Robot.m_driveTrain.setSolenoid(true);
+  }
+
+  public void shiftDown(){
+    Robot.m_driveTrain.setSolenoid(false);
   }
 
 }

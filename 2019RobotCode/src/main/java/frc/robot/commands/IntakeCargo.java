@@ -30,7 +30,7 @@ public class IntakeCargo extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return !Robot.m_oi.m_controller_1.getRawButton(Robot.m_oi.intakeCargoButton);
   }
 
   // Called once after isFinished returns true
