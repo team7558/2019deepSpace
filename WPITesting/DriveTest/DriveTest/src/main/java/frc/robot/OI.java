@@ -7,53 +7,19 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.*;
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  public Joystick m_controller_1 = new Joystick(0); 
-  public Joystick m_controller_2 = new Joystick(1);
-  public int shootHatchButton = 1;
-  public int extendEndGameButton = 2;
-  public int intakeCargoButton = 3;
-  public int retractEndGameButton = 4;
-  public int shootCargoButton = 5;
-  public int shiftGearsButton = 6;
-  public int driveShiftButton = 8;
-  // CREATING BUTTONS
+  //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
   // Joystick stick = new Joystick(port);
-  public OI(){
+  // Button button = new JoystickButton(stick, buttonNumber);
 
-    Button b1 = new JoystickButton(m_controller_1, shootHatchButton);
-    Button b2 = new JoystickButton(m_controller_1, extendEndGameButton);
-    Button b3 = new JoystickButton(m_controller_1, intakeCargoButton);
-    Button b4 = new JoystickButton(m_controller_1, retractEndGameButton);
-    Button b5 = new JoystickButton(m_controller_1, shootCargoButton);
-    Button b6 = new JoystickButton(m_controller_1, shiftGearsButton);
-    Button b8 = new JoystickButton(m_controller_1, driveShiftButton);
-    //b1.whenPressed(new ShootHatch());
-    //b2.whenPressed(new ExtendEndGame());        
-    //b3.whenPressed(new IntakeCargo());
-    //b4.whenPressed(new RetractEndGame());
-    //b5.whenPressed(new ShootCargo());
-    //b8.whenPressed(new GearShift());
-
-
-    b1.close();
-    b2.close();
-    b3.close();
-    b4.close();
-  }
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.

@@ -7,12 +7,12 @@
 
 package frc.robot;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -20,8 +20,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.*;
-
+import frc.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,19 +30,13 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-
-
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
-  public static Claw m_claw = new Claw();
-  public static Elbow m_elbow;
-  public static EndGame m_endGame;
-  public static DriveTrain m_driveTrain;
-  public static DifferentialDrive m_diffDrive;
-  public static Compressor m_Compressor;
-  public static CANSparkMax m_elbowMotor;
-  public static CANEncoder m_elbowEncoder;
-  public static CANSparkMax m_wristMotor;
+  public static WPI_VictorSPX m_leftMotor1, m_leftMotor2, m_rightMotor1, m_rightMotor2;
+  public static SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
+  public static DifferentialDrive m_driveTrain;
+  public static Joystick m_controller1;
+
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -55,19 +48,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_elbow = new Elbow();
-    m_driveTrain = new DriveTrain();
-    m_elbowMotor = new CANSparkMax(7, MotorType.kBrushless);
-    m_elbowEncoder = new CANEncoder(m_elbowMotor);
-    m_wristMotor = new CANSparkMax(8, MotorType.kBrushless);
+    m_leftMotor1 = new WPI_VictorSPX(4);
+    m_leftMotor2 = new WPI_VictorSPX(3);
+    m_rightMotor1 = new WPI_VictorSPX(1);
+    m_rightMotor2 = new WPI_VictorSPX(2);
+    m_controller1 = new Joystick(0);
+    m_driveTrain = new DifferentialDrive(new SpeedControllerGroup(m_leftMotor1, m_leftMotor2), new SpeedControllerGroup(m_rightMotor1, m_rightMotor2));
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);    
-
-    m_Compressor = new Compressor(RobotMap.COMPRESSOR);
-    m_Compressor.start();
-    m_Compressor.setClosedLoopControl(true);
-
+    SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**
@@ -89,7 +78,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    m_driveTrain.disable();
   }
 
   @Override
@@ -131,7 +119,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-    
   }
 
   @Override
@@ -143,8 +130,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_driveTrain.enable();
-    m_driveTrain.resetGyroYaw();
   }
 
   /**
@@ -153,7 +138,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
+    m_driveTrain.arcadeDrive(0.8*m_controller1.getRawAxis(1), 0.8*m_controller1.getRawAxis(2));
   }
 
   /**
@@ -161,16 +146,5 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    //System.out.println(Robot.m_oi.m_controller_1.getX());
-    // m_diffDrive.arcadeDrive(Robot.m_oi.m_controller_1.getY(), Robot.m_oi.m_controller_1.getX());
-    //m_motors[6].set(0.5);
-    //m_motors[1].set(0.5);
-    System.out.println(m_elbowEncoder.getPosition());
-    m_wristMotor.set(0.15*m_oi.m_controller_1.getZ());
-    //if(m_elbowEncoder.getPosition() >= -3 && m_elbowEncoder.getPosition() < 100)
-    m_elbowMotor.set(0.2*m_oi.m_controller_1.getY());
-    //else
-    //  m_elbowMotor.set(0);
-
   }
 }

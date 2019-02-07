@@ -45,9 +45,9 @@ public class Claw extends Subsystem {
     m_intake_1.set(1);
     m_intake_2.set(-1);
     // This might not work
-    if (m_intake_1.getSpeed() >= 0.95 && m_intake_2.getMotorOutputPercent() >= 0.95) {
-      m_solenoid_1.set(true);
-    }
+    //if (m_intake_1.getSpeed() >= 0.95 && m_intake_2.getMotorOutputPercent() >= 0.95) {
+    //  m_solenoid_1.set(true);
+    //}
   }
   public void stopShootCargo(){
     m_intake_1.set(0);
