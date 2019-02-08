@@ -39,7 +39,7 @@ public class DriveTrain extends PIDSubsystem {
    */
   public DriveTrain() {
     // Intert a subsystem name and PID values here
-    super("DriveTrain", 0.03, 0, 0.06); // kp, ki, kd
+    super("DriveTrain", 0.03, 0, 0.03); // kp, ki, kd
     setSetpoint(targetHeading);
     
     m_motors[1] = new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless);
@@ -74,12 +74,12 @@ public class DriveTrain extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    double inputX = 1.25 * Robot.m_oi.m_controller_1.getRawAxis(3);
+    double inputX = 2.5 * Robot.m_oi.m_controller_1.getRawAxis(4);
     targetHeading += -inputX;
     setSetpoint(targetHeading);
     previousControllerY = inputX;
     // System.out.println("Output: " + output + " TargetHeading: " + targetHeading);
-    m_driveTrain.arcadeDrive(-Robot.m_oi.m_controller_1.getRawAxis(1)*0.75, output);
+    m_driveTrain.arcadeDrive(Robot.m_oi.m_controller_1.getRawAxis(1)*0.75, output);
 
   }
 

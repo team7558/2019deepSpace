@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.*;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 
 /**
@@ -32,18 +33,18 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
-
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
-  public static Claw m_claw = new Claw();
+  public static Claw m_claw;
   public static Elbow m_elbow;
   public static EndGame m_endGame;
   public static DriveTrain m_driveTrain;
-  public static DifferentialDrive m_diffDrive;
+  
+  
   public static Compressor m_Compressor;
-  public static CANSparkMax m_elbowMotor;
-  public static CANEncoder m_elbowEncoder;
-  public static CANSparkMax m_wristMotor;
+
+  public static CANSparkMax m_elbowMotor, m_wristMotor;
+  public static WPI_VictorSPX m_intake_1, m_intake_2;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -54,12 +55,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
+    m_claw = new Claw();
+    
     m_elbow = new Elbow();
+    m_elbow.enable();
     m_driveTrain = new DriveTrain();
-    m_elbowMotor = new CANSparkMax(7, MotorType.kBrushless);
-    m_elbowEncoder = new CANEncoder(m_elbowMotor);
-    m_wristMotor = new CANSparkMax(8, MotorType.kBrushless);
+    m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);    
@@ -68,6 +69,10 @@ public class Robot extends TimedRobot {
     m_Compressor.start();
     m_Compressor.setClosedLoopControl(true);
 
+    m_elbowMotor = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
+    m_wristMotor = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
+    m_intake_1 = new WPI_VictorSPX(RobotMap.INTAKE_1);
+    m_intake_2 = new WPI_VictorSPX(RobotMap.INTAKE_2);
   }
 
   /**
@@ -131,7 +136,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-    
   }
 
   @Override
@@ -143,6 +147,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_elbow.enable();
     m_driveTrain.enable();
     m_driveTrain.resetGyroYaw();
   }
@@ -152,8 +157,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+   // System.out.println(m_elbow.getAngle());
+    //m_wristMotor.set(0.1*m_oi.m_controller_1.getRawAxis(1));
+    //m_elbowMotor.set(0.2*m_oi.m_controller_1.getRawAxis(5));
+    if (m_oi.m_controller_1.getRawButton(1)){
+      m_elbow.resetAngle();
+      m_elbow.setAngle(10);
+    }
+    /*
+    if (m_oi.elbowFrontLimit.get()){
+      //System.out.println("salada");
+      //m_elbow.resetAngle();
+    }
+    */
     Scheduler.getInstance().run();
-    
   }
 
   /**
@@ -161,16 +178,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    //m_elbow.setAngle(20);
     //System.out.println(Robot.m_oi.m_controller_1.getX());
     // m_diffDrive.arcadeDrive(Robot.m_oi.m_controller_1.getY(), Robot.m_oi.m_controller_1.getX());
     //m_motors[6].set(0.5);
     //m_motors[1].set(0.5);
-    System.out.println(m_elbowEncoder.getPosition());
-    m_wristMotor.set(0.15*m_oi.m_controller_1.getZ());
+    //System.out.println("Elbow: "+m_elbowEncoder.getPosition() + " Wrist: "+ m_wristEncoder.getPosition());
+    m_wristMotor.set(0.1*m_oi.m_controller_1.getRawAxis(1));
     //if(m_elbowEncoder.getPosition() >= -3 && m_elbowEncoder.getPosition() < 100)
-    m_elbowMotor.set(0.2*m_oi.m_controller_1.getY());
+    m_elbowMotor.set(0.2*m_oi.m_controller_1.getRawAxis(5));
     //else
     //  m_elbowMotor.set(0);
-
+    //System.out.println(m_elbow.getAngle());
+    //double intakeSpeed = m_oi.m_controller_1.getRawAxis(4);
+    //m_intake_1.set(-intakeSpeed);
+    //m_intake_2.set(intakeSpeed);
   }
 }

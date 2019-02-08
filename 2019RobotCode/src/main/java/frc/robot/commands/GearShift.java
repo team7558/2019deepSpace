@@ -13,6 +13,7 @@ import frc.robot.Robot;
 public class GearShift extends Command {
   public GearShift() {
     // Use requires() here to declare subsystem dependencies
+    super();
     requires(Robot.m_driveTrain);
   }
 

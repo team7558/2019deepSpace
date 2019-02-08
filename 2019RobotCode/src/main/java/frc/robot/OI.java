@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,7 +26,10 @@ public class OI {
   public int retractEndGameButton = 4;
   public int shootCargoButton = 5;
   public int shiftGearsButton = 6;
-  public int driveShiftButton = 8;
+  public int driveShiftButton = 6;
+
+  public DigitalInput elbowFrontLimit;
+
   // CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -43,16 +47,18 @@ public class OI {
     Button b8 = new JoystickButton(m_controller_1, driveShiftButton);
     //b1.whenPressed(new ShootHatch());
     //b2.whenPressed(new ExtendEndGame());        
-    //b3.whenPressed(new IntakeCargo());
+    b3.whenPressed(new IntakeCargo());
     //b4.whenPressed(new RetractEndGame());
     //b5.whenPressed(new ShootCargo());
-    //b8.whenPressed(new GearShift());
+    b8.whenPressed(new GearShift());
 
 
     b1.close();
     b2.close();
     b3.close();
     b4.close();
+
+    elbowFrontLimit = new DigitalInput(1);
   }
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to

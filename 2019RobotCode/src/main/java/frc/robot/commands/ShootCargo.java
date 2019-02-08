@@ -13,6 +13,7 @@ import frc.robot.Robot;
 public class ShootCargo extends Command {
   public ShootCargo() {
     // Use requires() here to declare subsystem dependencies
+    super();
     requires(Robot.m_claw);
   }
 

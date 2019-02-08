@@ -13,6 +13,7 @@ import frc.robot.Robot;
 public class IntakeCargo extends Command {
   public IntakeCargo() {
     // Use requires() here to declare subsystem dependencies
+    super();
     requires(Robot.m_claw);
   }
 
@@ -30,6 +31,8 @@ public class IntakeCargo extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    System.out.println("salada");
+    //return false;
     return !Robot.m_oi.m_controller_1.getRawButton(Robot.m_oi.intakeCargoButton);
   }
 

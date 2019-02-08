@@ -24,11 +24,11 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static final int LEFT_MOTOR_1 = 1, LEFT_MOTOR_2 = 2, RIGHT_MOTOR_1 = 4, RIGHT_MOTOR_2 = 5, LEFT_MOTOR_3 = 3, RIGHT_MOTOR_3 = 6;
-  public static final int INTAKE_1 = 7, INTAKE_2 = 8;
+  public static final int INTAKE_1 = 9, INTAKE_2 = 10;
   public static final int SOLENOID_1 = 4, SOLENOID_2 = 3, END_GAME_SOLENOID = 5;
   public static final int DRIVE_PIGEON = 11;
-  public static final int ELBOW_MOTOR = 9;
-  public static final int WRIST_MOTOR = 10;
+  public static final int ELBOW_MOTOR = 7;
+  public static final int WRIST_MOTOR = 8;
   public static final int COMPRESSOR = 0;
   public static final int SHIFTER = 5;
 }
