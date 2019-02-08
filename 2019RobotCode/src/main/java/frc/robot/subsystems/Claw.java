@@ -12,9 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
-import frc.robot.Robot;
 
 /**
  * Add your docs here.
@@ -45,7 +43,7 @@ public class Claw extends Subsystem {
     m_intake_1.set(0.2);
     m_intake_2.set(-0.2);
     // This might not work
-    //if (m_intake_1.getSpeed() >= 0.95 && m_intake_2.getMotorOutputPercent() >= 0.95) {
+    //if (m_intake_1.getMotorOutputPercent() >= 0.95 && m_intake_2.getMotorOutputPercent() >= 0.95) {
     //  m_solenoid_1.set(true);
     //}
   }

@@ -26,7 +26,6 @@ public class OI {
   public int retractEndGameButton = 4;
   public int shootCargoButton = 5;
   public int shiftGearsButton = 6;
-  public int driveShiftButton = 6;
 
   public DigitalInput elbowFrontLimit;
 
@@ -44,7 +43,6 @@ public class OI {
     Button b4 = new JoystickButton(m_controller_1, retractEndGameButton);
     Button b5 = new JoystickButton(m_controller_1, shootCargoButton);
     Button b6 = new JoystickButton(m_controller_1, shiftGearsButton);
-    Button b8 = new JoystickButton(m_controller_1, driveShiftButton);
     //b1.whenPressed(new ShootHatch());
     //b2.whenPressed(new ExtendEndGame());        
     b3.whenPressed(new IntakeCargo());
@@ -57,6 +55,8 @@ public class OI {
     b2.close();
     b3.close();
     b4.close();
+    b5.close();
+    b6.close();
 
     elbowFrontLimit = new DigitalInput(1);
   }

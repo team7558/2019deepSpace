@@ -7,16 +7,13 @@
 
 package frc.robot;
 
-import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -37,14 +34,11 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Claw m_claw;
   public static Elbow m_elbow;
+  public static Wrist m_wrist;
   public static EndGame m_endGame;
   public static DriveTrain m_driveTrain;
   
-  
   public static Compressor m_Compressor;
-
-  public static CANSparkMax m_elbowMotor, m_wristMotor;
-  public static WPI_VictorSPX m_intake_1, m_intake_2;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -56,9 +50,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_claw = new Claw();
-    
+    m_wrist = new Wrist();
     m_elbow = new Elbow();
-    m_elbow.enable();
     m_driveTrain = new DriveTrain();
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -68,11 +61,12 @@ public class Robot extends TimedRobot {
     m_Compressor = new Compressor(RobotMap.COMPRESSOR);
     m_Compressor.start();
     m_Compressor.setClosedLoopControl(true);
-
+    /*
     m_elbowMotor = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     m_wristMotor = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
     m_intake_1 = new WPI_VictorSPX(RobotMap.INTAKE_1);
     m_intake_2 = new WPI_VictorSPX(RobotMap.INTAKE_2);
+    */
   }
 
   /**
@@ -147,7 +141,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_elbow.enable();
     m_driveTrain.enable();
     m_driveTrain.resetGyroYaw();
   }
@@ -162,8 +155,11 @@ public class Robot extends TimedRobot {
     //m_elbowMotor.set(0.2*m_oi.m_controller_1.getRawAxis(5));
     if (m_oi.m_controller_1.getRawButton(1)){
       m_elbow.resetAngle();
-      m_elbow.setAngle(10);
+      m_wrist.resetAngle();
+      //m_elbow.setAngle(10);
     }
+    m_elbow.setAngle(m_elbow.getAngle() + m_oi.m_controller_1.getRawAxis(1)*0.01);
+    m_wrist.setAngle(m_wrist.getAngle() + m_oi.m_controller_1.getRawAxis(2)*0.01);
     /*
     if (m_oi.elbowFrontLimit.get()){
       //System.out.println("salada");
