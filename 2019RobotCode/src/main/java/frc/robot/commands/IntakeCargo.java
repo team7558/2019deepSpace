@@ -31,9 +31,8 @@ public class IntakeCargo extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    System.out.println("salada");
     //return false;
-    return !Robot.m_oi.m_controller_1.getRawButton(Robot.m_oi.intakeCargoButton);
+    return !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.intakeCargoButton);
   }
 
   // Called once after isFinished returns true

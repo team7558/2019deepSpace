@@ -11,9 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ExtendEndGame extends Command {
-  super();
+  
   public ExtendEndGame() {
     // Use requires() here to declare subsystem dependencies
+    super();
     requires(Robot.m_endGame);
   }
 
@@ -31,7 +32,7 @@ public class ExtendEndGame extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.m_oi.m_controller_1.getRawButton(Robot.m_oi.extendEndGameButton);
+    return !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.extendEndGameButton);
   }
 
   // Called once after isFinished returns true

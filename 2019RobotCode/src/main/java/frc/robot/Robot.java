@@ -38,6 +38,8 @@ public class Robot extends TimedRobot {
   public static EndGame m_endGame;
   public static DriveTrain m_driveTrain;
   
+  private CANSparkMax elbow, wrist;
+  
   public static Compressor m_Compressor;
 
   Command m_autonomousCommand;
@@ -52,7 +54,7 @@ public class Robot extends TimedRobot {
     m_claw = new Claw();
     m_wrist = new Wrist();
     m_elbow = new Elbow();
-    m_driveTrain = new DriveTrain();
+    //m_driveTrain = new DriveTrain();
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -61,6 +63,10 @@ public class Robot extends TimedRobot {
     m_Compressor = new Compressor(RobotMap.COMPRESSOR);
     m_Compressor.start();
     m_Compressor.setClosedLoopControl(true);
+
+    
+    elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
+    wrist = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
     /*
     m_elbowMotor = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     m_wristMotor = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
@@ -88,7 +94,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    m_driveTrain.disable();
+    //m_driveTrain.disable();
+    m_elbow.disable();
+    m_wrist.disable();
   }
 
   @Override
@@ -134,15 +142,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_driveTrain.enable();
-    m_driveTrain.resetGyroYaw();
+    //m_driveTrain.enable();
+    //m_driveTrain.resetGyroYaw();
+    m_elbow.enable();
   }
 
   /**
@@ -150,22 +155,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-   // System.out.println(m_elbow.getAngle());
-    //m_wristMotor.set(0.1*m_oi.m_controller_1.getRawAxis(1));
-    //m_elbowMotor.set(0.2*m_oi.m_controller_1.getRawAxis(5));
-    if (m_oi.m_controller_1.getRawButton(1)){
+    if (m_oi.m_operator.getRawButton(1)){
       m_elbow.resetAngle();
-      m_wrist.resetAngle();
       //m_elbow.setAngle(10);
+       // m_wrist.resetAngle();
     }
-    m_elbow.setAngle(m_elbow.getAngle() + m_oi.m_controller_1.getRawAxis(1)*0.01);
-    m_wrist.setAngle(m_wrist.getAngle() + m_oi.m_controller_1.getRawAxis(2)*0.01);
-    /*
-    if (m_oi.elbowFrontLimit.get()){
-      //System.out.println("salada");
-      //m_elbow.resetAngle();
-    }
-    */
+    elbow.set(m_oi.m_operator.getRawAxis(1)*0.1);
+    wrist.set(m_oi.m_operator.getRawAxis(5)*0.1);
+    //m_elbow.setAngle(m_elbow.getAngle() + m_oi.m_operator.getRawAxis(1)*0.01);
+    //m_wrist.setAngle(m_wrist.getAngle() + m_oi.m_operator.getRawAxis(5)*0.01);
     Scheduler.getInstance().run();
   }
 
@@ -174,20 +172,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    //m_elbow.setAngle(20);
-    //System.out.println(Robot.m_oi.m_controller_1.getX());
-    // m_diffDrive.arcadeDrive(Robot.m_oi.m_controller_1.getY(), Robot.m_oi.m_controller_1.getX());
-    //m_motors[6].set(0.5);
-    //m_motors[1].set(0.5);
-    //System.out.println("Elbow: "+m_elbowEncoder.getPosition() + " Wrist: "+ m_wristEncoder.getPosition());
-    m_wristMotor.set(0.1*m_oi.m_controller_1.getRawAxis(1));
-    //if(m_elbowEncoder.getPosition() >= -3 && m_elbowEncoder.getPosition() < 100)
-    m_elbowMotor.set(0.2*m_oi.m_controller_1.getRawAxis(5));
-    //else
-    //  m_elbowMotor.set(0);
-    //System.out.println(m_elbow.getAngle());
-    //double intakeSpeed = m_oi.m_controller_1.getRawAxis(4);
-    //m_intake_1.set(-intakeSpeed);
-    //m_intake_2.set(intakeSpeed);
+    
   }
 }

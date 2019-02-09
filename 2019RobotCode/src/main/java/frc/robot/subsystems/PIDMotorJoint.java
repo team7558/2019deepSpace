@@ -30,7 +30,6 @@ public class PIDMotorJoint extends PIDSubsystem {
     m_encoderPerAngle = 1;
 
     setSetpoint(0);
-    enable();
   }
 
   public void resetAngle(){
@@ -59,7 +58,8 @@ public class PIDMotorJoint extends PIDSubsystem {
     } else if (getAngle() > m_maxAngle){
       setSetpoint(m_maxAngle);
     } else {
-      m_jointMotor.set(output);
+      //System.out.println(this.getName() + ": " + output);
+      //m_jointMotor.set(output);
     }
   }
 
@@ -68,5 +68,6 @@ public class PIDMotorJoint extends PIDSubsystem {
       m_targetAngle = targetAngle;
     }
     setSetpoint(m_targetAngle);
+    System.out.println(m_targetAngle);
   }
 }
