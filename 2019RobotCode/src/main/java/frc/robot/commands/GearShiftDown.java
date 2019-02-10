@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class GearShift extends Command {
-  public GearShift() {
+public class GearShiftDown extends Command {
+  public GearShiftDown() {
     // Use requires() here to declare subsystem dependencies
     super();
     requires(Robot.m_driveTrain);
@@ -20,7 +20,7 @@ public class GearShift extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_driveTrain.shiftUp();
+    Robot.m_driveTrain.shiftDown();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -31,13 +31,13 @@ public class GearShift extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.m_oi.m_driver.getRawButton(Robot.m_oi.shiftGearsButton); 
-    }
+    return true;
+  }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_driveTrain.shiftDown();
+    //Robot.m_driveTrain.shiftDown();
   }
 
   // Called when another command which requires one or more of the same

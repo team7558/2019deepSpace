@@ -14,14 +14,15 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class OI {
-  public Joystick m_driver = new Joystick(0); 
-  public Joystick m_operator = new Joystick(1);
+  public Joystick m_driver = new Joystick(1); 
+  public Joystick m_operator = new Joystick(0);
   public int shootHatchButton = 1;
   public int extendEndGameButton = 2;
   public int intakeCargoButton = 3;
   public int retractEndGameButton = 5;
   public int shootCargoButton = 4;
-  public int shiftGearsButton = 6;
+  public int shiftGearDown = 5;
+  public int shiftGearUp = 6;
 
   public DigitalInput elbowFrontLimit;
 
@@ -31,14 +32,14 @@ public class OI {
     Button b2 = new JoystickButton(m_operator, extendEndGameButton);
     Button b3 = new JoystickButton(m_operator, intakeCargoButton);
     Button b4 = new JoystickButton(m_operator, retractEndGameButton);
-    Button b5 = new JoystickButton(m_operator, shootCargoButton);
-    Button b6 = new JoystickButton(m_driver, shiftGearsButton);
+    Button b5 = new JoystickButton(m_driver, shiftGearDown);
+    Button b6 = new JoystickButton(m_driver, shiftGearUp);
     //b1.whenPressed(new ShootHatch());
     //b2.whenPressed(new ExtendEndGame());        
-    b3.whenPressed(new IntakeCargo());
+    //b3.whenPressed(new IntakeCargo());
     //b4.whenPressed(new RetractEndGame());
-    b5.whenPressed(new ShootCargo());
-    //b6.whenPressed(new GearShift());
+    b5.whenPressed(new GearShiftDown());
+    b6.whenPressed(new GearShiftUp());
 
     b1.close();
     b2.close();

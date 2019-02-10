@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
     m_claw = new Claw();
     m_wrist = new Wrist();
     m_elbow = new Elbow();
-    //m_driveTrain = new DriveTrain();
+    m_driveTrain = new DriveTrain();
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -63,8 +63,7 @@ public class Robot extends TimedRobot {
     m_Compressor = new Compressor(RobotMap.COMPRESSOR);
     m_Compressor.start();
     m_Compressor.setClosedLoopControl(true);
-
-    
+ 
     elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     wrist = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
     /*
@@ -94,7 +93,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    //m_driveTrain.disable();
+    m_driveTrain.disable();
     m_elbow.disable();
     m_wrist.disable();
   }
@@ -145,33 +144,37 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    //m_driveTrain.enable();
-    //m_driveTrain.resetGyroYaw();
-    m_elbow.enable();
+    m_driveTrain.enable();
+    m_driveTrain.resetGyroYaw();
+    m_elbow.disable();
+    m_wrist.disable();
+    m_elbow.resetAngle();
+    m_wrist.resetAngle();
   }
 
-  /**
-   * This function is called periodically during operator control.
-   */
   @Override
   public void teleopPeriodic() {
+    m_elbow.enable();
+    m_wrist.enable();
+/*
     if (m_oi.m_operator.getRawButton(1)){
-      m_elbow.resetAngle();
-      //m_elbow.setAngle(10);
-       // m_wrist.resetAngle();
+      if (m_elbow.getAngle() > 80){
+        m_wrist.setAngle(-50);
+      }
+      m_elbow.setAngle(120);
     }
-    elbow.set(m_oi.m_operator.getRawAxis(1)*0.1);
-    wrist.set(m_oi.m_operator.getRawAxis(5)*0.1);
-    //m_elbow.setAngle(m_elbow.getAngle() + m_oi.m_operator.getRawAxis(1)*0.01);
-    //m_wrist.setAngle(m_wrist.getAngle() + m_oi.m_operator.getRawAxis(5)*0.01);
+    */
+    if (m_oi.m_operator.getRawButton(3)){
+      m_elbow.resetAngle();
+      m_wrist.resetAngle();
+    }
+    
     Scheduler.getInstance().run();
   }
 
-  /**
-   * This function is called periodically during test mode.
-   */
   @Override
   public void testPeriodic() {
-    
+    elbow.set(m_oi.m_operator.getRawAxis(1)*0.3);
+    wrist.set(m_oi.m_operator.getRawAxis(5)*0.1);
   }
 }

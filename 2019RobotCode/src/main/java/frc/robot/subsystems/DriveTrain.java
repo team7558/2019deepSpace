@@ -79,8 +79,8 @@ public class DriveTrain extends PIDSubsystem {
     setSetpoint(targetHeading);
     previousControllerY = inputX;
     // System.out.println("Output: " + output + " TargetHeading: " + targetHeading);
-    m_driveTrain.arcadeDrive(Robot.m_oi.m_driver.getRawAxis(1)*0.75, output);
-
+    //m_driveTrain.arcadeDrive(Robot.m_oi.m_driver.getRawAxis(1)*0.75, output);
+    m_driveTrain.arcadeDrive(Robot.m_oi.m_driver.getRawAxis(1)*0.75, -Robot.m_oi.m_driver.getRawAxis(4));
   }
 
   public void stop() {
@@ -109,11 +109,11 @@ public class DriveTrain extends PIDSubsystem {
   }
 
   public void shiftUp(){
-    Robot.m_driveTrain.setSolenoid(true);
+    Robot.m_driveTrain.setSolenoid(false);
   }
 
   public void shiftDown(){
-    Robot.m_driveTrain.setSolenoid(false);
+    Robot.m_driveTrain.setSolenoid(true);
   }
 
 }
