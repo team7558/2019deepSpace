@@ -19,7 +19,7 @@ public class EndGame extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public EndGame(){
-    endGameSolenoid = new Solenoid(RobotMap.END_GAME_SOLENOID); // Two smaller end game pistons
+    endGameSolenoid = new Solenoid(RobotMap.END_GAME_SOLENOID); 
   }
 
   @Override

@@ -23,6 +23,8 @@ public class OI {
   public int shootCargoButton = 4;
   public int shiftGearDown = 5;
   public int shiftGearUp = 6;
+  public int throttle = 1; 
+  public int whatDoWeCallIt = 4;
 
   public DigitalInput elbowFrontLimit;
 

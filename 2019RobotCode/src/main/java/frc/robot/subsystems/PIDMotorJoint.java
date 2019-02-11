@@ -12,12 +12,12 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
 public class PIDMotorJoint extends PIDSubsystem {
-  private double m_encoderPerAngle, m_zeroEncoder, m_targetAngle, m_maxAngle, m_minAngle, m_power;
+  private double m_encoderPerAngle, m_zeroEncoder, m_targetAngle, m_maxAngle, m_minAngle, m_zeroAngle, m_maxSpeed, m_length;
   private CANSparkMax m_jointMotor;
   private CANEncoder m_jointEncoder;
   private boolean m_reverse;
   
-  public PIDMotorJoint(String subsystemName, CANSparkMax jointMotor, double encoderPerAngle, double maxAngle, double minAngle, double power, double kP, double kI, double kD, boolean reverse) {
+  public PIDMotorJoint(String subsystemName, CANSparkMax jointMotor, double encoderPerAngle, double maxAngle, double minAngle, double zeroAngle, double power, double kP, double kI, double kD, boolean reverse, double maxSpeed, double length) {
     
     super(subsystemName, kP, kD, kI);
 
@@ -26,8 +26,10 @@ public class PIDMotorJoint extends PIDSubsystem {
     m_encoderPerAngle = encoderPerAngle;
     m_maxAngle = maxAngle;
     m_minAngle = minAngle;
+    m_zeroAngle = zeroAngle;
     m_reverse = reverse;
-    m_power = power;
+    m_maxSpeed = maxSpeed;
+    m_length = length;
 
     m_zeroEncoder = 0;
 
@@ -42,7 +44,11 @@ public class PIDMotorJoint extends PIDSubsystem {
   }
 
   public double getAngle(){
-    return -(m_jointEncoder.getPosition()-m_zeroEncoder)/m_encoderPerAngle;
+    return (-(m_jointEncoder.getPosition()-m_zeroEncoder)/m_encoderPerAngle)+m_zeroAngle;
+  }
+
+  public double getHeight(){
+    return Math.sin(getAngle())*m_length;
   }
 
   @Override
@@ -62,14 +68,11 @@ public class PIDMotorJoint extends PIDSubsystem {
     } else if (getAngle() > m_maxAngle){
       setSetpoint(m_maxAngle);
     } else {
-      output*=m_power;
-      if (this.getName().equals("wrist")){
-        System.out.println(this.getName() + " t: " + m_targetAngle+" c: " + getAngle());
-      }
+      System.out.println(this.getName() + " t: " + m_targetAngle+" c: " + getAngle());
       if (m_reverse)
         output*=-1;
-      if (output > 0.3) output = 0.3;
-      if (output < -0.3) output = -0.3;
+      if (output > m_maxSpeed) output = m_maxSpeed;
+      if (output < -m_maxSpeed) output = -m_maxSpeed;
       m_jointMotor.set(output);
       }
   }
@@ -80,5 +83,9 @@ public class PIDMotorJoint extends PIDSubsystem {
     }
     setSetpoint(m_targetAngle);
     //System.out.println("current angle: " + getAngle() + " target angle: "+targetAngle);
+  }
+
+  public void hold(){
+    setAngle(getAngle());
   }
 }

@@ -20,6 +20,7 @@ public class IntakeCargo extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_arm.goToPreset("INTAKE_CARGO");
     Robot.m_claw.cargoIntake();
   }
 

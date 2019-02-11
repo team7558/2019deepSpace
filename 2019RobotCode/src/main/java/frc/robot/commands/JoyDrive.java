@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class JoyDrive extends Command {
+  private final double DRIVE_MAX = 0.75;
+  private final double TURN_MAX = 0.75;
   public JoyDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_driveTrain);
@@ -24,12 +26,14 @@ public class JoyDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    // speed, turn, gyroEnabled
+    Robot.m_driveTrain.drive(Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.throttle)*DRIVE_MAX, Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.whatDoWeCallIt)*TURN_MAX);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -42,4 +46,5 @@ public class JoyDrive extends Command {
   @Override
   protected void interrupted() {
   }
+
 }

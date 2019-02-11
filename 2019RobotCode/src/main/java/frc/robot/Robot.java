@@ -17,9 +17,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.JoyDrive;
 import frc.robot.subsystems.*;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,10 +32,11 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
   public static Claw m_claw;
-  public static Elbow m_elbow;
-  public static Wrist m_wrist;
+  public static Arm m_arm;
   public static EndGame m_endGame;
   public static DriveTrain m_driveTrain;
+
+  public static JoyDrive m_joyDrive;
   
   private CANSparkMax elbow, wrist;
   
@@ -51,11 +51,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
     m_claw = new Claw();
-    m_wrist = new Wrist();
-    m_elbow = new Elbow();
+    m_arm = new Arm(30, new Elbow(), new Wrist());
     m_driveTrain = new DriveTrain();
     m_oi = new OI();
+
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);    
@@ -66,12 +67,7 @@ public class Robot extends TimedRobot {
  
     elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     wrist = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
-    /*
-    m_elbowMotor = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
-    m_wristMotor = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
-    m_intake_1 = new WPI_VictorSPX(RobotMap.INTAKE_1);
-    m_intake_2 = new WPI_VictorSPX(RobotMap.INTAKE_2);
-    */
+   
   }
 
   /**
@@ -93,9 +89,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-    m_driveTrain.disable();
-    m_elbow.disable();
-    m_wrist.disable();
+    m_arm.disable();
+    m_joyDrive.cancel();
   }
 
   @Override
@@ -144,31 +139,14 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_driveTrain.enable();
-    m_driveTrain.resetGyroYaw();
-    m_elbow.disable();
-    m_wrist.disable();
-    m_elbow.resetAngle();
-    m_wrist.resetAngle();
+    m_arm.zero();
+    m_arm.enable();
+    m_joyDrive = new JoyDrive();
   }
 
   @Override
   public void teleopPeriodic() {
-    m_elbow.enable();
-    m_wrist.enable();
-/*
-    if (m_oi.m_operator.getRawButton(1)){
-      if (m_elbow.getAngle() > 80){
-        m_wrist.setAngle(-50);
-      }
-      m_elbow.setAngle(120);
-    }
-    */
-    if (m_oi.m_operator.getRawButton(3)){
-      m_elbow.resetAngle();
-      m_wrist.resetAngle();
-    }
-    
+    m_joyDrive.start();
     Scheduler.getInstance().run();
   }
 
