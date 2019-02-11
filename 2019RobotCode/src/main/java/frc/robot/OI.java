@@ -38,7 +38,7 @@ public class OI {
     Button b6 = new JoystickButton(m_driver, shiftGearUp);
     //b1.whenPressed(new ShootHatch());
     //b2.whenPressed(new ExtendEndGame());        
-    //b3.whenPressed(new IntakeCargo());
+    b3.whenPressed(new IntakeCargo());
     //b4.whenPressed(new RetractEndGame());
     b5.whenPressed(new GearShiftDown());
     b6.whenPressed(new GearShiftUp());

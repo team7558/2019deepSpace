@@ -21,7 +21,7 @@ public class ShootHatch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    // Robot.m_claw.extendHatch();
+    Robot.m_claw.releaseHatch();
   }
 
   // Called repeatedly when this Command is scheduled to run
