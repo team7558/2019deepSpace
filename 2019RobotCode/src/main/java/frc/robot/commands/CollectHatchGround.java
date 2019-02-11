@@ -10,17 +10,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CollectHatch extends Command {
-  public CollectHatch() {
+public class CollectHatchGround extends Command {
+  public CollectHatchGround() {
     super();
     requires(Robot.m_claw);
+    requires(Robot.m_arm);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() { 
+    Robot.m_arm.goToPreset("INTAKE_HATCH_GROUND");
     Robot.m_claw.suckHatch();
   }
 

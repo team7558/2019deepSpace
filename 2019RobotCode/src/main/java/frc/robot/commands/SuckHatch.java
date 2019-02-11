@@ -10,24 +10,23 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class JoyDrive extends Command {
-  private final double DRIVE_MAX = 0.75;
-  private final double TURN_MAX = 0.75;
-  public JoyDrive() {
+public class SuckHatch extends Command {
+  public SuckHatch() {
+    super();
+    requires(Robot.m_claw);
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_driveTrain);
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_claw.suckHatch();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // speed, turn, gyroEnabled
-    Robot.m_driveTrain.drive(Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.throttle)*DRIVE_MAX, Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.turnStick)*TURN_MAX);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -46,5 +45,4 @@ public class JoyDrive extends Command {
   @Override
   protected void interrupted() {
   }
-
 }
