@@ -11,64 +11,55 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 public class OI {
   public Joystick m_driver = new Joystick(1); 
   public Joystick m_operator = new Joystick(0);
-  public int shootHatchButton = 1;
   public int extendEndGameButton = 2;
-  public int intakeCargoButton = 3;
-  public int retractEndGameButton = 5;
-  public int shootCargoButton = 4;
   public int shiftGearDown = 5;
   public int shiftGearUp = 6;
   public int throttle = 1; 
   public int turnStick = 4;
-
-  public DigitalInput elbowFrontLimit;
+  public int playerIntakeHatchButton = 1; 
+  public int groundIntakeHatchButton = 3;
+  public int shootHatchButton = 5;
+  public int intakeCargoButton = 2;
+  public int shootCargoButton = 6;
+  
 
   public OI(){
 
-    Button b1 = new JoystickButton(m_operator, shootHatchButton);
-    Button b2 = new JoystickButton(m_operator, extendEndGameButton);
-    Button b3 = new JoystickButton(m_operator, intakeCargoButton);
-    Button b4 = new JoystickButton(m_operator, retractEndGameButton);
-    Button b5 = new JoystickButton(m_driver, shiftGearDown);
-    Button b6 = new JoystickButton(m_driver, shiftGearUp);
-    //b1.whenPressed(new ShootHatch());
-    //b2.whenPressed(new ExtendEndGame());        
-    b3.whenPressed(new IntakeCargo());
-    //b4.whenPressed(new RetractEndGame());
-    b5.whenPressed(new GearShiftDown());
-    b6.whenPressed(new GearShiftUp());
+    Button ob1 = new JoystickButton(m_operator, playerIntakeHatchButton);
+    Button ob2 = new JoystickButton(m_operator, intakeCargoButton);
+    Button ob3 = new JoystickButton(m_operator, groundIntakeHatchButton);
+    Button ob4 = new JoystickButton(m_operator, shootCargoButton);
+    Button ob5 = new JoystickButton(m_operator, shootHatchButton);
+    Button ob6 = new JoystickButton(m_operator, shootCargoButton);
+    Button db5 = new JoystickButton(m_driver, shiftGearDown);
+    Button db6 = new JoystickButton(m_driver, shiftGearUp);
 
-    b1.close();
-    b2.close();
-    b3.close();
-    b4.close();
-    b5.close();
-    b6.close();
+    ob1.whenPressed(new CollectHatchPlayer());
+    ob2.whenPressed(new IntakeCargo());        
+    ob3.whenPressed(new CollectHatchGround());
+    ob4.whenPressed(new ShootCargo());
+    ob5.whenPressed(new ReleaseHatch());
+    ob6.whenPressed(new ShootCargo());
+    db5.whenPressed(new GearShiftUp());
+    db6.whenPressed(new GearShiftDown());
 
-    elbowFrontLimit = new DigitalInput(1);
+    ob1.close();
+    ob2.close();
+    ob3.close();
+    ob4.close();
+    ob5.close();
+    ob6.close();
+    db5.close();
+    db6.close();
+
   }
-  // There are a few additional built in buttons you can use. Additionally,
-  // by subclassing Button you can create custom triggers and bind those to
-  // commands the same as any other Button.
-
-  //// TRIGGERING COMMANDS WITH BUTTONS
-  // Once you have a button, it's trivial to bind it to a button in one of
-  // three ways:
-
-  // Start the command when the button is pressed and let it run the command
-  // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
 
-  // Run the command while the button is being held down and interrupt it once
-  // the button is released.
   // button.whileHeld(new ExampleCommand());
 
-  // Start the command when the button is released and let it run the command
-  // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 }

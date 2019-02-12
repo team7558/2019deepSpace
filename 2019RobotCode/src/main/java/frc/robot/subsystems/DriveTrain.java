@@ -22,8 +22,6 @@ import frc.robot.Robot;
  * Add your docs here.
  */
 public class DriveTrain extends Subsystem { 
-
-  private double[] ypr = new double[3];
   private CANSparkMax[] m_motors = new CANSparkMax[7];
   private CANEncoder[] m_motorEncoders = new CANEncoder[7];
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
@@ -31,7 +29,6 @@ public class DriveTrain extends Subsystem {
   private Solenoid m_shifter;
   private double m_driveSpeed = 0;
   private double m_turn = 0;
-  private boolean m_brakeEnabled = false;
 
   /**
    * Add your docs here.
@@ -57,12 +54,6 @@ public class DriveTrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-  }
-
-  public void stop() {
-    m_brakeEnabled = true;
-    m_leftMotorGroup.set(0);
-    m_rightMotorGroup.set(0);
   }
 
   public void setSolenoid(boolean a) {

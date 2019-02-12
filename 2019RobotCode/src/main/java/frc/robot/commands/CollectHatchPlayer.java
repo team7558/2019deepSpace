@@ -8,14 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import frc.robot.Robot;
 
-public class MoveArmToPreset extends Command {
-    private String m_position;
-  public MoveArmToPreset(String position) {
-    super();
+public class CollectHatchPlayer extends Command {
+  public CollectHatchPlayer() {
+    requires(Robot.m_claw);
     requires(Robot.m_arm);
-    this.m_position = position;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -23,19 +22,21 @@ public class MoveArmToPreset extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.goToPreset(m_position);
+    Robot.m_arm.goToPreset("INTAKE_HATCH_GROUND");
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_claw.suckHatch();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true; 
-  } 
+    return true;
+  }
 
   // Called once after isFinished returns true
   @Override

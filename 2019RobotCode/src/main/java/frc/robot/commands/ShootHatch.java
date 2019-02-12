@@ -15,12 +15,14 @@ public class ShootHatch extends Command {
   public ShootHatch() {
     super();
     // Use requires() here to declare subsystem dependencies
+    requires(Robot.m_arm);
     requires(Robot.m_claw);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_arm.goToPreset("SHOOT_HATCH");
     Robot.m_claw.releaseHatch();
   }
 
@@ -38,7 +40,7 @@ public class ShootHatch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    // Robot.m_claw.retractHatch();
+    Robot.m_claw.releaseHatch();
   }
 
   // Called when another command which requires one or more of the same

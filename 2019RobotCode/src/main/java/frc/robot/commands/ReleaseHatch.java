@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class ReleaseHatch extends Command {
   public ReleaseHatch() {
+    requires(Robot.m_arm);
     requires(Robot.m_claw);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -20,6 +21,7 @@ public class ReleaseHatch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_arm.goToPreset("SHOOT_HATCH");
     Robot.m_claw.releaseHatch();
   }
 

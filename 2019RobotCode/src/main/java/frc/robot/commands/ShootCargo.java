@@ -14,12 +14,14 @@ public class ShootCargo extends Command {
   public ShootCargo() {
     // Use requires() here to declare subsystem dependencies
     super();
+    requires(Robot.m_arm);
     requires(Robot.m_claw);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_arm.goToPreset("SHOOT_CARGO_SHIP");
     Robot.m_claw.shootCargo();
   }
 

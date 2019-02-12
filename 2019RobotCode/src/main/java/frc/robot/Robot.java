@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -16,7 +17,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.JoyDrive;
 import frc.robot.subsystems.*;
 
@@ -29,7 +29,6 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
   public static Claw m_claw;
   public static Arm m_arm;
@@ -42,6 +41,8 @@ public class Robot extends TimedRobot {
   
   public static Compressor m_Compressor;
 
+  public static WPI_VictorSPX m_hatchSuck;
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -53,12 +54,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     m_claw = new Claw();
-    m_arm = new Arm(30, new Elbow(), new Wrist());
+    m_arm = new Arm(43, new Elbow(), new Wrist());
     m_driveTrain = new DriveTrain();
     m_oi = new OI();
 
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    m_joyDrive = new JoyDrive();
+
+    m_hatchSuck = new WPI_VictorSPX(12);
+
     SmartDashboard.putData("Auto mode", m_chooser);    
 
     m_Compressor = new Compressor(RobotMap.COMPRESSOR);
@@ -90,7 +93,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     m_arm.disable();
-    m_joyDrive.cancel();
+    //m_joyDrive.cancel();
   }
 
   @Override
@@ -140,19 +143,22 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_arm.zero();
+    m_arm.hold();
     m_arm.enable();
-    m_joyDrive = new JoyDrive();
+    //m_joyDrive.start();
   }
 
   @Override
   public void teleopPeriodic() {
-    m_joyDrive.start();
+    //m_joyDrive.start();
+    m_arm.setAngle(new double[]{20, 45});
+    //System.out.println(m_arm.getAngles()[1]);
     Scheduler.getInstance().run();
   }
 
   @Override
   public void testPeriodic() {
-    elbow.set(m_oi.m_operator.getRawAxis(1)*0.3);
-    wrist.set(m_oi.m_operator.getRawAxis(5)*0.1);
+    //elbow.set(m_oi.m_operator.getRawAxis(1)*0.1);
+    //wrist.set(m_oi.m_operator.getRawAxis(5)*0.1);
   }
 }
