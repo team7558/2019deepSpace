@@ -699,3 +699,75 @@ function makeButtonStop(button) {
 	 button.style.background = stopCol;
 	 button.style.cursor = "default";
 }
+
+
+
+
+
+
+function scoreForm() {
+	updateFormData();
+}
+
+function updateFormData() {
+
+	var thisData = document.getElementById("scorespacedata0"); //Just a placeholder
+	//Score Spaces
+	for(i = 0; i < 20; i++) {
+		var thisData = document.getElementById("scorespacedata"+i);
+		var rawCargo = scoreSheet[i][0];
+		var rawPanel = scoreSheet[i][1];
+		var rawCargoWhen = scoreSheet[i][2];
+		var rawPanelWhen = scoreSheet[i][3];
+		var rawNull = scoreSheet[i][4];
+		var thisCargo = "No";
+		var thisPanel = "No";
+		var thisCargoWhen = "Not Scored";
+		var thisPanelWhen = "Not Scored";
+		var thisNull = "Normal";
+
+
+		if(rawCargo == "yes") thisCargo = "Yes";
+		if(rawPanel == "yes") thisPanel = "Yes";
+		if(rawNull == true) thisNull = "Null Panel";
+
+		//Cargo When
+		if(rawCargoWhen == "notscored") thisCargoWhen = "Not Scored";
+		else if(rawCargoWhen == "preload") thisCargoWhen = "Preload";
+		else if(rawCargoWhen == "sandstorm") thisCargoWhen = "Sandstorm";
+		else thisCargoWhen = "Tele-Operated";
+
+		//Panel When
+		if(rawPanelWhen == "notscored") thisPanelWhen = "Not Scored";
+		else if(rawPanelWhen == "preload") thisPanelWhen = "Preload";
+		else if(rawPanelWhen == "sandstorm") thisPanelWhen = "Sandstorm";
+		else thisPanelWhen = "Tele-Operated";
+
+
+
+		var thisValue = thisCargo+"_"+thisPanel+"_"+thisCargoWhen+"_"+thisPanelWhen+"_"+thisNull;
+		thisData.value = thisValue;
+		alert(thisData.value);
+	}
+
+	//HAB Levels
+	thisData = document.getElementById("hableveldatapreload");
+	if(habLevelPreload == -1) thisData.value = "Not Recorded";
+	else if(habLevelPreload == 0) thisData.value = "On Field";
+	else thisData.value = "On Level " + habLevelPreload; 
+
+	thisData = document.getElementById("hableveldatastart");
+	if(habLevelStart == -1) thisData.value = "Not Recorded";
+	else if(habLevelStart == 0) thisData.value = "On Field";
+	else thisData.value = "On Level " + habLevelStart; 
+
+	thisData = document.getElementById("hableveldataend");
+	if(habLevelEnd == -1) thisData.value = "Not Recorded";
+	else if(habLevelEnd == 0) thisData.value = "On Field";
+	else thisData.value = "On Level " + habLevelEnd; 
+
+	document.getElementById("grabdatacargohuman").value = cargoGrabbedHuman;
+	document.getElementById("grabdatacargofloor").value = cargoGrabbedFloor;
+	document.getElementById("grabdatapanelhuman").value = panelGrabbedHuman;
+	document.getElementById("grabdatapanelfloor").value = panelGrabbedFloor;
+}

@@ -1,4 +1,6 @@
 <html>
+
+<!--action="post.php" method="post"-->
    <head>
       <link rel="stylesheet" type="text/css" href="newstyle.css">
       <title>7558 Scouting App - 2019 Season</title>
@@ -59,7 +61,7 @@
 
                <button id="robotscorespace" onclick="preloadRobot();">Your Robot<br>is Holding:<br><br>Nothing</button>
 
-               <div id="scoringrocket1">
+               <<div id="scoringrocket1">
                   <button class="rocketleveldisplay" id="rocketleveldisplay1" onclick="changeRocket();">Level 1</button>
 
                   <!--Top Rocket Level 1-->
@@ -116,8 +118,48 @@
                         <textarea id="commentbox" placeholder="Type some general comments..."></textarea>
                      </div>
                      <div id="miscellaneousright">
-                        <div id="displayinfo">
-                        </div>
+                        <form id="form" action="post.php" method="post">
+
+                           <!--Top Rocket-->
+                           <input type="hidden" id="scorespacedata0" name="TopRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata1" name="TopRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata2" name="TopRocketClosetLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata3" name="TopRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata4" name="TopRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata5" name="TopRocketFarLeve31" value="No_No_Not Scored_Not Scored_Normal">
+
+                           <!--Bottom Rocket-->
+                           <input type="hidden" id="scorespacedata6" name="BottomRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata7" name="BottomRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata8" name="BottomRocketCloseLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata9" name="BottomRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata10" name="BottomRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata11" name="BottomRocketFarLevel3" value="No_No_Not Scored_Not Scored_Normal">
+
+                           <!--Cargo Ship-->
+                           <input type="hidden" id="scorespacedata12" name="ShipFrontUpper" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata13" name="ShipFrontLower" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata14" name="ShipTopClose" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata15" name="ShipBottomClose" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata16" name="ShipTopMedium" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata17" name="ShipBottomMedium" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata18" name="ShipTopFar" value="No_No_Not Scored_Not Scored_Normal">
+                           <input type="hidden" id="scorespacedata19" name="ShipBottomFar" value="No_No_Not Scored_Not Scored_Normal">
+
+                           <!--Other Information-->
+                           <input type="hidden" id="hableveldatapreload" name="HABPositionPreload" value="Not Recorded">
+                           <input type="hidden" id="hableveldatastart" name="HABPositionStart" value="Not Recorded">
+                           <input type="hidden" id="hableveldataend" name="HABPositionEnd" value="Not Recorded">
+                           <input type="hidden" id="grabdatacargohuman" name="CargoGrabbedFromHuman" value="0">
+                           <input type="hidden" id="grabdatacargofloor" name="CargoGrabbedFromFloor" value="0">
+                           <input type="hidden" id="grabdatapanelhuman" name="PanelGrabbedFromHuman" value="0">
+                           <input type="hidden" id="grabdatapanelfloor" name="PanelGrabbedFromFloor" value="0">
+
+
+
+
+                           <input type="submit" value="Submit" onclick="scoreForm();">
+                        </form>
                      </div>
                   </div>
                </div>
