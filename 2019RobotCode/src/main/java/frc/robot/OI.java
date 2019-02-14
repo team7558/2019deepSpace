@@ -15,16 +15,20 @@ import frc.robot.commands.*;
 public class OI {
   public Joystick m_driver = new Joystick(1); 
   public Joystick m_operator = new Joystick(0);
-  public int extendEndGameButton = 2;
+  public int extendEndGameButton = 2; 
   public int shiftGearDown = 5;
   public int shiftGearUp = 6;
   public int throttle = 1; 
   public int turnStick = 4;
-  public int playerIntakeHatchButton = 1; 
-  public int groundIntakeHatchButton = 3;
-  public int shootHatchButton = 5;
-  public int intakeCargoButton = 2;
-  public int shootCargoButton = 6;
+  public int playerIntakeHatchButton = 270; 
+  public int groundIntakeHatchButton = 180;
+  //public int transportHatchButton = 4; //Y
+  public int shootHatchButton = 5; //LB
+  public int intakeCargoButton = 5; //LB
+  public int shootCargoFrontButton = 0; //A
+  public int shootCargoBackButton = 90; //B
+  public int shootCargoButton = 3;
+
   
 
   public OI(){
@@ -32,20 +36,22 @@ public class OI {
     Button ob1 = new JoystickButton(m_operator, playerIntakeHatchButton);
     Button ob2 = new JoystickButton(m_operator, intakeCargoButton);
     Button ob3 = new JoystickButton(m_operator, groundIntakeHatchButton);
-    Button ob4 = new JoystickButton(m_operator, shootCargoButton);
+    Button ob4 = new JoystickButton(m_operator, shootCargoFrontButton);
     Button ob5 = new JoystickButton(m_operator, shootHatchButton);
-    Button ob6 = new JoystickButton(m_operator, shootCargoButton);
+    Button ob6 = new JoystickButton(m_operator, shootCargoBackButton);
     Button db5 = new JoystickButton(m_driver, shiftGearDown);
     Button db6 = new JoystickButton(m_driver, shiftGearUp);
+    //Button ob7 = new JoystickButton(m_operator, transportHatchButton);
 
     ob1.whenPressed(new CollectHatchPlayer());
     ob2.whenPressed(new IntakeCargo());        
     ob3.whenPressed(new CollectHatchGround());
-    ob4.whenPressed(new ShootCargo());
+    ob4.whenPressed(new ShootCargoFront());
     ob5.whenPressed(new ReleaseHatch());
-    ob6.whenPressed(new ShootCargo());
+    ob6.whenPressed(new ShootCargoBack());
     db5.whenPressed(new GearShiftUp());
     db6.whenPressed(new GearShiftDown());
+    //ob7.whenPressed(new TransportHatch());
 
     ob1.close();
     ob2.close();
@@ -55,6 +61,7 @@ public class OI {
     ob6.close();
     db5.close();
     db6.close();
+    //ob7.close();
 
   }
   // button.whenPressed(new ExampleCommand());

@@ -29,13 +29,14 @@ public class Arm extends Subsystem {
 
     m_presets = new HashMap<String, double[]>();
 
-    m_presets.put("INTAKE_CARGO", new double[] { 0, 0 });
-    m_presets.put("INTAKE_HATCH_GROUND", new double[] { 0, 0 });
-    m_presets.put("INTAKE_HATCH_HUMAN", new double[] { 0, 0 });
-    m_presets.put("SHOOT_HATCH", new double[] { 0, 0 });
-    m_presets.put("SHOOT_CARGO_SHIP", new double[] { 0, 0 });
-    m_presets.put("SHOOT_CARGO_ROCKET_1", new double[] { 0, 0 });
-
+    m_presets.put("HOLD", new double[] { 0, -20 });
+    m_presets.put("INTAKE_CARGO", new double[] { 0, -30 });
+    m_presets.put("INTAKE_HATCH_GROUND", new double[] { -20, -25});
+    m_presets.put("INTAKE_HATCH_HUMAN", new double[] { -15, 70 });
+    m_presets.put("SHOOT_HATCH", new double[] { 45, 20 });
+    m_presets.put("SHOOT_CARGO_FRONT", new double[] { 0, 30 });
+    m_presets.put("SHOOT_CARGO_BACK", new double[] { 90, 120 });
+    m_presets.put("RELEASE_HATCH", new double[] { -5, 4 });
   }
 
   public void zero() {
@@ -44,14 +45,25 @@ public class Arm extends Subsystem {
   }
 
   public void goToPreset(String presetName) {
+    //System.out.println(presetName);
     setAngle(m_presets.get(presetName));
   }
 
+  public boolean reachedDestination(){
+    /*
+    if (m_elbow.reachedDestination() && m_wrist.reachedDestination()){
+      System.out.println("reached destination");
+    }
+    */
+    return m_elbow.reachedDestination() && m_wrist.reachedDestination();
+  }
+
   public void setAngle(double[] targetAngles) {
-    System.out.println(getAngles()[1]);
+    //System.out.println(getAngles()[0] + " " +getAngles()[1]);
     m_elbow.setAngle(targetAngles[0]);
+    //System.out.println(m_wrist.m_jointEncoder.getPosition());
     //if (m_jointHeight + m_elbow.getHeight(getAngles()[0]) + m_wrist.getHeight(getAngles()[1]) > -5) {
-    if (targetAngles[1] > -20 || getAngles()[0] < 10){
+    if (targetAngles[1] > 0 || getAngles()[0] > -5){
       //System.out.println("salad");
       m_wrist.setAngle(targetAngles[1]-getAngles()[0]);
     } else {
@@ -60,7 +72,7 @@ public class Arm extends Subsystem {
   }
 
   public double[] getAngles() {
-    return new double[] { m_elbow.getAngle(), m_wrist.getAngle() + m_elbow.getAngle() };
+    return new double[] { m_elbow.getAngle(), m_wrist.getAngle()+m_elbow.getAngle()};
   }
 
   public void hold() {

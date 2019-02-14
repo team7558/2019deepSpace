@@ -16,9 +16,10 @@ public class PIDMotorJoint extends PIDSubsystem {
   private double m_encoderPerAngle, m_zeroEncoder, m_targetAngle, m_maxAngle, m_minAngle, m_zeroAngle, m_maxSpeed,
       m_length;
   private CANSparkMax m_jointMotor;
-  private CANEncoder m_jointEncoder;
+  public CANEncoder m_jointEncoder;
   private boolean m_reverse;
   private DigitalInput m_frontSwitch, m_backSwitch;
+  private double m_prevEncoder, m_currEncoder;
 
   public PIDMotorJoint(String subsystemName, CANSparkMax jointMotor, double encoderPerAngle, double maxAngle,
       double minAngle, double zeroAngle, double kP, double kD, double kI, boolean reverse, double maxSpeed,
@@ -37,6 +38,8 @@ public class PIDMotorJoint extends PIDSubsystem {
     m_length = length;
     m_frontSwitch = new DigitalInput(frontSwitch);
     m_backSwitch = new DigitalInput(backSwitch);
+
+    m_prevEncoder = m_jointEncoder.getPosition();
 
     m_zeroEncoder = 0;
 
@@ -66,7 +69,10 @@ public class PIDMotorJoint extends PIDSubsystem {
   @Override
   protected void usePIDOutput(double output) {
     //System.out.println(this.getName() + ": " + getAngle());
-    if (!outOfBounds()) {
+    if (outOfBounds(getAngle())) {
+      System.out.println("out of bounds");
+      hold();
+    } else {
       //System.out.println(this.getName() + " t: " + m_targetAngle + " c: " + getAngle());
       if (m_reverse)
         output *= -1;
@@ -76,16 +82,13 @@ public class PIDMotorJoint extends PIDSubsystem {
         output = -m_maxSpeed;
       //System.out.println(this.getName() + " :" + output);
       m_jointMotor.set(output);
-    } else {
-      //System.out.println("out of bounds");
-      hold();
-    }
+    } 
   }
 
-  public boolean outOfBounds() {
-    if (getAngle() <= m_minAngle) {
+  public boolean outOfBounds(double angle) {
+    if (angle <= m_minAngle) {
       return true;
-    } else if (getAngle() >= m_maxAngle) {
+    } else if (angle >= m_maxAngle) {
       return true;
     } else if (m_frontSwitch.get() || m_backSwitch.get()) {
       return false;
@@ -94,16 +97,32 @@ public class PIDMotorJoint extends PIDSubsystem {
   }
 
   public double getAngle() {
-    if (m_reverse){
-      return (-(m_jointEncoder.getPosition() - m_zeroEncoder) / m_encoderPerAngle) + m_zeroAngle;
+    m_currEncoder = m_jointEncoder.getPosition();
+    if (Math.abs(m_currEncoder) < 0.001){
+      m_currEncoder = m_prevEncoder;
     } else {
-      return ((m_jointEncoder.getPosition() - m_zeroEncoder) / m_encoderPerAngle) + m_zeroAngle;
+      m_prevEncoder = m_currEncoder;
+    }
+    if (m_reverse){
+      return (-(m_currEncoder - m_zeroEncoder) / m_encoderPerAngle) + m_zeroAngle;
+    } else {
+      return ((m_currEncoder - m_zeroEncoder) / m_encoderPerAngle) + m_zeroAngle;
     }
   }
 
+  public boolean reachedDestination(){
+    System.out.println(getAngle() - m_targetAngle);
+    return Math.abs(getAngle() - m_targetAngle) < 5;
+  }
+
   public void setAngle(double targetAngle) {
-    m_targetAngle = targetAngle;
-    setSetpoint(m_targetAngle);
+    //System.out.println(targetAngle);
+    if (!outOfBounds(targetAngle)){
+      m_targetAngle = targetAngle;
+      setSetpoint(m_targetAngle);
+    } else {
+      System.out.println("this angle is out of bounds");
+    }
   }
 
   public void hold() {

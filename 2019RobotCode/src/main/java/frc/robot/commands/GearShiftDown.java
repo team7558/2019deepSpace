@@ -14,7 +14,7 @@ public class GearShiftDown extends Command {
   public GearShiftDown() {
     // Use requires() here to declare subsystem dependencies
     super();
-    requires(Robot.m_driveTrain);
+    //requires(Robot.m_driveTrain);
   }
 
   // Called just before this Command runs the first time

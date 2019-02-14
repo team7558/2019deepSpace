@@ -22,20 +22,20 @@ public class CollectHatchPlayer extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.goToPreset("INTAKE_HATCH_GROUND");
-    
+    Robot.m_arm.goToPreset("INTAKE_HATCH_HUMAN");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
     Robot.m_claw.suckHatch();
+    Robot.m_arm.goToPreset("INTAKE_HATCH_HUMAN");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return Robot.m_arm.reachedDestination();
   }
 
   // Called once after isFinished returns true

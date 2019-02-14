@@ -10,11 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ShootHatch extends Command {
-  
-  public ShootHatch() {
-    super();
+public class ShootCargoBack extends Command {
+  public ShootCargoBack() {
     // Use requires() here to declare subsystem dependencies
+    super();
     requires(Robot.m_arm);
     requires(Robot.m_claw);
   }
@@ -22,25 +21,28 @@ public class ShootHatch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_claw.releaseHatch();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_arm.goToPreset("SHOOT_HATCH");
+    Robot.m_arm.goToPreset("SHOOT_CARGO_BACK");
+    //System.out.println("shooting");
+    if (Robot.m_arm.reachedDestination()){
+      Robot.m_claw.shootCargo(0.75);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.shootHatchButton);
+    return Robot.m_arm.reachedDestination() && !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.shootCargoBackButton);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_claw.releaseHatch();
+    Robot.m_claw.stopShootCargo();
   }
 
   // Called when another command which requires one or more of the same

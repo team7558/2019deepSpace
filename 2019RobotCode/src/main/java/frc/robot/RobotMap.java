@@ -31,4 +31,5 @@ public class RobotMap {
   public static final int WRIST_MOTOR = 8;
   public static final int COMPRESSOR = 0;
   public static final int SHIFTER = 5;
+  public static final int SHOOTING_PISTON = 1;
 }

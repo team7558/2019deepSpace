@@ -21,7 +21,6 @@ public class ReleaseHatch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.goToPreset("SHOOT_HATCH");
     Robot.m_claw.releaseHatch();
   }
 

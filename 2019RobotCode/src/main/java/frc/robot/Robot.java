@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.JoyDrive;
+import frc.robot.commands.ShootCargoFront;
 import frc.robot.subsystems.*;
 
 /**
@@ -137,28 +138,33 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
+  public ShootCargoFront shoo;
+
   @Override
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
-    }
+    }    
+    Scheduler.getInstance().removeAll();
     m_arm.zero();
     m_arm.hold();
     m_arm.enable();
-    //m_joyDrive.start();
+    m_joyDrive.start();
   }
 
   @Override
   public void teleopPeriodic() {
     //m_joyDrive.start();
-    m_arm.setAngle(new double[]{20, 45});
+    //m_arm.setAngle(new double[]{45, 0});
+    //m_arm.goToPreset("INTAKE_HATCH_HUMAN");
     //System.out.println(m_arm.getAngles()[1]);
+    System.out.println(Robot.m_oi.m_operator.getPOV(0));
     Scheduler.getInstance().run();
   }
 
   @Override
   public void testPeriodic() {
-    //elbow.set(m_oi.m_operator.getRawAxis(1)*0.1);
-    //wrist.set(m_oi.m_operator.getRawAxis(5)*0.1);
+    elbow.set(m_oi.m_operator.getRawAxis(1)*0.1);
+    wrist.set(m_oi.m_operator.getRawAxis(5)*0.1);
   }
 }
