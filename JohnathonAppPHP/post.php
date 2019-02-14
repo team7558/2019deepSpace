@@ -1,16 +1,22 @@
-<?php
+<?php 
+requires(db.php);
 error_reporting(E_ERROR | E_PARSE);
 session_start();
+$conn = new mysqli($db_HOST, $db_USER, $db_PASS, $db_NAME);
+$date = date("Y/m/d");
+$time = date("h:i:sa");
+$matchNumber = strip_tags($_POST['matchNumber']);
+$teamNumber = strip_tags($_POST['teamNumber']);
 
+$sql = "INSERT INTO matches (Date, Time, MatchNumber, TeamNumber) VALUES ($date, $time, $matchNumber, $teamNumber)";
+
+$query = mysqli_query($connect, $sql);
+
+if ($conn->query($sql) === TRUE) {
+    echo "AD Posted";
+}else{
+	echo "Error: " . $sql . "<br>" . $conn->error;
+}
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
 
-<body>
-</body>
-</html>
