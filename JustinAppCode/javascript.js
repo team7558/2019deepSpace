@@ -1,5 +1,7 @@
 var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
-cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, cargoDropped = 0, panelDropped = 0, station = "R1", xscale = 1, preloadedItem = "Nothing", preloadedItemState = "Not Assigned";
+cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, cargoDropped = 0, panelDropped = 0, xscale = 1, preloadedItem = "Nothing", preloadedItemState = "Not Assigned";
+
+var teamNumber = "0", competitionName = "Unknown", matchNumber = 0, station = "R1";
 
 var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
 
@@ -770,4 +772,14 @@ function updateFormData() {
 	document.getElementById("grabdatacargofloor").value = cargoGrabbedFloor;
 	document.getElementById("grabdatapanelhuman").value = panelGrabbedHuman;
 	document.getElementById("grabdatapanelfloor").value = panelGrabbedFloor;
+
+	document.getElementById("miscdatapreloadeditem").value = preloadedItem;
+	document.getElementById("miscdatadefenselevel").value = defenseLevel;
+	document.getElementById("miscdatarobotscarried").value = carryBotNumber;
+	document.getElementById("miscdatawascarried").value = wasCarried;
+
+	document.getElementById("matchdatateamnumber").value = teamNumber;
+	document.getElementById("matchdatacompetition").value = competitionName;
+	document.getElementById("matchdatamatchnumber").value = matchNumber;
+	document.getElementById("matchdatarobotstation").value = station;
 }
