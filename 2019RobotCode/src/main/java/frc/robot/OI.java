@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
+import frc.robot.Robot;
 
 public class OI {
   public Joystick m_driver = new Joystick(1); 
@@ -62,6 +63,30 @@ public class OI {
     db5.close();
     db6.close();
     //ob7.close();
+
+  }
+
+  public void checkPresets(){
+    switch (m_operator.getPOV()) {
+      case 0:
+        Robot.m_arm.goToPreset("INTAKE_HATCH_HUMAN");
+        break;
+
+      case 90:
+        Robot.m_arm.goToPreset("SHOOT_CARGO_FRONT");
+        break;
+
+      case 180:
+        Robot.m_arm.goToPreset("RELEASE_HATCH");
+        break;
+    
+      case 270:
+        Robot.m_arm.goToPreset("INTAKE_GROUND");
+        break;
+        
+      default:
+        break;
+    }
 
   }
   // button.whenPressed(new ExampleCommand());
