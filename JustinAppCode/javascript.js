@@ -639,7 +639,7 @@ function changeLevel(level, type) {
 
 function changeStation(col, num) {
 	var x = document.getElementsByClassName("stationbutton");
-	station = "R1";
+	var text = "";
 	for(i = 0; i < x.length; i++) {
 		makeButtonStop(x[i]);
 		x[i].style.fontSize = "12px";
@@ -649,11 +649,15 @@ function changeStation(col, num) {
 		var y = document.getElementById("stationR"+num);
 		y.style.background = redCol;
 		y.style.fontSize = "16px";
+		text = "R";
 	} else { //Blue
 		var y = document.getElementById("stationB"+num);
 		y.style.background = blueCol;
 		y.style.fontSize = "16px";
+		text = "B";
 	}
+	station = text+num;
+	alert(station);
 }
 
 function changePickup(type) {
