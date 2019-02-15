@@ -1,21 +1,19 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 session_start();
-requires(db.php);
+$db_HOST = "localhost";
+$db_USER = "jslighth_1";
+$db_PASS = "1234";
+$db_NAME = "jslighth_frctest";
 $connect = mysqli_connect($db_HOST, $db_USER, $db_PASS, $db_NAME);
 
-$sortType = htmlspecialchars($_GET["sortType"]); // Should be a column name
-$sortOrder = htmlspecialchars($_GET["sortOrder"]); // Should be ASC or DSC
-$sql = "SELECT * FROM matches ORDER BY'$sortType' '$sortOrder'";
+//$sortType = htmlspecialchars($_GET["sortType"]); // Should be a column name
+//$sortOrder = htmlspecialchars($_GET["sortOrder"]); // Should be ASC or DSC
+$sql = "SELECT * FROM `matches` WHERE 1";
 
-$search_result = filterTable($sql);
+$search_result = mysqli_query($connect, $sql);
 
 // this is a function since there may need to be more than one query later on
-function filterTable($query)
-{
-    $filter_Result = mysqli_query($connect, $query);
-    return $filter_Result;
-}
 
 ?>
 <html>
@@ -38,20 +36,21 @@ tr:nth-child(even) {
 }
 </style>
 </head>
-<?php while($row = mysqli_fetch_array($search_result)):?>
-	<table>
-  <tr>
-    <th>ID</th>
-    <th>Date & Time</th>
-    <th>Match Number</th>
+<table>
+<tr>
     <th>Team Number</th>
+    <th>Match Number</th>
+    <th>Score</th>
+    <th>View Full</th>
   </tr>
+<?php while($row = mysqli_fetch_array($search_result)):?>
   <tr>
-    <td><?php echo $row['ID']; ?></td>
-    <td><?php echo $row['Date']; ?> @ <?php echo $row['Time']; ?></td>
-    <td><?php echo $row['MatchNumber']; ?></td>
     <td><?php echo $row['TeamNumber']; ?></td>
+    <td><?php echo $row['MatchNumber']; ?></td>
+    <td><?php echo $row['Score']; ?></td>
+    <td><a href="/full.php?id=<?php echo $row['ID']; ?>">Full</a></td>
   </tr>
-</table>
+
 <?php endwhile; ?>
+</table>
 </html>
