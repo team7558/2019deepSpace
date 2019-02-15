@@ -105,7 +105,7 @@ body{
   margin-top: 10px;
   text-align: center;
   position: absolute;
-  display: block;
+  display: none;
 
   font-size: 14px;
   font-weight: 100px;
@@ -451,16 +451,20 @@ body{
   display:block;
 }
 
-#scorespace0, #scorespace1, #scorespace2, #scorespace3, #scorespace4, #scorespace5, #scorespace6, #scorespace7, #scorespace8, #scorespace9, #scorespace10, #scorespace11, #scorespace12, #scorespace13, #scorespace14, #scorespace15, #scorespace16, #scorespace17, #scorespace18, #scorespace19 { display: block; }
+#scorespace0, #scorespace1, #scorespace2, #scorespace3, #scorespace4, #scorespace5, #scorespace6, #scorespace7, #scorespace8, #scorespace9, #scorespace10, #scorespace11, #scorespace12, #scorespace13, #scorespace14, #scorespace15, #scorespace16, #scorespace17, #scorespace18, #scorespace19 { 
+  display: none; 
+}
 
 
 
 
 #sstable { 
-  display: none; 
+  display: block; 
   position: relative;
-  top: -180px;
+  top: -500px;
   left: 20px;
+  width: 720px;
+  background-color: red;
 }
 #sstablerow { display: table-row; }
 .sstableitem { display: table-cell; }

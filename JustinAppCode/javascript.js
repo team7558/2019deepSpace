@@ -657,7 +657,6 @@ function changeStation(col, num) {
 		text = "B";
 	}
 	station = text+num;
-	alert(station);
 }
 
 function changePickup(type) {
