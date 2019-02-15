@@ -48,13 +48,13 @@ body{
   position: relative;
   vertical-align: middle;
   display: table-cell;
-  width: 100px;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 80px;
+  margin-left: 12px;
+  margin-right: 12px;
   height: 60px;
 
   font-size: 12px;
-  background-color: #8fc1e2;
+  background-color: #161616;
 
   -webkit-transition-duration: 0.4s; 
   transition-duration: 0.4s;
@@ -69,14 +69,14 @@ body{
   position: relative;
   vertical-align: middle;
   display: table-cell;
-  width: 120px;
+  width: 100px;
   margin-left: 30px;
   margin-right: 30px;
   border: 2px solid black;
   height: 80px;
 
   font-size: 16px;
-  background-color: #8fc1e2;
+  background-color: #161616;
 
   -webkit-transition-duration: 0.4s; 
   transition-duration: 0.4s;
@@ -99,7 +99,7 @@ body{
 
 
 
-.scorespaces, .rocketleveldisplay, #robotscorespace {
+.scorespaces, .rocketleveldisplay, #robotscorespace, #mapteamnumber {
   width: 80px;
   height: 80px;
   margin-left: 0px;
@@ -128,12 +128,15 @@ body{
 }
 
 .rocketleveldisplay {
-  background-color: #2196F3;
+  background-color: #161616;
 }
 
-.scorespaces, #robotscorespace {
-  background-color: #8FC1E2;
-  left: 400px;
+.scorespaces {
+  background-color: #333333;
+}
+
+#robotscorespace {
+  background-color: #161616;
 }
 
 
@@ -168,7 +171,7 @@ body{
   /*background-image: url("photos/FRCGameMapL.png");
   background-repeat: no-repeat;
   background-size: 800px 520px;*/
-  background-color: #4994E5;
+  background: #F94F42;
   border-radius: 30px;
   opacity: 0.825;
   width: 760px;
@@ -200,7 +203,7 @@ body{
 }
 
 .switchdefense, .switchcarrybot {
-  background-color: #8FC1E2;
+  background-color: #444444;
   border-radius: 5px;
   margin: 0px;
   width: 40px;
@@ -212,12 +215,12 @@ body{
 }
 
 #defense0, #carrybot0 {
-  background-color: #3881DC;
+  background-color: #7C7C7C;
 }
 
 #wascarried {
   text-align: center;
-  background-color: #3881DC;
+  background-color: #444444;
   margin-top: 20px;
   width: 120px;
   height: 80px;
@@ -255,7 +258,7 @@ body{
   font-size: 16px;
   font-weight: 100px;
 
-  background: #2196F3;
+  background: #444444;
   border: none;
   color: white;
   text-decoration: none;
@@ -279,7 +282,7 @@ body{
   font-size: 12px;
   font-weight: 100px;
 
-  background: #8FC1E2;
+  background: #161616;
   border: none;
   color: white;
   text-decoration: none;
@@ -307,7 +310,7 @@ body{
 
 
 
-/*Scorespaces Horizontal Position*/
+/*Scorespaces Horizontal Position and preloading*/
 #rocketleveldisplay1, #rocketleveldisplay2 {
   left:80px;
 }
@@ -322,6 +325,8 @@ body{
 
 #scorespace12, #scorespace13 {
   left:400px;
+
+  background-image: -webkit-linear-gradient(top,#2F9E38,#2F9E38 50%,#333333 50%,#333333 100%);
 }
 
 #scorespace14, #scorespace15 {
@@ -339,7 +344,6 @@ body{
 #robotscorespace { 
   left:0px; 
 }
-
 
 
 
@@ -390,6 +394,18 @@ body{
   width: block;
   height: 80px;
 }
+
+
+
+#mapteamnumber {
+  left: 160px;
+  top: 160px;
+  width: 240px;
+  height: 160px;
+  background-color: transparent;
+  font-size: 92px;
+}
+
 
 
 
@@ -453,7 +469,7 @@ body{
   font-size: 20px;
   font-weight: 100px;
 
-  background-color: #8fc1e2;
+  background-color: #161616;
   -webkit-transition-duration: 0.4s; 
   transition-duration: 0.4s;
   cursor: pointer;

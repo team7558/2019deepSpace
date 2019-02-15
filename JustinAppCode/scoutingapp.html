@@ -3,26 +3,28 @@
    <head>
       <link rel="stylesheet" type="text/css" href="newstyle.css">
       <title>7558 Scouting App - 2019 Season</title>
+      <script src="javascript.js"></script>
+      <script>
+      
+      </script>
    </head>
-   <script src="javascript.js" type="text/javascript"></script>
-   <body>
+   <body onload="initialize();">
+
       <div id="modelbltop" class="modelbl"><p>PRELOAD PERIOD</p></div>
       <div id="teaminfo">
-         Team Number: <span id="teamnumber"></span><br>
-         Match Number: <span id="matchnumber"></span><br>
+         Team Number: <span id="teamnumber">   </span><br>
+         Match Number: <span id="matchnumber">   </span><br>
       </div>
 
       <div id="stations">
          <div id="stationrow">
-            <button class="stationbutton" id="stationR1" onclick="changeStation(0, 1);">Station<br>Red 1</button>
-            <button class="stationbutton" id="stationR2" onclick="changeStation(0, 2);">Station<br>Red 2</button>
-            <button class="stationbutton" id="stationR3" onclick="changeStation(0, 3);">Station<br>Red 3</button>
-
+            <button class="stationbutton" id="stationR1" onclick="changeStation(0,1);">Station<br>Red 1</button>
+            <button class="stationbutton" id="stationR2" onclick="changeStation(0,2);">Station<br>Red 2</button>
+            <button class="stationbutton" id="stationR3" onclick="changeStation(0,3);">Station<br>Red 3</button>
             <button id="flipsides" onclick="changeButtonPlacement();">Flip Sides</button>
-
-            <button class="stationbutton" id="stationB1" onclick="changeStation(1, 1);">Station<br>Blue 1</button>
-            <button class="stationbutton" id="stationB2" onclick="changeStation(1, 2);">Station<br>Blue 2</button>
-            <button class="stationbutton" id="stationB3" onclick="changeStation(1, 3);">Station<br>Blue 3</button>
+            <button class="stationbutton" id="stationB1" onclick="changeStation(1,1);">Station<br>Blue 1</button>
+            <button class="stationbutton" id="stationB2" onclick="changeStation(1,2);">Station<br>Blue 2</button>
+            <button class="stationbutton" id="stationB3" onclick="changeStation(1,3);">Station<br>Blue 3</button>
          </div>
       </div>
 
@@ -63,14 +65,14 @@
                   <!--Top Row - Rocket 1-->
                   <div class="sstablerow">
                      <div class="sstableitem">
-                        <button class="scorespaces" id="scorespace0" onclick="score(0);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace1" onclick="score(1);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace0" onclick="score(0);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace1" onclick="score(1);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-                        <button class="scorespaces" id="scorespace2" onclick="score(2);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace3" onclick="score(3);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace2" onclick="score(2);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace3" onclick="score(3);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-                        <button class="scorespaces" id="scorespace4" onclick="score(4);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace5" onclick="score(5);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace4" onclick="score(4);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace5" onclick="score(5);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
                         <button class="rocketleveldisplay" id="rocketleveldisplay1" onclick="changeRocket();">Level 1</button>
                      </div>
@@ -78,14 +80,14 @@
 
                   <div class="sstablerow">
                      <div class="sstableitem">
-                        <button class="scorespaces" id="scorespace6" onclick="score(6);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace7" onclick="score(7);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace6" onclick="score(6);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace7" onclick="score(7);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-                        <button class="scorespaces" id="scorespace8" onclick="score(8);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace9" onclick="score(9);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace8" onclick="score(8);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace9" onclick="score(9);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-                        <button class="scorespaces" id="scorespace10" onclick="score(10);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace11" onclick="score(11);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace10" onclick="score(10);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace11" onclick="score(11);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
                         <button class="rocketleveldisplay" id="rocketleveldisplay2" onclick="changeRocket();">Level 1</button>
                      </div>
@@ -96,30 +98,33 @@
                         <!--Robot Score Space-->
                         <button id="robotscorespace" onclick="preloadRobot();">Your Robot<br>is Holding:<br><br>Nothing</button>
 
-                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br>Panel: &#x2716</button>
+                        <!--Team Number-->
+                        <button id="mapteamnumber">7558</button>
+
+                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
                   <div class="sstablerow">
                      <div class="sstableitem">
-                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
 
                   <div class="sstablerow">
                      <div class="sstableitem">
-                        <button class="scorespaces" id="scorespace14" onclick="score(14);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace15" onclick="score(15);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace16" onclick="score(16);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace14" onclick="score(14);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace15" onclick="score(15);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace16" onclick="score(16);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
                   <div class="sstablerow">
                      <div class="sstableitem">
-                        <button class="scorespaces" id="scorespace17" onclick="score(17);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace18" onclick="score(18);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                        <button class="scorespaces" id="scorespace19" onclick="score(19);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace17" onclick="score(17);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace18" onclick="score(18);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace19" onclick="score(19);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
@@ -148,7 +153,7 @@
                   <form id="form" action="http://frctest.jslightman.x10host.com/post.php" method="post">
 
                      <!--Top Rocket-->
-                     <input type="hidden" id="scorespacedata0" name="TopRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata0" name="TopRocketCloseLevel1" value="No_No_Not Scored_Not_Scored_Not_Normal">
                      <input type="hidden" id="scorespacedata1" name="TopRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
                      <input type="hidden" id="scorespacedata2" name="TopRocketClosetLevel2" value="No_No_Not Scored_Not Scored_Normal">
                      <input type="hidden" id="scorespacedata3" name="TopRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">

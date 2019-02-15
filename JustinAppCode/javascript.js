@@ -1,7 +1,7 @@
 var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
 cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, cargoDropped = 0, panelDropped = 0, xscale = 1, preloadedItem = "Nothing", preloadedItemState = "Not Assigned";
 
-var teamNumber = "0", competitionName = "Unknown", matchNumber = 0, station = "R1";
+var teamNumber = "7558", competitionName = "Unknown", matchNumber = 0, station = "R1";
 
 var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
 
@@ -59,15 +59,21 @@ var buttonPlacement = [ //For each button, then the rocket displays
 	[80,560], //rocket 1
 	[80,560], //rocket 2
 
-	[0,560] //robot preload
+	[0,560], //robot preload
+	[160,320] //teamnumber
 
 ];
 
-var normCol = "#2196F3", stopCol = "#8FC1E2", checkCol = "#167BCC", tryCol = "#FFCA32", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
+var normCol = "#636363", stopCol = "#3f3f3f", checkCol = "#7C7C7C", tryCol = "#999891", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
+var scoredCol = "#2F9E38", notscoredCol = "#333333", triedCol = "#CCB92A", canclickCol = "#444444", cantclickCol = "#161616";
+
+
+function initialize() {
+	document.getElementById("teamnumber").innerHTML = teamNumber;
+}
 
 
 
-//Run a few methods at the very beginning of the game
 
 function changeButtonPlacement() {
 	if(xscale==1) xscale = -1;
@@ -83,11 +89,13 @@ function changeButtonPlacement() {
 		document.getElementById("rocketleveldisplay2").style.left = buttonPlacement[21][0];
 		document.getElementById("gamemap").style.transform = "scaleX(1)";
 		document.getElementById("robotscorespace").style.left = buttonPlacement[22][0];
+		document.getElementById("mapteamnumber").style.left = buttonPlacement[23][0];
 	} else {
 		document.getElementById("rocketleveldisplay1").style.left = buttonPlacement[20][1];
 		document.getElementById("rocketleveldisplay2").style.left = buttonPlacement[21][1];
 		document.getElementById("gamemap").style.transform = "scaleX(-1)";
 		document.getElementById("robotscorespace").style.left = buttonPlacement[22][1];
+		document.getElementById("mapteamnumber").style.left = buttonPlacement[23][1];
 	}
 		
 }
@@ -292,7 +300,7 @@ function updateMode(mode) {
 
 function switchDefense(level) {
 	var x = document.getElementsByClassName("switchdefense");
-	for(i = 0; i < x.length; i++) x[i].style.background = normCol;
+	for(i = 0; i < x.length; i++) x[i].style.background = canclickCol;
 	var y = document.getElementById("defense"+level);
 	y.style.background = checkCol;
 	defenseLevel = level;
@@ -300,7 +308,7 @@ function switchDefense(level) {
 
 function switchCarryBot(level) {
 	var x = document.getElementsByClassName("switchcarrybot");
-	for(i = 0; i < x.length; i++) x[i].style.background = normCol;
+	for(i = 0; i < x.length; i++) x[i].style.background = canclickCol;
 	var y = document.getElementById("carrybot"+level);
 	y.style.background = checkCol;
 	carryBotNumber = level;
@@ -308,7 +316,7 @@ function switchCarryBot(level) {
 
 function switchWasCarried() {
 	wasCarried = !wasCarried;
-	document.getElementById("wascarried").style.background = normCol;
+	document.getElementById("wascarried").style.background = canclickCol;
 	if(wasCarried) document.getElementById("wascarried").style.background = checkCol
 }
 
@@ -366,6 +374,7 @@ function updateButtonLook() {
 			//Check - &#x2714
 			//Cross - &#x2716
 			makeButtonStop(x[i]);
+			checkButtonScored(x[i], hasCargo, hasPanel);
 			//Check if they were just attempted
 			if(hasCargo == "try") {
 				hasCargo = "no";
@@ -377,33 +386,33 @@ function updateButtonLook() {
 			}
 
 			//Indicate if scored
-			if(hasCargo == "no" && hasPanel == "no") x[i].innerHTML = "Cargo: &#x2716<br>Panel: &#x2716";
-			else if(hasCargo == "no" && hasPanel == "yes") x[i].innerHTML = "Cargo: &#x2716<br>Panel: &#x2714";
-			else if(hasCargo == "yes" && hasPanel == "no") x[i].innerHTML = "Cargo: &#x2714<br>Panel: &#x2716";
-			else x[i].innerHTML = "Cargo: &#x2714<br>Panel: &#x2714";
+			if(hasCargo == "no" && hasPanel == "no") x[i].innerHTML = "Cargo: &#x2716<br><br>Panel: &#x2716";
+			else if(hasCargo == "no" && hasPanel == "yes") x[i].innerHTML = "Cargo: &#x2716<br><br>Panel: &#x2714";
+			else if(hasCargo == "yes" && hasPanel == "no") x[i].innerHTML = "Cargo: &#x2714<br><br>Panel: &#x2716";
+			else x[i].innerHTML = "Cargo: &#x2714<br><br>Panel: &#x2714";
 		} else {
 			makeButtonNorm(x[i]);
 			if(itemType == "cargo") {
 				if(hasCargo == "no") {
 					x[i].innerHTML = "Empty";
-					x[i].style.background = normCol;
+					x[i].style.background = canclickCol;
 				} else if(hasCargo == "try") {
 					x[i].innerHTML = "Attempted";
-					x[i].style.background = tryCol;
+					x[i].style.background = triedCol;
 				} else {
 					x[i].innerHTML = "Scored";
-					x[i].style.background = checkCol;
+					x[i].style.background = scoredCol;
 				}
 			} else {
 				if(hasPanel == "no") {
 					x[i].innerHTML = "Empty";
-					x[i].style.background = normCol;
+					x[i].style.background = canclickCol;
 				} else if(hasPanel == "try") {
 					x[i].innerHTML = "Attempted";
-					x[i].style.background = tryCol;
+					x[i].style.background = triedCol;
 				} else {
 					x[i].innerHTML = "Scored";
-					x[i].style.background = checkCol;
+					x[i].style.background = scoredCol;
 				}
 			}
 		}
@@ -422,13 +431,13 @@ function updateButtonLook() {
 	} else {
 		bot.innerHTML = "Your Robot<br>is Holding:<br><br>" + preloadedItem;
 		makeButtonStop(bot);
-		
+		bot.style.backgroundImage = "-webkit-linear-gradient(top,"+scoredCol+","+scoredCol+" 50%,"+scoredCol+" 50%,"+scoredCol+" 100%)";
 	}
 
 
 	var y = document.getElementsByClassName("rocketleveldisplay");
 	for(i = 0; i < y.length; i++) {
-		makeButtonNorm(y[i]); //Always displayed as usable
+		y[i].style.backgroundColor = cantclickCol;
 	}
 }
 
@@ -673,11 +682,17 @@ function changeStation(col, num) {
 		y.style.background = redCol;
 		y.style.fontSize = "16px";
 		text = "R";
+
+		var z = document.getElementById("gamemap");
+		z.style.background = redCol;
 	} else { //Blue
 		var y = document.getElementById("stationB"+num);
 		y.style.background = blueCol;
 		y.style.fontSize = "16px";
 		text = "B";
+
+		var z = document.getElementById("gamemap");
+		z.style.background = blueCol;
 	}
 	station = text+num;
 }
@@ -719,13 +734,25 @@ function changePickup(type) {
 }
 
 function makeButtonNorm(button) {
-	 button.style.background = normCol;
+	 button.style.background = canclickCol;
 	 button.style.cursor = "pointer";
 }
 
 function makeButtonStop(button) {
-	 button.style.background = stopCol;
+	 button.style.background = cantclickCol;
 	 button.style.cursor = "default";
+}
+
+function checkButtonScored(button, cargo, panel) {
+	if(cargo == "yes" && panel == "yes") {
+		button.style.backgroundImage = "-webkit-linear-gradient(top,"+scoredCol+","+scoredCol+" 50%,"+scoredCol+" 50%,"+scoredCol+" 100%)";
+	} else if(cargo == "yes") {
+		button.style.backgroundImage = "-webkit-linear-gradient(top,"+scoredCol+","+scoredCol+" 50%,"+notscoredCol+" 50%,"+notscoredCol+" 100%)";
+	} else if(panel == "yes") {
+		button.style.backgroundImage = "-webkit-linear-gradient(top,"+notscoredCol+","+notscoredCol+" 50%,"+scoredCol+" 50%,"+scoredCol+" 100%)";
+	} else {
+		button.style.backgroundImage = "-webkit-linear-gradient(top,"+notscoredCol+","+notscoredCol+" 50%,"+notscoredCol+" 50%,"+notscoredCol+" 100%)";
+	}
 }
 
 
