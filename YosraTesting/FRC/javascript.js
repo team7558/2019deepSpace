@@ -1,5 +1,5 @@
 var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
-cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, station = "R1", xscale = 1, preloadedItem = "Nothing";
+cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, cargoDropped = 0, panelDropped = 0, station = "R1", xscale = 1, preloadedItem = "Nothing", preloadedItemState = "Not Assigned";
 
 var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
 
@@ -26,56 +26,46 @@ var scoreSheet = [ //Cargo, panel, cargoWhen, panelWhen, nullPanel - index is li
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
-	["no", "no", "notscored", "notscored", false],
-	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false]
 ];
 
 var buttonPlacement = [ //For each button, then the rocket displays
 	//will be left: ... value for scaleX(1) and scaleX(-1)
 
-	[345,905],
-	[505,745],
-	[345,905],
-	[505,745],
-	[345,905],
-	[505,745],
-	[345,905],
-	[505,745],
-	[345,905],
-	[505,745],
-	[345,905],
-	[505,745],
+	[354,914],
+	[514,754],
+	[354,914],
+	[514,754],
+	[354,914],
+	[514,754],
+	[354,914],
+	[514,754],
+	[354,914],
+	[514,754],
+	[354,914],
+	[514,754],
 
-	[505,745],
-	[505,745],
-	[625,625],
-	[625,625],
-	[745,505],
-	[745,505],
-	[865,385],
-	[865,385],
+	[514,754],
+	[514,754],
+	[634,634],
+	[634,634],
+	[754,514],
+	[754,514],
+	[874,394],
+	[874,394],
 
-	[425,825],
-	[425,825],
+	[434,834],
+	[434,834],
 
-	[305, 905]
+	[314,914]
 
 ];
 
-var normCol = "#8fc1e2", stopCol = "#8fc1e2", checkCol = "rgb(56, 129, 220, 0.85)", tryCol = "#FFCA32", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
+var normCol = "#2196F3", stopCol = "#8FC1E2", checkCol = "#167BCC", tryCol = "#FFCA32", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
+
+
 
 //Run a few methods at the very beginning of the game
-
-
-function updateGameStats() {
-	document.getElementById("panelsfromfloor").innerHTML = panelGrabbedFloor + "<br>";
-	document.getElementById("panelsfromhuman").innerHTML = panelGrabbedHuman + "<br>";
-	document.getElementById("cargofromfloor").innerHTML = cargoGrabbedFloor + "<br>";
-	document.getElementById("cargofromhuman").innerHTML = cargoGrabbedHuman + "<br>";
-	document.getElementById("holdingitem").innerHTML = itemType + "<br>";
-	document.getElementById("gamemode").innerHTML = gameMode + "<br>";
-}
 
 function changeButtonPlacement() {
 	if(xscale==1) xscale = -1;
@@ -107,7 +97,7 @@ function print2D(arr) {
 		for(j = 0; j < arr[i].length; j++) {
 			msg+=arr[i][j]+"   ";
 		}
-		msg+="<br>";
+		msg+="\n";
 	}
 	alert(msg);
 }
@@ -117,6 +107,21 @@ function print2D(arr) {
 
 
 function updateMode(mode) {
+	//Deal with item dropping
+	var itemToTake = "Nothing";
+
+	if(gameMode == "preload") {
+		if(holdingItem) dropItem();
+
+		if(mode == 1 || mode == 2) {
+			if(preloadedItemState == "Assigned") {
+				holdingItem = false;
+				itemToTake = preloadedItem;
+			}
+		}
+	}
+
+
 	if(mode==0) gameMode = "preload";
 	else if(mode==1) gameMode = "sandstorm";
 	else if(mode==2) gameMode = "teleop";
@@ -234,9 +239,29 @@ function updateMode(mode) {
 		document.getElementById("robotscorespace").style.display = "none";
 		document.getElementById("gamemap").style.display = "none";
 		document.getElementById("miscellaneous").style.display = "table";
+
+		var y = document.getElementsByClassName("modelbl");
+		for(i = 0; i < y.length; i++) {
+			y[i].innerHTML = "MISCELLANEOUS PERIOD";
+			y[i].style.fontSize = "48px";
+			y[i].style.fontWeight = "600";
+			y[i].style.textAlign = "center";
+			y[i].style.color = "white";
+			y[i].style.backgroundColor = miscCol;
+		}
 	}
 
-	updateGameStats();
+	if(itemToTake == "Cargo") {
+		holdingItem = false;
+		getCargoFloor();
+		cargoGrabbedFloor--;
+		document.getElementById("cargoFloor").style.background = checkCol;
+	} else if(itemToTake == "Hatch Panel") {
+		holdingItem = false;
+		getPanelFloor();
+		panelGrabbedFloor--;
+		document.getElementById("panelFloor").style.background = checkCol;
+	}
 }
 
 
@@ -246,7 +271,6 @@ function switchDefense(level) {
 	var y = document.getElementById("defense"+level);
 	y.style.background = checkCol;
 	defenseLevel = level;
-	alert(defenseLevel);
 }
 
 function switchCarryBot(level) {
@@ -255,7 +279,6 @@ function switchCarryBot(level) {
 	var y = document.getElementById("carrybot"+level);
 	y.style.background = checkCol;
 	carryBotNumber = level;
-	alert(carryBotNumber);
 }
 
 function switchWasCarried() {
@@ -394,14 +417,15 @@ function changeRocket() {
 
 function preloadRobot() {
 	if(preloadedItem == "Nothing") {
+		preloadedItemState = "Assigned";
 		if(holdingItem) {
 			if(itemType == "cargo") {
 				preloadedItem = "Cargo";
 			} else if(itemType == "panel") {
-				preloadedItem = "Panel";
+				preloadedItem = "Hatch Panel";
 			}
 			dropItem();
-			print2D(scoreSheet);
+			//print2D(scoreSheet);
 /*
 			//Make it so that the item has been selected
 			holdingItem = false;
@@ -435,7 +459,7 @@ function score(place) { //Actually scores on a given position
 					scoreSheet[place][2] = gameMode;
 
 					dropItem();
-				}
+				} else if(preloadedItemState=="Assigned") preloadedItemState="Used";
 			} else if(cargoState == "try") {
 				scoreSheet[place][0] = "yes";
 				
@@ -453,7 +477,7 @@ function score(place) { //Actually scores on a given position
 
 					scoreSheet[place][4] = true;
 					dropItem();
-				}
+				} else if(preloadedItemState=="Assigned") preloadedItemState="Used";
 			} else if(panelState == "try") {
 				scoreSheet[place][1] = "yes";
 				scoreSheet[place][3] = gameMode;
@@ -566,11 +590,12 @@ function dropItem() {
 		itemType = "";
 		holdingItem = false;
 		changePickup("drop");
+
+		if(preloadedItemState=="Assigned" && gameMode!="preload") preloadedItemState="Used";
 	}
 }
 
 function changeLevel(level, type) {
-	updateGameStats();
 	updateButtonLook();
 
 	if(level >= 0) {
@@ -630,7 +655,6 @@ function changeStation(col, num) {
 }
 
 function changePickup(type) {
-	updateGameStats();
 	updateButtonLook();
 	if(type=="grab") {
 		//Change pickups
