@@ -456,6 +456,19 @@ body{
 
 
 
+#sstable { 
+  display: none; 
+  position: relative;
+  top: -180px;
+  left: 20px;
+}
+#sstablerow { display: table-row; }
+.sstableitem { display: table-cell; }
+
+
+
+
+
 
 
 .modelbl {

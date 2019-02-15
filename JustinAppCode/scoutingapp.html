@@ -1,6 +1,5 @@
 <html>
 
-<!--action="post.php" method="post"-->
    <head>
       <link rel="stylesheet" type="text/css" href="newstyle.css">
       <title>7558 Scouting App - 2019 Season</title>
@@ -59,9 +58,32 @@
             <div id="gamearea">
                <div id="gamemap"></div>
 
+               <!--<div id="sstable">
+                  <div id="sstablerow">
+                     <div class="sstableitem">
+                        <button>Element</button>
+                     </div>
+                     <div class="sstableitem">
+                        <button>Element</button>
+                     </div>
+                     <div class="sstableitem">
+                        <button>Element</button>
+                     </div>
+                     <div class="sstableitem">
+                        <button>Element</button>
+                     </div>
+                     <div class="sstableitem">
+                        <button>Element</button>
+                     </div>
+                     <div class="sstableitem">
+                        <button>Element</button>
+                     </div>
+                  </div>
+               </div>-->
+
                <button id="robotscorespace" onclick="preloadRobot();">Your Robot<br>is Holding:<br><br>Nothing</button>
 
-               <<div id="scoringrocket1">
+               <div id="scoringrocket1">
                   <button class="rocketleveldisplay" id="rocketleveldisplay1" onclick="changeRocket();">Level 1</button>
 
                   <!--Top Rocket Level 1-->
@@ -118,7 +140,7 @@
                         <textarea id="commentbox" placeholder="Type some general comments..."></textarea>
                      </div>
                      <div id="miscellaneousright">
-                        <form id="form" action="post.php" method="post">
+                        <form id="form" action="http://frctest.jslightman.x10host.com/post.php" method="post">
 
                            <!--Top Rocket-->
                            <input type="hidden" id="scorespacedata0" name="TopRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
@@ -218,8 +240,6 @@
             </div>
          </div>
       </div>
-
-      <!--<div id="modelblbtm" class="modelbl"><p>PRELOAD PERIOD</p></div>-->
 
    </body>
    <div id="localSubmissions"></div>

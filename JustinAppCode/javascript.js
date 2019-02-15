@@ -749,7 +749,6 @@ function updateFormData() {
 
 		var thisValue = thisCargo+"_"+thisPanel+"_"+thisCargoWhen+"_"+thisPanelWhen+"_"+thisNull;
 		thisData.value = thisValue;
-		alert(thisData.value);
 	}
 
 	//HAB Levels
