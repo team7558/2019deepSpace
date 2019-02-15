@@ -29,7 +29,7 @@
       <div id="playfield">
          <div id="playfieldrow">
 
-            <div id="habpreload">
+            <div id="habpreload" class="habbuttons">
                <p class="btnheader">Preload Setting</p>
                <button class="hablevels" id="habLevel01" onclick="leaveHAB(1, 0);">Started<br>on HAB Level 1<br><span class="habsandstormtag">(During Preload)</span></button>
                <button class="hablevels" id="habLevel02" onclick="leaveHAB(2, 0);">Started<br>on HAB Level 2<br><span class="habsandstormtag">(During Preload)</span></button>
@@ -37,7 +37,7 @@
                <button class="cancel" onclick="leaveHAB(-1, 0);">Cancel HAB Selection</button>
             </div>
 
-            <div id="habstart">
+            <div id="habstart" class="habbuttons">
                <p class="btnheader">HAB Activity</p>
                <button class="hablevels" id="habLevel10" onclick="leaveHAB(0, 1);">Stayed<br>on HAB<br><span class="habsandstormtag">(During Sandstorm)</span></button>
                <button class="hablevels" id="habLevel11" onclick="leaveHAB(1, 1);">Left HAB<br>Level 1<br><span class="habsandstormtag">(During Sandtorm)</span></button>
@@ -46,7 +46,7 @@
                <button class="cancel" onclick="leaveHAB(-1, 1);">Cancel HAB Selection</button>
             </div>
 
-            <div id="habend">
+            <div id="habend" class="habbuttons">
                <p class="btnheader">HAB Activity</p>
                <button class="hablevels" id="habLevel20" onclick="leaveHAB(0, 2);">Remained<br>on Field<br><span class="habsandstormtag">(During Endgame)</span></button>
                <button class="hablevels" id="habLevel21" onclick="leaveHAB(1, 2);">Entered HAB<br>Level 1<br><span class="habsandstormtag">(During Endgame)</span></button>
@@ -59,158 +59,156 @@
                <div id="gamemap"></div>
 
                <div id="sstable">
-                  <div id="sstablerow">
+
+                  <!--Top Row - Rocket 1-->
+                  <div class="sstablerow">
                      <div class="sstableitem">
-                        <button>Element</button>
+                        <button class="scorespaces" id="scorespace0" onclick="score(0);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace1" onclick="score(1);">Cargo: &#x2716<br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace2" onclick="score(2);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace3" onclick="score(3);">Cargo: &#x2716<br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace4" onclick="score(4);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace5" onclick="score(5);">Cargo: &#x2716<br>Panel: &#x2716</button>
+
+                        <button class="rocketleveldisplay" id="rocketleveldisplay1" onclick="changeRocket();">Level 1</button>
                      </div>
+                  </div>   
+
+                  <div class="sstablerow">
                      <div class="sstableitem">
-                        <button>Element</button>
-                     </div>
-                     <div class="sstableitem">
-                        <button>Element</button>
-                     </div>
-                     <div class="sstableitem">
-                        <button>Element</button>
-                     </div>
-                     <div class="sstableitem">
-                        <button>Element</button>
-                     </div>
-                     <div class="sstableitem">
-                        <button>Element</button>
+                        <button class="scorespaces" id="scorespace6" onclick="score(6);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace7" onclick="score(7);">Cargo: &#x2716<br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace8" onclick="score(8);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace9" onclick="score(9);">Cargo: &#x2716<br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace10" onclick="score(10);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace11" onclick="score(11);">Cargo: &#x2716<br>Panel: &#x2716</button>
+
+                        <button class="rocketleveldisplay" id="rocketleveldisplay2" onclick="changeRocket();">Level 1</button>
                      </div>
                   </div>
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <!--Robot Score Space-->
+                        <button id="robotscorespace" onclick="preloadRobot();">Your Robot<br>is Holding:<br><br>Nothing</button>
+
+                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace14" onclick="score(14);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace15" onclick="score(15);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace16" onclick="score(16);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace17" onclick="score(17);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace18" onclick="score(18);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace19" onclick="score(19);">Cargo: &#x2716<br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
                </div>
 
 
 
-
-
-               <button id="robotscorespace" onclick="preloadRobot();">Your Robot<br>is Holding:<br><br>Nothing</button>
-
-               <div id="scoringrocket1">
-                  <button class="rocketleveldisplay" id="rocketleveldisplay1" onclick="changeRocket();">Level 1</button>
-
-                  <!--Top Rocket Level 1-->
-                  <button class="scorespaces" id="scorespace0" onclick="score(0);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace1" onclick="score(1);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <!--Top Rocket Level 2-->
-                  <button class="scorespaces" id="scorespace0" onclick="score(2);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace1" onclick="score(3);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <!--Top Rocket Level 3-->
-                  <button class="scorespaces" id="scorespace0" onclick="score(4);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace1" onclick="score(5);">Cargo: &#x2716<br>Panel: &#x2716</button>
-               </div>
-               <div id="scoringrocket2">
-                  <button class="rocketleveldisplay" id="rocketleveldisplay2" onclick="changeRocket();">Level 1</button>
-
-                  <!--Bottom Rocket Level 1-->
-                  <button class="scorespaces" id="scorespace6" onclick="score(6);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace7" onclick="score(7);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <!--Bottom Rocket Level 2-->
-                  <button class="scorespaces" id="scorespace8" onclick="score(8);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace9" onclick="score(9);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <!--Bottom Rocket Level 3-->
-                  <button class="scorespaces" id="scorespace10" onclick="score(10);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace11" onclick="score(11);">Cargo: &#x2716<br>Panel: &#x2716</button>
-               </div>
-               
-               <div id="scoringship">
-                  <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace14" onclick="score(14);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace15" onclick="score(15);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace16" onclick="score(16);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace17" onclick="score(17);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace18" onclick="score(18);">Cargo: &#x2716<br>Panel: &#x2716</button>
-                  <button class="scorespaces" id="scorespace19" onclick="score(19);">Cargo: &#x2716<br>Panel: &#x2716</button>
-               </div>
                <div id="miscellaneous">
-                  <div id="miscellaneousrow">
-                     <div id="miscellaneousleft">
-                        <p class="btnheader">Robot Defense Activity</p>
-                        <div id="defensebuttons">
-                           <button class="switchdefense" id="defense0" onclick="switchDefense(0);">0</button>
-                           <button class="switchdefense" id="defense1" onclick="switchDefense(1);">1</button>
-                           <button class="switchdefense" id="defense2" onclick="switchDefense(2);">2</button>
-                        </div>
-                        <p class="btnheader">Number of Bots Carried</p>
-                        <div id="carrybotbuttons">
-                           <button class="switchcarrybot" id="carrybot0" onclick="switchCarryBot(0);">0</button>
-                           <button class="switchcarrybot" id="carrybot1" onclick="switchCarryBot(1);">1</button>
-                           <button class="switchcarrybot" id="carrybot2" onclick="switchCarryBot(2);">2</button>
-                        </div>
-                        <button id="wascarried" onclick="switchWasCarried();">Was Carried</button>
-                        <p class="btnheader">Comment Area</p>
-                        <textarea id="commentbox" placeholder="Type some general comments..."></textarea>
-                     </div>
-                     <div id="miscellaneousright">
-                        <form id="form" action="http://frctest.jslightman.x10host.com/post.php" method="post">
-
-                           <!--Top Rocket-->
-                           <input type="hidden" id="scorespacedata0" name="TopRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata1" name="TopRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata2" name="TopRocketClosetLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata3" name="TopRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata4" name="TopRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata5" name="TopRocketFarLeve31" value="No_No_Not Scored_Not Scored_Normal">
-
-                           <!--Bottom Rocket-->
-                           <input type="hidden" id="scorespacedata6" name="BottomRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata7" name="BottomRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata8" name="BottomRocketCloseLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata9" name="BottomRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata10" name="BottomRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata11" name="BottomRocketFarLevel3" value="No_No_Not Scored_Not Scored_Normal">
-
-                           <!--Cargo Ship-->
-                           <input type="hidden" id="scorespacedata12" name="ShipFrontUpper" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata13" name="ShipFrontLower" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata14" name="ShipTopClose" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata15" name="ShipBottomClose" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata16" name="ShipTopMedium" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata17" name="ShipBottomMedium" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata18" name="ShipTopFar" value="No_No_Not Scored_Not Scored_Normal">
-                           <input type="hidden" id="scorespacedata19" name="ShipBottomFar" value="No_No_Not Scored_Not Scored_Normal">
-
-                           <!--Other Information-->
-                           <input type="hidden" id="hableveldatapreload" name="HABPositionPreload" value="Not Recorded">
-                           <input type="hidden" id="hableveldatastart" name="HABPositionStart" value="Not Recorded">
-                           <input type="hidden" id="hableveldataend" name="HABPositionEnd" value="Not Recorded">
-                           <input type="hidden" id="grabdatacargohuman" name="CargoGrabbedFromHuman" value="0">
-                           <input type="hidden" id="grabdatacargofloor" name="CargoGrabbedFromFloor" value="0">
-                           <input type="hidden" id="grabdatapanelhuman" name="PanelGrabbedFromHuman" value="0">
-                           <input type="hidden" id="grabdatapanelfloor" name="PanelGrabbedFromFloor" value="0">
-                           <input type="hidden" id="miscdatapreloadeditem" name="RobotPreloadedItem" value="Nothing">
-                           <input type="hidden" id="miscdatadefenselevel" name="DefenseLevel" value="0">
-                           <input type="hidden" id="miscdatarobotscarried" name="RobotsCarriedAtEnd" value="0">
-                           <input type="hidden" id="miscdatawascarried" name="WasCarriedAtEnd" value="false">
-
-
-                           <!--Match Info-->
-                           <input type="hidden" id="matchdatateamnumber" name="TeamNumber" value="000">
-                           <input type="hidden" id="matchdatacompetition" name="Competition" value="Unknown">
-                           <input type="hidden" id="matchdatamatchnumber" name="MatchNumber" value="1">
-                           <input type="hidden" id="matchdatarobotstation" name="RobotStation" value="R1">
-
-
-
-
-                           <input type="submit" value="Submit" onclick="scoreForm();">
-                        </form>
-                     </div>
+                  <p class="btnheader">Robot Defense Activity</p>
+                  <div id="defensebuttons">
+                     <button class="switchdefense" id="defense0" onclick="switchDefense(0);">0</button>
+                     <button class="switchdefense" id="defense1" onclick="switchDefense(1);">1</button>
+                     <button class="switchdefense" id="defense2" onclick="switchDefense(2);">2</button>
                   </div>
+                  <p class="btnheader">Number of Bots Carried</p>
+                  <div id="carrybotbuttons">
+                     <button class="switchcarrybot" id="carrybot0" onclick="switchCarryBot(0);">0</button>
+                     <button class="switchcarrybot" id="carrybot1" onclick="switchCarryBot(1);">1</button>
+                     <button class="switchcarrybot" id="carrybot2" onclick="switchCarryBot(2);">2</button>
+                  </div>
+                  <button id="wascarried" onclick="switchWasCarried();">Was Carried</button>
+                  <p class="btnheader">Comment Area</p>
+                  <textarea id="commentbox" placeholder="Type some general comments..."></textarea>
+
+
+                  <form id="form" action="http://frctest.jslightman.x10host.com/post.php" method="post">
+
+                     <!--Top Rocket-->
+                     <input type="hidden" id="scorespacedata0" name="TopRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata1" name="TopRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata2" name="TopRocketClosetLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata3" name="TopRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata4" name="TopRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata5" name="TopRocketFarLeve31" value="No_No_Not Scored_Not Scored_Normal">
+
+                     <!--Bottom Rocket-->
+                     <input type="hidden" id="scorespacedata6" name="BottomRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata7" name="BottomRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata8" name="BottomRocketCloseLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata9" name="BottomRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata10" name="BottomRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata11" name="BottomRocketFarLevel3" value="No_No_Not Scored_Not Scored_Normal">
+
+                     <!--Cargo Ship-->
+                     <input type="hidden" id="scorespacedata12" name="ShipFrontUpper" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata13" name="ShipFrontLower" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata14" name="ShipTopClose" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata15" name="ShipBottomClose" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata16" name="ShipTopMedium" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata17" name="ShipBottomMedium" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata18" name="ShipTopFar" value="No_No_Not Scored_Not Scored_Normal">
+                     <input type="hidden" id="scorespacedata19" name="ShipBottomFar" value="No_No_Not Scored_Not Scored_Normal">
+
+                     <!--Other Information-->
+                     <input type="hidden" id="hableveldatapreload" name="HABPositionPreload" value="Not Recorded">
+                     <input type="hidden" id="hableveldatastart" name="HABPositionStart" value="Not Recorded">
+                     <input type="hidden" id="hableveldataend" name="HABPositionEnd" value="Not Recorded">
+                     <input type="hidden" id="grabdatacargohuman" name="CargoGrabbedFromHuman" value="0">
+                     <input type="hidden" id="grabdatacargofloor" name="CargoGrabbedFromFloor" value="0">
+                     <input type="hidden" id="grabdatapanelhuman" name="PanelGrabbedFromHuman" value="0">
+                     <input type="hidden" id="grabdatapanelfloor" name="PanelGrabbedFromFloor" value="0">
+                     <input type="hidden" id="miscdatapreloadeditem" name="RobotPreloadedItem" value="Nothing">
+                     <input type="hidden" id="miscdatadefenselevel" name="DefenseLevel" value="0">
+                     <input type="hidden" id="miscdatarobotscarried" name="RobotsCarriedAtEnd" value="0">
+                     <input type="hidden" id="miscdatawascarried" name="WasCarriedAtEnd" value="false">
+
+
+                     <!--Match Info-->
+                     <input type="hidden" id="matchdatateamnumber" name="TeamNumber" value="000">
+                     <input type="hidden" id="matchdatacompetition" name="Competition" value="Unknown">
+                     <input type="hidden" id="matchdatamatchnumber" name="MatchNumber" value="1">
+                     <input type="hidden" id="matchdatarobotstation" name="RobotStation" value="R1">
+
+                     <input type="submit" id="submitform" value="Submit" onclick="scoreForm();">
+                  </form>
+
+
                </div>
             </div>
 
 
-            <div id="pickuppreload">
+            <div id="pickuppreload" class="pickupbuttons">
                <p class="btnheader">Item Pickup</p>
                <button class="itempickups" id="cargoPreload" onclick="getCargoPreload();">Cargo</button>
                <button class="itempickups" id="panelPreload" onclick="getPanelPreload();">Hatch Panel</button>
                <button class="cancel" onclick="dropItem();">Drop Item</button>
             </div>
 
-            <div id="pickup">
+            <div id="pickup" class="pickupbuttons">
                <p class="btnheader">Item Pickup</p>
                <button class="itempickups" id="cargoFloor" onclick="getCargoFloor();">Cargo<br><span class="itemgrabtag">(On Floor)</span></button>
                <button class="itempickups" id="cargoHuman" onclick="getCargoHuman();">Cargo<br><span class="itemgrabtag">(Human Load)</span></button>
@@ -246,5 +244,4 @@
       </div>
 
    </body>
-   <div id="localSubmissions"></div>
 </html>

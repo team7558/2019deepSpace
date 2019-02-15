@@ -34,32 +34,32 @@ var scoreSheet = [ //Cargo, panel, cargoWhen, panelWhen, nullPanel - index is li
 var buttonPlacement = [ //For each button, then the rocket displays
 	//will be left: ... value for scaleX(1) and scaleX(-1)
 
-	[354,914],
-	[514,754],
-	[354,914],
-	[514,754],
-	[354,914],
-	[514,754],
-	[354,914],
-	[514,754],
-	[354,914],
-	[514,754],
-	[354,914],
-	[514,754],
+	[0,640], //0
+	[160,480], //1
+	[0,640], //2
+	[160,480], //3
+	[0,640], //4
+	[160,480], //5
+	[0,640], //6
+	[160,480], //7
+	[0,640], //8
+	[160,480], //9
+	[0,640], //10
+	[160,480], //11
 
-	[514,754],
-	[514,754],
-	[634,634],
-	[634,634],
-	[754,514],
-	[754,514],
-	[874,394],
-	[874,394],
+	[400,240], //12
+	[400,240], //13
+	[480,160], //14
+	[480,160], //15
+	[560,80], //16
+	[560,80], //17
+	[640,0], //18
+	[640,0], //19
 
-	[434,834],
-	[434,834],
+	[80,560], //rocket 1
+	[80,560], //rocket 2
 
-	[314,914]
+	[0,560] //robot preload
 
 ];
 
@@ -162,11 +162,9 @@ function updateMode(mode) {
 		document.getElementById("habend").style.display = "none";
 		document.getElementById("pickuppreload").style.display = "table-cell";
 		document.getElementById("pickup").style.display = "none";
-		document.getElementById("scoringrocket1").style.display = "block";
-		document.getElementById("scoringrocket2").style.display = "block";
-		document.getElementById("scoringship").style.display = "block";
 		document.getElementById("robotscorespace").style.display = "block";
 		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
 
 
@@ -180,6 +178,14 @@ function updateMode(mode) {
 			y[i].style.backgroundColor = preloadCol;
 		}
 
+		var z = document.getElementsByClassName("scorespaces");
+		for(i = 0; i < z.length; z++) {
+			z[i].style.display = "block";
+		}
+
+		document.getElementById("modetable").style.top = "-480px"; //Accounts for the sstable
+
+
 	} else if(gameMode == "sandstorm") {
 
 		document.getElementById("habpreload").style.display = "none";
@@ -187,11 +193,9 @@ function updateMode(mode) {
 		document.getElementById("habend").style.display = "none";
 		document.getElementById("pickuppreload").style.display = "none";
 		document.getElementById("pickup").style.display = "table-cell";
-		document.getElementById("scoringrocket1").style.display = "block";
-		document.getElementById("scoringrocket2").style.display = "block";
-		document.getElementById("scoringship").style.display = "block";
 		document.getElementById("robotscorespace").style.display = "none";
 		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
 
 
@@ -205,6 +209,13 @@ function updateMode(mode) {
 			y[i].style.backgroundColor = sandstormCol;
 		}
 
+		var z = document.getElementsByClassName("scorespaces");
+		for(i = 0; i < z.length; z++) {
+			z[i].style.display = "block";
+		}
+
+		document.getElementById("modetable").style.top = "-480px"; //Accounts for the sstable
+
 	} else if(gameMode == "teleop") {
 		
 		document.getElementById("habpreload").style.display = "none";
@@ -212,11 +223,9 @@ function updateMode(mode) {
 		document.getElementById("habend").style.display = "table-cell";
 		document.getElementById("pickuppreload").style.display = "none";
 		document.getElementById("pickup").style.display = "table-cell";
-		document.getElementById("scoringrocket1").style.display = "block";
-		document.getElementById("scoringrocket2").style.display = "block";
-		document.getElementById("scoringship").style.display = "block";
 		document.getElementById("robotscorespace").style.display = "none";
 		document.getElementById("gamemap").style.display = "block";
+		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
 
 		var y = document.getElementsByClassName("modelbl");
@@ -228,6 +237,14 @@ function updateMode(mode) {
 			y[i].style.color = "white";
 			y[i].style.backgroundColor = teleopCol;
 		}
+
+		var z = document.getElementsByClassName("scorespaces");
+		for(i = 0; i < z.length; z++) {
+			z[i].style.display = "block";
+		}
+
+		document.getElementById("modetable").style.top = "-480px"; //Accounts for the sstable
+
 	} else {
 		
 		document.getElementById("habpreload").style.display = "none";
@@ -235,11 +252,9 @@ function updateMode(mode) {
 		document.getElementById("habend").style.display = "none";
 		document.getElementById("pickuppreload").style.display = "none";
 		document.getElementById("pickup").style.display = "none";
-		document.getElementById("scoringrocket1").style.display = "none";
-		document.getElementById("scoringrocket2").style.display = "none";
-		document.getElementById("scoringship").style.display = "none";
 		document.getElementById("robotscorespace").style.display = "none";
 		document.getElementById("gamemap").style.display = "none";
+		document.getElementById("sstable").style.display = "none";
 		document.getElementById("miscellaneous").style.display = "table";
 
 		var y = document.getElementsByClassName("modelbl");
@@ -251,6 +266,14 @@ function updateMode(mode) {
 			y[i].style.color = "white";
 			y[i].style.backgroundColor = miscCol;
 		}
+
+		var z = document.getElementsByClassName("scorespaces");
+		for(i = 0; i < z.length; z++) {
+			z[i].style.display = "none";
+		}
+
+		document.getElementById("modetable").style.top = "0px"; //Accounts for the sstable
+
 	}
 
 	if(itemToTake == "Cargo") {

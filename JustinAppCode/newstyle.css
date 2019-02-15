@@ -2,6 +2,7 @@ body{
   font-family: Courier New, Roboto, sans-serif;
   font-size: 16px;
   background-image: url("photos/spacewallpaper.png");
+  overflow: hidden;
 }
 
 
@@ -101,11 +102,11 @@ body{
 .scorespaces, .rocketleveldisplay, #robotscorespace {
   width: 80px;
   height: 80px;
-  margin-left: 10px;
-  margin-top: 10px;
+  margin-left: 0px;
+  margin-top: 0px;
   text-align: center;
   position: absolute;
-  display: none;
+  display: block;
 
   font-size: 14px;
   font-weight: 100px;
@@ -122,8 +123,8 @@ body{
 }
 
 #robotscorespace {
-  height: 120px;
-  width: 120px;
+  height: 160px;
+  width: 160px;
 }
 
 .rocketleveldisplay {
@@ -136,29 +137,19 @@ body{
 }
 
 
-
-#pickup, #pickuppreload {
+.habbuttons, .pickupbuttons  {
   vertical-align: middle;
   margin: 0px;
   width: 200px;
   display: table-cell;
   height: 400px;
+
+  position: relative;
+  top: -240px;
+  left: 0px;
 }
 
-#pickup {
-  display: none;
-}
-
-
-#habstart, #habend, #habpreload {
-  vertical-align: middle;
-  margin: 0px;
-  width: 200px;
-  display: table-cell;
-  height: 400px;
-}
-
-#habstart, #habend {
+#habstart, #habend, #pickup {
   display: none;
 }
 
@@ -185,32 +176,23 @@ body{
   transform: scaleX(1);
 }
 
+
+
+
+
 #miscellaneous {
   display: none;
   margin-left: auto;
   margin-right: auto;
   width: 900px;
   color: white;
-}
-
-#miscellaneousrow {
-  display: table-row;
-}
-
-#miscellaneousleft, #miscellaneousright {
-  padding-top: 5px;
   text-align: center;
-  display: table-cell;
-  width: 50%;
-  height: 520px;
-  border: 2px solid #3881DC;
-  border-radius: 5px;
 }
 
 #commentbox {
   resize: none;
   width: 250px;
-  height: 160px;
+  height: 120px;
 }
  
 #defensebuttons {
@@ -237,7 +219,6 @@ body{
   text-align: center;
   background-color: #3881DC;
   margin-top: 20px;
-  margin-bottom: 20px;
   width: 120px;
   height: 80px;
   font-size: 16px;
@@ -246,11 +227,20 @@ body{
   color: white;
 }
 
+#submitform {
+  padding: 20px;
+  margin-top: 20px;
+}
+
+
+
+
 
 
 
 .btnheader {
   top: 40px;
+  color: white;
   text-align: center;
 }
 
@@ -311,163 +301,97 @@ body{
   font-size: 12px;
 }
 
-#scoringrocket1, #scoringrocket2, #scoringship {
-  display: block;
+
+
+
+
+
+
+/*Scorespaces Horizontal Position*/
+#rocketleveldisplay1, #rocketleveldisplay2 {
+  left:80px;
+}
+
+#scorespace0, #scorespace2, #scorespace4, #scorespace6, #scorespace8, #scorespace10 {
+  left:0px;
+}
+
+#scorespace1, #scorespace3, #scorespace5, #scorespace7, #scorespace9, #scorespace11 {
+  left:160px;
+}
+
+#scorespace12, #scorespace13 {
+  left:400px;
+}
+
+#scorespace14, #scorespace15 {
+  left:480px;
+}
+
+#scorespace16, #scorespace17 {
+  left:560px;
+}
+
+#scorespace18, #scorespace19 {
+  left:640px;
+}
+
+#robotscorespace { 
+  left:0px; 
 }
 
 
 
 
-/*All Different Scoring Spaces and Rockets*/
-#rocketleveldisplay1 {
-  left: 434px;
-  top: 170px;
+/*Scorespaces Vertical Position*/
+#scorespace0, #scorespace1, #scorespace2, #scorespace3, #scorespace4, #scorespace5, #rocketleveldisplay1 {
+  top: 0px;
+}
+#scorespace6, #scorespace7, #scorespace8, #scorespace9, #scorespace10, #scorespace11, #rocketleveldisplay2 {
+  top: 400px;
 }
 
-#rocketleveldisplay2 {
-  left: 434px;
-  top: 610px;
+#scorespace12 {
+  top: 160px;
 }
 
-#robotscorespace {
-  left: 314px;
-  top: 369px;
+#scoresapce13 {
+  top: 240px;
 }
 
-#scorespace0, #scorespace1, #scorespace2, 
-#scorespace3, #scorespace4, #scorespace5 {
-  top: 170px;
+#scorespace14, #scorespace16, #scorespace18 {
+  top: 80px;
 }
 
-#scorespace6, #scorespace7, #scorespace8, 
-#scorespace9, #scorespace10, #scorespace11 {
-  top: 610px;
+#scorespace15, #scorespace17, #scorespace19 {
+  top: 320px;
 }
 
-#scorespace0 {   /*Top Rocket - Level 1 - Left*/
-  left: 354px;
-  display:block;
-}
-
-#scorespace1 {  /*Top Rocket - Level 1 - Right*/
-  left: 514px;
-  display:block;
-}
-
-#scorespace2 {  /*Top Rocket - Level 2 - Left*/
-  left: 354px;
-  display:block;
-}
-
-#scorespace3 {   /*Top Rocket - Level 2 - Right*/
-  left: 514px;
-  display:block;
-}
-#scorespace4 {  /*Top Rocket - Level 3 - Left*/
-  left: 354px;
-  display:block;
-}
-
-#scorespace5 {  /*Top Rocket - Level 3 - Right*/
-  left: 514px;
-  display:block;
-}
-
-#scorespace6 { /*Bottom Rocket - Level 1 - Left*/
-  left: 354px;
-  display:block;
-}
-
-#scorespace7 {  /*Bottom Rocket - Level 1 - Right*/
-  left: 514px;
-  display:block;
-}
-
-#scorespace8 {  /*Bottom Rocket - Level 2 - Left*/
-  left: 354px;
-  display:block;
-}
-
-#scorespace9 { /*Bottom Rocket - Level 2 - Right*/
-  left: 514px;
-  display:block;
-}
-
-#scorespace10 {  /*Bottom Rocket - Level 3 - Left*/
-  left: 354px;
-  display:block;
-}
-
-#scorespace11 {  /*Bottom Rocket - Level 3 - Right*/
-  left: 514px;
-  display:block;
-}
-
-#scorespace12 { /*Alliance-facing Ship - Upper*/
-  left: 514px;
-  top: 330px;
-  display:block;
-}
-
-#scorespace13 { /*Alliance-facing Ship - Lower*/
-  left: 514px;
-  top: 450px;
-  display:block;
-}
-
-#scorespace14 { /*Top of Ship - Left*/
-  left: 634px;
-  top: 290px;
-  display:block;
-}
-
-#scorespace15 { /*Bottom of Ship - Left*/
-  left: 634px;
-  top: 490px;
-  display:block;
-}
-
-#scorespace16 { /*Top of Ship - mid*/
-  left: 754px;
-  top: 290px;
-  display:block;
-}
-
-#scorespace17 { /*Bottom of Ship - mid*/
-  left: 754px;
-  top: 490px;
-  display:block;
-}
-
-#scorespace18 { /*Top of Ship - right*/
-  left: 874px;
-  top: 290px;
-  display:block;
-}
-
-#scorespace19 { /*Bottom of Ship - right*/
-  left: 874px;
-  top: 490px;
-  display:block;
-}
-
-#scorespace0, #scorespace1, #scorespace2, #scorespace3, #scorespace4, #scorespace5, #scorespace6, #scorespace7, #scorespace8, #scorespace9, #scorespace10, #scorespace11, #scorespace12, #scorespace13, #scorespace14, #scorespace15, #scorespace16, #scorespace17, #scorespace18, #scorespace19 { 
-  display: none; 
+#robotscorespace { 
+  top: 160px; 
 }
 
 
 
 
 #sstable { 
-  display: block; 
+  display: table; 
   position: relative;
   top: -500px;
   left: 20px;
   width: 720px;
-  background-color: red;
 }
-#sstablerow { display: table-row; }
-.sstableitem { display: table-cell; }
+.sstablerow { 
+  display: table-row; 
+  height: 80px;
+}
+.sstableitem { 
+  display: table-cell; 
+  width: block;
+  height: 80px;
+}
+
+
 
 
 
@@ -510,6 +434,8 @@ body{
   margin-right: auto;
   margin-top: 0px;
   margin-bottom: 0px;
+  position: relative;
+  top: -480px;
 }
 
 #moderow {
