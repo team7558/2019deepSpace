@@ -46,10 +46,6 @@ $WasCarriedAtEnd = strip_tags($_POST['WasCarriedAtEnd']);
 $RobotStation = strip_tags($_POST['RobotStation']);
 $Competition = strip_tags($_POST['Competition']);
 
-
-
-
-
 $sql = "INSERT INTO matches (MatchNumber, TeamNumber, TopRocketCloseLevel1, TopRocketFarLevel1, TopRocketClosetLevel2, TopRocketFarLevel2, TopRocketCloseLevel3, TopRocketFarLeve31, BottomRocketCloseLevel1, BottomRocketFarLevel1, BottomRocketCloseLevel2, BottomRocketFarLevel2, BottomRocketCloseLevel3, BottomRocketFarLevel3, ShipFrontUpper, ShipFrontLower, ShipTopClose, ShipBottomClose, ShipTopMedium, ShipBottomMedium, ShipTopFar, ShipBottomFar, HABPositionPreload, HABPositionStart, HABPositionEnd, CargoGrabbedFromHuman, CargoGrabbedFromFloor, PanelGrabbedFromHuman, PanelGrabbedFromFloor, RobotPreloadedItem, DefenseLevel, RobotsCarriedAtEnd, WasCarriedAtEnd, RobotStation, Competition) VALUES ('$MatchNumber', '$TeamNumber', '$TopRocketCloseLevel1', '$TopRocketFarLevel1', '$TopRocketClosetLevel2', '$TopRocketFarLevel2', '
 $TopRocketCloseLevel3', '$TopRocketFarLeve31', '$BottomRocketCloseLevel1', '$BottomRocketFarLevel1', '$BottomRocketCloseLevel2', '$BottomRocketFarLevel2', '$BottomRocketCloseLevel3', '$BottomRocketFarLevel3', '$ShipFrontUpper', '$ShipFrontLower', '$ShipTopClose', '$ShipBottomClose', '$ShipTopMedium', '$ShipBottomMedium', '$ShipTopFar', '$ShipBottomFar', '$HABPositionPreload', '$HABPositionStart', '$HABPositionEnd', '$CargoGrabbedFromHuman', '$CargoGrabbedFromFloor', '$PanelGrabbedFromHuman', '$PanelGrabbedFromFloor', '$RobotPreloadedItem', '$DefenseLevel', '$RobotsCarriedAtEnd', '$WasCarriedAtEnd', '$RobotStation', '$Competition')";
 

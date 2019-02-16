@@ -19,6 +19,27 @@ $row = mysqli_fetch_row($query);
    <head>
       <link rel="stylesheet" type="text/css" href="newstyle.css">
       <script src="javascript.js"></script>
+      <?php
+		 if (strpos($row[36], 'R') !== false){
+		 echo '<script type="text/javascript">
+		 alert("test");
+		 ',
+     	'changeStation(0, '
+		;
+		 echo $row[36][1]; echo ');
+    	 </script>'
+		 ;
+		 }else{
+		echo '<script type="text/javascript"> alert("test"); 
+		',
+     	'changeStation(1, '
+		;
+		 echo $row[36][1]; echo ');
+    	 </script>'
+		 ;
+		 }
+		 
+		 ?>
       <title>7558 Scouting App - 2019 Season</title>
    </head>
    <body>
@@ -30,24 +51,6 @@ $row = mysqli_fetch_row($query);
 
       <div id="stations">
          <div id="stationrow">
-         <?php
-		 if (strpos($row[36], 'R') !== false){
-		 echo '<script type="text/javascript">',
-     	'changeStation(0, '
-		;
-		 echo $row[36][1]; echo ');
-    	 </script>'
-		 ;
-		 }else{
-		echo '<script type="text/javascript">',
-     	'changeStation(1, '
-		;
-		 echo $row[36][1]; echo ');
-    	 </script>'
-		 ;
-		 }
-		 
-		 ?>
             <button class="stationbutton" id="stationR1" >Station<br>Red 1</button>
             <button class="stationbutton" id="stationR2" >Station<br>Red 2</button>
             <button class="stationbutton" id="stationR3" >Station<br>Red 3</button>
