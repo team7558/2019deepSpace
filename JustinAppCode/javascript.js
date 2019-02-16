@@ -917,6 +917,4 @@ function updateFormData() {
 	document.getElementById("matchdatarobotstation").value = station;
 	message+="Station: "+station;
 
-	alert(message);
-
 }
