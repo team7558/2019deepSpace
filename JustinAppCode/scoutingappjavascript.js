@@ -530,7 +530,7 @@ function leaveHAB(level, type) {
 			if(level >= 0 && habLevelPreload==-1) {
 				habLevelPreload = level;
 				changeLevel(level, type);
-				document.getElementById("habLevel"+type+habLevelPreload).style.background = checkCol;
+				makeSideButtonOn(document.getElementById("habLevel"+type+habLevelPreload));
 			} else {
 				habLevelPreload = -1;
 				changeLevel(level,type);
@@ -539,7 +539,7 @@ function leaveHAB(level, type) {
 			if(level >= 0 && habLevelStart==-1) {
 				habLevelStart = level;
 				changeLevel(level, type);
-				document.getElementById("habLevel"+type+habLevelStart).style.background = checkCol;
+				makeSideButtonOn(document.getElementById("habLevel"+type+habLevelStart));
 			} else {
 				habLevelStart = -1;
 				changeLevel(level,type);
@@ -548,7 +548,7 @@ function leaveHAB(level, type) {
 			if(level >= 0 && habLevelEnd==-1) {
 				habLevelEnd = level;
 				changeLevel(level, type);
-				document.getElementById("habLevel"+type+habLevelEnd).style.background = checkCol;
+				makeSideButtonOn(document.getElementById("habLevel"+type+habLevelEnd));
 			} else {
 				habLevelEnd = -1;
 				changeLevel(level,type);
@@ -564,7 +564,7 @@ function getCargoFloor() {
 		cargoGrabbedFloor++;
 		holdingItem = true;
 		changePickup("grab");
-		document.getElementById("cargoFloor").style.background = checkCol;
+		makeSideButtonOn(document.getElementById("cargoFloor"));
 	}
 }
 
@@ -574,17 +574,7 @@ function getCargoHuman() {
 		cargoGrabbedHuman++;
 		holdingItem = true;
 		changePickup("grab");
-		document.getElementById("cargoHuman").style.background = checkCol;
-	}
-}
-
-function getPanelHuman() {
-	if(!holdingItem) {
-		itemType = "panel";
-		panelGrabbedHuman++;
-		holdingItem = true;
-		changePickup("grab");
-		document.getElementById("panelHuman").style.background = checkCol;
+		makeSideButtonOn(document.getElementById("cargoHuman"));
 	}
 }
 
@@ -594,7 +584,17 @@ function getPanelFloor() {
 		panelGrabbedFloor++;
 		holdingItem = true;
 		changePickup("grab");
-		document.getElementById("panelFloor").style.background = checkCol;
+		makeSideButtonOn(document.getElementById("panelFloor"));
+	}
+}
+
+function getPanelHuman() {
+	if(!holdingItem) {
+		itemType = "panel";
+		panelGrabbedHuman++;
+		holdingItem = true;
+		changePickup("grab");
+		makeSideButtonOn(document.getElementById("panelHuman"));
 	}
 }
 
@@ -603,7 +603,7 @@ function getCargoPreload() {
 		itemType = "cargo";
 		holdingItem = true;
 		changePickup("grab");
-		document.getElementById("cargoPreload").style.background = checkCol;
+		makeSideButtonOn(document.getElementById("cargoPreload"));
 	}
 }
 
@@ -612,7 +612,7 @@ function getPanelPreload() {
 		itemType = "panel";
 		holdingItem = true;
 		changePickup("grab");
-		document.getElementById("panelPreload").style.background = checkCol;
+		makeSideButtonOn(document.getElementById("panelPreload"));
 	}
 }
 
@@ -635,9 +635,9 @@ function changeLevel(level, type) {
 	if(level >= 0) {
 		var x = document.getElementsByClassName("hablevels");
 		for(i = 0; i < x.length; i++) {
-			if(type == 0 && i <= 2)	makeButtonStop(x[i]);
-			if(type == 1 && i > 2 && i <= 6) makeButtonStop(x[i]);
-			if(type == 2 && i > 6) makeButtonStop(x[i]);
+			if(type == 0 && i <= 2)	makeSideButtonStop(x[i]);
+			if(type == 1 && i > 2 && i <= 6) makeSideButtonStop(x[i]);
+			if(type == 2 && i > 6) makeSideButtonStop(x[i]);
 		}
 		if(gameMode=="preload") {
 			makeButtonNorm(document.getElementsByClassName("cancel")[0]);
@@ -703,7 +703,7 @@ function changePickup(type) {
 		//Change pickups
 		var x = document.getElementsByClassName("itempickups");
 		for(i = 0; i < x.length; i++) {
-			makeButtonStop(x[i]);
+			makeSideButtonStop(x[i]);
 		}
 
 		//Change drop item
@@ -736,12 +736,29 @@ function changePickup(type) {
 function makeButtonNorm(button) {
 	 button.style.background = canclickCol;
 	 button.style.cursor = "pointer";
+	 button.style.opacity = "1.0";
 }
 
 function makeButtonStop(button) {
 	 button.style.background = cantclickCol;
 	 button.style.cursor = "default";
 }
+
+function makeSideButtonOn(button) {
+	button.style.background = checkCol;
+	button.style.opacity = "1.0";
+}
+
+function makeSideButtonStop(button) {
+	button.style.background = cantclickCol;
+	button.style.cursor = "default";
+	button.style.opacity = "0.0";
+}
+
+
+
+
+
 
 function checkButtonScored(button, cargo, panel) {
 	if(cargo == "yes" && panel == "yes") {

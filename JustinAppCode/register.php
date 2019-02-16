@@ -2,7 +2,7 @@
 session_start();
 if (isset($_POST['username'])) {
     
-     
+     $dbCon = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
     
     
     // Form
@@ -58,7 +58,7 @@ if(!isset($user) || trim($user) == '')
     <div id="mainbox">
         <div id="outerbox">
             <form action="/index.php" enctype="multipart/form-data" id="form" method="post" name="form">
-              <h1>TEAM 7558<br>SCOUTING APP<br><i>LOGIN</i></h1>
+              <h1>TEAM 7558<br>SCOUTING APP<br><i>REGISTRATION</i></h1>
               <br>
               USERNAME: <br>
               <input name="username" type="text" placeholder="Username" class="form2">
@@ -66,12 +66,20 @@ if(!isset($user) || trim($user) == '')
               <br/> PASSWORD: <br>
               <input name="password" type="password" placeholder="Password" class="form2">
               <br>
+              <br/> EMAIL: <br>
+              <input name="email" type="email" placeholder="Email" class="form2">
+              <br>
+              <br/> TEAM NUMBER: <br>
+              <input name="teamnumber" type="number" placeholder="Team Number" class="form2">
+              <br>
+              <br/> SCHOOL NAME: <br>
+              <input name="schoolname" type="text" placeholder="School Name" class="form2">
               <br>
               <br>
-              <input type="submit" id="login" name="submit" value="Login">
+              <input type="submit" id="register" name="submit" value="Register">
               <br>
             </form>
-            <a href="http://scouting.team7558.com/register.php"><button id="register">Register</button></a>
+            <a href="http://scouting.team7558.com"><button id="login">Login</button></a>
             <br/>
             <div id="errors">
               You inputted an invalid username or password.<br>Please try again.
