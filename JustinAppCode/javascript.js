@@ -757,6 +757,41 @@ function checkButtonScored(button, cargo, panel) {
 
 
 
+function getSandstormScored(type) {
+	var count = 0;
+	for(i = 0; i < scoreSheet.length; i++) {
+		if(scoreSheet[i][type+2]=="sandstorm") count++:
+	}
+	return count;
+}
+
+function getObjectsScored(type, where) {
+	var count = 0;
+
+	//Account for scored ship cargo
+	if(type==0 && where=="ship") count=-2;
+
+	for(i = 0; i < scoreSheet.length; i++) {
+
+		if(scoreSheet[i][type] == "yes") {
+
+			if(i>=12) {
+				if(where=="ship") count++;
+			} else if(i==0||i==1||i==6||i==7) {
+				if(where=="low") count++;
+			} else if(i==2||i==3||i==8||i==9) {
+				if(where=="mid") count++;
+			} else {
+				if(where=="high") count++;
+			}
+
+		} 
+
+	}
+	return count;
+}
+
+
 
 
 
@@ -765,71 +800,88 @@ function scoreForm() {
 }
 
 function updateFormData() {
+	var thisData = null; //Used to modify each different input
 
-	var thisData = document.getElementById("scorespacedata0"); //Just a placeholder
-	//Score Spaces
-	for(i = 0; i < 20; i++) {
-		var thisData = document.getElementById("scorespacedata"+i);
-		var rawCargo = scoreSheet[i][0];
-		var rawPanel = scoreSheet[i][1];
-		var rawCargoWhen = scoreSheet[i][2];
-		var rawPanelWhen = scoreSheet[i][3];
-		var rawNull = scoreSheet[i][4];
-		var thisCargo = "No";
-		var thisPanel = "No";
-		var thisCargoWhen = "Not Scored";
-		var thisPanelWhen = "Not Scored";
-		var thisNull = "Normal";
+	//HAB Sandstorm Score
+	thisData = document.getElementById("datahabstart");
+	if(habLevelStart == 1 || habLevelStart == 2) thisData.value = habLevelStart*3;
 
+	//Sandstorm Cargo
+	thisData = document.getElementById("datasandstormcargo");
+	thisData.value = getSandstormScored(0);
 
-		if(rawCargo == "yes") thisCargo = "Yes";
-		if(rawPanel == "yes") thisPanel = "Yes";
-		if(rawNull == true) thisNull = "Null Panel";
-
-		//Cargo When
-		if(rawCargoWhen == "notscored") thisCargoWhen = "Not Scored";
-		else if(rawCargoWhen == "preload") thisCargoWhen = "Preload";
-		else if(rawCargoWhen == "sandstorm") thisCargoWhen = "Sandstorm";
-		else thisCargoWhen = "Tele-Operated";
-
-		//Panel When
-		if(rawPanelWhen == "notscored") thisPanelWhen = "Not Scored";
-		else if(rawPanelWhen == "preload") thisPanelWhen = "Preload";
-		else if(rawPanelWhen == "sandstorm") thisPanelWhen = "Sandstorm";
-		else thisPanelWhen = "Tele-Operated";
+	//Sandstorm Panel
+	thisData = document.getElementById("datasandstormpanel");
+	thisData.value = getSandstormScored(1);
 
 
 
-		var thisValue = thisCargo+"_"+thisPanel+"_"+thisCargoWhen+"_"+thisPanelWhen+"_"+thisNull;
-		thisData.value = thisValue;
-	}
+	//Cargo From Floor
+	thisData = document.getElementById("datacargofloor");
+	thisData.value = cargoGrabbedFloor;
 
-	//HAB Levels
-	thisData = document.getElementById("hableveldatapreload");
-	if(habLevelPreload == -1) thisData.value = "Not Recorded";
-	else if(habLevelPreload == 0) thisData.value = "On Field";
-	else thisData.value = "On Level " + habLevelPreload; 
+	//Cargo From Human
+	thisData = document.getElementById("datacargohuman");
+	thisData.value = cargoGrabbedHuman;
 
-	thisData = document.getElementById("hableveldatastart");
-	if(habLevelStart == -1) thisData.value = "Not Recorded";
-	else if(habLevelStart == 0) thisData.value = "On Field";
-	else thisData.value = "On Level " + habLevelStart; 
+	//Panel From Floor
+	thisData = document.getElementById("datapanelfloor");
+	thisData.value = panelGrabbedFloor;
 
-	thisData = document.getElementById("hableveldataend");
-	if(habLevelEnd == -1) thisData.value = "Not Recorded";
-	else if(habLevelEnd == 0) thisData.value = "On Field";
-	else thisData.value = "On Level " + habLevelEnd; 
+	//Panel From Human
+	thisData = document.getElementById("datapanelhuman");
+	thisData.value = panelGrabbedHuman;
 
-	document.getElementById("grabdatacargohuman").value = cargoGrabbedHuman;
-	document.getElementById("grabdatacargofloor").value = cargoGrabbedFloor;
-	document.getElementById("grabdatapanelhuman").value = panelGrabbedHuman;
-	document.getElementById("grabdatapanelfloor").value = panelGrabbedFloor;
 
-	document.getElementById("miscdatapreloadeditem").value = preloadedItem;
-	document.getElementById("miscdatadefenselevel").value = defenseLevel;
-	document.getElementById("miscdatarobotscarried").value = carryBotNumber;
-	document.getElementById("miscdatawascarried").value = wasCarried;
 
+	//Ship Cargo
+	thisData = document.getElementById("datashipcargo");
+	thisData.value = getObjectsScored(0, "ship");
+
+	//Ship Panel
+	thisData = document.getElementById("datashippanel");
+	thisData.value = getObjectsScored(1, "ship");
+
+	//Low Rocket Cargo
+	thisData = document.getElementById("datalowcargo");
+	thisData.value = getObjectsScored(0, "low");
+
+	//Low Rocket Panel
+	thisData = document.getElementById("datalowpanel");
+	thisData.value = getObjectsScored(1, "low");
+
+	//Mid Rocket Cargo
+	thisData = document.getElementById("datamidcargo");
+	thisData.value = getObjectsScored(0, "mid");
+
+	//Mid Rocket Panel
+	thisData = document.getElementById("datamidpanel");
+	thisData.value = getObjectsScored(1, "mid");
+
+	//High Rocket Cargo
+	thisData = document.getElementById("datahighcargo");
+	thisData.value = getObjectsScored(0, "high");
+
+	//High Rocket Panel
+	thisData = document.getElementById("datahighpanel");
+	thisData.value = getObjectsScored(1, "high");
+
+
+
+	//Was Carried
+	thisData = document.getElementById("datawascarried");
+	thisData.value = wasCarried;
+
+	//Robots Carried
+	thisData = document.getElementById("datarobotscarried");
+	thisData.value = carryBotNumber;
+
+	//HAB Endgame Score
+	thisData = document.getElementById("datahabend");
+	if(habLevelEnd==1||habLevelEnd==2) thisData.value == habLevelEnd*3;
+	else if(habLevelEnd==3) thisData.value == 12;
+
+	//Competition Information
 	document.getElementById("matchdatateamnumber").value = teamNumber;
 	document.getElementById("matchdatacompetition").value = competitionName;
 	document.getElementById("matchdatamatchnumber").value = matchNumber;

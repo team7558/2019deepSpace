@@ -152,44 +152,35 @@
 
                   <form id="form" action="http://frctest.jslightman.x10host.com/post.php" method="post">
 
-                     <!--Top Rocket-->
-                     <input type="hidden" id="scorespacedata0" name="TopRocketCloseLevel1" value="No_No_Not Scored_Not_Scored_Not_Normal">
-                     <input type="hidden" id="scorespacedata1" name="TopRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata2" name="TopRocketClosetLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata3" name="TopRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata4" name="TopRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata5" name="TopRocketFarLeve31" value="No_No_Not Scored_Not Scored_Normal">
+                     <!--Sandstorm Info-->
+                     <input type="hidden" id="datahabstart" name="HABSandstormScore" value="0">
+                     <input type="hidden" id="datasandstormcargo" name="SandstormCargo" value="0">
+                     <input type="hidden" id="datasandstormpanel" name="SandstormPanels" value="0">
 
-                     <!--Bottom Rocket-->
-                     <input type="hidden" id="scorespacedata6" name="BottomRocketCloseLevel1" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata7" name="BottomRocketFarLevel1" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata8" name="BottomRocketCloseLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata9" name="BottomRocketFarLevel2" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata10" name="BottomRocketCloseLevel3" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata11" name="BottomRocketFarLevel3" value="No_No_Not Scored_Not Scored_Normal">
 
-                     <!--Cargo Ship-->
-                     <input type="hidden" id="scorespacedata12" name="ShipFrontUpper" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata13" name="ShipFrontLower" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata14" name="ShipTopClose" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata15" name="ShipBottomClose" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata16" name="ShipTopMedium" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata17" name="ShipBottomMedium" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata18" name="ShipTopFar" value="No_No_Not Scored_Not Scored_Normal">
-                     <input type="hidden" id="scorespacedata19" name="ShipBottomFar" value="No_No_Not Scored_Not Scored_Normal">
+                     <!--General Info-->
+                     <input type="hidden" id="datacargofloor" name="CargoFromFloor" value="0">
+                     <input type="hidden" id="datacargohuman" name="CargoFromHuman" value="0">
+                     <input type="hidden" id="datapanelfloor" name="PanelFromFloor" value="0">
+                     <input type="hidden" id="datapanelhuman" name="PanelFromHuman" value="0">
+                     <input type="hidden" id="datadefense" name="defenselevel" value="0">
 
-                     <!--Other Information-->
-                     <input type="hidden" id="hableveldatapreload" name="HABPositionPreload" value="Not Recorded">
-                     <input type="hidden" id="hableveldatastart" name="HABPositionStart" value="Not Recorded">
-                     <input type="hidden" id="hableveldataend" name="HABPositionEnd" value="Not Recorded">
-                     <input type="hidden" id="grabdatacargohuman" name="CargoGrabbedFromHuman" value="0">
-                     <input type="hidden" id="grabdatacargofloor" name="CargoGrabbedFromFloor" value="0">
-                     <input type="hidden" id="grabdatapanelhuman" name="PanelGrabbedFromHuman" value="0">
-                     <input type="hidden" id="grabdatapanelfloor" name="PanelGrabbedFromFloor" value="0">
-                     <input type="hidden" id="miscdatapreloadeditem" name="RobotPreloadedItem" value="Nothing">
-                     <input type="hidden" id="miscdatadefenselevel" name="DefenseLevel" value="0">
-                     <input type="hidden" id="miscdatarobotscarried" name="RobotsCarriedAtEnd" value="0">
-                     <input type="hidden" id="miscdatawascarried" name="WasCarriedAtEnd" value="false">
+                     
+                     <!--TeleOp Info-->
+                     <input type="hidden" id="datashipcargo" name="ShipCargo" value="0">
+                     <input type="hidden" id="datashippanel" name="ShipPanels" value="0">
+                     <input type="hidden" id="datalowcargo" name="LowRocketCargo" value="0">
+                     <input type="hidden" id="datalowpanel" name="LowRocketPanels" value="0">
+                     <input type="hidden" id="datamidcargo" name="MidRocketCargo" value="0">
+                     <input type="hidden" id="datamidpanel" name="MidRocketPanels" value="0">
+                     <input type="hidden" id="datahighcargo" name="HighRocketCargo" value="0">
+                     <input type="hidden" id="datahighpanel" name="HighRocketPanels" value="0">
+
+
+                     <!--Endgame Info-->
+                     <input type="hidden" id="datawascarried" name="WasCarried" value="false">
+                     <input type="hidden" id="datarobotscarried" name="RobotsCarried" value="0">
+                     <input type="hidden" id="datahabend" name="HABEndScore" value="0">
 
 
                      <!--Match Info-->
@@ -197,6 +188,8 @@
                      <input type="hidden" id="matchdatacompetition" name="Competition" value="Unknown">
                      <input type="hidden" id="matchdatamatchnumber" name="MatchNumber" value="1">
                      <input type="hidden" id="matchdatarobotstation" name="RobotStation" value="R1">
+
+
 
                      <input type="submit" id="submitform" value="Submit" onclick="scoreForm();">
                   </form>
