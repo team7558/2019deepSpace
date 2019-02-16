@@ -5,9 +5,9 @@ session_start();
 if (isset($_POST['username'])) {
 
     
-
+    //WHEN PUSHING GET RID OF THIS LINE
+    //IT COMPROMISES OUR DATABASE SECURITY
    
-
     
 
     
