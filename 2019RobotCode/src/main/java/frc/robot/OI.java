@@ -27,7 +27,7 @@ public class OI {
   public int shootHatchButton = 5; //LB
   public int intakeCargoButton = 5; //LB
   public int shootCargoFrontButton = 0; //A
-  public int shootCargoBackButton = 90; //B
+  public int shootCargoBackButton = 6; //B
   public int shootCargoButton = 3;
 
   

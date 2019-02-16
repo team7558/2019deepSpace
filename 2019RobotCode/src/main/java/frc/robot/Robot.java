@@ -65,9 +65,9 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putData("Auto mode", m_chooser);    
 
-    m_Compressor = new Compressor(RobotMap.COMPRESSOR);
-    m_Compressor.start();
-    m_Compressor.setClosedLoopControl(true);
+    //m_Compressor = new Compressor(RobotMap.COMPRESSOR);
+    //m_Compressor.start();
+    //m_Compressor.setClosedLoopControl(true);
  
     elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     wrist = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
@@ -160,6 +160,7 @@ public class Robot extends TimedRobot {
     //System.out.println(m_arm.getAngles()[1]);
     System.out.println(Robot.m_oi.m_operator.getPOV(0));
     Scheduler.getInstance().run();
+    m_oi.checkPresets();
   }
 
   @Override
