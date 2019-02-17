@@ -32,7 +32,7 @@ if(!isset($user) || trim($user) == '')
         $_SESSION['id'] = $uid;
 		?>
         <script type="text/javascript">
-		window.location.href = 'http://scouting.team7558.com/scoutinghome';
+		window.location.href = 'http://www.scouting.team7558.com/scoutinghome';
 		</script>
         <?php
     } else {
