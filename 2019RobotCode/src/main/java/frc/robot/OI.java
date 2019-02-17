@@ -5,6 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/**
+ * hatch player intake position is 1/A 
+ * release hatch is 2/B
+ */
+
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -14,17 +19,17 @@ import frc.robot.commands.*;
 import frc.robot.Robot;
 
 public class OI {
-  public Joystick m_driver = new Joystick(1); 
-  public Joystick m_operator = new Joystick(0);
+  public Joystick m_driver = new Joystick(0); 
+  public Joystick m_operator = new Joystick(1);
   public int extendEndGameButton = 2; 
   public int shiftGearDown = 5;
   public int shiftGearUp = 6;
   public int throttle = 1; 
   public int turnStick = 4;
-  public int playerIntakeHatchButton = 270; 
-  public int groundIntakeHatchButton = 180;
+  public int playerIntakeHatchButton = 1; 
+  public int groundIntakeHatchButton = 2;
   //public int transportHatchButton = 4; //Y
-  public int shootHatchButton = 5; //LB
+  public int shootHatchButton = 2; 
   public int intakeCargoButton = 5; //LB
   public int shootCargoFrontButton = 0; //A
   public int shootCargoBackButton = 6; //B
@@ -45,15 +50,18 @@ public class OI {
     //Button ob7 = new JoystickButton(m_operator, transportHatchButton);
 
     ob1.whenPressed(new CollectHatchPlayer());
+    ob5.whenPressed(new ReleaseHatch());
+
+    db5.whenPressed(new GearShiftUp());
+    db6.whenPressed(new GearShiftDown());
+    
+    /*
     ob2.whenPressed(new IntakeCargo());        
     ob3.whenPressed(new CollectHatchGround());
     ob4.whenPressed(new ShootCargoFront());
-    ob5.whenPressed(new ReleaseHatch());
     ob6.whenPressed(new ShootCargoBack());
-    db5.whenPressed(new GearShiftUp());
-    db6.whenPressed(new GearShiftDown());
     //ob7.whenPressed(new TransportHatch());
-
+    */
     ob1.close();
     ob2.close();
     ob3.close();
@@ -66,6 +74,18 @@ public class OI {
 
   }
 
+  public void checkDPad(){
+    switch(m_operator.getPOV()){
+      case 180:
+        System.out.println("salad");
+        Robot.m_arm.goToPreset("INTAKE_CARGO");
+        break;
+      default:
+        break;
+    }
+  }
+
+/*
   public void checkPresets(){
     switch (m_operator.getPOV()) {
       case 0:
@@ -94,4 +114,5 @@ public class OI {
   // button.whileHeld(new ExampleCommand());
 
   // button.whenReleased(new ExampleCommand());
+  */
 }

@@ -19,7 +19,7 @@ public class EndGame extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public EndGame(){
-    endGameSolenoid = new Solenoid(RobotMap.END_GAME_SOLENOID); 
+    //endGameSolenoid = new Solenoid(RobotMap.BIG_ENDGAME_SOLENOID); 
   }
 
   @Override
@@ -29,10 +29,10 @@ public class EndGame extends Subsystem {
   }
 
   public void extend(){
-    endGameSolenoid.set(true);
+    //endGameSolenoid.set(true);
   }
   // This should only be called in case of emergency, and not when deploying end game arm
   public void retract(){
-    endGameSolenoid.set(false);
+    //endGameSolenoid.set(false);
   }
 }

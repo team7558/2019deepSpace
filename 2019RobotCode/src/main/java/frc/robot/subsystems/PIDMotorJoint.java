@@ -20,6 +20,7 @@ public class PIDMotorJoint extends PIDSubsystem {
   private boolean m_reverse;
   private DigitalInput m_frontSwitch, m_backSwitch;
   private double m_prevEncoder, m_currEncoder;
+  private boolean m_holding;
 
   public PIDMotorJoint(String subsystemName, CANSparkMax jointMotor, double encoderPerAngle, double maxAngle,
       double minAngle, double zeroAngle, double kP, double kD, double kI, boolean reverse, double maxSpeed,
@@ -38,6 +39,8 @@ public class PIDMotorJoint extends PIDSubsystem {
     m_length = length;
     m_frontSwitch = new DigitalInput(frontSwitch);
     m_backSwitch = new DigitalInput(backSwitch);
+
+    m_holding = false;
 
     m_prevEncoder = m_jointEncoder.getPosition();
 
@@ -63,69 +66,59 @@ public class PIDMotorJoint extends PIDSubsystem {
 
   @Override
   protected double returnPIDInput() {
+    checkOutOfBounds();
+    if (this.getName().equals("wrist")) {
+      System.out.println("current: " + this.getAngle() + "goal: " + this.getSetpoint());
+    }
     return getAngle();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    //System.out.println(this.getName() + ": " + getAngle());
-    if (outOfBounds(getAngle())) {
-      System.out.println("out of bounds");
-      hold();
-    } else {
-      //System.out.println(this.getName() + " t: " + m_targetAngle + " c: " + getAngle());
-      if (m_reverse)
-        output *= -1;
-      if (output > m_maxSpeed)
-        output = m_maxSpeed;
-      if (output < -m_maxSpeed)
-        output = -m_maxSpeed;
-      //System.out.println(this.getName() + " :" + output);
-      m_jointMotor.set(output);
-    } 
+    if (m_reverse)
+      output *= -1;
+    if (output > m_maxSpeed)
+      output = m_maxSpeed;
+    if (output < -m_maxSpeed)
+      output = -m_maxSpeed;
+    m_jointMotor.set(output);
   }
 
-  public boolean outOfBounds(double angle) {
-    if (angle <= m_minAngle) {
-      return true;
-    } else if (angle >= m_maxAngle) {
-      return true;
-    } else if (m_frontSwitch.get() || m_backSwitch.get()) {
-      return false;
+  public void checkOutOfBounds() {
+    if (getAngle() <= m_minAngle) {
+      hold();
+    } else if (getAngle() >= m_maxAngle) {
+      hold();
+    } else if (!m_frontSwitch.get() || !m_backSwitch.get()) {
+      hold();
     }
-    return false;
   }
 
   public double getAngle() {
     m_currEncoder = m_jointEncoder.getPosition();
-    if (Math.abs(m_currEncoder) < 0.001){
+    if (Math.abs(m_currEncoder) < 0.001) {
       m_currEncoder = m_prevEncoder;
     } else {
       m_prevEncoder = m_currEncoder;
     }
-    if (m_reverse){
+    if (m_reverse) {
       return (-(m_currEncoder - m_zeroEncoder) / m_encoderPerAngle) + m_zeroAngle;
     } else {
       return ((m_currEncoder - m_zeroEncoder) / m_encoderPerAngle) + m_zeroAngle;
     }
   }
 
-  public boolean reachedDestination(){
-    System.out.println(getAngle() - m_targetAngle);
-    return Math.abs(getAngle() - m_targetAngle) < 5;
+  public boolean reachedDestination() {
+    return Math.abs(getAngle() - m_targetAngle) < 10;
   }
 
   public void setAngle(double targetAngle) {
-    //System.out.println(targetAngle);
-    if (!outOfBounds(targetAngle)){
-      m_targetAngle = targetAngle;
-      setSetpoint(m_targetAngle);
-    } else {
-      System.out.println("this angle is out of bounds");
-    }
+    // if (Math.abs(m_targetAngle - targetAngle) > 0){
+    m_targetAngle = targetAngle;
+    setSetpoint(m_targetAngle);
   }
 
   public void hold() {
-    setAngle(getAngle()); 
+    setSetpoint(getAngle());
   }
 }

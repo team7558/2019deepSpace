@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
    * Add your docs here.
    */
   public DriveTrain() {
-    super("OldDriveTrain"); 
+    super("DriveTrain"); 
     
     m_motors[1] = new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless);
     m_motors[2] = new CANSparkMax(RobotMap.LEFT_MOTOR_2, MotorType.kBrushless);
@@ -48,7 +48,7 @@ public class DriveTrain extends Subsystem {
     m_leftMotorGroup = new SpeedControllerGroup(m_motors[1], m_motors[2], m_motors[3]);
     m_rightMotorGroup = new SpeedControllerGroup(m_motors[4], m_motors[5], m_motors[6]);
     m_driveTrain = new DifferentialDrive(m_rightMotorGroup, m_leftMotorGroup);
-    m_shifter = new Solenoid(RobotMap.SHIFTER);
+    m_shifter = new Solenoid(RobotMap.SHIFT_SOLENOID);
   }
 
   @Override
@@ -68,10 +68,8 @@ public class DriveTrain extends Subsystem {
     Robot.m_driveTrain.setSolenoid(true);
   }
 
-  public void drive(double driveSpeed, double turn){
-    m_driveSpeed = driveSpeed;
-    m_turn = turn;
-    m_driveTrain.arcadeDrive(m_driveSpeed, m_turn);
+  public void drive(double speedOne, double speedTwo){
+    m_driveTrain.arcadeDrive(speedOne, speedTwo);
   }
 
 }

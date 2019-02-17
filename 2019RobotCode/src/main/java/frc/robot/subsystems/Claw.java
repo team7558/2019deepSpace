@@ -27,7 +27,7 @@ public class Claw extends Subsystem {
     m_intake_1 = new WPI_VictorSPX(RobotMap.INTAKE_1);
     m_intake_2 = new WPI_VictorSPX(RobotMap.INTAKE_2);
     m_suction = new WPI_VictorSPX(RobotMap.HATCH_SUCTION);
-    m_shooter = new Solenoid(RobotMap.SHOOTING_PISTON);
+    m_shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
     m_startTime = Timer.getFPGATimestamp();
   }
 

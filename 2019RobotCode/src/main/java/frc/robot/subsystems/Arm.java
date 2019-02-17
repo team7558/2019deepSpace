@@ -5,6 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/**
+ * wrist = 0
+ * elbow back = 1
+ * elbow front = 2
+ */
+
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -32,11 +38,11 @@ public class Arm extends Subsystem {
     m_presets.put("HOLD", new double[] { 0, -20 });
     m_presets.put("INTAKE_CARGO", new double[] { 0, -30 });
     m_presets.put("INTAKE_HATCH_GROUND", new double[] { -20, -25});
-    m_presets.put("INTAKE_HATCH_HUMAN", new double[] { -15, 70 });
+    m_presets.put("INTAKE_HATCH_HUMAN", new double[] { 0, 62 });
     m_presets.put("SHOOT_HATCH", new double[] { 45, 20 });
     m_presets.put("SHOOT_CARGO_FRONT", new double[] { 0, 30 });
     m_presets.put("SHOOT_CARGO_BACK", new double[] { 90, 120 });
-    m_presets.put("RELEASE_HATCH", new double[] { -5, 4 });
+    m_presets.put("RELEASE_HATCH", new double[] { -5, 80 });
   }
 
   public void zero() {
@@ -59,12 +65,10 @@ public class Arm extends Subsystem {
   }
 
   public void setAngle(double[] targetAngles) {
-    //System.out.println(getAngles()[0] + " " +getAngles()[1]);
+    //System.out.println(getAngles()[0] + " " + getAngles()[1]);
     m_elbow.setAngle(targetAngles[0]);
-    //System.out.println(m_wrist.m_jointEncoder.getPosition());
-    //if (m_jointHeight + m_elbow.getHeight(getAngles()[0]) + m_wrist.getHeight(getAngles()[1]) > -5) {
-    if (targetAngles[1] > 0 || getAngles()[0] > -5){
-      //System.out.println("salad");
+    if (targetAngles[1] >= 0 || getAngles()[0] > -5){
+      //System.out.println(this.getName() + " " + getAngles()[1]);
       m_wrist.setAngle(targetAngles[1]-getAngles()[0]);
     } else {
       m_wrist.hold();

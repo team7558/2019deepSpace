@@ -22,17 +22,19 @@ public class ReleaseHatch extends Command {
   @Override
   protected void initialize() {
     Robot.m_claw.releaseHatch();
+    Robot.m_arm.goToPreset("RELEASE_HATCH");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_arm.goToPreset("RELEASE_HATCH");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return Robot.m_arm.reachedDestination();
   }
 
   // Called once after isFinished returns true

@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class JoyDrive extends Command {
-  private final double DRIVE_MAX = 0.5;
-  private final double TURN_MAX = 0.5;
+  private final double DRIVE_MAX = 0.75;
+  private final double TURN_MAX = 0.75;
   public JoyDrive() {
     super();
     // Use requires() here to declare subsystem dependencies
@@ -29,7 +29,12 @@ public class JoyDrive extends Command {
   @Override
   protected void execute() {
     // speed, turn
-    Robot.m_driveTrain.drive(Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.throttle)*DRIVE_MAX, -Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.turnStick)*TURN_MAX);
+    double joyStickValue = Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.throttle);
+    double speed = 0;
+    if (Math.abs(joyStickValue) > 0.1){
+      speed = joyStickValue;
+    }
+    Robot.m_driveTrain.drive(speed*DRIVE_MAX, -Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.turnStick)*TURN_MAX);
   }
 
   // Make this return true when this Command no longer needs to run execute()

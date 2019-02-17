@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -42,8 +43,6 @@ public class Robot extends TimedRobot {
   
   public static Compressor m_Compressor;
 
-  public static WPI_VictorSPX m_hatchSuck;
-
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -60,8 +59,6 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
 
     m_joyDrive = new JoyDrive();
-
-    m_hatchSuck = new WPI_VictorSPX(12);
 
     SmartDashboard.putData("Auto mode", m_chooser);    
 
@@ -138,8 +135,6 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
-  public ShootCargoFront shoo;
-
   @Override
   public void teleopInit() {
     if (m_autonomousCommand != null) {
@@ -154,13 +149,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    //m_joyDrive.start();
-    //m_arm.setAngle(new double[]{45, 0});
-    //m_arm.goToPreset("INTAKE_HATCH_HUMAN");
-    //System.out.println(m_arm.getAngles()[1]);
-    System.out.println(Robot.m_oi.m_operator.getPOV(0));
+    //m_arm.setAngle(new double[]{0,0});
+    m_oi.checkDPad();
     Scheduler.getInstance().run();
-    m_oi.checkPresets();
   }
 
   @Override
