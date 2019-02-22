@@ -15,13 +15,13 @@ public class ExtendEndGame extends Command {
   public ExtendEndGame() {
     // Use requires() here to declare subsystem dependencies
     super();
-    requires(Robot.m_endGame);
+    requires(Robot.m_endgame);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //Robot.m_endGame.extend();
+    Robot.m_endgame.extend();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -32,7 +32,7 @@ public class ExtendEndGame extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.extendEndGameButton);
+    return true;
   }
 
   // Called once after isFinished returns true

@@ -10,16 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RetractEndGame extends Command {
-  public RetractEndGame() {
+public class GearShiftDown extends Command {
+  public GearShiftDown() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_endgame);
+    super();
+    //requires(Robot.m_driveTrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_endgame.retractLittle();
+    Robot.m_driveTrain.shiftDown();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -36,6 +37,7 @@ public class RetractEndGame extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    //Robot.m_driveTrain.shiftDown();
   }
 
   // Called when another command which requires one or more of the same

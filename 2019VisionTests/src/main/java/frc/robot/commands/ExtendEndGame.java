@@ -10,48 +10,40 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ShootCargoFront extends Command {
-
-
-  public ShootCargoFront() {
+public class ExtendEndGame extends Command {
+  
+  public ExtendEndGame() {
     // Use requires() here to declare subsystem dependencies
     super();
-    requires(Robot.m_arm);
-    requires(Robot.m_claw);
+    requires(Robot.m_endgame);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_endgame.extend();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_arm.goToPreset("SHOOT_CARGO_FRONT");
-    //System.out.println("shooting");
-    if (Robot.m_arm.reachedDestination()){
-      Robot.m_claw.shootCargo(Robot.m_oi.m_operator.getRawAxis(3));
-    }
-  
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_arm.reachedDestination() && !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.shootCargoButton);
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_claw.stopShootCargo();
+    
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    
   }
 }

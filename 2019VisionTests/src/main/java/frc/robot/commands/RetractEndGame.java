@@ -8,34 +8,29 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
 
-public class CollectHatchPlayer extends Command {
-  public CollectHatchPlayer() {
-    requires(Robot.m_claw);
-    requires(Robot.m_arm);
+public class RetractEndGame extends Command {
+  public RetractEndGame() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.m_endgame);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.goToPreset("INTAKE_HATCH_HUMAN");
+    Robot.m_endgame.retractLittle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_claw.suckHatch();
-    Robot.m_arm.goToPreset("INTAKE_HATCH_HUMAN");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_arm.reachedDestination();
+    return true;
   }
 
   // Called once after isFinished returns true

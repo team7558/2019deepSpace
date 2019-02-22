@@ -10,16 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RetractEndGame extends Command {
-  public RetractEndGame() {
+public class JetsonDrive extends Command {
+  public JetsonDrive() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_endgame);
+    // eg. requires(chassis);
+    requires(Robot.m_driveTrain);
+    requires(Robot.m_jetson);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_endgame.retractLittle();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -30,7 +31,7 @@ public class RetractEndGame extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

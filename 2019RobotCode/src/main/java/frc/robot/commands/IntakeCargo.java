@@ -14,7 +14,6 @@ public class IntakeCargo extends Command {
   public IntakeCargo() {
     // Use requires() here to declare subsystem dependencies
     super();
-    requires(Robot.m_arm);
     requires(Robot.m_claw);
   }
 
@@ -26,15 +25,14 @@ public class IntakeCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_arm.goToPreset("INTAKE_CARGO");
-    Robot.m_claw.cargoIntake(); 
+    Robot.m_claw.cargoIntake(Robot.m_oi.m_operator.getRawAxis(2)); 
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     //return true;
-    return Robot.m_arm.reachedDestination() && !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.intakeCargoButton);
+    return Robot.m_oi.m_operator.getRawAxis(2) < 0.1;
   }
 
   // Called once after isFinished returns true
