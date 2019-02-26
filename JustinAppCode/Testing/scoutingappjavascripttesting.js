@@ -932,6 +932,8 @@ function updateFormData() {
 	document.getElementById("matchdatacompetition").value = competitionName;
 	document.getElementById("matchdatamatchnumber").value = matchNumber;
 	document.getElementById("matchdatarobotstation").value = station;
+	document.getElementById("matchdatascoutname").value = document.getElementById("scoutname").value;
+	document.getElementById("matchdatamatchcode").value = document.getElementById("matchcode").value;
 	message+="Station: "+station;
 
 

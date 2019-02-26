@@ -1,0 +1,281 @@
+<html>
+
+   <head>
+      <link rel="stylesheet" type="text/css" href="scoutingappstyletesting.css">
+      <title>7558 Scouting App - 2019 Season</title>
+      <script src="scoutingappjavascripttesting.js"></script>
+      <script>
+      
+      </script>
+   </head>
+   <body onload="initialize();">
+
+      <div id="modelbltop" class="modelbl"><p>PRELOAD PERIOD</p></div>
+      <div id="teaminfo">
+         Team Number: <span id="teamnumber">   </span><br>
+         Match Number: <span id="matchnumber">   </span><br>
+      </div>
+      <div id="scoutinfo">
+         Scout Name: <span id="scoutname">
+            <select>
+               <option>Unselected</option>
+               <option>Abtin Abbaspour</option>
+               <option>Kiara Chong</option>
+               <option>Ethan Elbaz</option>
+               <option>Chris Filice</option>
+               <option>Noah Fremont</option>
+               <option>Yosra Hashim</option>
+               <option>Ryan Hui</option>
+               <option>Ryan Laing</option>
+               <option>Justin Narayan</option>
+               <option>Samantha Sedran</option>
+               <option>Aidan Snaiderman</option>
+               <option>Evan Tcherbadji</option>
+               <option>Dylan Teodoro</option>
+               <option>Kirill Tregubov</option>
+               <option>Alex Wong</option>
+               <option>Bill Wu</option>
+            </select>
+         </span><br>
+         Match Code: <span id="matchcode"> 
+            <select>
+               <option>Unselected</option>
+               <option>123</option>
+               <option>456</option>
+               <option>789</option>
+            </select>
+         </span><br>
+      </div>
+
+      <div id="stations">
+         <div id="stationrow">
+            <button class="stationbutton" id="stationR1" onclick="changeStation(0,1);">Station<br>Red 1</button>
+            <button class="stationbutton" id="stationR2" onclick="changeStation(0,2);">Station<br>Red 2</button>
+            <button class="stationbutton" id="stationR3" onclick="changeStation(0,3);">Station<br>Red 3</button>
+            <button id="flipsides" onclick="changeButtonPlacement();">Flip Sides</button>
+            <button class="stationbutton" id="stationB1" onclick="changeStation(1,1);">Station<br>Blue 1</button>
+            <button class="stationbutton" id="stationB2" onclick="changeStation(1,2);">Station<br>Blue 2</button>
+            <button class="stationbutton" id="stationB3" onclick="changeStation(1,3);">Station<br>Blue 3</button>
+         </div>
+      </div>
+
+      <div id="playfield">
+         <div id="playfieldrow">
+
+            <div id="habpreload" class="habbuttons">
+               <p class="btnheader">Preload Setting</p>
+               <button class="hablevels" id="habLevel01" onclick="leaveHAB(1, 0);">Started<br>on HAB Level 1<br><span class="habsandstormtag">(During Preload)</span></button>
+               <button class="hablevels" id="habLevel02" onclick="leaveHAB(2, 0);">Started<br>on HAB Level 2<br><span class="habsandstormtag">(During Preload)</span></button>
+               <button class="hablevels" id="habLevel03" onclick="leaveHAB(3, 0);">Started<br>on HAB Level 3<br><span class="habsandstormtag">(During Preload)</span></button>
+               <button class="cancel" onclick="leaveHAB(-1, 0);">Cancel HAB Selection</button>
+            </div>
+
+            <div id="habstart" class="habbuttons">
+               <p class="btnheader">HAB Activity</p>
+               <button class="hablevels" id="habLevel10" onclick="leaveHAB(0, 1);">Stayed<br>on HAB<br><span class="habsandstormtag">(During Sandstorm)</span></button>
+               <button class="hablevels" id="habLevel11" onclick="leaveHAB(1, 1);">Left HAB<br>Level 1<br><span class="habsandstormtag">(During Sandtorm)</span></button>
+               <button class="hablevels" id="habLevel12" onclick="leaveHAB(2, 1);">Left HAB<br>Level 2<br><span class="habsandstormtag">(During Sandtorm)</span></button>
+               <button class="hablevels" id="habLevel13" onclick="leaveHAB(3, 1);">Left HAB<br>Level 3<br><span class="habsandstormtag">(During Sandtorm)</span></button>
+               <button class="cancel" onclick="leaveHAB(-1, 1);">Cancel HAB Selection</button>
+            </div>
+
+            <div id="habend" class="habbuttons">
+               <p class="btnheader">HAB Activity</p>
+               <button class="hablevels" id="habLevel20" onclick="leaveHAB(0, 2);">Remained<br>on Field<br><span class="habsandstormtag">(During Endgame)</span></button>
+               <button class="hablevels" id="habLevel21" onclick="leaveHAB(1, 2);">Entered HAB<br>Level 1<br><span class="habsandstormtag">(During Endgame)</span></button>
+               <button class="hablevels" id="habLevel22" onclick="leaveHAB(2, 2);">Entered HAB<br>Level 2<br><span class="habsandstormtag">(During Endgame)</span></button>
+               <button class="hablevels" id="habLevel23" onclick="leaveHAB(3, 2);">Entered HAB<br>Level 3<br><span class="habsandstormtag">(During Endgame)</span></button>
+               <button class="cancel" onclick="leaveHAB(-1, 2);">Cancel HAB Selection</button>
+            </div>
+
+            <div id="gamearea">
+               <div id="gamemap"></div>
+
+               <div id="sstable">
+
+                  <!--Top Row - Rocket 1-->
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace0" onclick="score(0);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace1" onclick="score(1);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace2" onclick="score(2);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace3" onclick="score(3);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace4" onclick="score(4);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace5" onclick="score(5);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="rocketleveldisplay" id="rocketleveldisplay1" onclick="changeRocket();">Level 1</button>
+                     </div>
+                  </div>   
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace6" onclick="score(6);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace7" onclick="score(7);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace8" onclick="score(8);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace9" onclick="score(9);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace10" onclick="score(10);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace11" onclick="score(11);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="rocketleveldisplay" id="rocketleveldisplay2" onclick="changeRocket();">Level 1</button>
+                     </div>
+                  </div>
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <!--Robot Score Space-->
+                        <button id="robotscorespace" onclick="preloadRobot();">Your Robot<br>is Holding:<br><br>Nothing</button>
+
+                        <!--Team Number-->
+                        <button id="mapteamnumber">7558</button>
+
+                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace14" onclick="score(14);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace15" onclick="score(15);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace16" onclick="score(16);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
+                  <div class="sstablerow">
+                     <div class="sstableitem">
+                        <button class="scorespaces" id="scorespace17" onclick="score(17);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace18" onclick="score(18);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace19" onclick="score(19);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                     </div>
+                  </div>
+
+               </div>
+
+
+
+               <div id="miscellaneous">
+                  <p class="btnheader">Robot Defense Activity</p>
+                  <div id="defensebuttons">
+                     <button class="switchdefense" id="defense0" onclick="switchDefense(0);">0</button>
+                     <button class="switchdefense" id="defense1" onclick="switchDefense(1);">1</button>
+                     <button class="switchdefense" id="defense2" onclick="switchDefense(2);">2</button>
+                  </div>
+                  <p class="btnheader">Number of Bots Carried</p>
+                  <div id="carrybotbuttons">
+                     <button class="switchcarrybot" id="carrybot0" onclick="switchCarryBot(0);">0</button>
+                     <button class="switchcarrybot" id="carrybot1" onclick="switchCarryBot(1);">1</button>
+                     <button class="switchcarrybot" id="carrybot2" onclick="switchCarryBot(2);">2</button>
+                  </div>
+                  <button id="wascarried" onclick="switchWasCarried();">Was Carried</button>
+                  <p class="btnheader">Comment Area</p>
+                  <textarea id="commentbox" placeholder="Type some general comments..."></textarea>
+
+
+                  <form id="form" action="/post.php" method="post">
+
+                     <!--Sandstorm Info-->
+                     <input type="hidden" id="datahabstart" name="HABSandstormScore" value="0">
+                     <input type="hidden" id="datasandstormcargo" name="SandstormCargo" value="0">
+                     <input type="hidden" id="datasandstormpanel" name="SandstormPanels" value="0">
+
+
+                     <!--General Info-->
+                     <input type="hidden" id="datacargofloor" name="CargoFromFloor" value="0">
+                     <input type="hidden" id="datacargohuman" name="CargoFromHuman" value="0">
+                     <input type="hidden" id="datapanelfloor" name="PanelFromFloor" value="0">
+                     <input type="hidden" id="datapanelhuman" name="PanelFromHuman" value="0">
+                     <input type="hidden" id="datadefense" name="DefenseLevel" value="0">
+
+                     
+                     <!--TeleOp Info-->
+                     <input type="hidden" id="datashipcargo" name="ShipCargo" value="0">
+                     <input type="hidden" id="datashippanel" name="ShipPanels" value="0">
+                     <input type="hidden" id="datalowcargo" name="LowRocketCargo" value="0">
+                     <input type="hidden" id="datalowpanel" name="LowRocketPanels" value="0">
+                     <input type="hidden" id="datamidcargo" name="MidRocketCargo" value="0">
+                     <input type="hidden" id="datamidpanel" name="MidRocketPanels" value="0">
+                     <input type="hidden" id="datahighcargo" name="HighRocketCargo" value="0">
+                     <input type="hidden" id="datahighpanel" name="HighRocketPanels" value="0">
+
+
+                     <!--Endgame Info-->
+                     <input type="hidden" id="datawascarried" name="WasCarried" value="false">
+                     <input type="hidden" id="datarobotscarried" name="RobotsCarried" value="0">
+                     <input type="hidden" id="datahabend" name="HABEndScore" value="0">
+                     <input type="hidden" id="datacomments" name="Comments" value="">
+
+
+                     <!--Match Info-->
+                     <input type="hidden" id="matchdatateamnumber" name="TeamNumber" value="000">
+                     <input type="hidden" id="matchdatacompetition" name="Competition" value="Unknown">
+                     <input type="hidden" id="matchdatamatchnumber" name="MatchNumber" value="1">
+                     <input type="hidden" id="matchdatarobotstation" name="RobotStation" value="R1">
+
+
+                     <!--Test Info-->
+                     <input type="hidden" id="matchdatascoutname" name="Username" value="Justin Narayan">
+                     <input type="hidden" id="matchdatamatchcode" name="MatchCode" value="123">
+
+
+                     <input type="submit" id="submitform" value="Submit" onclick="scoreForm();">
+                  </form>
+
+
+               </div>
+            </div>
+
+
+            <div id="pickuppreload" class="pickupbuttons">
+               <p class="btnheader">Item Pickup</p>
+               <button class="itempickups" id="cargoPreload" onclick="getCargoPreload();">Cargo</button>
+               <button class="itempickups" id="panelPreload" onclick="getPanelPreload();">Hatch Panel</button>
+               <button class="cancel" onclick="dropItem();">Drop Item</button>
+            </div>
+
+            <div id="pickup" class="pickupbuttons">
+               <p class="btnheader">Item Pickup</p>
+               <button class="itempickups" id="cargoFloor" onclick="getCargoFloor();">Cargo<br><span class="itemgrabtag">(On Floor)</span></button>
+               <button class="itempickups" id="cargoHuman" onclick="getCargoHuman();">Cargo<br><span class="itemgrabtag">(Human Load)</span></button>
+               <button class="itempickups" id="panelFloor" onclick="getPanelFloor();">Hatch Panel<br><span class="itemgrabtag">(On Floor)</span></button>
+               <button class="itempickups" id="panelHuman" onclick="getPanelHuman();">Hatch Panel<br><span class="itemgrabtag">(Human Load)</span></button>
+               <button class="cancel" onclick="dropItem();">Drop Item or<br>Cross Mid</button>
+            </div>
+         </div>
+      </div>
+
+
+
+
+
+      <div id="modetable">
+         <div id="moderow">
+            <div id="modepreload">
+               <button class="modebtns" id="preloadmodebtn" onclick="updateMode(0);">Preload</button>
+            </div>
+
+            <div id="modesandstorm">
+               <button class="modebtns" id="sandstormmodebtn" onclick="updateMode(1);">Sandstorm</button>
+            </div>
+
+            <div id="modeteleop">
+               <button class="modebtns" id="teleopmodebtn" onclick="updateMode(2);">Tele-Operated</button>
+            </div>
+
+            <div id="modemisc">
+               <button class="modebtns" id="miscmodebtn" onclick="updateMode(3);">Miscellaneous</button>
+            </div>
+         </div>
+      </div>
+
+   </body>
+</html>
