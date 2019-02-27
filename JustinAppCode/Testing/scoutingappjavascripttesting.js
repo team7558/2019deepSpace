@@ -819,122 +819,123 @@ function scoreForm() {
 function updateFormData() {
 	var thisData = null; //Used to modify each different input
 	var message = "";
+	
+	document.getElementById("matchdatascoutname").value = document.getElementById("scoutname").value;
+	document.getElementById("matchdatamatchcode").value = document.getElementById("matchcode").value;
 
 	//HAB Sandstorm Score
 	thisData = document.getElementById("datahabstart");
 	if(habLevelStart == 1 || habLevelStart == 2) thisData.value = habLevelStart*3;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Sandstorm Cargo
 	thisData = document.getElementById("datasandstormcargo");
 	thisData.value = getSandstormScored(0);
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Sandstorm Panel
 	thisData = document.getElementById("datasandstormpanel");
 	thisData.value = getSandstormScored(1);
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 
 
 	//Cargo From Floor
 	thisData = document.getElementById("datacargofloor");
 	thisData.value = cargoGrabbedFloor;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Cargo From Human
 	thisData = document.getElementById("datacargohuman");
 	thisData.value = cargoGrabbedHuman;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Panel From Floor
 	thisData = document.getElementById("datapanelfloor");
 	thisData.value = panelGrabbedFloor;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Panel From Human
 	thisData = document.getElementById("datapanelhuman");
 	thisData.value = panelGrabbedHuman;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Defense Level
 	thisData = document.getElementById("datadefense");
 	thisData.value = defenseLevel;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 
 
 	//Ship Cargo
 	thisData = document.getElementById("datashipcargo");
 	thisData.value = getObjectsScored(0, "ship");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Ship Panel
 	thisData = document.getElementById("datashippanel");
 	thisData.value = getObjectsScored(1, "ship");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Low Rocket Cargo
 	thisData = document.getElementById("datalowcargo");
 	thisData.value = getObjectsScored(0, "low");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Low Rocket Panel
 	thisData = document.getElementById("datalowpanel");
 	thisData.value = getObjectsScored(1, "low");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Mid Rocket Cargo
 	thisData = document.getElementById("datamidcargo");
 	thisData.value = getObjectsScored(0, "mid");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Mid Rocket Panel
 	thisData = document.getElementById("datamidpanel");
 	thisData.value = getObjectsScored(1, "mid");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//High Rocket Cargo
 	thisData = document.getElementById("datahighcargo");
 	thisData.value = getObjectsScored(0, "high");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//High Rocket Panel
 	thisData = document.getElementById("datahighpanel");
 	thisData.value = getObjectsScored(1, "high");
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 
 
 	//Was Carried
 	thisData = document.getElementById("datawascarried");
 	thisData.value = wasCarried;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Robots Carried
 	thisData = document.getElementById("datarobotscarried");
 	thisData.value = carryBotNumber;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//HAB Endgame Score
 	thisData = document.getElementById("datahabend");
 	if(habLevelEnd==1||habLevelEnd==2) thisData.value = habLevelEnd*3;
 	else if(habLevelEnd==3) thisData.value = 12;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Comments
 	thisData = document.getElementById("datacomments");
 	thisData.value = document.getElementById("commentbox").value;
-	message += thisData.name+": "+thisData.value+"\n";
+	message += thisData.value+"\n";
 
 	//Competition Information
 	document.getElementById("matchdatateamnumber").value = teamNumber;
 	document.getElementById("matchdatacompetition").value = competitionName;
 	document.getElementById("matchdatamatchnumber").value = matchNumber;
 	document.getElementById("matchdatarobotstation").value = station;
-	document.getElementById("matchdatascoutname").value = document.getElementById("scoutname").value;
-	document.getElementById("matchdatamatchcode").value = document.getElementById("matchcode").value;
-	message+="Station: "+station;
+	message+=station;
 
 
 	alert(message);
