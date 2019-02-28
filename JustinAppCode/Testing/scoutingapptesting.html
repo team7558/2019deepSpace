@@ -13,12 +13,12 @@
 
       <div id="modelbltop" class="modelbl"><p>PRELOAD PERIOD</p></div>
       <div id="teaminfo">
-         Team Number: <span id="teamnumber">   </span><br>
-         Match Number: <span id="matchnumber">   </span><br>
+         Team Number: <span id="teamnumber"><input type="number" name="teamNumber" value="0"></span><br>
+         Match Number: <span id="matchnumber"><input type="number" name="MatchNumber" value="0"></span><br>
       </div>
       <div id="scoutinfo">
          Scout Name: <span id="scoutname">
-            <select>
+            <select id="scoutnamereal">
                <option>Unselected</option>
                <option>Abtin Abbaspour</option>
                <option>Kiara Chong</option>
@@ -39,7 +39,7 @@
             </select>
          </span><br>
          Match Code: <span id="matchcode"> 
-            <select>
+            <select id="matchcodereal">
                <option>Unselected</option>
                <option>A23</option>
                <option>B12</option>
@@ -47,12 +47,6 @@
                <option>D42</option>
                <option>E71</option>
                <option>F22</option>
-               <option>G58</option>
-               <option>H43</option>
-               <option>I31</option>
-               <option>J82</option>
-               <option>K58</option>
-               <option>L19</option>
             </select>
          </span><br>
       </div>
@@ -142,13 +136,13 @@
                         <!--Team Number-->
                         <button id="mapteamnumber">7558</button>
 
-                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
                   <div class="sstablerow">
                      <div class="sstableitem">
-                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
