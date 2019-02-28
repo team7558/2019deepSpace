@@ -21,8 +21,8 @@ var scoreSheet = [ //Cargo, panel, cargoWhen, panelWhen, nullPanel - index is li
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
-	["yes", "no", "preload", "notscored", false],
-	["yes", "no", "preload", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
@@ -785,9 +785,6 @@ function getSandstormScored(type) {
 function getObjectsScored(type, where) {
 	var count = 0;
 
-	//Account for scored ship cargo
-	if(type==0 && where=="ship") count=-2;
-
 	for(i = 0; i < scoreSheet.length; i++) {
 
 		if(scoreSheet[i][type] == "yes") {
@@ -820,8 +817,10 @@ function updateFormData() {
 	var thisData = null; //Used to modify each different input
 	var message = "";
 	
-	document.getElementById("matchdatascoutname").value = document.getElementById("scoutname").value;
-	document.getElementById("matchdatamatchcode").value = document.getElementById("matchcode").value;
+	document.getElementById("matchdatascoutname").value = document.getElementById("scoutnamereal").value;
+	message += document.getElementById("matchdatascoutname").value+"%0D%0A";
+	document.getElementById("matchdatamatchcode").value = document.getElementById("matchcodereal").value;
+	message += document.getElementById("matchdatamatchcode").value+"%0D%0A";
 
 	//HAB Sandstorm Score
 	thisData = document.getElementById("datahabstart");

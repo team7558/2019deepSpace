@@ -21,10 +21,10 @@ var scoreSheet = [ //Cargo, panel, cargoWhen, panelWhen, nullPanel - index is li
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
-	["yes", "no", "preload", "notscored", false],
-	["yes", "no", "preload", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
+	["no", "no", "notscored", "notscored", false], 
+	["no", "no", "notscored", "notscored", false], 
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
 	["no", "no", "notscored", "notscored", false],
@@ -66,11 +66,6 @@ var buttonPlacement = [ //For each button, then the rocket displays
 
 var normCol = "#636363", stopCol = "#3f3f3f", checkCol = "#7C7C7C", tryCol = "#999891", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
 var scoredCol = "#2F9E38", notscoredCol = "#333333", triedCol = "#CCB92A", canclickCol = "#444444", cantclickCol = "#161616";
-
-
-function initialize() {
-	document.getElementById("teamnumber").innerHTML = teamNumber;
-}
 
 
 
@@ -784,9 +779,6 @@ function getSandstormScored(type) {
 
 function getObjectsScored(type, where) {
 	var count = 0;
-
-	//Account for scored ship cargo
-	if(type==0 && where=="ship") count=-2;
 
 	for(i = 0; i < scoreSheet.length; i++) {
 

@@ -8,12 +8,15 @@
       
       </script>
    </head>
-   <body onload="initialize();">
+   <body>
 
       <div id="modelbltop" class="modelbl"><p>PRELOAD PERIOD</p></div>
       <div id="teaminfo">
-         Team Number: <span id="teamnumber">   </span><br>
-         Match Number: <span id="matchnumber">   </span><br>
+         Team Number: <span id="teamnumber"><input type="number" name="teamNumber" value="0"></span><br>
+         Match Number: <span id="matchnumber"><input type="number" name="MatchNumber" value="0"></span><br>
+      </div>
+      <div id="scoutinfo">
+         Scout Name: <span id="scoutname"><input type="text" name="scoutName" value=""></span><br>
       </div>
 
       <div id="stations">
@@ -101,13 +104,13 @@
                         <!--Team Number-->
                         <button id="mapteamnumber">7558</button>
 
-                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace12" onclick="score(12);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
                   <div class="sstablerow">
                      <div class="sstableitem">
-                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2714<br><br>Panel: &#x2716</button>
+                        <button class="scorespaces" id="scorespace13" onclick="score(13);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
                      </div>
                   </div>
 
