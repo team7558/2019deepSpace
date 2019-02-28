@@ -1,0 +1,4 @@
+﻿  AlexVisionTests.cpp
+c:\users\aalex\dev\github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\aalex\dev\github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(71): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  AlexVisionTests.vcxproj -> C:\Users\aalex\Dev\GitHub\2019deepSpace\AlexVisionTests\x64\Debug\AlexVisionTests.exe
