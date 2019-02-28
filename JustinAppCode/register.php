@@ -2,7 +2,7 @@
 session_start();
 if (isset($_POST['username'])) {
     
-     $dbCon = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
+   
     
     
     // Form
