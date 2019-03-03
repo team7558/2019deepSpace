@@ -31,7 +31,7 @@ public class Jetson extends Subsystem {
   }
 
   public void printRawValues(){
-    System.out.println("distance: " + rawValues.getEntry("distance").getDouble(-1));
+    System.out.println("angle: " + rawValues.getEntry("angle").getDouble(-1));
   }
 
 }
