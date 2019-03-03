@@ -1,0 +1,8 @@
+﻿  AlexVisionTests.cpp
+c:\users\16479\dev\alex_github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(18): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\16479\dev\alex_github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(35): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\16479\dev\alex_github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(77): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\16479\dev\alex_github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(102): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\16479\dev\alex_github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(103): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\16479\dev\alex_github\2019deepspace\alexvisiontests\alexvisiontests\alexvisiontests.cpp(111): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  AlexVisionTests.vcxproj -> C:\Users\16479\dev\alex_github\2019deepSpace\AlexVisionTests\x64\Debug\AlexVisionTests.exe
