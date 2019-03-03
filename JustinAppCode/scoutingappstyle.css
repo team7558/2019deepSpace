@@ -19,7 +19,7 @@ body{
   display: table-row
 }
 
-#teaminfo, #scoutinfo {
+#gameinfo, #teaminfo {
   font-weight: bold;
   top: 8px;
   position: absolute;
@@ -27,12 +27,17 @@ body{
   color: white;
 }
 
-#teaminfo {
-  float: left;
+#gameinfo {
+  left: 8px;
 }
 
-#scoutinfo {
+#teaminfo {
   right: 8px;
+}
+
+.toptitle {
+  width: 160px;
+  display: inline-block;
 }
 
 
@@ -241,6 +246,14 @@ body{
 #submitform {
   padding: 20px;
   margin-top: 20px;
+  background-color: #444444;
+  border-radius: 5px;
+  border: 0px;
+  color: white;
+}
+
+#submitform:hover {
+    background-color: #7C7C7C;
 }
 
 

@@ -3,7 +3,6 @@ session_start();
 if (isset($_POST['username'])) {
     
     
-    
     // Form
     $user = ($_POST['username']);
     $pass = ($_POST['password']);

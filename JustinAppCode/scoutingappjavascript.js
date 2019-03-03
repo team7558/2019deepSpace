@@ -1,7 +1,7 @@
 var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
 cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, cargoDropped = 0, panelDropped = 0, xscale = 1, preloadedItem = "Nothing", preloadedItemState = "Not Assigned";
 
-var teamNumber = "7558", competitionName = "Unknown", matchNumber = 0, station = "R1";
+var teamNumber = "0", competitionName = "Unknown", matchNumber = 0, station = "R1";
 
 var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
 
@@ -64,7 +64,7 @@ var buttonPlacement = [ //For each button, then the rocket displays
 
 ];
 
-var normCol = "#636363", stopCol = "#3f3f3f", checkCol = "#7C7C7C", tryCol = "#999891", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
+var normCol = "#636363", stopCol = "#3f3f3f", checkCol = "#7C7C7C", tryCol = "#999891", preloadCol = "#6CCC12", sandstormCol = "#D57217", teleopCol = "#3881DC",  errorsCol = "#8C50C4", miscCol = "#D7271A", redCol = "#F94F42", blueCol = "#1281F0";
 var scoredCol = "#2F9E38", notscoredCol = "#333333", triedCol = "#CCB92A", canclickCol = "#444444", cantclickCol = "#161616";
 
 
@@ -107,7 +107,9 @@ function print2D(arr) {
 	alert(msg);
 }
 
-
+function updateTeamNumber() {
+    document.getElementById("mapteamnumber").innerHTML = document.getElementById("inputteamnumber").value;
+}
 
 
 
@@ -130,6 +132,7 @@ function updateMode(mode) {
 	if(mode==0) gameMode = "preload";
 	else if(mode==1) gameMode = "sandstorm";
 	else if(mode==2) gameMode = "teleop";
+	else if(mode==3) gameMode = "errors";
 	else gameMode = "misc";
 
 	var x = document.getElementsByClassName("modebtns");
@@ -151,8 +154,12 @@ function updateMode(mode) {
 	 		button.style.background = teleopCol;
 	 		button.style.cursor = "default";
 	 		button.style.fontSize = "24px";
-	 	} else if(gameMode == "misc" && i == 3) {
-	 		button.style.background = miscCol;
+	 	} else if(gameMode == "errors" && i == 3) {
+	 		button.style.background = errorsCol;
+	 		button.style.cursor = "default";
+	 		button.style.fontSize = "24px";
+	 	} else if(gameMode == "misc" && i == 4) {
+	 	    button.style.background = miscCol;
 	 		button.style.cursor = "default";
 	 		button.style.fontSize = "24px";
 	 	}
@@ -248,7 +255,35 @@ function updateMode(mode) {
 
 		document.getElementById("modetable").style.top = "-480px"; //Accounts for the sstable
 
-	} else {
+	} else if(gameMode == "errors") {
+	    
+	    document.getElementById("habpreload").style.display = "none";
+		document.getElementById("habstart").style.display = "none";
+		document.getElementById("habend").style.display = "none";
+		document.getElementById("pickuppreload").style.display = "none";
+		document.getElementById("pickup").style.display = "none";
+		document.getElementById("robotscorespace").style.display = "none";
+		document.getElementById("gamemap").style.display = "none";
+		document.getElementById("sstable").style.display = "none";
+		document.getElementById("miscellaneous").style.display = "none";
+
+		var y = document.getElementsByClassName("modelbl");
+		for(i = 0; i < y.length; i++) {
+			y[i].innerHTML = "ERROR CORRECTION";
+			y[i].style.fontSize = "48px";
+			y[i].style.fontWeight = "600";
+			y[i].style.textAlign = "center";
+			y[i].style.color = "white";
+			y[i].style.backgroundColor = errorsCol;
+		}
+
+		var z = document.getElementsByClassName("scorespaces");
+		for(i = 0; i < z.length; z++) {
+			z[i].style.display = "none";
+		}
+
+		document.getElementById("modetable").style.top = "0px"; //Accounts for the sstable
+	} else if(gameMode == "misc") {
 		
 		document.getElementById("habpreload").style.display = "none";
 		document.getElementById("habstart").style.display = "none";
@@ -278,6 +313,11 @@ function updateMode(mode) {
 		document.getElementById("modetable").style.top = "0px"; //Accounts for the sstable
 
 	}
+
+
+
+
+
 
 	if(itemToTake == "Cargo") {
 		holdingItem = false;
@@ -440,7 +480,11 @@ function changeRocket() {
 	rocketLevel++;
 	if(rocketLevel>3) rocketLevel = 1;
 	var x = document.getElementsByClassName("rocketleveldisplay");
-	for(i = 0; i < x.length; i++) x[i].innerHTML = "Level " + rocketLevel;
+	for(i = 0; i < x.length; i++) {
+	    if(rocketLevel==1) x[i].innerHTML = "Low<br><br>Level C";
+	    else if(rocketLevel==2) x[i].innerHTML = "Mid<br><br>Level B";
+	    else x[i].innerHTML = "High<br><br>Level A";
+	}
 	updateButtonLook();
 }
 
@@ -921,11 +965,9 @@ function updateFormData() {
 
 	//Competition Information
 	document.getElementById("matchdatateamnumber").value = teamNumber;
-	document.getElementById("matchdatacompetition").value = competitionName;
 	document.getElementById("matchdatamatchnumber").value = matchNumber;
 	document.getElementById("matchdatarobotstation").value = station;
 	message+="Station: "+station;
-
-
-	alert(message);
+	alert(station);
+	
 }
