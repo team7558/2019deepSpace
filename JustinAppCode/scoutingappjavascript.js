@@ -1,7 +1,9 @@
-var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1,
-cargoGrabbedHuman = 0, cargoGrabbedFloor = 0, panelGrabbedHuman = 0, panelGrabbedFloor = 0, cargoDropped = 0, panelDropped = 0, xscale = 1, preloadedItem = "Nothing", preloadedItemState = "Not Assigned";
+var gameMode = "preload", habLevelPreload = -1, habLevelStart = -1, habLevelEnd = -1, holdingItem = false, itemType = "cargo", rocketLevel = 1, cargoDropped = 0, panelDropped = 0, xscale = 1, preloadedItem = "Nothing", preloadedItemState = "Not Assigned";
+
+var sandstormCargo = 0, sandstormPanel = 0, cargoGrabbedFloor = 0, cargoGrabbedHuman = 0, panelGrabbedFloor = 0, panelGrabbedHuman = 0, shipCargo = 0, shipPanel = 0, lowCargo = 0, lowPanel = 0, midCargo = 0, midPanel = 0, highCargo = 0, highPanel = 0;
 
 var teamNumber = "0", competitionName = "Unknown", matchNumber = 0, station = "R1";
+
 
 var defenseLevel = 0, carryBotNumber = 0, wasCarried = false;
 
@@ -109,8 +111,12 @@ function print2D(arr) {
 
 function updateTeamNumber() {
     document.getElementById("mapteamnumber").innerHTML = document.getElementById("inputteamnumber").value;
+    teamNumber = document.getElementById("inputteamnumber").value;
 }
 
+function updateMatchNumber() {
+    matchNumber = document.getElementById("inputmatchnumber").value;
+}
 
 
 function updateMode(mode) {
@@ -176,6 +182,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "block";
 		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
+		document.getElementById("errors").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -207,6 +214,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "block";
 		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
+		document.getElementById("errors").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -237,6 +245,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "block";
 		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
+		document.getElementById("errors").style.display = "none";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -257,6 +266,8 @@ function updateMode(mode) {
 
 	} else if(gameMode == "errors") {
 	    
+	    resetErrorSheet();
+	    
 	    document.getElementById("habpreload").style.display = "none";
 		document.getElementById("habstart").style.display = "none";
 		document.getElementById("habend").style.display = "none";
@@ -266,6 +277,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "none";
 		document.getElementById("sstable").style.display = "none";
 		document.getElementById("miscellaneous").style.display = "none";
+		document.getElementById("errors").style.display = "block";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -294,6 +306,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "none";
 		document.getElementById("sstable").style.display = "none";
 		document.getElementById("miscellaneous").style.display = "table";
+		document.getElementById("errors").style.display = "none";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -535,9 +548,16 @@ function score(place) { //Actually scores on a given position
 				} else if(preloadedItemState=="Assigned") preloadedItemState="Used";
 			} else if(cargoState == "try") {
 				scoreSheet[place][0] = "yes";
-				
 				scoreSheet[place][2] = gameMode;
 				dropItem();
+				
+				//Add to the variables
+				if(gameMode=="sandstorm") sandstormCargo++;
+				var location = getLocation(place);
+				if(location=="ship") shipCargo++;
+				else if(location=="low") lowCargo++;
+				else if(location=="mid") midCargo++;
+				else if(location=="high") highCargo++;
 			}
 		} else {
 			if(panelState == "no") {
@@ -555,6 +575,14 @@ function score(place) { //Actually scores on a given position
 				scoreSheet[place][1] = "yes";
 				scoreSheet[place][3] = gameMode;
 				dropItem();
+				
+				//Add to the variables
+				if(gameMode=="sandstorm") sandstormPanel++;
+				var location = getLocation(place);
+				if(location=="ship") shipPanel++;
+				else if(location=="low") lowPanel++;
+				else if(location=="mid") midPanel++;
+				else if(location=="high") highPanel++;
 			}
 		}
 	}
@@ -844,6 +872,63 @@ function getObjectsScored(type, where) {
 	return count;
 }
 
+function getLocation(place) {
+    if(place>=12) return "ship";
+    else if(place==0||place==1||place==6||place==7) return "low";
+    else if(place==2||place==3||place==8||place==9) return "mid";
+    else return "high";
+}
+
+
+function resetErrorSheet() {
+    document.getElementById("errorsandstormcargo").innerHTML = sandstormCargo;
+    document.getElementById("errorsandstormpanel").innerHTML = sandstormPanel;
+    
+    document.getElementById("errorcargofloor").innerHTML = cargoGrabbedFloor;
+    document.getElementById("errorpanelfloor").innerHTML = panelGrabbedFloor;
+    document.getElementById("errorcargohuman").innerHTML = cargoGrabbedHuman;
+    document.getElementById("errorpanelhuman").innerHTML = panelGrabbedHuman;
+    
+    document.getElementById("errorshipcargo").innerHTML = shipCargo;
+    document.getElementById("errorshippanel").innerHTML = shipPanel;
+    document.getElementById("errorlowcargo").innerHTML = lowCargo;
+    document.getElementById("errorlowpanel").innerHTML = lowPanel;
+    document.getElementById("errormidcargo").innerHTML = midCargo;
+    document.getElementById("errormidpanel").innerHTML = midPanel;
+    document.getElementById("errorhighcargo").innerHTML = highCargo;
+    document.getElementById("errorhighpanel").innerHTML = highPanel;
+}
+
+
+
+function changeVar(data, amount) {
+    var min = 0;
+    var max = 24;
+    
+    if(data=="carL" || data=="panL" || data=="carM" || data=="panM" || data=="carH" || data=="panH") max = 2;
+    if(data=="carS" || data=="panS") max = 8;
+    
+    //Change each variable
+    if(data=="sandC" && sandstormCargo+amount >= min && sandstormCargo+amount <= max) sandstormCargo+=amount;
+    if(data=="sandP" && sandstormPanel+amount >= min && sandstormPanel+amount <= max) sandstormPanel+=amount;
+    
+    if(data=="floorC" &&cargoGrabbedFloor+amount >= min && cargoGrabbedFloor+amount <= max) cargoGrabbedFloor+=amount;
+    if(data=="floorP" && panelGrabbedFloor+amount >= min && panelGrabbedFloor+amount <= max) panelGrabbedFloor+=amount;
+    if(data=="humanC" && cargoGrabbedHuman+amount >= min && cargoGrabbedHuman+amount <= max) cargoGrabbedHuman+=amount;
+    if(data=="humanP" && panelGrabbedHuman+amount >= min && panelGrabbedHuman+amount <= max) panelGrabbedHuman+=amount;
+    
+    if(data=="carS" && shipCargo+amount >= min && shipCargo+amount <= max) shipCargo+=amount;
+    if(data=="panS" && shipPanel+amount >= min && shipPanel+amount <= max) shipPanel+=amount;
+    if(data=="carL" && lowCargo+amount >= min && lowCargo+amount <= max) lowCargo+=amount;
+    if(data=="panL" && lowPanel+amount >= min && lowPanel+amount <= max) lowPanel+=amount;
+    if(data=="carM" && midCargo+amount >= min && midCargo+amount <= max) midCargo+=amount;
+    if(data=="panM" && midPanel+amount >= min && midPanel+amount <= max) midPanel+=amount;
+    if(data=="carH" && highCargo+amount >= min && highCargo+amount <= max) highCargo+=amount;
+    if(data=="panH" && highPanel+amount >= min && highPanel+amount <= max) highPanel+=amount;
+    
+    
+    resetErrorSheet();
+}
 
 
 
@@ -858,17 +943,17 @@ function updateFormData() {
 
 	//HAB Sandstorm Score
 	thisData = document.getElementById("datahabstart");
-	if(habLevelStart == 1 || habLevelStart == 2) thisData.value = habLevelStart*3;
+	if(habLevelStart == 1 || habLevelStart == 2) thisData.value = habLevelStart;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Sandstorm Cargo
 	thisData = document.getElementById("datasandstormcargo");
-	thisData.value = getSandstormScored(0);
+	thisData.value = sandstormCargo;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Sandstorm Panel
 	thisData = document.getElementById("datasandstormpanel");
-	thisData.value = getSandstormScored(1);
+	thisData.value = sandstormPanel;
 	message += thisData.name+": "+thisData.value+"\n";
 
 
@@ -902,42 +987,42 @@ function updateFormData() {
 
 	//Ship Cargo
 	thisData = document.getElementById("datashipcargo");
-	thisData.value = getObjectsScored(0, "ship");
+	thisData.value = shipCargo;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Ship Panel
 	thisData = document.getElementById("datashippanel");
-	thisData.value = getObjectsScored(1, "ship");
+	thisData.value = shipPanel;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Low Rocket Cargo
 	thisData = document.getElementById("datalowcargo");
-	thisData.value = getObjectsScored(0, "low");
+	thisData.value = lowCargo;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Low Rocket Panel
 	thisData = document.getElementById("datalowpanel");
-	thisData.value = getObjectsScored(1, "low");
+	thisData.value = lowPanel;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Mid Rocket Cargo
 	thisData = document.getElementById("datamidcargo");
-	thisData.value = getObjectsScored(0, "mid");
+	thisData.value = midCargo;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Mid Rocket Panel
 	thisData = document.getElementById("datamidpanel");
-	thisData.value = getObjectsScored(1, "mid");
+	thisData.value = midPanel;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//High Rocket Cargo
 	thisData = document.getElementById("datahighcargo");
-	thisData.value = getObjectsScored(0, "high");
+	thisData.value = highCargo;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//High Rocket Panel
 	thisData = document.getElementById("datahighpanel");
-	thisData.value = getObjectsScored(1, "high");
+	thisData.value = highPanel;
 	message += thisData.name+": "+thisData.value+"\n";
 
 
@@ -954,8 +1039,7 @@ function updateFormData() {
 
 	//HAB Endgame Score
 	thisData = document.getElementById("datahabend");
-	if(habLevelEnd==1||habLevelEnd==2) thisData.value = habLevelEnd*3;
-	else if(habLevelEnd==3) thisData.value = 12;
+	thisData.value = habLevelEnd;
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Comments
@@ -968,6 +1052,5 @@ function updateFormData() {
 	document.getElementById("matchdatamatchnumber").value = matchNumber;
 	document.getElementById("matchdatarobotstation").value = station;
 	message+="Station: "+station;
-	alert(station);
 	
 }

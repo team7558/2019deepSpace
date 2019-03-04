@@ -56,7 +56,7 @@ session_start();
 
       <div id="gameinfo">
        <span class="toptitle">Competition ID:</span><?php echo $cid; ?><br>
-       <span class="toptitle">Match Number:</span><span id="matchnumber"><input type="number" min=0 max=500 id="inputmatchnumber"></span><br>
+       <span class="toptitle">Match Number:</span><span id="matchnumber"><input type="number" min=0 max=500 id="inputmatchnumber" onchange="updateMatchNumber();"></span><br>
       </div>
       <div id="teaminfo">
         <br><span class="toptitle">Team Number:</span><span id="teamnumber"><input type="number" min=0 max=7915 id="inputteamnumber" onchange="updateTeamNumber();"></span>
@@ -296,6 +296,151 @@ session_start();
 
 
 
+               <div id="errors">
+                   <div id="errorstable">
+                       <div class="errorstablerow">
+                           <div class="errorstablecell">
+                               <span class="errorstitle"><!--Nothing--></span>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Sandstorm Cargo</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('sandC',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorsandstormcargo">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('sandC',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Sandstorm Panels</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('sandP',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorsandstormpanel">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('sandP',1);">+</button>
+                               </div>
+                           </div>
+                          
+                           <div class="errorstablecell">
+                               <span class="errorstitle"><!--Nothing--></span>
+                           </div>
+                       </div>
+                       <div class="errorstablerow">
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Cargo from Floor</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('floorC',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorcargofloor">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('floorC',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Panels from Floor</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('floorP',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorpanelfloor">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('floorP',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Cargo from Human</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('humanC',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorcargohuman">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('humanC',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Panels from Human</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('humanP',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorpanelhuman">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('humanP',1);">+</button>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="errorstablerow">
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Ship Cargo</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('carS',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorshipcargo">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('carS',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Ship Panels</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('panS',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorshippanel">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('panS',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Low Rocket Cargo</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('carL',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorlowcargo">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('carL',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Low Rocket Panels</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('panL',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorlowpanel">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('panL',1);">+</button>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="errorstablerow">
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Mid Rocket Cargo</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('carM',-1);">-</button>
+                                   <button class="errorsdisplay" id="errormidcargo">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('carM',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">Mid Rocket Panels</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('panM',-1);">-</button>
+                                   <button class="errorsdisplay" id="errormidpanel">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('panM',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">High Rocket Cargo</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('carH',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorhighcargo">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('carH',1);">+</button>
+                               </div>
+                           </div>
+                           
+                           <div class="errorstablecell">
+                               <span class="errorstitle">High Rocket Panels</span>
+                               <div class="errorsbuttons">
+                                   <button class="errorsminus" onClick="changeVar('panH',-1);">-</button>
+                                   <button class="errorsdisplay" id="errorhighpanel">0</button></button>
+                                   <button class="errorsplus" onClick="changeVar('panH',1);">+</button>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+
+
                <div id="miscellaneous">
 
                   <p class="btnheader">Robot Defense Activity</p>
@@ -332,7 +477,7 @@ session_start();
 
 
 
-                  <form id="form" method="post">
+                  <form id="form" action="/post.php" method="post">
 
 
 

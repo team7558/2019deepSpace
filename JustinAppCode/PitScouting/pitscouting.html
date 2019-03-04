@@ -11,10 +11,14 @@
    <body>
 
       <div id="modelbltop" class="modelbl"><p>PIT SCOUTING</p></div>
-      <div id="teaminfo">
-         Team Number: <span id="teamnumber"><input type="number"></span><br>
-         Team Name: <span id="teamname"><input type="text"></span><br>
+      <div id="gameinfo">
+       <span class="toptitle">Competition ID:</span><br>
+       <span class="toptitle">Match Number:</span><span id="matchnumber"><input type="number" min=0 max=500 id="inputmatchnumber"></span><br>
       </div>
+      <div id="teaminfo">
+        <br><span class="toptitle">Team Number:</span><span id="teamnumber"><input type="number" min=0 max=7915 id="inputteamnumber" onchange="updateTeamNumber();"></span>
+      </div>
+
 
       <div id="bigtable">
          <div id="toprow">
