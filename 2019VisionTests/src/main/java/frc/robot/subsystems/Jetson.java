@@ -19,7 +19,7 @@ public class Jetson extends Subsystem {
 
   private NetworkTable rawValues;
 
-  public Jetson(){
+  public Jetson() {
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     rawValues = inst.getTable("rawValues");
   }
@@ -30,18 +30,13 @@ public class Jetson extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void printRawValues(){
+  public void printRawValues() {
     System.out.println("angle: " + rawValues.getEntry("angle").getDouble(-1));
   }
 
-  public double[] getTrackingPowers(){
-    double angle = rawValues.getEntry("angle").getDouble(3.14/2);
-    double x = rawValues.getEntry("x").getDouble(0);
-    double y = rawValues.getEntry("y").getDouble(0);
-    double[] motorPowers = new double[2];
-    motorPowers[0] = y*0.01;
-    motorPowers[1] = y*0.01;
-    return motorPowers;
-   }
+  public double[] getRawValues() {
+    return new double[] { rawValues.getEntry("angle").getDouble(3.14 / 2), rawValues.getEntry("x").getDouble(0),
+        rawValues.getEntry("y").getDouble(0) };
+  }
 
 }

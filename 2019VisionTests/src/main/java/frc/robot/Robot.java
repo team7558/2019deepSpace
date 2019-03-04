@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_driveTrain;
 
   public static JoyDrive m_joyDrive;
-  public static JetsonDrive m_jetsonDrive;
+  public static VisionTargetAlign m_visionTargetAlign;
 
   private CANSparkMax elbow, wrist;
 
@@ -70,8 +70,7 @@ public class Robot extends TimedRobot {
     // shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
 
     m_joyDrive = new JoyDrive();
-    m_jetsonDrive = new JetsonDrive();
-
+    m_visionTargetAlign = new VisionTargetAlign();
 
     SmartDashboard.putData("Auto mode", m_chooser);
 /*
@@ -159,7 +158,7 @@ public class Robot extends TimedRobot {
     m_arm.zero();
     m_arm.hold();
     m_arm.enable();
-    m_jetsonDrive.start();
+    m_visionTargetAlign.start();
     //m_joyDrive.start();
     
     m_endgame.retractAll();
