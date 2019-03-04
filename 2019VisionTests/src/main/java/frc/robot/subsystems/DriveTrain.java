@@ -31,6 +31,7 @@ public class DriveTrain extends Subsystem {
   private Solenoid m_shifter;
   private double m_driveSpeed = 0;
   private double m_turn = 0;
+  private double m_maxSpeed = 0.3;
 
   /**
    * Add your docs here.
@@ -84,7 +85,19 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(double speedOne, double speedTwo){
+    if (speedOne > m_maxSpeed) speedOne = m_maxSpeed;
+    if (speedOne < -m_maxSpeed) speedOne = -m_maxSpeed;
+    if (speedTwo > m_maxSpeed) speedTwo = m_maxSpeed;
+    if (speedTwo < -m_maxSpeed) speedTwo = -m_maxSpeed;
     m_driveTrain.arcadeDrive(speedOne, speedTwo);
+  }
+
+  public void tankDrive(double speedOne, double speedTwo){
+    if (speedOne > m_maxSpeed) speedOne = m_maxSpeed;
+    if (speedOne < -m_maxSpeed) speedOne = -m_maxSpeed;
+    if (speedTwo > m_maxSpeed) speedTwo = m_maxSpeed;
+    if (speedTwo < -m_maxSpeed) speedTwo = -m_maxSpeed;
+    m_driveTrain.tankDrive(speedOne, speedTwo);
   }
 
 }

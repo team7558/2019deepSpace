@@ -20,8 +20,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.JoyDrive;
-import frc.robot.commands.ShootCargo;
+import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -41,6 +40,7 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_driveTrain;
 
   public static JoyDrive m_joyDrive;
+  public static JetsonDrive m_jetsonDrive;
 
   private CANSparkMax elbow, wrist;
 
@@ -70,6 +70,7 @@ public class Robot extends TimedRobot {
     // shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
 
     m_joyDrive = new JoyDrive();
+    m_jetsonDrive = new JetsonDrive();
 
 
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -158,7 +159,8 @@ public class Robot extends TimedRobot {
     m_arm.zero();
     m_arm.hold();
     m_arm.enable();
-    m_joyDrive.start();
+    m_jetsonDrive.start();
+    //m_joyDrive.start();
     
     m_endgame.retractAll();
   }
@@ -167,11 +169,11 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     m_oi.checkOtherButtons();
     m_arm.updateArm();
-    m_jetson.printRawValues();
+    //m_jetson.printRawValues();
     Scheduler.getInstance().run();
   }
 
-  // DigitalInput elbowSwitch = new DigitalInput(RobotMap.BACK_ELBOW_SWITCH);
+  // DigitalInput elbowSwitch =  new DigitalInput(RobotMap.BACK_ELBOW_SWITCH);
   // DigitalInput wristSwitch = new DigitalInput(RobotMap.BACK_WRIST_SWITCH);
 
   @Override

@@ -26,6 +26,9 @@ public class JetsonDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double[] powers = Robot.m_jetson.getTrackingPowers();
+    System.out.println(powers[0] + " " + powers[1]);
+    Robot.m_driveTrain.tankDrive(powers[0], powers[1]);
   }
 
   // Make this return true when this Command no longer needs to run execute()
