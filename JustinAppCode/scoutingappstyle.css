@@ -194,6 +194,55 @@ body{
 
 
 
+#errors {
+    display: none;
+}
+
+#errorstable {
+    display: table;
+    text-align: center;
+}
+
+.errorstablerow {
+    display: table-row;
+}
+
+.errorstablecell {
+    display: table-cell;
+    height: 120px;
+}
+
+.errorstitle {
+    display: inline-block;
+    font-weight: bold;
+    width: 240px;
+    height: 32px;
+    color: white;
+}
+
+.errorsminus, .errorsplus {
+    border: 0px solid black;
+    border-radius: 5px;
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+    color: white;
+    background-color: #444444;
+}
+
+.errorsdisplay {
+    border: 0px solid black;
+    border-radius: 5px;
+    width: 48px;
+    height: 40px;
+    margin-top: 8px;
+    font-size: 20px;
+    color: white;
+    background-color: #333333;
+}
+
+
+
 
 
 #miscellaneous {
