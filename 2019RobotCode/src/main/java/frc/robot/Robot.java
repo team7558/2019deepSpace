@@ -170,7 +170,7 @@ public class Robot extends TimedRobot {
 
   // DigitalInput elbowSwitch = new DigitalInput(RobotMap.BACK_ELBOW_SWITCH);
   // DigitalInput wristSwitch = new DigitalInput(RobotMap.BACK_WRIST_SWITCH);
-
+  Solenoid valve = new Solenoid(0);
   @Override
   public void testPeriodic() {
     Scheduler.getInstance().removeAll();
@@ -178,8 +178,11 @@ public class Robot extends TimedRobot {
      * if (Robot.m_oi.m_operator.getRawButton(1)){ if (!elbowSwitch.get()){
      * elbow.set(-0.05); } if (!wristSwitch.get()){ wrist.set(-0.05); } } else {
      */
+    /*
     wrist.set(m_oi.m_operator.getRawAxis(5) * 0.1);
     elbow.set(m_oi.m_operator.getRawAxis(1) * 0.1);
+    */
+    valve.set(true);
 
   }
 }

@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
   public static EndGame m_endgame;
   public static Jetson m_jetson;
   public static DriveTrain m_driveTrain;
+  public static LightSensor m_lightSensor;
 
   public static JoyDrive m_joyDrive;
   public static VisionTargetAlign m_visionTargetAlign;
@@ -66,6 +67,7 @@ public class Robot extends TimedRobot {
     m_driveTrain = new DriveTrain();
     m_jetson = new Jetson();
     m_oi = new OI();
+    m_lightSensor = new LightSensor();
 
     // shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
 
@@ -166,6 +168,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    m_visionTargetAlign.start();
     m_oi.checkOtherButtons();
     m_arm.updateArm();
     //m_jetson.printRawValues();

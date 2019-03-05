@@ -31,7 +31,8 @@ public class DriveTrain extends Subsystem {
   private Solenoid m_shifter;
   private double m_driveSpeed = 0;
   private double m_turn = 0;
-  private double m_maxSpeed = 0.3;
+  private double m_maxSpeed = 0.4;
+  //private double m_leftZeroDistance = m_motorEncoders[0].getPosition(), m_rightZeroDistance = m_motorEncoders[3].getPosition();
 
   /**
    * Add your docs here.
@@ -98,6 +99,16 @@ public class DriveTrain extends Subsystem {
     if (speedTwo > m_maxSpeed) speedTwo = m_maxSpeed;
     if (speedTwo < -m_maxSpeed) speedTwo = -m_maxSpeed;
     m_driveTrain.tankDrive(speedOne, speedTwo);
+  }
+
+  public void resetDistance(){
+    //m_leftZeroDistance = m_motorEncoders[0].getPosition();
+    //m_rightZeroDistance = m_motorEncoders[3].getPosition();
+  }
+
+  public double[] distanceTraveled(){
+    return new double[] {0.0,0.0};
+    //return new double[]{m_motorEncoders[0].getPosition()-m_leftZeroDistance, m_motorEncoders[3].getPosition()-m_rightZeroDistance};
   }
 
 }

@@ -121,6 +121,11 @@ public class OI {
       CollectHatch collectHatch = new CollectHatch();
       collectHatch.start();
     }
+
+    if (m_driver.getRawAxis(3) > 0.4){
+      VisionTargetAlign track = new VisionTargetAlign();
+      track.start();
+    }
 /*
     if (m_driver.getRawAxis(3) > 0.4){
       Robot.m_joyDrive.setMaxSpeeds(0.3, 0.2);
