@@ -1,30 +1,30 @@
 <?php
 session_start();
-   $cid = $_GET['id'];
-   $query = "SELECT * FROM `competitions` WHERE `id` = '$cid'";
-   $belongsToUser = false;
-   $_SESSION['cid'] = $cid;
-   $search_result = filterTable($query);
-   while($row = mysqli_fetch_array($search_result)):
-      if($row['Username'] == $_SESSION['username']){
-         $belongsToUser = true;  
-      }
-   endwhile;
-   if((isset($_SESSION['username']) && $belongsToUser)){
-   $user = $_SESSION['username'];
-   }else{
-   ?>
+  $cid = $_GET['id'];
+  $query = "SELECT * FROM `competitions` WHERE `id` = '$cid'";
+  $belongsToUser = false;
+  $_SESSION['cid'] = $cid;
+  $search_result = filterTable($query);
+  while($row = mysqli_fetch_array($search_result)):
+    if($row['Username'] == $_SESSION['username']){
+      $belongsToUser = true;  
+    }
+  endwhile;
+  if((isset($_SESSION['username']) && $belongsToUser)){
+  $user = $_SESSION['username'];
+  }else{
+  ?>
    <script type="text/javascript">
-   window.location.href = 'https://www.scouting.team7558.com';
-   </script>
+  window.location.href = 'https://www.scouting.team7558.com';
+  </script>
     <?php
 }
-   function filterTable($query)
-   {
+  function filterTable($query)
+  {
       $connect = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
       $filter_Result = mysqli_query($connect, $query);
-         return $filter_Result;
-   }
+      return $filter_Result;
+  }
 
 
 ?>
@@ -55,7 +55,7 @@ session_start();
       <div id="modelbltop" class="modelbl"><p>PRELOAD PERIOD</p></div>
 
       <div id="gameinfo">
-       <span class="toptitle">Competition ID:</span><?php echo $cid; ?><br>
+     <span class="toptitle">Competition ID:</span><?php echo $cid; ?><br>
        <span class="toptitle">Match Number:</span><span id="matchnumber"><input type="number" min=0 max=500 id="inputmatchnumber" onchange="updateMatchNumber();"></span><br>
       </div>
       <div id="teaminfo">
@@ -102,8 +102,6 @@ session_start();
 
                <button class="hablevels" id="habLevel02" onClick="leaveHAB(2, 0);">Started<br>on HAB Level 2<br><span class="habsandstormtag">(During Preload)</span></button>
 
-               <button class="hablevels" id="habLevel03" onClick="leaveHAB(3, 0);">Started<br>on HAB Level 3<br><span class="habsandstormtag">(During Preload)</span></button>
-
                <button class="cancel" onClick="leaveHAB(-1, 0);">Cancel HAB Selection</button>
 
             </div>
@@ -119,8 +117,6 @@ session_start();
                <button class="hablevels" id="habLevel11" onClick="leaveHAB(1, 1);">Left HAB<br>Level 1<br><span class="habsandstormtag">(During Sandtorm)</span></button>
 
                <button class="hablevels" id="habLevel12" onClick="leaveHAB(2, 1);">Left HAB<br>Level 2<br><span class="habsandstormtag">(During Sandtorm)</span></button>
-
-               <button class="hablevels" id="habLevel13" onClick="leaveHAB(3, 1);">Left HAB<br>Level 3<br><span class="habsandstormtag">(During Sandtorm)</span></button>
 
                <button class="cancel" onClick="leaveHAB(-1, 1);">Cancel HAB Selection</button>
 
@@ -181,46 +177,44 @@ session_start();
 
 
                         <button class="rocketleveldisplay" id="rocketleveldisplay1" onClick="changeRocket();">Low<br><br>Level C</button>
-
-                     </div>
-
-                  </div>   
-
-
-
-                  <div class="sstablerow">
-
-                     <div class="sstableitem">
-
+                        
+                        
+                        
+                        
+                        
                         <button class="scorespaces" id="scorespace6" onClick="score(6);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
                         <button class="scorespaces" id="scorespace7" onClick="score(7);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-
-
                         <button class="scorespaces" id="scorespace8" onClick="score(8);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
+
                         <button class="scorespaces" id="scorespace9" onClick="score(9);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
-
-
 
                         <button class="scorespaces" id="scorespace10" onClick="score(10);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
                         <button class="scorespaces" id="scorespace11" onClick="score(11);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+                        
+                        <button class="scorespaces" id="scorespace12" onClick="score(12);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace13" onClick="score(13);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
+                        <button class="scorespaces" id="scorespace14" onClick="score(14);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
 
 
                         <button class="rocketleveldisplay" id="rocketleveldisplay2" onClick="changeRocket();">Low<br><br>Level C</button>
+                        
+                        
+                        
+                        
+                        
+                        <button class="scorespaces" id="scorespace15" onClick="score(15);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-                     </div>
+                        <button class="scorespaces" id="scorespace16" onClick="score(16);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-                  </div>
+                        <button class="scorespaces" id="scorespace17" onClick="score(17);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
-
-
-                  <div class="sstablerow">
-
-                     <div class="sstableitem">
 
                         <!--Robot Score Space-->
 
@@ -234,59 +228,14 @@ session_start();
 
 
 
-                        <button class="scorespaces" id="scorespace12" onClick="score(12);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
-
-                     </div>
-
-                  </div>
-
-
-
-                  <div class="sstablerow">
-
-                     <div class="sstableitem">
-
-                        <button class="scorespaces" id="scorespace13" onClick="score(13);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
-
-                     </div>
-
-                  </div>
-
-
-
-
-
-                  <div class="sstablerow">
-
-                     <div class="sstableitem">
-
-                        <button class="scorespaces" id="scorespace14" onClick="score(14);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
-
-                        <button class="scorespaces" id="scorespace15" onClick="score(15);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
-
-                        <button class="scorespaces" id="scorespace16" onClick="score(16);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
-
-                     </div>
-
-                  </div>
-
-
-
-                  <div class="sstablerow">
-
-                     <div class="sstableitem">
-
-                        <button class="scorespaces" id="scorespace17" onClick="score(17);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
-
                         <button class="scorespaces" id="scorespace18" onClick="score(18);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
+
 
                         <button class="scorespaces" id="scorespace19" onClick="score(19);">Cargo: &#x2716<br><br>Panel: &#x2716</button>
 
                      </div>
 
                   </div>
-
-
 
                </div>
 
@@ -443,8 +392,13 @@ session_start();
 
                <div id="miscellaneous">
 
-                  <p class="btnheader">Robot Defense Activity</p>
 
+                  <p class="btnheader">Comment Area</p>
+
+                  <textarea id="commentbox" placeholder="Type some general comments..."></textarea>
+                  
+                  <p class="btnheader">Robot Defense Activity</p>
+                  
                   <div id="defensebuttons">
 
                      <button class="switchdefense" id="defense0" onClick="switchDefense(0);">0</button>
@@ -466,12 +420,6 @@ session_start();
                      <button class="switchcarrybot" id="carrybot2" onClick="switchCarryBot(2);">2</button>
 
                   </div>
-
-                  <button id="wascarried" onClick="switchWasCarried();">Was Carried</button>
-
-                  <p class="btnheader">Comment Area</p>
-
-                  <textarea id="commentbox" placeholder="Type some general comments..."></textarea>
 
 
 
@@ -644,14 +592,6 @@ session_start();
             <div id="modeteleop">
 
                <button class="modebtns" id="teleopmodebtn" onClick="updateMode(2);">Tele-Operated</button>
-
-            </div>
-
-            
-            
-            <div id="modeerrors">
-
-               <button class="modebtns" id="errorsmodebtn" onClick="updateMode(3);">Errors</button>
 
             </div>
 

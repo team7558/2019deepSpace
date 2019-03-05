@@ -1,45 +1,58 @@
 body{
-  font-family: Courier New, Roboto, sans-serif;
-  font-size: 16px;
-  background-image: url("photos/spacewallpaper.png");
+  font-family: Courier New, Arial, sans-serif;
+  font-size: 18px;
+  background-image: url("spacewallpaper.png");
   overflow: hidden;
+  font-style: italic;
 }
 
 
-
 #bigtable {
-  margin-top: 60px;
+  margin-top: 24px;
   display: table;
   margin-left: auto;
   margin-right: auto;
-  height: 650px;
+  height: 712px;
   width: 1100px;
   padding: 16px;
-  background-color: blue;
 }
 
 #toprow, #middlerow, #bottomrow {
   display: table-row;
 }
 
-#general, #drive, #misc, #start, #end, #hatchcargo {
+#general, #drive, #misc, #start, #end {
   display: table-cell;
-  color: red;
+  color: white;
   vertical-align: top;
   text-align: center;
-  border: 2px solid yellow;
+  border: 2px solid #444444;
+  border-radius: 15px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
+}
+
+#hatchcargo {
+  display: table-cell;
+  color: white;
+  vertical-align: top;
+  text-align: center;
 }
 
 #general, #drive, #misc {
   width: 500px;
   float: left;
-  background-color: green;
+  background-color: #444444;
 }
 
-#start, #end, #hatchcargo {
+#start, #end {
   width: 500px;
   float: right;
-  background-color: green;
+  background-color: #444444;
+}
+
+#hatchcargo {
+  width: 500px;
+  float: right;
 }
 
 #hatchcargotable {
@@ -50,44 +63,163 @@ body{
   display: table-row;
 }
 
-#hatch, #cargo {
+#h, #c {
   display: table-cell;
-  width: 246px;
-  background-color: green;
+  width: 220px;
+  background-color: #444444;
+  border: 2px solid #444444;
+  border-radius: 15px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
-#hatch, #cargo, #drive {
-  height: 320px;
+#cargo {
+  margin-left: 48px;
+}
+
+#h, #c, #drive {
+  height: 300px;
 }
 
 #misc, #end {
-  height: 160px;
+  height: 200px;
 }
 #general, #start {
-  height: 140px;
+  height: 160px;
+}
+
+#hatch, #cargo {
+  display:inline-block;
 }
 
 
 .title {
   color: black;
-  font-weight: bold;
+  font-weight: bolder;
+  font-style: normal;
   font-size: 24px;
+  margin-bottom: 12px;
+  margin-top: 6px;
+  color: white;
+  text-decoration: underline
+}
+
+.element, .sandstormelement, .endgameleft {
+  text-align: center;
 }
 
 
 
 
 
+#general .label, #drive .label, #misc .label {
+  width: 200px;
+  display: inline-block;
+}
 
+.label {
+  font-weight: bolder;
+  font-style: normal;
+}
+
+.inputs {
+  margin-bottom: 16px;
+  width: 160px;
+  font-size: 18px;
+}
+
+.sandstorminputs {
+  width: 40px;
+  font-size: 18px;
+}
+
+.sandstormelement {
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.inputs[type="radio"] {
+  width: 20px;
+}
+
+.driverow .element {
+  display: inline-block;
+  width: 120px;
+  text-align: center;
+}
+
+#driverow3 {
+  margin-bottom: 32px;
+}
+
+#rookierow, #sandstormrow, #endgamerow {
+  margin-top: 8px;
+}
+
+#rookieleft, #sandstormleft, .endgameleft {
+  margin-right: 48px;
+}
+
+#sandstormitemleft {
+  margin-right: 20px;
+}
+
+.checkinputs {
+  margin-top: 12px;
+  width: 16px;
+  height: 16px;
+  vertical-align: bottom;
+}
+
+.checkelement {
+  display: inline-block;
+  width: 120px;
+  margin-left: 16px;
+  text-align: left;
+}
+
+#cargo .checkelement {
+  margin-left: 0px;
+  text-align: right;
+  margin-right: 16px;
+}
+
+.itemelementdown {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+
+#showtop {
+  position: absolute
+  z-index: 3;
+}
+
+#submit {
+  font-weight: bold;
+  font-size: 16px;
+  padding: 22px;
+  color: white;
+  background-color: #f47f41;
+  border: 0px solid black;
+  border-radius: 15px;
+}
+
+
+#submit:hover {
+    background-color: #f49541;
+}
 
 .modelbl {
-  z-index: 2;
+  z-index: -2;
   left: 0px;
   position: fixed;
   width: 100%;
-  background-color: #6CCC12;
+  background-color: #f4bf42;
   color: white;
+  font-style: normal;
 }
+
+
 
 #modelbltop {
   top: 0px;
@@ -101,6 +233,8 @@ body{
 .modelbl p {
   font-size: 48px;
   font-weight: 600;
+  padding-top: 12px;
+  padding-bottom: 12px;
   margin: 0px;
   color: white;
   text-align: center;

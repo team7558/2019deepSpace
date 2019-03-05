@@ -191,8 +191,6 @@ function updateMode(mode) {
 			y[i].style.fontSize = "48px";
 			y[i].style.fontWeight = "600";
 			y[i].style.textAlign = "center";
-			y[i].style.color = "white";
-			y[i].style.backgroundColor = preloadCol;
 		}
 
 		var z = document.getElementsByClassName("scorespaces");
@@ -223,8 +221,6 @@ function updateMode(mode) {
 			y[i].style.fontSize = "48px";
 			y[i].style.fontWeight = "600";
 			y[i].style.textAlign = "center";
-			y[i].style.color = "white";
-			y[i].style.backgroundColor = sandstormCol;
 		}
 
 		var z = document.getElementsByClassName("scorespaces");
@@ -253,8 +249,6 @@ function updateMode(mode) {
 			y[i].style.fontSize = "48px";
 			y[i].style.fontWeight = "600";
 			y[i].style.textAlign = "center";
-			y[i].style.color = "white";
-			y[i].style.backgroundColor = teleopCol;
 		}
 
 		var z = document.getElementsByClassName("scorespaces");
@@ -285,8 +279,6 @@ function updateMode(mode) {
 			y[i].style.fontSize = "48px";
 			y[i].style.fontWeight = "600";
 			y[i].style.textAlign = "center";
-			y[i].style.color = "white";
-			y[i].style.backgroundColor = errorsCol;
 		}
 
 		var z = document.getElementsByClassName("scorespaces");
@@ -314,8 +306,6 @@ function updateMode(mode) {
 			y[i].style.fontSize = "48px";
 			y[i].style.fontWeight = "600";
 			y[i].style.textAlign = "center";
-			y[i].style.color = "white";
-			y[i].style.backgroundColor = miscCol;
 		}
 
 		var z = document.getElementsByClassName("scorespaces");
@@ -323,7 +313,7 @@ function updateMode(mode) {
 			z[i].style.display = "none";
 		}
 
-		document.getElementById("modetable").style.top = "0px"; //Accounts for the sstable
+		document.getElementById("modetable").style.marginTop = "-400px"; //Accounts for the sstable
 
 	}
 
@@ -697,14 +687,13 @@ function dropItem() {
 }
 
 function changeLevel(level, type) {
-	updateButtonLook();
-
+    updateButtonLook();
 	if(level >= 0) {
 		var x = document.getElementsByClassName("hablevels");
 		for(i = 0; i < x.length; i++) {
-			if(type == 0 && i <= 2)	makeSideButtonStop(x[i]);
-			if(type == 1 && i > 2 && i <= 6) makeSideButtonStop(x[i]);
-			if(type == 2 && i > 6) makeSideButtonStop(x[i]);
+			if(type == 0 && i <= 1)	makeSideButtonStop(x[i]);
+			if(type == 1 && i > 1 && i <= 4) makeSideButtonStop(x[i]);
+			if(type == 2 && i > 4) makeSideButtonStop(x[i]);
 		}
 		if(gameMode=="preload") {
 			makeButtonNorm(document.getElementsByClassName("cancel")[0]);
@@ -717,11 +706,12 @@ function changeLevel(level, type) {
 			document.getElementsByClassName("cancel")[2].style.fontSize = "16px";
 		}
 	} else {
+	    console.log("h");
 		var x = document.getElementsByClassName("hablevels");
 		for(i = 0; i < x.length; i++) {
-			if(type == 0 && i <= 2)	makeButtonNorm(x[i]);
-			if(type == 1 && i > 2 && i <= 6) makeButtonNorm(x[i]);
-			if(type == 2 && i > 6) makeButtonNorm(x[i]);
+			if(type == 0 && i <= 1)	makeButtonNorm(x[i]);
+			if(type == 1 && i > 1 && i <= 4) makeButtonNorm(x[i]);
+			if(type == 2 && i > 4) makeButtonNorm(x[i]);
 		}
 		if(gameMode=="preload") {
 			makeButtonStop(document.getElementsByClassName("cancel")[0]);
@@ -943,6 +933,7 @@ function updateFormData() {
 
 	//HAB Sandstorm Score
 	thisData = document.getElementById("datahabstart");
+	if(habLevelStart<0) habLevelStart=0;
 	if(habLevelStart == 1 || habLevelStart == 2) thisData.value = habLevelStart;
 	message += thisData.name+": "+thisData.value+"\n";
 
@@ -1039,6 +1030,7 @@ function updateFormData() {
 
 	//HAB Endgame Score
 	thisData = document.getElementById("datahabend");
+	if(habLevelEnd<0) habLevelEnd=0;
 	thisData.value = habLevelEnd;
 	message += thisData.name+": "+thisData.value+"\n";
 
