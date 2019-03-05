@@ -1,11 +1,10 @@
-body{
+body {
   font-family: Courier New, Roboto, sans-serif;
   font-size: 16px;
   background-image: url("photos/spacewallpaper.png");
   background-repeat: repeat-x;
   overflow: hidden;
 }
-
 
 #playfield {
   margin: 0px;
@@ -17,7 +16,7 @@ body{
 
 #playfieldrow {
   margin: 0px;
-  display: table-row
+  display: table-row;
 }
 
 #gameinfo, #teaminfo {
@@ -41,10 +40,9 @@ body{
   display: inline-block;
 }
 
-
 #stations {
   vertical-align: middle;
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;
   margin-top: 12px;
@@ -66,14 +64,12 @@ body{
   margin-right: 12px;
   height: 60px;
   z-index: 3;
-
   font-size: 12px;
   background-color: #161616;
-
-  -webkit-transition-duration: 0.4s; 
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white; 
+  color: white;
   border: 2px;
   border-radius: 4px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
@@ -89,14 +85,12 @@ body{
   border: 2px solid black;
   height: 60px;
   z-index: 10;
-
   font-size: 16px;
   background-color: #161616;
-
-  -webkit-transition-duration: 0.4s; 
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white; 
+  color: white;
   border: 2px;
   border-radius: 4px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
@@ -111,9 +105,6 @@ body{
   background-color: #F94F42;
 }
 
-
-
-
 .scorespaces, .rocketleveldisplay, #robotscorespace, #mapteamnumber {
   width: 80px;
   height: 80px;
@@ -122,17 +113,15 @@ body{
   text-align: center;
   position: absolute;
   display: block;
-
   font-size: 14px;
   font-weight: 100px;
-
   border: none;
   color: white;
   text-decoration: none;
-  -webkit-transition-duration: 0.4s; 
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white; 
+  color: white;
   border: 2px;
   border-radius: 5px;
   z-index: 4;
@@ -157,14 +146,12 @@ body{
   background-color: #161616;
 }
 
-
-.habbuttons, .pickupbuttons  {
+.habbuttons, .pickupbuttons {
   vertical-align: middle;
   margin: 0px;
   width: 200px;
   display: table-cell;
   height: 400px;
-
   position: relative;
   top: -160px;
   left: 0px;
@@ -173,8 +160,6 @@ body{
 #habstart, #habend, #pickup {
   display: none;
 }
-
-
 
 #gamearea {
   margin: 0px;
@@ -186,9 +171,10 @@ body{
 #gamemap {
   display: block;
   image-rendering: pixelated;
-  /*background-image: url("photos/FRCGameMapL.png");
-  background-repeat: no-repeat;
-  background-size: 800px 520px;*/
+    /*background-image: url("photos/FRCGameMapL.png");
+     background-repeat: no-repeat;
+     background-size: 800px 520px;
+    */
   background: #F94F42;
   border-radius: 30px;
   opacity: 0.825;
@@ -198,75 +184,71 @@ body{
   z-index: 2;
 }
 
-
-
 #errors {
-    display: none;
+  display: none;
 }
 
 #errorstable {
-    display: table;
-    text-align: center;
+  display: table;
+  text-align: center;
 }
 
 .errorstablerow {
-    display: table-row;
+  display: table-row;
 }
 
 .errorstablecell {
-    display: table-cell;
-    height: 120px;
+  display: table-cell;
+  height: 120px;
 }
 
 .errorstitle {
-    display: inline-block;
-    font-weight: bold;
-    width: 240px;
-    height: 32px;
-    color: white;
+  display: inline-block;
+  font-weight: bold;
+  width: 240px;
+  height: 32px;
+  color: white;
 }
 
 .errorsminus, .errorsplus {
-    border: 0px solid black;
-    border-radius: 5px;
-    width: 56px;
-    height: 56px;
-    font-size: 20px;
-    color: white;
-    background-color: #444444;
+  border: 0px solid black;
+  border-radius: 5px;
+  width: 56px;
+  height: 56px;
+  font-size: 20px;
+  color: white;
+  background-color: #444444;
 }
 
 .errorsdisplay {
-    border: 0px solid black;
-    border-radius: 5px;
-    width: 48px;
-    height: 40px;
-    margin-top: 8px;
-    font-size: 20px;
-    color: white;
-    background-color: #333333;
+  border: 0px solid black;
+  border-radius: 5px;
+  width: 48px;
+  height: 40px;
+  margin-top: 8px;
+  font-size: 20px;
+  color: white;
+  background-color: #333333;
 }
-
-
-
-
 
 #miscellaneous {
   display: none;
   margin-left: auto;
   margin-right: auto;
   width: 900px;
+  height: 360px;
+  margin-bottom: 20px;
   color: white;
   text-align: center;
-  height: 600px;
+  z-index: 4;
 }
 
 #commentbox {
   resize: none;
   width: 250px;
-  height: 60px;
+  height: 72px;
 }
- 
+
 #defensebuttons {
   margin-bottom: 20px;
 }
@@ -296,12 +278,6 @@ body{
   color: white;
 }
 
-
-
-
-
-
-
 .btnheader {
   top: 40px;
   color: white;
@@ -315,18 +291,16 @@ body{
   text-align: center;
   height: 60px;
   width: 140px;
-
   font-size: 16px;
   font-weight: 100px;
-
   background: #444444;
   border: none;
   color: white;
   text-decoration: none;
-  -webkit-transition-duration: 0.4s; 
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white; 
+  color: white;
   border: 2px;
   border-radius: 5px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
@@ -339,18 +313,16 @@ body{
   text-align: center;
   height: 60px;
   width: 110px;
-
   font-size: 12px;
   font-weight: 100px;
-
   background: #161616;
   border: none;
   color: white;
   text-decoration: none;
-  -webkit-transition-duration: 0.4s; 
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white; 
+  color: white;
   border: 2px;
   border-radius: 5px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
@@ -364,52 +336,43 @@ body{
 .itemgrabtag, .habsandstormtag {
   font-size: 12px;
 }
-
-
-
-
-
-
-
 /*Scorespaces Horizontal Position and preloading*/
 #rocketleveldisplay1, #rocketleveldisplay2 {
-  left:80px;
+  left: 80px;
 }
 
 #scorespace0, #scorespace2, #scorespace4, #scorespace6, #scorespace8, #scorespace10 {
-  left:0px;
+  left: 0px;
 }
 
 #scorespace1, #scorespace3, #scorespace5, #scorespace7, #scorespace9, #scorespace11 {
-  left:160px;
+  left: 160px;
 }
 
 #scorespace12, #scorespace13 {
-  left:400px;
+  left: 400px;
 }
 
 #scorespace14, #scorespace15 {
-  left:480px;
+  left: 480px;
 }
 
 #scorespace16, #scorespace17 {
-  left:560px;
+  left: 560px;
 }
 
 #scorespace18, #scorespace19 {
-  left:640px;
+  left: 640px;
 }
 
-#robotscorespace { 
-  left:0px; 
+#robotscorespace {
+  left: 0px;
 }
-
-
-
 /*Scorespaces Vertical Position*/
 #scorespace0, #scorespace1, #scorespace2, #scorespace3, #scorespace4, #scorespace5, #rocketleveldisplay1 {
   top: 0px;
 }
+
 #scorespace6, #scorespace7, #scorespace8, #scorespace9, #scorespace10, #scorespace11, #rocketleveldisplay2 {
   top: 240px;
 }
@@ -421,6 +384,7 @@ body{
 #scorespace13 {
   top: 160px;
 }
+
 #scorespace14, #scorespace16, #scorespace18 {
   top: 0px;
 }
@@ -429,31 +393,28 @@ body{
   top: 240px;
 }
 
-#robotscorespace { 
-  top: 80px; 
+#robotscorespace {
+  top: 80px;
 }
 
-
-
-
-#sstable { 
-  display: table; 
+#sstable {
+  display: table;
   position: relative;
   top: -500px;
   left: 20px;
   width: 720px;
 }
-.sstablerow { 
-  display: table-row; 
+
+.sstablerow {
+  display: table-row;
   height: 320px;
 }
-.sstableitem { 
-  display: table-cell; 
+
+.sstableitem {
+  display: table-cell;
   width: block;
   height: 80px;
 }
-
-
 
 #mapteamnumber {
   left: 160px;
@@ -463,15 +424,6 @@ body{
   background-color: transparent;
   font-size: 92px;
 }
-
-
-
-
-
-
-
-
-
 
 .modelbl {
   z-index: -2;
@@ -501,81 +453,75 @@ body{
   text-align: center;
 }
 
-
-
-
 #modetable {
-  display: table;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -480px;
+  display: block;
   margin-bottom: 0px;
   position: relative;
-  z-index: 0;
+  margin-top: -300px;
+  height: 0px;
+  text-align: center;
+  margin-left: -40px;
 }
 
 #moderow {
-  display: table-row;
-  width: 600px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .modebtns {
+  display: inline-block;
+  z-index: 0;
   margin: 20px;
-  margin-top: 180px;
+  margin-top: 0px;
   vertical-align: middle;
   text-align: center;
   width: 180px;
   height: 60px;
-
   font-size: 20px;
   font-weight: 100px;
-
   background-color: #161616;
-  -webkit-transition-duration: 0.4s; 
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white; 
+  color: white;
   border: 2px;
   border-radius: 4px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
 #modepreload, #modesandstorm, #modeteleop, #modemisc {
+  display: inline-block;
   width: 180px;
   height: 60px;
   position: relative;
-  display: table-cell;
   margin: 0px;
+  z-index: 0;
 }
 
 #preloadmodebtn {
   font-size: 24px;
   background-color: #6CCC12;
   font-weight: 100px;
-
-  -webkit-transition-duration: 0.4s; 
+  -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: white; 
+  color: white;
   border: 2px;
   border-radius: 4px;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.16), 0 5px 13px 0 rgba(0,0,0,0.12);
 }
 
-
-
-
 #displayinfo {
   top: 20px;
-  display:block;
+  display: block;
   font-style: italic;
   font-weight: bold;
 }
 
 .infotag {
-    font-weight: normal;
+  font-weight: normal;
 }
-
 
 button {
   cursor: pointer;
