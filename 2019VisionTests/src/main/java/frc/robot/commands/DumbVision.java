@@ -11,7 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DumbVision extends Command {
+  public double kP, kI, kD, pTerm, iTerm, dTerm, prevError, errorSum; 
   public DumbVision() {
+    kP = 0.1;
+    kD = 0;
+    kI = 0;
+    prevError = 0;
+    errorSum = 0;
+
     requires(Robot.m_driveTrain);
     requires(Robot.m_jetson);
     // Use requires() here to declare subsystem dependencies
@@ -26,15 +33,18 @@ public class DumbVision extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    System.out.println("salad");
-    double offset = Robot.m_jetson.getRawValues()[3];
+    double power1 = 0, power2 = 0;
+    double error = Robot.m_jetson.getRawValues()[3];
     double linearSpeed = 0.4;
-    double power1 = linearSpeed;
-    double power2 = linearSpeed;
-    double k = 0.025;
-    power1 -= offset*k;
-    power2 += offset*k;
-    System.out.println(offset);
+    //double linearSpeed = Robot.m_oi.m_driver.getRawAxis();
+    pTerm = kP*error;
+    dTerm = kD*(error-prevError);
+    iTerm = kI*(errorSum);
+    errorSum += error;
+    double correction = pTerm + dTerm + iTerm; 
+    power1 = linearSpeed - correction;
+    power2 += linearSpeed + correction;
+    System.out.println(error);
     Robot.m_driveTrain.tankDrive(power1, power2);
   }
 

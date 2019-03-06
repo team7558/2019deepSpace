@@ -123,7 +123,7 @@ public class OI {
     }
 
     if (m_driver.getRawAxis(3) > 0.4){
-      VisionTargetAlign track = new VisionTargetAlign();
+      DumbVision track = new DumbVision();
       track.start();
     }
 /*
