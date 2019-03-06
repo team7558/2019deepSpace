@@ -2,7 +2,7 @@ body {
 	font-family: Courier New, Roboto, sans-serif;
   	font-size: 12px;
   	text-align: center;
-  	background-image: url("photos/spacewallpaper.png");
+  	background-image: url("../photos/spacewallpaper.png");
 }
 
 h1 {

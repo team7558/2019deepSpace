@@ -2,7 +2,8 @@
 session_start();
 if (isset($_POST['username'])) {
     
-
+    
+    
     // Form
     $user = ($_POST['username']);
     $pass = ($_POST['password']);
@@ -12,7 +13,7 @@ if(!isset($user) || trim($user) == '')
 } else{
     
     
-    $sql        = "SELECT * FROM users WHERE username = '$user' LIMIT 1";
+    $sql        = "SELECT * FROM users WHERE Username = '$user' LIMIT 1";
     $query      = mysqli_query($dbCon, $sql); //search database
     $row        = mysqli_fetch_row($query);
     $uid        = $row[0];
@@ -30,7 +31,7 @@ if(!isset($user) || trim($user) == '')
         $_SESSION['id'] = $uid;
     ?>
         <script type="text/javascript">
-    window.location.href = 'http://scouting.team7558.com/scoutinghome';
+    window.location.href = 'http://www.scouting.team7558.com/scoutinghome.php';
     </script>
         <?php
     } else {
@@ -47,7 +48,7 @@ if(!isset($user) || trim($user) == '')
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="mainstyle.css">
+    <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
 </head>
