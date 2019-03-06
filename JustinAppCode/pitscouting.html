@@ -1,0 +1,152 @@
+<html>
+
+   <head>
+      <link rel="stylesheet" type="text/css" href="pitscoutingstyle.css">
+      <title>7558 Scouting App - 2019 Season</title>
+      <script src="scoutingappjavascript.js"></script>
+      <script>
+      
+      </script>
+   </head>
+   <body>
+
+      <div id="modelbltop" class="modelbl"><p>PIT SCOUTING</p></div>
+      <div id="showtop">
+         <form id="form">
+            <input type="submit" id="submit" value="Submit">
+         </form>
+      </div>
+
+      <div id="bigtable">
+         <div id="toprow">
+            <div id="general">
+               <div class="title">General</div>
+
+               <div class="element"><span class="label">Team Name: </span><input class="inputs" type="text" name="teamName" placeholder="ALT-F4"></div>
+
+               <div class="element"><span class="label">Team Number: </span><input class="inputs" type="number" min=0 max=7915 name="teamNumber" placeholder="7558"></div>
+
+
+            </div>
+            <div id="start">
+               <div class="title">Sandstorm</div>
+
+               <div class="element"><span class="label">Starting HAB Level</span></div>
+               <div id="sandstormrow">
+                  <span class="element" id="sandstormleft">Level 1<input class="inputs" type="radio" name="sandstormlevel"></span>
+                  <span class="element">Level 2<input class="inputs" type="radio" name="sandstormlevel"></span>
+               </div>
+
+               <div class="sandstormelement" id="sandstormitemleft"><span class="label">Cargo: </span><input class="sandstorminputs" type="number" min=0 max=4 name="sandstormCargo" placeholder="0"></div>
+
+               <div class="sandstormelement"><span class="label">Panels: </span><input class="sandstorminputs" type="number" min=0 max=4 name="sandstormPanels" placeholder="0"></div>
+            </div>
+         </div>
+
+         <div id="middlerow">
+            <div id="drive">
+               <div class="title">Drive</div>
+
+               <div class="element"><span class="label">Drivetrain Type</span></div>
+               <br>
+               <div id="driverow1" class="driverow">
+                  <span class="element">Tank<input class="inputs" type="radio" name="drivetrain"></span>
+                  <span class="element">Swerve<input class="inputs" type="radio" name="drivetrain"></span>
+               </div>
+               <div id="driverow2" class="driverow">
+                  <span class="element">Omni<input class="inputs" type="radio" name="drivetrain"></span>
+                  <span class="element">Mecanum<input class="inputs" type="radio" name="drivetrain"></span>
+               </div>
+               <div id="driverow3" class="driverow">
+                  <span class="element">H-Drive<input class="inputs" type="radio" name="drivetrain"></span>
+                  <span class="element">Treads<input class="inputs" type="radio" name="drivetrain"></span>
+                  <span class="element">Bi-Pedal<input class="inputs" type="radio" name="drivetrain"></span>
+               </div>
+
+
+
+               <div class="element"><span class="label">Number of Wheels: </span><input class="inputs" type="number" min=0 max=16 name="wheelNumber" placeholder="0"></div>
+
+               <div class="element"><span class="label">Number of Motors: </span><input class="inputs" type="number" min=0 max=16 name="motorNumber" placeholder="0"></div>
+            </div>
+            <div id="hatchcargo">
+               <div id="hatchcargotable">
+                  <div id="hatchcargorow">
+                     <div id="hatch">
+                        <div id="h">
+                           <div class="title">Hatch</div>
+
+                           <div class="element"><span class="label">Intake</span></div>
+
+                           <div class="element"><input class="checkinputs" type="checkbox" name="hatchintakeground"><span class="checkelement">Ground</span></div>
+
+                           <div class="element"><input class="checkinputs" type="checkbox" name="hatchintakehuman"><span class="checkelement">Human</span></div>
+
+                           <span class="itemelementdown"><div class="element"><span class="label">Scoring</span></div></span>
+
+                           <div class="element"><input class="checkinputs" type="checkbox" name="hatchscoringship"><span class="checkelement">Ship</span></div>
+
+                           <div class="element"><input class="checkinputs" type="checkbox" name="hatchscoringlow"><span class="checkelement">Low Level</span></div>
+
+                           <div class="element"><input class="checkinputs" type="checkbox" name="hatchscoringmid"><span class="checkelement">Mid Level</span></div>
+
+                           <div class="element"><input class="checkinputs" type="checkbox" name="hatchscoringhigh"><span class="checkelement">High Level</span></div>
+                        </div>
+                     </div>
+                     <div id="cargo">
+                        <div id="c">
+                           <div class="title">Cargo</div>
+
+                           <div class="element"><span class="label">Intake</span></div>
+
+                           <div class="element"><span class="checkelement">Ground</span><input class="checkinputs" type="checkbox" name="cargointakeground"></div>
+
+                           <div class="element"><span class="checkelement">Human</span><input class="checkinputs" type="checkbox" name="cargointakehuman"></div>
+
+                           <span class="itemelementdown"><div class="element"><span class="label">Scoring</span></div></span>
+
+                           <div class="element"><span class="checkelement">Ship</span><input class="checkinputs" type="checkbox" name="cargoscoringship"></div>
+
+                           <div class="element"><span class="checkelement">Low Level</span><input class="checkinputs" type="checkbox" name="cargoscoringlow"></div>
+
+                           <div class="element"><span class="checkelement">Mid Level</span><input class="checkinputs" type="checkbox" name="cargoscoringmid"></div>
+
+                           <div class="element"><span class="checkelement">High Level</span><input class="checkinputs" type="checkbox" name="cargoscoringhigh"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div id="bottomrow">
+            <div id="misc">
+               <div class="title">Miscellaneous</div>
+
+               <div class="element"><span class="label">Rookie Team</span></div>
+               <div id="rookierow">
+                  <span class="element" id="rookieleft">Yes<input class="inputs" type="radio" name="rookieteam"></span>
+                  <span class="element">No<input class="inputs" type="radio" name="rookieteam"></span>
+               </div>
+
+               <div class="element"><span class="label">Cycle Time: </span><input class="inputs" type="text" name="cycleTime" placeholder="In seconds"></div>
+
+               <div class="element"><span class="label">Robot Weight: </span><input class="inputs" type="text" name="robotWeight" placeholder="In pounds"></div>
+
+            </div>
+            <div id="end">
+               <div class="title">Endgame</div>
+
+               <div class="element"><span class="label">Ending HAB Level</span></div>
+               <div id="endgamerow">
+                  <span class="endgameleft">Level 1<input class="inputs" type="radio" name="endgamelevel"></span>
+                  <span class="endgameleft">Level 2<input class="inputs" type="radio" name="endgamelevel"></span>
+                  <span class="element">Level 3<input class="inputs" type="radio" name="endgamelevel"></span>
+               </div>
+            </div>
+         </div>
+
+      </div>
+
+   </body>
+</html>

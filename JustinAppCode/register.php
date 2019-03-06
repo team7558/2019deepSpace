@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (isset($_POST['username'])) {
-    
-    
 
+    
+    
     // Form
     $user = ($_POST['username']);
     $pass = ($_POST['password']);
@@ -48,7 +48,7 @@ if(!isset($user) || trim($user) == '')
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="mainstyle.css">
+    <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Login</title>
 </head>

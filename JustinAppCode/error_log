@@ -1,0 +1,155 @@
+[15-Feb-2019 19:05:54 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/2005): Unknown MySQL server host 'localhost:3306' (0) in /home3/team7558/scouting.team7558.com/index.php on line 5
+[15-Feb-2019 19:05:54 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/index.php on line 18
+[15-Feb-2019 19:05:54 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/index.php on line 19
+[15-Feb-2019 19:06:16 America/Chicago] PHP Warning:  mysqli_connect(): (HY000/2005): Unknown MySQL server host 'localhost:3306' (0) in /home3/team7558/scouting.team7558.com/index.php on line 5
+[15-Feb-2019 19:06:16 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/index.php on line 18
+[15-Feb-2019 19:06:16 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/index.php on line 19
+[15-Feb-2019 19:08:15 America/Chicago] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'team7558_s'@'localhost' to database 'team7558_scouting' in /home3/team7558/scouting.team7558.com/index.php on line 5
+[15-Feb-2019 19:08:15 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/index.php on line 18
+[15-Feb-2019 19:08:15 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/index.php on line 19
+[16-Feb-2019 14:16:55 America/Chicago] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home3/team7558/scouting.team7558.com/index.php:3) in /home3/team7558/scouting.team7558.com/index.php on line 5
+[16-Feb-2019 15:58:12 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home3/team7558/scouting.team7558.com/index.php on line 88
+[16-Feb-2019 15:58:15 America/Chicago] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home3/team7558/scouting.team7558.com/index.php on line 88
+[16-Feb-2019 15:59:30 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home3/team7558/scouting.team7558.com/index.php on line 102
+[17-Feb-2019 13:16:19 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:19:27 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:19:28 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:19:29 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:20:10 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:20:12 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:23:07 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:23:14 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:25:29 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:25:31 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:25:48 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:25:50 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:25:52 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:26:51 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:27:07 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 39
+[17-Feb-2019 13:27:23 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:27:24 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:27:25 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:27:45 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:27:47 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 37
+[17-Feb-2019 13:28:12 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:28:14 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:28:55 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:29:02 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 38
+[17-Feb-2019 13:29:44 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 39
+[17-Feb-2019 13:29:45 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 39
+[17-Feb-2019 13:30:06 America/Chicago] PHP Warning:  end() expects exactly 1 parameter, 0 given in /home3/team7558/scouting.team7558.com/index.php on line 46
+[17-Feb-2019 13:30:17 America/Chicago] PHP Warning:  end() expects exactly 1 parameter, 0 given in /home3/team7558/scouting.team7558.com/index.php on line 46
+[17-Feb-2019 13:30:17 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 39
+[17-Feb-2019 13:31:41 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 39
+[17-Feb-2019 13:32:18 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 39
+[17-Feb-2019 13:32:43 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 39
+[17-Feb-2019 13:32:49 America/Chicago] PHP Fatal error:  Call to undefined function filterTable() in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 9
+[17-Feb-2019 13:33:37 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[17-Feb-2019 13:33:51 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[17-Feb-2019 13:34:06 America/Chicago] PHP Fatal error:  Call to undefined function filterTable() in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 9
+[17-Feb-2019 13:50:07 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:50:28 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:50:45 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'team7558'@'localhost' (using password: NO) in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 8
+[17-Feb-2019 13:50:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 9
+[17-Feb-2019 13:50:45 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:51:01 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'team7558'@'localhost' (using password: NO) in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 8
+[17-Feb-2019 13:51:01 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 9
+[17-Feb-2019 13:51:01 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:51:16 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'team7558'@'localhost' (using password: NO) in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 8
+[17-Feb-2019 13:51:16 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 9
+[17-Feb-2019 13:51:16 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:51:23 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'team7558'@'localhost' (using password: NO) in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 8
+[17-Feb-2019 13:51:23 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 9
+[17-Feb-2019 13:51:23 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:51:26 America/Chicago] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'team7558'@'localhost' (using password: NO) in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 8
+[17-Feb-2019 13:51:26 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 9
+[17-Feb-2019 13:51:26 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:54:35 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 32
+[17-Feb-2019 13:54:42 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 32
+[17-Feb-2019 13:55:06 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 32
+[17-Feb-2019 13:55:26 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 13:55:58 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[17-Feb-2019 13:57:49 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[17-Feb-2019 13:58:40 America/Chicago] PHP Catchable fatal error:  Object of class mysqli_result could not be converted to string in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 13
+[17-Feb-2019 13:58:56 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[17-Feb-2019 14:00:11 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:01:21 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:01:22 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:01:23 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:02:01 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:02:15 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:04:10 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:04:51 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:04:53 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[17-Feb-2019 14:05:09 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[25-Feb-2019 21:20:22 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[26-Feb-2019 17:05:15 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[28-Feb-2019 15:05:09 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 34
+[28-Feb-2019 15:20:20 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[28-Feb-2019 15:21:03 America/Chicago] PHP Catchable fatal error:  Object of class mysqli_result could not be converted to string in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 10
+[28-Feb-2019 15:22:37 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[28-Feb-2019 15:22:40 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[28-Feb-2019 15:22:41 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[28-Feb-2019 15:22:57 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[28-Feb-2019 15:24:43 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[28-Feb-2019 15:24:45 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 33
+[28-Feb-2019 15:39:38 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 35
+[28-Feb-2019 15:40:19 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 35
+[28-Feb-2019 15:40:21 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 35
+[28-Feb-2019 15:41:57 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:42:33 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:42:34 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:42:35 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:45:37 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:45:48 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:45:53 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:46:20 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 36
+[28-Feb-2019 15:47:40 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 42
+[28-Feb-2019 15:48:24 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 42
+[28-Feb-2019 17:01:57 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 6
+[28-Feb-2019 17:01:57 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 59
+[28-Feb-2019 17:02:01 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 6
+[28-Feb-2019 17:02:01 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 59
+[28-Feb-2019 17:02:07 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 6
+[28-Feb-2019 17:02:07 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 59
+[28-Feb-2019 17:02:58 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 6
+[28-Feb-2019 17:02:58 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/matchhome.php on line 59
+[28-Feb-2019 17:18:12 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 42
+[28-Feb-2019 20:18:20 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 42
+[01-Mar-2019 11:42:32 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[01-Mar-2019 11:46:28 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[01-Mar-2019 16:14:24 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[02-Mar-2019 17:19:57 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[03-Mar-2019 11:24:05 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:08:24 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:11:54 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:13:56 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:21:17 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:26:49 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:29:30 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:30:35 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 15:47:09 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 16:29:33 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 16:46:48 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 16:56:03 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 16:57:46 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 16:58:03 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 16:58:05 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 17:27:52 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 17:44:36 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 21:01:16 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[04-Mar-2019 21:18:26 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 07:15:02 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 07:34:05 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 09:09:33 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 09:24:37 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 13:30:42 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 15:09:55 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 15:14:13 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 15:26:50 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 15:28:16 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 87
+[05-Mar-2019 16:10:45 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 88
+[05-Mar-2019 16:15:47 America/Chicago] PHP Fatal error:  Call to a member function query() on null in /home3/team7558/scouting.team7558.com/team.php on line 146
+[05-Mar-2019 16:27:30 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 88
+[05-Mar-2019 16:42:47 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 88
+[05-Mar-2019 17:49:30 America/Chicago] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home3/team7558/scouting.team7558.com/scoutinghome.php on line 88
