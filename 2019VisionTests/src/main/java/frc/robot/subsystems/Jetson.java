@@ -36,7 +36,7 @@ public class Jetson extends Subsystem {
 
   public double[] getRawValues() {
     return new double[] { rawValues.getEntry("angle").getDouble(3.14 / 2), rawValues.getEntry("x").getDouble(0),
-        rawValues.getEntry("y").getDouble(0) };
+        rawValues.getEntry("y").getDouble(0), rawValues.getEntry("offset").getDouble(0) };
   }
 
 }

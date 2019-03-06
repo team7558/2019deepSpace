@@ -12,14 +12,12 @@ import frc.robot.Robot;
 
 public class VisionTargetAlign extends Command {
   private static double targetDistance = 3, directionDistanceConstant = 0.2, endPointHeight = 1, endPointDX = 0.3;
-  private static double[] xi, yi;
-  private static double step;
-  private static double stepConstant = 0.01;
+  private static double[] xi =  new double[4], yi = new double[4];
+  private static double step = 1;
+  private static double stepConstant = 0.000001;
+  private static double x = 0, y = 0, angle = 3.14 / 2;
 
   public VisionTargetAlign() {
-    xi = new double[4];
-    yi = new double[4];
-    step = 1;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_driveTrain);
@@ -32,32 +30,43 @@ public class VisionTargetAlign extends Command {
   }
 
   // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
+  @Override                         
+  protected void execute() {       
     double[] powers = new double[2];
     double[] rawValues = Robot.m_jetson.getRawValues();
-    double angle = rawValues[0];
-    double x = rawValues[1];
-    double y = rawValues[2];
-    double targetPower = 0.3;
-
-    if (y <= 0) { // not seeing a target
-      step++;
-      Robot.m_driveTrain.tankDrive(0, 0);
-      return;
+    if (rawValues[1] > 0) {
+      x = rawValues[1];
+      y = rawValues[2];
+      angle = rawValues[0];
+      computeCurve();
     } else {
-      computeCurve(x, y, angle);
-      step = 1;
+      if (x > 0.1){
+        x -= 0.2;
+      } else {
+        x = 0.1;
+      }
     }
-
-    powers[0] = targetPower * turnRatio(x - stepConstant*step);
+    double targetPower = 0.3;
+    //boolean seeingTarget = y > 0;
+    //boolean reachedYAxis = x - stepConstant * step <= 0.1;
+    //System.out.println();
+    //if (!seeingTarget) {
+      //x-=0.0001;
+      // if (!reachedYAxis) {
+      //step++;
+      // }
+    //} else {
+      //step = 1;
+    //}
+    System.out.println(x);
+    powers[0] = targetPower * turnRatio(x-0.5);
     powers[1] = targetPower;
 
-    System.out.println(powers[0] + " " + powers[1]);
+    // System.out.println(powers[0] + " " + powers[1]);
     Robot.m_driveTrain.tankDrive(powers[0], powers[1]);
   }
 
-  protected void computeCurve(double x, double y, double angle) {
+  protected void computeCurve() {
     xi[0] = x;
     xi[1] = xi[0] - Math.cos(angle) * directionDistanceConstant;
     xi[3] = 0;
@@ -110,7 +119,7 @@ public class VisionTargetAlign extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return pathFunction(xi[0] + ) <= targetDistance + 5;
+    return pathFunction(x) <= targetDistance + 5;
   }
 
   // Called once after isFinished returns true

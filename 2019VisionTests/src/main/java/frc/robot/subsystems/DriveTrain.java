@@ -31,7 +31,7 @@ public class DriveTrain extends Subsystem {
   private Solenoid m_shifter;
   private double m_driveSpeed = 0;
   private double m_turn = 0;
-  private double m_maxSpeed = 0.4;
+  private double m_maxSpeed = 0.35;
   //private double m_leftZeroDistance = m_motorEncoders[0].getPosition(), m_rightZeroDistance = m_motorEncoders[3].getPosition();
 
   /**

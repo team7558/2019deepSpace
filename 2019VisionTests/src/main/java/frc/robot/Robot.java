@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 
   public static JoyDrive m_joyDrive;
   public static VisionTargetAlign m_visionTargetAlign;
-
+  public static DumbVision m_dumbVision;
   private CANSparkMax elbow, wrist;
 
   public Solenoid shooter;
@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
 
     m_joyDrive = new JoyDrive();
     m_visionTargetAlign = new VisionTargetAlign();
-
+    m_dumbVision = new DumbVision();
     SmartDashboard.putData("Auto mode", m_chooser);
 /*
     m_Compressor = new Compressor(RobotMap.COMPRESSOR);
@@ -160,15 +160,16 @@ public class Robot extends TimedRobot {
     m_arm.zero();
     m_arm.hold();
     m_arm.enable();
-    m_visionTargetAlign.start();
+    //m_visionTargetAlign.start();
     //m_joyDrive.start();
-    
+    m_dumbVision.start();
     m_endgame.retractAll();
   }
 
   @Override
   public void teleopPeriodic() {
-    m_visionTargetAlign.start();
+   // m_visionTargetAlign.start();
+    m_dumbVision.start();
     m_oi.checkOtherButtons();
     m_arm.updateArm();
     //m_jetson.printRawValues();
