@@ -20,7 +20,7 @@ import frc.robot.RobotMap;
 public class Claw extends Subsystem {
 
   private WPI_VictorSPX m_intake_1, m_intake_2, m_suction;
-  private Solenoid m_shooter;
+  private Solenoid m_shooter, m_hatchShooter;
   public double m_startTime;
   public static double SHOOT_SPEED = 0.95;
   public static double INTAKE_SPEED = 0.8;
@@ -30,6 +30,7 @@ public class Claw extends Subsystem {
     m_intake_2 = new WPI_VictorSPX(RobotMap.INTAKE_2);
     m_suction = new WPI_VictorSPX(RobotMap.HATCH_SUCTION);
     m_shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
+    m_hatchShooter = new Solenoid(RobotMap.SHOOT_HATCH);
     m_startTime = Timer.getFPGATimestamp();
   }
 
@@ -66,6 +67,11 @@ public class Claw extends Subsystem {
 
   public void releaseHatch(){
     m_suction.set(0);
+    m_hatchShooter.set(true);
+  }
+
+  public void stopHatchBlow(){
+    m_hatchShooter.set(false);
   }
 
 }

@@ -83,7 +83,7 @@ public class PIDMotorJoint extends PIDSubsystem {
       output = m_maxSpeed;
     if (output < -m_maxSpeed)
       output = -m_maxSpeed;
-    m_jointMotor.set(output);
+    //m_jointMotor.set(output);
   }
 
   public void checkOutOfBounds() {

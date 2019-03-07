@@ -136,8 +136,15 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
+    m_arm.zero();
+    m_arm.hold();
+    m_arm.enable();
+    m_joyDrive.cancel();
+    m_dumbVision.cancel();       
+    m_endgame.retractAll();
+    new TestAuto();
     if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
+      m_autonomousCommand.start(); 
     }
   }
 
@@ -146,7 +153,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    //new TestAuto();
+    Scheduler.getInstance().run() ;
   }
 
   @Override
@@ -158,9 +166,8 @@ public class Robot extends TimedRobot {
     m_arm.zero();
     m_arm.hold();
     m_arm.enable();
-    //m_visionTargetAlign.start();
     m_joyDrive.start();
-    m_dumbVision.cancel();
+    m_dumbVision.cancel();       
     m_endgame.retractAll();
   }
 
@@ -168,6 +175,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     m_oi.checkOtherButtons();
     m_arm.updateArm();
+    //System.out.println(m_driveTrain.distanceTravelled()[0]);
     Scheduler.getInstance().run();
   }
 
@@ -183,6 +191,6 @@ public class Robot extends TimedRobot {
      */
     wrist.set(m_oi.m_operator.getRawAxis(5) * 0.1);
     elbow.set(m_oi.m_operator.getRawAxis(1) * 0.1);
-
+    
   }
 }

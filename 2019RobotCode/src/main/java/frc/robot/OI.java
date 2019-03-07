@@ -123,7 +123,8 @@ public class OI {
     }
       
     if (m_driver.getRawAxis(3) > 0.4) {
-    DumbVision track = new DumbVision();
+      DumbVision track = new DumbVision();
+      track.linearSpeed = m_driver.getRawAxis(3);
       track.start();
     } else {
       Robot.m_joyDrive.start();

@@ -11,14 +11,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DumbVision extends Command {
-  public double kP, kI, kD, pTerm, iTerm, dTerm, prevError, errorSum; 
+  public double kP, kI, kD, pTerm, iTerm, dTerm, prevError, errorSum;
+  public double linearSpeed;
   public DumbVision() {
     kP = 0.0015;
     kD = 0;
     kI = 0;
     prevError = 0;
     errorSum = 0;
-
+    linearSpeed = 0;
     requires(Robot.m_driveTrain);
     requires(Robot.m_jetson);
     // Use requires() here to declare subsystem dependencies
@@ -36,7 +37,7 @@ public class DumbVision extends Command {
     double power1 = 0, power2 = 0;
     double error = Robot.m_jetson.getRawValues()[3];
     //double linearSpeed = 0.3;
-    double linearSpeed = -Robot.m_oi.m_driver.getRawAxis(1);
+    //double linearSpeed = -Robot.m_oi.m_driver.getRawAxis(1);
     //double joyTurn = Robot.m_oi.m_driver.getRawAxis(4);
     pTerm = kP*error;
     dTerm = kD*(error-prevError);
