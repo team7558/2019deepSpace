@@ -9,12 +9,8 @@ if(isset($_SESSION['username'])){
 $connect = mysqli_connect($db_HOST, $db_USER, $db_PASS, $db_NAME);
 $cid = $_SESSION['cid'];
 $TeamNumber = strip_tags($_GET['TeamNumber']);
-
-//$sortType = htmlspecialchars($_GET["sortType"]); // Should be a column name
-//$sortOrder = htmlspecialchars($_GET["sortOrder"]); // Should be ASC or DSC
-$sql = "SELECT * FROM `matches` WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$cid'";
+$sql = "SELECT * FROM `pitdata` WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$cid'";
 $search_result = mysqli_query($connect, $sql);
-}
 ?>
 <html>
 <head>
@@ -38,8 +34,154 @@ tr:nth-child(even) {
 </style>
 </head>
 <h1>Team: <?php echo $TeamNumber; ?></h1>
-<img src="/uploads/<?php echo $TeamNumber; ?>.jpg" height="500" width="500" />
 <h2>Comments: </h2>
+
+<div id="containertable">
+<div id="containerrow">
+
+<div id="teamphoto">
+<h2>Team Photo: </h2>
+<img src="/uploads/<?php echo $TeamNumber; ?>.jpg" height="500" width="500" />
+</div>
+
+<div id="containerpitdata">
+<h2>Pit Data</h2>
+<table>
+<?php $row = mysqli_fetch_array($search_result)?> //DON'T USE WHILE LOOP, ONLY SEARCH ONCE
+<tr>
+    <td>
+    <span class="pitdatafield">Team Name</span>
+    <span class="pitdatalong"><?php echo $row['TeamName']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Drivetrain Type</span>
+    <span class="pitdatalong"><?php echo $row['DrivetrainType']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Number of Wheels</span>
+    <span class="pitdatashort"><?php echo $row['NumberWheels']; ?></span>
+    <span class="pitdatafield">Number of Motors</span>
+    <span class="pitdatashort"><?php echo $row['NumberMotors']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">HAB Start Level</span>
+    <span class="pitdatalong"><?php echo $row['HABStart']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Cargo in Sandstorm</span>
+    <span class="pitdatashort"><?php echo $row['CargoSandstorm']; ?></span>
+    <span class="pitdatafield">Panel in Sandstorm</span>
+    <span class="pitdatashort"><?php echo $row['PanelSandstorm']; ?></td>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Hatch Intake Ground</span>
+    <span class="pitdatashort"><?php echo $row['IntakeHatchGround']; ?></span>
+    <span class="pitdatafield">Hatch Intake Human</span>
+    <span class="pitdatashort"><?php echo $row['IntakeHatchHuman']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Hatch Scoring Ship</span>
+    <span class="pitdatashort"><?php echo $row['ScoreHatchShip']; ?></span>
+    <span class="pitdatafield">Hatch Scoring Low</span>
+    <span class="pitdatashort"><?php echo $row['ScoreHatchLow']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Hatch Scoring Mid</span>
+    <span class="pitdatashort"><?php echo $row['ScoreHatchMid']; ?></span>
+    <span class="pitdatafield">Hatch Scoring High</span>
+    <span class="pitdatashort"><?php echo $row['ScoreHatchHigh']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Cargo Intake Ground</span>
+    <span class="pitdatashort"><?php echo $row['IntakeCargoGround']; ?></span>
+    <span class="pitdatafield">Cargo Intake Human</span>
+    <span class="pitdatashort"><?php echo $row['IntakeCargoHuman']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Cargo Scoring Ship</span>
+    <span class="pitdatashort"><?php echo $row['ScoreCargoShip']; ?></span>
+    <span class="pitdatafield">Cargo Scoring Low</span>
+    <span class="pitdatashort"><?php echo $row['ScoreCargoLow']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Cargo Scoring Mid</span>
+    <span class="pitdatashort"><?php echo $row['ScoreCargoMid']; ?></span>
+    <span class="pitdatafield">Cargo Scoring High</span>
+    <span class="pitdatashort"><?php echo $row['ScoreCargoHigh']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">HAB End Level</span>
+    <span class="pitdatalong"><?php echo $row['HABEnd']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Robots Carried</span>
+    <span class="pitdatalong"><?php echo $row['RobotsCarried']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Lift Type</span>
+    <span class="pitdatalong"><?php echo $row['LiftType']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Is Rookie</span>
+    <span class="pitdatalong"><?php echo $row['IsRookie']; ?></span>
+    </td>
+</tr>
+<tr>
+    <td>
+    <span class="pitdatafield">Cycle Time Seconds</span>
+    <span class="pitdatashort"><?php echo $row['CycleTimeSeconds']; ?></span>
+    <span class="pitdatafield">Robot Weight Pounds</span>
+    <span class="pitdatashort"><?php echo $row['RobotWeightPounds']; ?></span>
+    </td>
+</tr>
+</table>
+</div>
+
+</div>
+</div>
+
+
+<?php
+
+//$sortType = htmlspecialchars($_GET["sortType"]); // Should be a column name
+//$sortOrder = htmlspecialchars($_GET["sortOrder"]); // Should be ASC or DSC
+$sql = "SELECT * FROM `matches` WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$cid'";
+$search_result = mysqli_query($connect, $sql);
+
+}
+
+?>
+
+
+</table>
 
 
 <h2>Matches</h2>

@@ -67,6 +67,7 @@ tr:nth-child(even) {
     <th>Cargo From Human</th>
     <th>Panel From Floor</th>
     <th>Panel From Human</th>
+    <th>DefenseLevel</th>
     <th>Ship Hatch</th>
     <th>Ship Cargo</th>
     <th>Rocket Hatch</th>
@@ -84,6 +85,7 @@ tr:nth-child(even) {
     <td><?php echo $row['CargoFromHuman']; ?></td>
     <td><?php echo $row['PanelFromFloor']; ?></td>
     <td><?php echo $row['PanelFromHuman']; ?></td>
+    <td><?php echo $row['DefenseLevel']; ?></td>
     <td><?php echo $row['ShipPanels']; ?></td>
     <td><?php echo $row['ShipCargo']; ?></td>
     <td>A<?php echo $row['HighRocketPanels']; ?>, B<?php echo $row['MidRocketPanels']; ?>, C<?php echo $row['LowRocketPanels']; ?></td>

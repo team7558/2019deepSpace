@@ -72,6 +72,8 @@ window.location.href = 'https://www.scouting.team7558.com';
                     <th>Competition Page</th>
 					
                     <th>Scout Match</th>
+                    
+                    <th>Pit Scout</th>
 
                     <th>Add Teams/Matches</th>
 
@@ -95,7 +97,9 @@ window.location.href = 'https://www.scouting.team7558.com';
 
                     <td><a href="/matchhome.php?id=<?php echo $row['ID'];?>"> View </a></td>
 
-					<td><a href="/scoutingapp.php?id=<?php echo $row['ID'];?>"> Scout </a></td>
+					<td><a href="/scoutingapp.php?id=<?php echo $row['ID'];?>"> Scout Match </a></td>
+					
+					<td><a href="/pitscouting.php?id=<?php echo $row['ID'];?>"> Pit Scout </a></td>
 
                     <td><a href="/edit.php?id=<?php echo $row['ID'];?>"> Edit </a></td>
 
