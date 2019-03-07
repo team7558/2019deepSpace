@@ -13,3 +13,54 @@
 .panelitems {
     background-color: #e5d119;
 }
+
+#containertable {
+    display: table;
+    width: 100%;
+}
+
+#containerrow {
+    display: table-row;
+    width: 100%;
+}
+
+#teamphoto, #containerpitdata {
+    display: table-cell;
+}
+
+#teamphoto {
+    float: left;
+    width: 35%;
+}
+#containerpitdata {
+    width: 60%;
+    float: right;
+}
+
+#containerpitdata tr {
+    width: 100%;
+}
+
+#containerpitdata td {
+    width: 100%;
+}
+
+#containerpitdata span {
+    display: inline-block;
+    margin: 0;
+    padding-left: 8px;
+}
+.pitdatafield {
+    width: 23%;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+}
+
+
+.pitdatalong {
+    width: 65%;
+}
+
+.pitdatashort {
+    width: 20.625%;
+}
