@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class ReleaseHatch extends Command {
   public ReleaseHatch() {
-    
+    setTimeout(0.5);
     requires(Robot.m_claw);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -34,12 +34,13 @@ public class ReleaseHatch extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_claw.stopHatchBlow();
   }
 
   // Called when another command which requires one or more of the same
