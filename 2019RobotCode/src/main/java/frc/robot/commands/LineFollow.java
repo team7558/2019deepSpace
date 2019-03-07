@@ -10,41 +10,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class JoyDrive extends Command {
-  private double driveMax;
-  private double turnMax;
-
-  public JoyDrive() {
-    super();
+public class LineFollow extends Command {
+  private double distance, power, kP, kI, kD;
+  private double targetLight = 50;
+  public LineFollow(double distance, double power, double kP, double kI, double kD) {
     // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.m_driveTrain);
-    setMaxSpeeds(0.75, 0.6);
+    requires(Robot.m_lightSensor);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
-  }
-
-  public void setMaxSpeeds(double straightSpeed, double turnSpeed){
-    driveMax = straightSpeed;
-    turnMax = turnSpeed;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // speed, turn
-    double speed = -Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.throttle);
-    double turnValue = Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.turnStick);
-    //System.out.println(turnValue);
-    /*
-    if (Math.abs(turnValue) < 0.01){
-      turnValue = 0;
-    }
-    */
-    Robot.m_driveTrain.drive(speed*driveMax, turnValue*turnMax);
+    double error = targetLight - Robot.m_lightSensor.getLight();
+    double correction = 5;
+    Robot.m_driveTrain.tankDrive(0.0,0.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -63,5 +49,4 @@ public class JoyDrive extends Command {
   @Override
   protected void interrupted() {
   }
-
 }

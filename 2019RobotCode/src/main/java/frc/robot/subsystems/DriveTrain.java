@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -22,31 +23,45 @@ import frc.robot.Robot;
  * Add your docs here.
  */
 public class DriveTrain extends Subsystem { 
-  private CANSparkMax[] m_motors = new CANSparkMax[7];
+  //private CANSparkMax[] m_motors = new CANSparkMax[7];
+  private WPI_VictorSPX[] m_motors = new WPI_VictorSPX[4];
   private CANEncoder[] m_motorEncoders = new CANEncoder[7];
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   private DifferentialDrive m_driveTrain;
   private Solenoid m_shifter;
-  private double m_driveSpeed = 0;
-  private double m_turn = 0;
+  private double m_maxSpeed = 0.4;
+  //private double m_leftZeroDistance = m_motorEncoders[0].getPosition(), m_rightZeroDistance = m_motorEncoders[3].getPosition();
 
   /**
    * Add your docs here.
    */
   public DriveTrain() {
     super("DriveTrain"); 
+    /*
+    m_motors[0] = new WPI_VictorSPX(RobotMap.LEFT_MOTOR_1);
+    m_motors[1] = new WPI_VictorSPX(RobotMap.LEFT_MOTOR_2);
+    m_motors[2] = new WPI_VictorSPX(RobotMap.RIGHT_MOTOR_1);
+    m_motors[3] = new WPI_VictorSPX(RobotMap.RIGHT_MOTOR_1);
+    */
     
-    m_motors[1] = new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless);
-    m_motors[2] = new CANSparkMax(RobotMap.LEFT_MOTOR_2, MotorType.kBrushless);
-    m_motors[3] = new CANSparkMax(RobotMap.LEFT_MOTOR_3, MotorType.kBrushless);
-    m_motors[4] = new CANSparkMax(RobotMap.RIGHT_MOTOR_1, MotorType.kBrushless);
-    m_motors[5] = new CANSparkMax(RobotMap.RIGHT_MOTOR_2, MotorType.kBrushless);
-    m_motors[6] = new CANSparkMax(RobotMap.RIGHT_MOTOR_3, MotorType.kBrushless);
+    m_motors[0] = new CANSparkMax(RobotMap.LEFT_MOTOR_1, MotorType.kBrushless);
+    m_motors[1] = new CANSparkMax(RobotMap.LEFT_MOTOR_2, MotorType.kBrushless);
+    m_motors[2] = new CANSparkMax(RobotMap.LEFT_MOTOR_3, MotorType.kBrushless);
+    m_motors[3] = new CANSparkMax(RobotMap.RIGHT_MOTOR_1, MotorType.kBrushless);
+    m_motors[4] = new CANSparkMax(RobotMap.RIGHT_MOTOR_2, MotorType.kBrushless);
+    m_motors[5] = new CANSparkMax(RobotMap.RIGHT_MOTOR_3, MotorType.kBrushless);
+    
     for (int i = 0; i < m_motors.length; i++) {
       m_motorEncoders[i] = new CANEncoder(m_motors[i]);
     }
+    
     m_leftMotorGroup = new SpeedControllerGroup(m_motors[1], m_motors[2], m_motors[3]);
     m_rightMotorGroup = new SpeedControllerGroup(m_motors[4], m_motors[5], m_motors[6]);
+    */
+
+    m_leftMotorGroup = new SpeedControllerGroup(m_motors[0], m_motors[1]);
+    m_rightMotorGroup = new SpeedControllerGroup(m_motors[2], m_motors[3]);
+
     m_driveTrain = new DifferentialDrive(m_rightMotorGroup, m_leftMotorGroup);
     m_shifter = new Solenoid(RobotMap.SHIFT_SOLENOID);
   }
@@ -69,7 +84,29 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(double speedOne, double speedTwo){
+    if (speedOne > m_maxSpeed) speedOne = m_maxSpeed;
+    if (speedOne < -m_maxSpeed) speedOne = -m_maxSpeed;
+    if (speedTwo > m_maxSpeed) speedTwo = m_maxSpeed;
+    if (speedTwo < -m_maxSpeed) speedTwo = -m_maxSpeed;
     m_driveTrain.arcadeDrive(speedOne, speedTwo);
+  }
+
+  public void tankDrive(double speedOne, double speedTwo){
+    if (speedOne > m_maxSpeed) speedOne = m_maxSpeed;
+    if (speedOne < -m_maxSpeed) speedOne = -m_maxSpeed;
+    if (speedTwo > m_maxSpeed) speedTwo = m_maxSpeed;
+    if (speedTwo < -m_maxSpeed) speedTwo = -m_maxSpeed;
+    m_driveTrain.tankDrive(speedOne, speedTwo);
+  }
+
+  public void resetDistance(){
+    //m_leftZeroDistance = m_motorEncoders[0].getPosition();
+    //m_rightZeroDistance = m_motorEncoders[3].getPosition();
+  }
+
+  public double[] distanceTraveled(){
+    return new double[] {0.0,0.0};
+    //return new double[]{m_motorEncoders[0].getPosition()-m_leftZeroDistance, m_motorEncoders[3].getPosition()-m_rightZeroDistance};
   }
 
 }

@@ -83,6 +83,12 @@ public class PIDMotorJoint extends PIDSubsystem {
       output = m_maxSpeed;
     if (output < -m_maxSpeed)
       output = -m_maxSpeed;
+
+    if (this.getName().equals("wrist")) {
+      System.out.print(
+          this.getName() + " current: " + getAngle() + " target: " + getSetpoint() + " output: " + output + " || ");
+      System.out.println();
+    }
     m_jointMotor.set(output);
   }
 

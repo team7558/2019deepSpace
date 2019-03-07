@@ -36,8 +36,8 @@ public class JoyDrive extends Command {
   @Override
   protected void execute() {
     // speed, turn
-    double speed = Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.throttle);
-    double turnValue = -Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.turnStick);
+    double speed = -Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.throttle);
+    double turnValue = Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.turnStick);
     //System.out.println(turnValue);
     /*
     if (Math.abs(turnValue) < 0.01){

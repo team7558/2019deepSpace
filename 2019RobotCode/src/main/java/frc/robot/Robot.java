@@ -20,8 +20,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.JoyDrive;
-import frc.robot.commands.ShootCargo;
+import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -37,10 +36,12 @@ public class Robot extends TimedRobot {
   public static Claw m_claw;
   public static Arm m_arm;
   public static EndGame m_endgame;
+  public static Jetson m_jetson;
   public static DriveTrain m_driveTrain;
+  public static LightSensor m_lightSensor;
 
   public static JoyDrive m_joyDrive;
-
+  public static DumbVision m_dumbVision;
   private CANSparkMax elbow, wrist;
 
   public Solenoid shooter;
@@ -63,13 +64,14 @@ public class Robot extends TimedRobot {
     m_endgame = new EndGame();
     m_arm = new Arm(43, new Elbow(), new Wrist());
     m_driveTrain = new DriveTrain();
+    m_jetson = new Jetson();
     m_oi = new OI();
+    m_lightSensor = new LightSensor();
 
     // shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
 
     m_joyDrive = new JoyDrive();
-
-
+    m_dumbVision = new DumbVision();
     SmartDashboard.putData("Auto mode", m_chooser);
 /*
     m_Compressor = new Compressor(RobotMap.COMPRESSOR);
@@ -156,8 +158,9 @@ public class Robot extends TimedRobot {
     m_arm.zero();
     m_arm.hold();
     m_arm.enable();
+    //m_visionTargetAlign.start();
     m_joyDrive.start();
-    
+    m_dumbVision.cancel();
     m_endgame.retractAll();
   }
 
@@ -168,9 +171,9 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
-  // DigitalInput elbowSwitch = new DigitalInput(RobotMap.BACK_ELBOW_SWITCH);
+  // DigitalInput elbowSwitch =  new DigitalInput(RobotMap.BACK_ELBOW_SWITCH);
   // DigitalInput wristSwitch = new DigitalInput(RobotMap.BACK_WRIST_SWITCH);
-  Solenoid valve = new Solenoid(0);
+
   @Override
   public void testPeriodic() {
     Scheduler.getInstance().removeAll();
@@ -178,11 +181,8 @@ public class Robot extends TimedRobot {
      * if (Robot.m_oi.m_operator.getRawButton(1)){ if (!elbowSwitch.get()){
      * elbow.set(-0.05); } if (!wristSwitch.get()){ wrist.set(-0.05); } } else {
      */
-    /*
     wrist.set(m_oi.m_operator.getRawAxis(5) * 0.1);
     elbow.set(m_oi.m_operator.getRawAxis(1) * 0.1);
-    */
-    valve.set(true);
 
   }
 }
