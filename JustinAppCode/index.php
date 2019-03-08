@@ -1,9 +1,19 @@
 <?php
+
+if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+    $link = "https"; 
+else {
+    $link = "http"; 
+    header("Location: https://www.scouting.team7558.com", true, 301);
+}
+
+
+
+
 session_start();
 if (isset($_POST['username'])) {
     
-     $dbCon = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
-    
+
     
     // Form
     $user = ($_POST['username']);

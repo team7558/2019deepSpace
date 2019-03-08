@@ -1,7 +1,8 @@
 <?php
 session_start();
 	$cid = $_GET['id'];
-	$query = "SELECT * FROM `competitions` WHERE `id` = '$cid' ";
+	$sortType = $_GET['SortType'];
+	$query = "SELECT * FROM `competitions` WHERE `id` = '$cid'";
 	$belongsToUser = false;
 	$_SESSION['cid'] = $cid;
 	$search_result = filterTable($query);
@@ -12,7 +13,13 @@ session_start();
 	endwhile;
 	if((isset($_SESSION['username']) && $belongsToUser)){
 	$user = $_SESSION['username'];
-    $query = "SELECT * FROM `matchAverages` WHERE `competition` = '$cid'";
+	
+	if(isset($_GET['SortType'])){
+	    $query = "SELECT * FROM `matchAverages` WHERE `competition` = '$cid' ORDER BY $sortType DESC";
+	    
+	}else{
+        $query = "SELECT * FROM `matchAverages` WHERE `competition` = '$cid'";
+	}
     $search_result = filterTable($query);
 	
 	}else{
@@ -60,20 +67,20 @@ tr:nth-child(even) {
 <table>
 <tr>
     <th>Team Number</th>
-    <th>Hab Start</th>
-    <th>Sandstorm Cargo</th>
-    <th>Sandstorm Panels</th>
-    <th>Cargo From Floor</th>
-    <th>Cargo From Human</th>
-    <th>Panel From Floor</th>
-    <th>Panel From Human</th>
-    <th>DefenseLevel</th>
-    <th>Ship Hatch</th>
-    <th>Ship Cargo</th>
-    <th>Rocket Hatch</th>
-    <th>Rocket Cargo</th>
-    <th>Hab End</th>
-    <th>Robots Carried</th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=HABSandstormScore">Hab Start</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=SandstormCargo">Sandstorm Cargo</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=SandstormPanels">Sandstorm Panels</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=CargoFromFloor">Cargo From Floor</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=CargoFromHuman">Cargo From Human</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=PanelFromFloor">Panel From Floor</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=PanelFromHuman">Panel From Human</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=DefenseLevel">DefenseLevel</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=ShipPanels">Ship Hatch</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=ShipCargo">Ship Cargo</a></th>
+    <th>Rocket Hatch (<a href="/matchhome.php?id=<?php echo $cid ?>&SortType=HighRocketPanels">A</a>, <a href="/matchhome.php?id=<?php echo $cid ?>&SortType=MidRocketPanels">B</a>, <a href="/matchhome.php?id=<?php echo $cid ?>&SortType=LowRocketPanels">C</a>)</th>
+    <th>Rocket Cargo (<a href="/matchhome.php?id=<?php echo $cid ?>&SortType=HighRocketCargo">A</a>, <a href="/matchhome.php?id=<?php echo $cid ?>&SortType=MidRocketCargo">B</a>, <a href="/matchhome.php?id=<?php echo $cid ?>&SortType=LowRocketCargo">C</a>)</th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=HabEndScore">Hab End</a></th>
+    <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=RobotsCarried">Robots Carried</a></th>
   </tr>
 <?php while($row = mysqli_fetch_array($search_result)):?>
   <tr>

@@ -15,39 +15,24 @@ $search_result = mysqli_query($connect, $sql);
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/databasestyle.css">
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
 </head>
 <h1>Team: <?php echo $TeamNumber; ?></h1>
 <h2>Comments: </h2>
+<a href="https://www.scouting.team7558.com/scoutinghome.php"><button id="gohome">Go Home</button></a>
 
 <div id="containertable">
 <div id="containerrow">
 
 <div id="teamphoto">
 <h2>Team Photo: </h2>
-<img src="/uploads/<?php echo $TeamNumber; ?>.jpg" height="500" width="500" />
+<img src="/uploads/<?php echo $TeamNumber; ?>_<?php echo $cid; ?>.jpg" height="500" width="500" />
 </div>
 
 <div id="containerpitdata">
 <h2>Pit Data</h2>
-<table>
-<?php $row = mysqli_fetch_array($search_result)?> //DON'T USE WHILE LOOP, ONLY SEARCH ONCE
+<table id="pitdatatable">
+<?php $row = mysqli_fetch_array($search_result)?> 
 <tr>
     <td>
     <span class="pitdatafield">Team Name</span>
@@ -76,58 +61,58 @@ tr:nth-child(even) {
 </tr>
 <tr>
     <td>
-    <span class="pitdatafield">Cargo in Sandstorm</span>
-    <span class="pitdatashort"><?php echo $row['CargoSandstorm']; ?></span>
-    <span class="pitdatafield">Panel in Sandstorm</span>
-    <span class="pitdatashort"><?php echo $row['PanelSandstorm']; ?></td>
+    <span class="pitdatafield"id="cargotable">Cargo in Sandstorm</span>
+    <span class="pitdatashort"id="cargotable"><?php echo $row['CargoSandstorm']; ?></span>
+    <span class="pitdatafield"id="paneltable">Panel in Sandstorm</span>
+    <span class="pitdatashort"id="paneltable"><?php echo $row['PanelSandstorm']; ?></td>
     </td>
 </tr>
 <tr>
     <td>
-    <span class="pitdatafield">Hatch Intake Ground</span>
-    <span class="pitdatashort"><?php echo $row['IntakeHatchGround']; ?></span>
-    <span class="pitdatafield">Hatch Intake Human</span>
-    <span class="pitdatashort"><?php echo $row['IntakeHatchHuman']; ?></span>
+    <span class="pitdatafield"id="cargotable">Cargo Intake Ground</span>
+    <span class="pitdatashort"id="cargotable"><?php echo $row['IntakeCargoGround']; ?></span>
+    <span class="pitdatafield"id="paneltable">Hatch Intake Ground</span>
+    <span class="pitdatashort"id="paneltable"><?php echo $row['IntakeHatchGround']; ?></span>
     </td>
 </tr>
 <tr>
     <td>
-    <span class="pitdatafield">Hatch Scoring Ship</span>
-    <span class="pitdatashort"><?php echo $row['ScoreHatchShip']; ?></span>
-    <span class="pitdatafield">Hatch Scoring Low</span>
-    <span class="pitdatashort"><?php echo $row['ScoreHatchLow']; ?></span>
+    <span class="pitdatafield"id="cargotable">Cargo Intake Human</span>
+    <span class="pitdatashort"id="cargotable"><?php echo $row['IntakeCargoHuman']; ?></span>
+    <span class="pitdatafield"id="paneltable">Hatch Intake Human</span>
+    <span class="pitdatashort"id="paneltable"><?php echo $row['IntakeHatchHuman']; ?></span>
     </td>
 </tr>
 <tr>
     <td>
-    <span class="pitdatafield">Hatch Scoring Mid</span>
-    <span class="pitdatashort"><?php echo $row['ScoreHatchMid']; ?></span>
-    <span class="pitdatafield">Hatch Scoring High</span>
-    <span class="pitdatashort"><?php echo $row['ScoreHatchHigh']; ?></span>
+    <span class="pitdatafield"id="cargotable">Cargo Scoring Ship</span>
+    <span class="pitdatashort"id="cargotable"><?php echo $row['ScoreCargoShip']; ?></span>
+    <span class="pitdatafield"id="paneltable">Hatch Scoring Ship</span>
+    <span class="pitdatashort"id="paneltable"><?php echo $row['ScoreHatchShip']; ?></span>
     </td>
 </tr>
 <tr>
     <td>
-    <span class="pitdatafield">Cargo Intake Ground</span>
-    <span class="pitdatashort"><?php echo $row['IntakeCargoGround']; ?></span>
-    <span class="pitdatafield">Cargo Intake Human</span>
-    <span class="pitdatashort"><?php echo $row['IntakeCargoHuman']; ?></span>
+    <span class="pitdatafield"id="cargotable">Cargo Scoring Low</span>
+    <span class="pitdatashort"id="cargotable"><?php echo $row['ScoreCargoLow']; ?></span>
+    <span class="pitdatafield"id="paneltable">Hatch Scoring Low</span>
+    <span class="pitdatashort"id="paneltable"><?php echo $row['ScoreHatchLow']; ?></span>
     </td>
 </tr>
 <tr>
     <td>
-    <span class="pitdatafield">Cargo Scoring Ship</span>
-    <span class="pitdatashort"><?php echo $row['ScoreCargoShip']; ?></span>
-    <span class="pitdatafield">Cargo Scoring Low</span>
-    <span class="pitdatashort"><?php echo $row['ScoreCargoLow']; ?></span>
+    <span class="pitdatafield"id="cargotable">Cargo Scoring Mid</span>
+    <span class="pitdatashort"id="cargotable"><?php echo $row['ScoreCargoMid']; ?></span>
+    <span class="pitdatafield"id="paneltable">Hatch Scoring Mid</span>
+    <span class="pitdatashort"id="paneltable"><?php echo $row['ScoreHatchMid']; ?></span>
     </td>
 </tr>
 <tr>
     <td>
-    <span class="pitdatafield">Cargo Scoring Mid</span>
-    <span class="pitdatashort"><?php echo $row['ScoreCargoMid']; ?></span>
-    <span class="pitdatafield">Cargo Scoring High</span>
-    <span class="pitdatashort"><?php echo $row['ScoreCargoHigh']; ?></span>
+    <span class="pitdatafield"id="cargotable">Cargo Scoring High</span>
+    <span class="pitdatashort"id="cargotable"><?php echo $row['ScoreCargoHigh']; ?></span>
+    <span class="pitdatafield"id="paneltable">Hatch Scoring High</span>
+    <span class="pitdatashort"id="paneltable"><?php echo $row['ScoreHatchHigh']; ?></span>
     </td>
 </tr>
 <tr>
@@ -185,9 +170,8 @@ $search_result = mysqli_query($connect, $sql);
 
 
 <h2>Matches</h2>
-<table>
+<table class="matchdatatable">
 <tr>
-    <th>Team Number</th>
     <th>Match Number</th>
     <th>HAB Start</th>
     <th>Sandstorm Cargo</th>
@@ -209,7 +193,6 @@ $search_result = mysqli_query($connect, $sql);
   </tr>
 <?php while($row = mysqli_fetch_array($search_result)):?>
   <tr>
-    <td><?php echo $row['TeamNumber']; ?></td>
     <td><a href="/match.php?MatchNumber=<?php echo $row['MatchNumber']; ?>"><?php echo $row['MatchNumber']; ?></a></td>
     <td class="habitems"><?php echo $row['HABSandstormScore']; ?></td>
     <?php $totalHABSandstormScore += $row['HABSandstormScore']; ?>
@@ -273,6 +256,8 @@ $totalLowRocketCargo /= $counter;
 $totalHABEndScore /= $counter;
 $totalRobotsCarried /= $counter;
 
+echo $totalCargoFromFloor;
+
 $sql = "SELECT * FROM `matchAverages` WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$cid'";
 
 $search_result = mysqli_query($connect, $sql);
@@ -282,7 +267,7 @@ $exists = true;
 endwhile;
 
 if($exists){
-$sql = "UPDATE `matchAverages` SET `HABSandstormScore`='$totalHABSandstormScore',`SandstormCargo`='$totalSandstormCargo',`SandstormPanels`='$totalSandstormPanels',`CargoFromFloor`='$totalCargoFromFloor',`CargoFromHuman`='$totalCargoFromHuman',`PanelFromFloor`='$totalPanelFromFloor',`PanelFromHuman`='$totalPanelFromHuman ,`DefenseLevel`='$totalDefenseLevel',`ShipCargo`='$totalShipCargo',`ShipPanels`='$totalShipPanels',`LowRocketCargo`='$totalLowRocketPanels',`LowRocketPanels`='$totalLowRocketPanels',`MidRocketCargo`='$totalMidRocketCargo',`MidRocketPanels`='$totalMidRocketPanels',`HighRocketCargo`='$totalHighRocketCargo',`HighRocketPanels`='$totalHighRocketPanels',`RobotsCarried`='$totalRobotsCarried',`HabEndScore`='$totalHABEndScore' WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$cid'";
+$sql = "UPDATE `matchAverages` SET `HABSandstormScore`='$totalHABSandstormScore',`SandstormCargo`='$totalSandstormCargo',`SandstormPanels`='$totalSandstormPanels',`CargoFromFloor`='$totalCargoFromFloor',`CargoFromHuman`='$totalCargoFromHuman',`PanelFromFloor`='$totalPanelFromFloor',`PanelFromHuman`='$totalPanelFromHuman' ,`DefenseLevel`='$totalDefenseLevel',`ShipCargo`='$totalShipCargo',`ShipPanels`='$totalShipPanels',`LowRocketCargo`='$totalLowRocketPanels',`LowRocketPanels`='$totalLowRocketPanels',`MidRocketCargo`='$totalMidRocketCargo',`MidRocketPanels`='$totalMidRocketPanels',`HighRocketCargo`='$totalHighRocketCargo',`HighRocketPanels`='$totalHighRocketPanels',`RobotsCarried`='$totalRobotsCarried',`HabEndScore`='$totalHABEndScore' WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$cid'";
 }else{
     $sql = "INSERT INTO `matchAverages` (Competition, TeamNumber, HABSandstormScore, SandstormCargo, SandstormPanels, CargoFromFloor, CargoFromHuman, PanelFromFloor, PanelFromHuman, DefenseLevel, ShipCargo, ShipPanels, LowRocketCargo, LowRocketPanels, MidRocketCargo, MidRocketPanels, HighRocketCargo, HighRocketPanels, RobotsCarried, HabEndScore) VALUES ('$cid', '$TeamNumber', '$totalHABSandstormScore', '$totalSandstormCargo', '$totalSandstormPanels', '$totalCargoFromFloor', '$totalCargoFromHuman', '$totalPanelFromFloor', '$totalPanelFromHuman', '$totalDefenseLevel', '$totalShipCargo', '$totalShipPanels', '$totalLowRocketCargo', '$totalLowRocketPanels', '$totalMidRocketCargo', '$totalMidRocketPanels', '$totalHighRocketCargo', '$totalHighRocketPanels', '$totalRobotsCarried', '$totalHabEndScore')";
     

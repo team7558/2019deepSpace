@@ -50,6 +50,8 @@
          <span class="toptitle">Scout:</span><span id="scoutname"><input type="text" size="16" id="inputscoutname" onchange="updateScoutName();"></span><br>
          <div class="inputmid"></div>
          <span class="toptitle">Team:</span><span id="teamnumber"><input type="number" min=0 max=7915 id="inputteamnumber" onchange="updateTeamNumber();"></span>
+         <br>
+         <button id="gohome" onclick="goHome();">Go Home</button>
       </div>
       <div id="stations">
          <div id="stationrow">

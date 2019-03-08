@@ -182,6 +182,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "block";
 		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
+		document.getElementById("gohome").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -211,6 +212,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "block";
 		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
+		document.getElementById("gohome").style.display = "none";
 
 
 		var y = document.getElementsByClassName("modelbl");
@@ -239,6 +241,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "block";
 		document.getElementById("sstable").style.display = "table";
 		document.getElementById("miscellaneous").style.display = "none";
+		document.getElementById("gohome").style.display = "none";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -266,6 +269,7 @@ function updateMode(mode) {
 		document.getElementById("gamemap").style.display = "none";
 		document.getElementById("sstable").style.display = "none";
 		document.getElementById("miscellaneous").style.display = "table";
+		document.getElementById("gohome").style.display = "block";
 
 		var y = document.getElementsByClassName("modelbl");
 		for(i = 0; i < y.length; i++) {
@@ -797,6 +801,18 @@ function checkButtonScored(button, cargo, panel) {
 
 
 
+
+
+function goHome() {
+    if(confirm("Are you sure want to return to the Scouting Home Page? All data will be lost.")) {
+        if(confirm("Are you absolutely sure?")) {
+            window.location.href = "https://www.scouting.team7558.com/scoutinghome.php";
+        }
+    }
+}
+
+
+
 function getSandstormScored(type) {
 	var count = 0;
 	for(i = 0; i < scoreSheet.length; i++) {
@@ -886,6 +902,12 @@ function changeVar(data, amount) {
     resetErrorSheet();
 }
 
+
+
+function fixText(text) {
+    var curr = text.replace(/'/g,"");
+    return curr;
+}
 
 
 
@@ -996,14 +1018,14 @@ function updateFormData() {
 
 	//Comments
 	thisData = document.getElementById("datacomments");
-	thisData.value = document.getElementById("commentbox").value;
+	thisData.value = fixText(document.getElementById("commentbox").value);
 	message += thisData.name+": "+thisData.value+"\n";
 
 	//Competition Information
 	document.getElementById("matchdatateamnumber").value = teamNumber;
 	document.getElementById("matchdatamatchnumber").value = matchNumber;
 	document.getElementById("matchdatarobotstation").value = station;
-	document.getElementById("matchdatascoutname").value = document.getElementById("inputscoutname").value;;
+	document.getElementById("matchdatascoutname").value = fixText(document.getElementById("inputscoutname").value);
 	message+="Station: "+station;
 	
 }

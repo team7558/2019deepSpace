@@ -11,7 +11,7 @@ body{
   display: table;
   margin-left: auto;
   margin-right: auto;
-  height: 712px;
+  height: 860px;
   width: 1100px;
   padding: 16px;
 }
@@ -76,14 +76,14 @@ body{
 }
 
 #h, #c, #drive {
-  height: 300px;
+  height: 360px;
 }
 
 #misc, #end {
-  height: 200px;
+  height: 240px;
 }
 #general, #start {
-  height: 160px;
+  height: 200px;
 }
 
 #hatch, #cargo {
@@ -141,7 +141,9 @@ body{
 }
 
 .inputs[type="radio"] {
-  width: 20px;
+  width: 24px;
+  height: 24px;
+  vertical-align: -35%
 }
 
 .driverow .element {
@@ -168,9 +170,9 @@ body{
 
 .checkinputs {
   margin-top: 12px;
-  width: 16px;
-  height: 16px;
-  vertical-align: bottom;
+  width: 32px;
+  height: 24px;
+  vertical-align: -35%;
 }
 
 .checkelement {
@@ -193,11 +195,10 @@ body{
 
 
 #showtop {
-  position: absolute
   z-index: 3;
 }
 
-#submit {
+#submitform, #submitphoto, #gohome {
   font-weight: bold;
   font-size: 16px;
   padding: 22px;
@@ -207,15 +208,30 @@ body{
   border-radius: 15px;
 }
 
+#submitphoto {
+    position: absolute;
+    top: 8px;
+    left: 120px;
+}
 
-#submit:hover {
+#gohome {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+#gohome {
+    float: right;
+}
+
+#submit:hover, #submitphoto:hover, #gohome:hover {
     background-color: #f49541;
 }
 
 .modelbl {
   z-index: -2;
   left: 0px;
-  position: fixed;
+  position: absolute;
   width: 100%;
   background-color: #f4bf42;
   color: white;
