@@ -1,5 +1,6 @@
 body {
     font-family: arial, sans-serif;
+    background-color: #d7dae0;
 }
 
 table {
@@ -11,7 +12,12 @@ th,td {
     text-align: center;
 }
 
-#gohome {
+.matchdataheader {
+    margin-top: 28px;
+    margin-bottom: 28px;
+}
+
+#gohome, #findmatchbutton {
     position: absolute;
     right: 8px;
     top: 8px;
@@ -24,9 +30,21 @@ th,td {
     border-radius: 15px;
 }
 
-#gohome:hover {
+#gohome:hover, #findmatchbutton:hover {
     background-color: #f49541;
 }
+
+#findmatchbutton {
+    right: 140px;
+    height: 63px;
+}
+
+#inputmatchnumber {
+    margin-left: 12px;
+}
+
+
+
 
 .matchdata {
     text-align: center;
@@ -36,6 +54,15 @@ th,td {
     background-color: #429ef4;
 }
 
+    /*defenseitems is kept under habitems
+      the colours are listed below:
+      
+      no defense - #ffc1b7
+      mid defense - #ff8672
+      good defense - #ff4426
+      
+      */
+
 .cargoitems, #cargotable {
     background-color: #f2982b;
 }
@@ -43,6 +70,50 @@ th,td {
 .panelitems, #paneltable {
     background-color: #e5d119;
 }
+
+#hometable {
+    width: 100%;
+}
+
+#hometable tr {
+    height: 48px;
+    border-bottom: 2px solid black;
+}
+
+#hometable tr:last-child {
+    border-bottom: 0px solid black;
+}
+
+#hometable td, #hometable th {
+    border-right: 2px solid black
+}
+
+#hometable td:last-child, #hometable th:last-child {
+    border-right: 0px solid black;
+}
+
+#hometable tr:first-child {
+    background-color: #d7dae0;
+}
+
+#hometable tr {
+    background-color: #f2f3f4;
+}
+
+#hometable tr:nth-child(even) {
+    background-color: #e5e6ea;
+}
+
+
+#homeid { width: 10%; }
+#homenme { width: 20%; }
+#homeview { width: 14%; }
+#homescout { width: 14%; }
+#homepit { width: 14%; }
+#homepreload { width: 14%; }
+#homeedit { width: 14%; }
+
+
 
 
 #containertable {
@@ -99,14 +170,18 @@ th,td {
     vertical-align: middle;
     margin-bottom: 2px;
 }
-.pitdatafield {
+
+#containerpitdata .pitdatabig, #containerpitdata .pitdatafieldbig {
+    height: 56px;
+}
+
+.pitdatafield, .pitdatafieldbig {
     width: 23%;
     border-right: 2px solid black;
     border-left: 2px solid black;
 }
 
-
-.pitdatalong {
+.pitdatalong, .pitdatabig {
     width: 65.85%;
 }
 
@@ -114,6 +189,6 @@ th,td {
     width: 20.625%;
 }
 
-.pitdatafield, .pitdatalong, .pitdatashort {
-    background-color: gray;
+.pitdatafield, .pitdatalong, .pitdatashort, .pitdatafieldbig, .pitdatabig {
+    background-color: #bbc3cc;
 }

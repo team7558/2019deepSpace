@@ -8,40 +8,64 @@ if (isset($_POST['username'])) {
     // Form
     $user = ($_POST['username']);
     $pass = ($_POST['password']);
-if(!isset($user) || trim($user) == '')
+	$email = ($_POST['email']);
+    $teamnumber = ($_POST['teamnumber']);
+	$schoolname = ($_POST['schoolname']);
+	
+if((!isset($user) || trim($user) == '') || (!isset($pass) || trim($pass) == '') || (!isset($teamnumber) || trim($teamnumber) == ''|| (!isset($schoolname) || trim($schoolname) == '')))
 {
-   echo "You did not fill out the required fields.";
+   $errors = "You did not fill out the required fields.";
 } else{
-    
-    
-    $sql        = "SELECT * FROM users WHERE username = '$user' LIMIT 1";
-    $query      = mysqli_query($dbCon, $sql); //search database
-    $row        = mysqli_fetch_row($query);
-    $uid        = $row[0];
-    $dbUsname   = $row[1];
-    $dbPassword = $row[2];
-  echo $dbUsname;
-  echo $dbUsname;
-  $acti = $row[5];
-    // Check if user=user and pass=pass
-  
-    if ($user == $dbUsname && $pass == $dbPassword) {
-    
-        // Set session 
-        $_SESSION['username'] = $user;
-        $_SESSION['id'] = $uid;
-    ?>
-        <script type="text/javascript">
-    window.location.href = 'http://scouting.team7558.com/scoutinghome';
-    </script>
-        <?php
-    } else {
-        echo "<h2>Oops that username or password combination was incorrect.
-        <br /> Please try again.</h2>";
-    }
-}
-  
-    
+	$sql = "SELECT * FROM `users` WHERE `Username` = '$user'";
+	$search_result = mysqli_query($connect, $sql);
+	$exists = false;
+	while($row = mysqli_fetch_array($search_result)):
+	$exists = true;
+	endwhile;
+	if($exists){
+		$errors = "That username already exists";	
+	}
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  		$errors = "Invalid email";
+	}
+	if (!preg_match("/^[a-zA-Z ]*$/",$schoolname)) {
+  		$errors = "Only letters and spaces permitted in school name";
+	}
+	if(!isset($errors) || trim($errors) == ''){
+    	$sql = "INSERT INTO `users` (Username, Password, Email, Team Number) VALUES ('$user', '$pass', '$email', '$teamnumber')";
+	
+	if ($connect->query($sql) === TRUE) {
+    echo "Record updated successfully";
+	
+	$email_to = "scouting@team7558.com";
+ 
+    $email_subject = "New Account at Team7558.com";
+    $email_message .= "Hello, Team ".($teamnumber). "\n";
+	 
+    $email_message .= "Thanks for registering your account at scouting.team7558.com. You must first verify your account by visiting the following link and logging in: ".$link."\n";
+	
+	$email_message .= "Please make a note of your account information, it is as follows:"."\n";
+	$email_message .= "\n"."Username: ".($user)."\n";
+	$email_message .= "Email: ".($email)."\n";
+	$email_message .= "Team Number: ".($teamnumber)."\n";
+	$email_message .= "School Name: ".($schoolname)."\n";	
+	// create email headers
+ 
+	$headers = 'From: '.$email_to."\r\n".
+ 
+	'Reply-To: '.$email."\r\n" .
+ 
+	'X-Mailer: PHP/' . phpversion();
+ 
+	@mail($email_to, $email_subject, $email_message, $headers);  
+ 
+	@mail($email, $email_subject, $email_message, $headers);  
+
+	} else {
+    echo "Error updating record: " . $conn->error;
+	}
+	}
+	}
 }
 ?>
 
@@ -57,7 +81,7 @@ if(!isset($user) || trim($user) == '')
 <body>
     <div id="mainbox">
         <div id="outerbox">
-            <form action="/index.php" enctype="multipart/form-data" id="form" method="post" name="form">
+            <form action="/register.php" enctype="multipart/form-data" id="form" method="post" name="form">
               <h1>TEAM 7558<br>SCOUTING APP<br><i>REGISTRATION</i></h1>
               <br>
               USERNAME: <br>
@@ -82,7 +106,7 @@ if(!isset($user) || trim($user) == '')
             <a href="http://scouting.team7558.com"><button id="login">Login</button></a>
             <br/>
             <div id="errors">
-              You inputted an invalid username or password.<br>Please try again.
+              <?php echo $errors; ?>
             </div>
         </div>
     </div>

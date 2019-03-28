@@ -906,6 +906,8 @@ function changeVar(data, amount) {
 
 function fixText(text) {
     var curr = text.replace(/'/g,"");
+    curr = curr.replace(/\"/g,"");
+    curr = curr.replace(/`/g,"");
     return curr;
 }
 

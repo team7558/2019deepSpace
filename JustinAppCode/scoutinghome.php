@@ -2,7 +2,7 @@
 
 	session_start();
 
-	echo $_SESSION['username']; 
+	echo 'Welcome, '.$_SESSION['username']; 
 
 	if(isset($_SESSION['username'])){
 
@@ -49,7 +49,7 @@ window.location.href = 'https://www.scouting.team7558.com';
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 
-<title>Untitled Document</title>
+<title>Team 7558 Scouting App</title>
 
 </head>
 
@@ -61,23 +61,23 @@ window.location.href = 'https://www.scouting.team7558.com';
 
 
 
-<table>
+<table id="hometable">
 
                 <tr>
 
-                    <th>ID</th>
+                    <th id="homeid">ID</th>
 
-                    <th>Competition Name</th>
+                    <th id="homename">Competition Name</th>
 
-                    <th>Competition Page</th>
+                    <th id="homeview">Competition Page</th>
 					
-                    <th>Scout Match</th>
+                    <th id="homescout">Scout Match</th>
                     
-                    <th>Pit Scout</th>
+                    <th id="homepit">Pit Scout</th>
 
-                    <th>Add Teams/Matches</th>
+                    <th id="homepreload">Preload Teams and Matches</th>
 
-                    <th>Delete Competition</th>
+                    <th id="homeedit">Edit/Delete Data</th>
                     
                     
 
@@ -101,9 +101,9 @@ window.location.href = 'https://www.scouting.team7558.com';
 					
 					<td><a href="/pitscouting.php?id=<?php echo $row['ID'];?>"> Pit Scout </a></td>
 
-                    <td><a href="/edit.php?id=<?php echo $row['ID'];?>"> Edit </a></td>
+                    <td><a href="/preload.php?id=<?php echo $row['ID'];?>">Preload </a></td>
 
-                    <td><a href="/delete.php?id=<?php echo $row['ID'];?>"> Delete </a></td>
+                    <td><a href="/edit.php?id=<?php echo $row['ID'];?>"> Edit/Delete </a></td>
 
                 </tr>
 

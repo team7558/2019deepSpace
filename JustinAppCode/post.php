@@ -11,6 +11,7 @@ $conn = new mysqli($db_HOST, $db_USER, $db_PASS, $db_NAME);
 $Date = date("Y/m/d");
 $Time = date("h:i:sa");
 $Username = strip_tags($_POST['Username']);
+$Updated = true;
 $HABSandstormScore = strip_tags($_POST['HABSandstormScore']);
 $SandstormCargo = strip_tags($_POST['SandstormCargo']);
 $SandstormPanels = strip_tags($_POST['SandstormPanels']);
@@ -41,7 +42,22 @@ $RobotStation = strip_tags($_POST['RobotStation']);
 $ScoutName = strip_tags($_POST['ScoutName']);
 
 
-$sql = "INSERT INTO matches (Date, Time, Username, HABSandstormScore, SandstormCargo, SandstormPanels, CargoFromFloor, CargoFromHuman, PanelFromFloor, PanelFromHuman, DefenseLevel, ShipCargo, ShipPanels, LowRocketCargo, LowRocketPanels, MidRocketCargo, MidRocketPanels, HighRocketCargo, HighRocketPanels, RobotsCarried, HABEndScore, Comments, TeamNumber, Competition, MatchNumber, RobotStation, ScoutName) VALUES ('$Date', '$Time', '$Username', '$HABSandstormScore', '$SandstormCargo', '$SandstormPanels', '$CargoFromFloor', '$CargoFromHuman', '$PanelFromFloor', '$PanelFromHuman', '$DefenseLevel', '$ShipCargo', '$ShipPanels', '$LowRocketCargo', '$LowRocketPanels', '$MidRocketCargo', '$MidRocketPanels', '$HighRocketCargo', '$HighRocketPanels', '$RobotsCarried', '$HABEndScore', '$Comments', '$TeamNumber', '$Competition', '$MatchNumber', '$RobotStation', '$ScoutName')";
+
+
+
+$sql = "SELECT * FROM `matches` WHERE `TeamNumber` = '$TeamNumber' AND `MatchNumber` = '$MatchNumber' AND `Competition` = '$Competition'";
+
+$search_result = mysqli_query($conn, $sql);
+$exists = false;
+while($row = mysqli_fetch_array($search_result)):
+$exists = true;
+endwhile;
+
+if($exists) {
+    $sql = "UPDATE `matches` SET `Date` = '$Date', `Time` = '$Time', `Username` = '$Username', `Updated` = '1', `HABSandstormScore`='$HABSandstormScore',`SandstormCargo`='$SandstormCargo',`SandstormPanels`='$SandstormPanels',`CargoFromFloor`='$CargoFromFloor',`CargoFromHuman`='$CargoFromHuman',`PanelFromFloor`='$PanelFromFloor',`PanelFromHuman`='$PanelFromHuman' ,`DefenseLevel`='$DefenseLevel',`ShipCargo`='$ShipCargo',`ShipPanels`='$ShipPanels',`LowRocketCargo`='$LowRocketCargo',`LowRocketPanels`='$LowRocketPanels',`MidRocketCargo`='$MidRocketCargo',`MidRocketPanels`='$MidRocketPanels',`HighRocketCargo`='$HighRocketCargo',`HighRocketPanels`='$HighRocketPanels',`RobotsCarried`='$RobotsCarried',`HABEndScore`='$HABEndScore', `Comments` = '$Comments', `ScoutName` = '$ScoutName' WHERE `TeamNumber` = '$TeamNumber' AND `MatchNumber` = '$MatchNumber'";
+} else {
+    $sql = "INSERT INTO `matches` (Date, Time, Username, Updated, HABSandstormScore, SandstormCargo, SandstormPanels, CargoFromFloor, CargoFromHuman, PanelFromFloor, PanelFromHuman, DefenseLevel, ShipCargo, ShipPanels, LowRocketCargo, LowRocketPanels, MidRocketCargo, MidRocketPanels, HighRocketCargo, HighRocketPanels, RobotsCarried, HABEndScore, Comments, TeamNumber, Competition, MatchNumber, RobotStation, ScoutName) VALUES ('$Date', '$Time', '$Username', '1', '$HABSandstormScore', '$SandstormCargo', '$SandstormPanels', '$CargoFromFloor', '$CargoFromHuman', '$PanelFromFloor', '$PanelFromHuman', '$DefenseLevel', '$ShipCargo', '$ShipPanels', '$LowRocketCargo', '$LowRocketPanels', '$MidRocketCargo', '$MidRocketPanels', '$HighRocketCargo', '$HighRocketPanels', '$RobotsCarried', '$HABEndScore', '$Comments', '$TeamNumber', '$Competition', '$MatchNumber', '$RobotStation', '$ScoutName')";
+}
 
 $query = mysqli_query($connect, $sql);
 

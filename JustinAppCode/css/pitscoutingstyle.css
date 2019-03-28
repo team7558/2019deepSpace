@@ -1,9 +1,14 @@
 body{
-  font-family: Courier New, Arial, sans-serif;
+  font-family: Courier, Arial, sans-serif;
   font-size: 18px;
   background-image: url("../photos/spacewallpaper.png");
   font-style: italic;
 }
+
+input[type="file"] {
+
+}
+
 
 
 #bigtable {
@@ -11,8 +16,8 @@ body{
   display: table;
   margin-left: auto;
   margin-right: auto;
-  height: 860px;
-  width: 1100px;
+  height: 950px;
+  width: 1040px;
   padding: 16px;
 }
 
@@ -76,14 +81,14 @@ body{
 }
 
 #h, #c, #drive {
-  height: 360px;
+  height: 320px;
 }
 
 #misc, #end {
-  height: 240px;
+  height: 220px;
 }
 #general, #start {
-  height: 200px;
+  height: 290px;
 }
 
 #hatch, #cargo {
@@ -111,20 +116,27 @@ body{
 
 
 #general .label, #drive .label, #misc .label {
-  width: 200px;
+  width: 220px;
   display: inline-block;
 }
 
-.label {
+
+.label, #drivetraincomments, #generalcomments {
   font-weight: bolder;
   font-style: normal;
 }
 
-.inputs, .miniinputs {
+.inputs, .miniinputs, textarea {
   margin-bottom: 16px;
   width: 160px;
   font-size: 18px;
 }
+
+textarea {
+    width: 380px;
+    resize: none;
+}
+
 
 .miniinputs {
      width: 40px;
@@ -146,12 +158,6 @@ body{
   vertical-align: -35%
 }
 
-.driverow .element {
-  display: inline-block;
-  width: 120px;
-  text-align: center;
-}
-
 #driverow3 {
   margin-bottom: 32px;
 }
@@ -169,17 +175,22 @@ body{
 }
 
 .checkinputs {
-  margin-top: 12px;
+  margin-top: 6px;
   width: 32px;
   height: 24px;
-  vertical-align: -35%;
+  vertical-align: -26%;
 }
 
-.checkelement {
+.checkelement, .checkelementsand {
   display: inline-block;
   width: 120px;
   margin-left: 16px;
   text-align: left;
+}
+
+.checkelementsand {
+    width: 64px;
+    margin-bottom: 16px;
 }
 
 #cargo .checkelement {
@@ -193,25 +204,46 @@ body{
   margin-top: 12px;
 }
 
+#drivetraincomments, #generalcomments {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
 
 #showtop {
   z-index: 3;
 }
 
-#submitform, #submitphoto, #gohome {
+#submitform, #submitphoto, #gohome, .customupload {
   font-weight: bold;
   font-size: 16px;
   padding: 22px;
   color: white;
   background-color: #f47f41;
   border: 0px solid black;
+  display: inline-block;
   border-radius: 15px;
+  font-style: normal;
+  font-family: arial;
+  height: 80px;
 }
 
-#submitphoto {
+#selectedfile {
+    font-style: italic;
+    font-family: arial;
+    font-size: 12px;
+    text-align: center;
+}
+
+#submitform {
     position: absolute;
     top: 8px;
-    left: 120px;
+    left: 320px;
+}
+
+#uploadedimage {
+    margin-top: 8px;
 }
 
 #gohome {
@@ -224,8 +256,13 @@ body{
     float: right;
 }
 
-#submit:hover, #submitphoto:hover, #gohome:hover {
+#submit:hover, #gohome:hover {
     background-color: #f49541;
+}
+
+.customupload {
+    padding-bottom: 0px;
+    height: 58px;
 }
 
 .modelbl {
@@ -252,8 +289,8 @@ body{
 .modelbl p {
   font-size: 48px;
   font-weight: 600;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 22px;
+  padding-bottom: 22px;
   margin: 0px;
   color: white;
   text-align: center;

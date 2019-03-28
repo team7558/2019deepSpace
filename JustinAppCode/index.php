@@ -1,26 +1,16 @@
 <?php
-
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-    $link = "https"; 
-else {
-    $link = "http"; 
-    header("Location: https://www.scouting.team7558.com", true, 301);
-}
-
-
-
-
 session_start();
 if (isset($_POST['username'])) {
     
 
+    
     
     // Form
     $user = ($_POST['username']);
     $pass = ($_POST['password']);
 if(!isset($user) || trim($user) == '')
 {
-   echo "You did not fill out the required fields.";
+   $errors = "You did not fill out the required fields<br />";
 } else{
     
     
@@ -30,24 +20,26 @@ if(!isset($user) || trim($user) == '')
     $uid        = $row[0];
     $dbUsname   = $row[1];
     $dbPassword = $row[2];
-  echo $dbUsname;
-  echo $dbUsname;
-  $acti = $row[5];
+	$dbVerified = $row[7];
     // Check if user=user and pass=pass
   
-    if ($user == $dbUsname && $pass == $dbPassword) {
+    if ($user == $dbUsname && $pass == $dbPassword && $dbVerified == 0) {
     
         // Set session 
         $_SESSION['username'] = $user;
         $_SESSION['id'] = $uid;
     ?>
         <script type="text/javascript">
-    window.location.href = 'http://www.scouting.team7558.com/scoutinghome.php';
+    window.location.href = 'https://www.scouting.team7558.com/scoutinghome.php';
     </script>
         <?php
     } else {
-        echo "<h2>Oops that username or password combination was incorrect.
-        <br /> Please try again.</h2>";
+		$errors = " ";
+		if($dbVerified == 1){
+			$errors = "Your account is unverified";
+		}else{
+        $errors = "That username and password combination is incorrect";
+		}
     }
 }
   
@@ -81,10 +73,11 @@ if(!isset($user) || trim($user) == '')
               <input type="submit" id="login" name="submit" value="Login">
               <br>
             </form>
-            <a href="http://scouting.team7558.com/register.php"><button id="register">Register</button></a>
+            <a href="http://scouting.team7558.com/register.php"><button id="register">Register</button></a><br />
+			<a href="http://scouting.team7558.com/forgot.php"><button id="register">Forgot Password</button></a>
             <br/>
             <div id="errors">
-              You inputted an invalid username or password.<br>Please try again.
+            <?php echo $errors; ?>
             </div>
         </div>
     </div>

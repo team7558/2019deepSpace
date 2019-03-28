@@ -190,7 +190,7 @@
                <button class="itempickups" id="cargoHuman" onClick="getCargoHuman();">Cargo<br><span class="itemgrabtag">(Human Load)</span></button>
                <button class="itempickups" id="panelFloor" onClick="getPanelFloor();">Hatch Panel<br><span class="itemgrabtag">(On Floor)</span></button>
                <button class="itempickups" id="panelHuman" onClick="getPanelHuman();">Hatch Panel<br><span class="itemgrabtag">(Human Load)</span></button>
-               <button class="cancel" onClick="dropItem();">Drop Item or<br>Cross Mid</button>
+               <button class="cancel" onClick="dropItem();">Drop Item</button>
             </div>
          </div>
       </div>
