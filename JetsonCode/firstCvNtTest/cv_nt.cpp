@@ -14,24 +14,36 @@ int min_area = 10000, max_area = 10000000;
 
 int main() {
 	
+	NetworkTable::SetClientMode();
+	NetworkTable::SetTeam(7556);
+	
+	auto rawValues = NetworkTable::GetTable("rawValues");
+	
 	VideoCapture cap(1);
 	if (!cap.isOpened()) return -1;
 	
-	//Mat imgRgb = imread("color.jpg"); 
-	
 	namedWindow("bgr", 1);
 	
-	NetworkTable::SetClientMode();
-	NetworkTable::SetTeam(7558);
+	int i = 0;
 
-	auto m_visionNetworkTable = NetworkTable::GetTable("testing");
-	
+	while(true){
+		Mat frame;
+		cap >> frame;
+		//imshow("bgr", frame);
+		
+		rawValues->PutNumber("distance", i);
+		
+		
+		
+		if (waitKey(30) >= 0) break;
+	}
+	/*
 	while(true){
 		Mat frame;
 		cap >> frame;
 		Mat imgHsv;
 		Mat imgRgb = frame;
-			
+			                            
 		cvtColor(imgRgb, imgHsv, CV_BGR2HSV);
 	 
 		Mat imgGrey;
@@ -64,6 +76,7 @@ int main() {
 		if (waitKey(30) >= 0) break;
 		//m_visionNetworkTable->PutNumber("X", 4.0);
 	}
+	*/
 	
 	return 0;
 }
