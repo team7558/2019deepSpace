@@ -12,6 +12,12 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import frc.robot.Robot;
+
+import frc.robot.RobotMap;
+
 public class PIDMotorJoint extends PIDSubsystem {
   private double m_encoderPerAngle, m_zeroEncoder, m_targetAngle, m_maxAngle, m_minAngle, m_zeroAngle, m_maxSpeed,
       m_length;
@@ -68,10 +74,11 @@ public class PIDMotorJoint extends PIDSubsystem {
   @Override
   protected double returnPIDInput() {
     checkOutOfBounds();
-    /*
-     * if (this.getName().equals("wrist")) { System.out.println("current: " +
-     * this.getAngle() + "goal: " + this.getSetpoint()); }
-     */
+/*
+    if (this.getName().equals("elbow")) {
+      System.out.println("current: " + this.getAngle() + "goal: " + this.getSetpoint());
+    }
+*/
     return getAngle();
   }
 
@@ -83,17 +90,21 @@ public class PIDMotorJoint extends PIDSubsystem {
       output = m_maxSpeed;
     if (output < -m_maxSpeed)
       output = -m_maxSpeed;
-    m_jointMotor.set(output);
+    if (!this.getName().equals("wrist")) {
+      System.out.println(output);
+      m_jointMotor.set(output);
+    }
   }
 
   public void checkOutOfBounds() {
 
-    boolean goingUp = m_targetAngle - getAngle() > 0;
-    if (getAngle() <= m_minAngle) {
-      hold();
-    } else if (getAngle() >= m_maxAngle) {
-      hold();
-    } else if (goingUp && !m_backSwitch.get()) {
+    boolean goingUp = m_targetAngle - getAngle() >= 0;
+    /*
+     * if (getAngle() <= m_minAngle) { hold(); } else if (getAngle() >= m_maxAngle)
+     * { hold(); }
+     */
+    if (goingUp && !m_backSwitch.get()) {
+      //System.out.println("saladaadas");
       resetAngle();
       hold();
     } else if (!goingUp && !m_frontSwitch.get()) {

@@ -15,7 +15,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 
 /**
@@ -27,7 +27,7 @@ public class Arm extends Subsystem {
   private double m_jointHeight;
   private String m_currentPreset;
 
-  private Map<String, double[]> m_presets;
+  public Map<String, double[]> m_presets;
 
   public Arm(double jointHeight, Elbow elbow, Wrist wrist) {
     m_elbow = elbow;
@@ -35,16 +35,17 @@ public class Arm extends Subsystem {
     m_jointHeight = jointHeight;
     m_currentPreset = "HOLD";
 
-    m_presets = new HashMap<String, double[]>();
+    m_presets = new TreeMap<String, double[]>();
 
     m_presets.put("HOLD", new double[] { 0, 0 });
-    m_presets.put("INTAKE_CARGO", new double[] { 20, -30 });
-    m_presets.put("INTAKE_HATCH_GROUND", new double[] { -35, 10 });
-    m_presets.put("INTAKE_HATCH_HUMAN", new double[] { 15, 100 });
+    m_presets.put("INTAKE_CARGO_GROUND", new double[] { -25, 20 });
+    //m_presets.put("INTAKE_CARGO_HUMAN", new double[] { 105, 10 });
+    m_presets.put("INTAKE_CARGO_HUMAN", new double[] { 108, 110 });
     m_presets.put("SHOOT_HATCH", new double[] { 45, 20 });
-    m_presets.put("SHOOT_CARGO_ROCKET", new double[] { 90, 170 });
-    m_presets.put("SHOOT_CARGO_BACK", new double[] { 90, 150 });
-    m_presets.put("RELEASE_HATCH", new double[] { 15, 115 });
+    m_presets.put("SHOOT_CARGO_ROCKET", new double[] { 15, 170 });
+    m_presets.put("SHOOT_CARGO_BACK", new double[] { 90, 135 });
+    m_presets.put("RELEASE_HATCH", new double[] { 15, 110 });
+    m_presets.put("HANG", new double[] { 80, 160 });
   }
 
   public void zero() {
@@ -60,12 +61,13 @@ public class Arm extends Subsystem {
     if (m_currentPreset.equals("HOLD")) {
       hold();
     } else {
+      //System.out.println(m_currentPreset);
       setAngle(m_presets.get(m_currentPreset));
     }
   }
 
   public void changePreset(String presetName) {
-    // System.out.println(presetName);
+    //System.out.println(presetName);
     m_currentPreset = presetName;
   }
 
@@ -78,6 +80,7 @@ public class Arm extends Subsystem {
   }
 
   public void setAngle(double[] targetAngles) {
+    //System.out.println(targetAngles[1]);
     m_elbow.setAngle(targetAngles[0]);
     if (m_jointHeight + Math.sin(toRadians(getAngles()[0])) * m_elbow.getLength()
         + Math.sin(toRadians(toRadians(getAngles()[1])) * m_wrist.getLength()) > 5) {

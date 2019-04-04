@@ -12,8 +12,10 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -41,10 +43,8 @@ public class Robot extends TimedRobot {
   public static LightSensor m_lightSensor;
 
   public static JoyDrive m_joyDrive;
-  public static DumbVision m_dumbVision;
+  //public static DumbVision m_dumbVision;
   private CANSparkMax elbow, wrist;
-
-  public Solenoid shooter;
 
   public static Compressor m_Compressor;
 
@@ -57,21 +57,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-
-    //CameraServer.getInstance().startAutomaticCapture(0);
+    
+    CameraServer.getInstance().startAutomaticCapture(0);
+    //CameraServer.getInstance().startAutomaticCapture(1);
+    
     //CameraServer.getInstance().startAutomaticCapture(1);
     m_claw = new Claw();
     m_endgame = new EndGame();
     m_arm = new Arm(43, new Elbow(), new Wrist());
+    m_arm.hold();
     m_driveTrain = new DriveTrain();
     m_jetson = new Jetson();
     m_oi = new OI();
     m_lightSensor = new LightSensor();
 
-    // shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
-
     m_joyDrive = new JoyDrive();
-    m_dumbVision = new DumbVision();
+    //m_dumbVision = new DumbVision();
     SmartDashboard.putData("Auto mode", m_chooser);
 /*
     m_Compressor = new Compressor(RobotMap.COMPRESSOR);
@@ -80,7 +81,6 @@ public class Robot extends TimedRobot {
 */
     elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     wrist = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
-
   }
 
   /**
@@ -126,8 +126,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    
     m_autonomousCommand = m_chooser.getSelected();
-
+    //CameraServer.getInstance().startAutomaticCapture(1);
+    
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
      * switch(autoSelected) { case "My Auto": autonomousCommand = new
@@ -136,13 +138,16 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
+    
     m_arm.zero();
     m_arm.hold();
     m_arm.enable();
-    m_joyDrive.cancel();
-    m_dumbVision.cancel();       
+    m_joyDrive.start();
+    
+    //m_dumbVision.cancel();       
     m_endgame.retractAll();
-    new TestAuto();
+    //new TestAuto();
+    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start(); 
     }
@@ -152,29 +157,37 @@ public class Robot extends TimedRobot {
    * This function is called periodically during autonomous.
    */
   @Override
-  public void autonomousPeriodic() {
+  public void autonomousPeriodic() {  
     //new TestAuto();
+    //elbow.set(m_oi.m_operator.getRawAxis(1) * 0.1);
+    
+    m_oi.checkOtherButtons();
+    m_arm.updateArm();
     Scheduler.getInstance().run() ;
   }
 
   @Override
   public void teleopInit() {
+    
+    Scheduler.getInstance().removeAll();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
 
-    m_arm.zero();
+    //m_arm.zero();
     m_arm.hold();
     m_arm.enable();
     m_joyDrive.start();
-    m_dumbVision.cancel();       
+    //m_dumbVision.cancel();       
     m_endgame.retractAll();
   }
 
   @Override
   public void teleopPeriodic() {
-    m_oi.checkOtherButtons();
+    
     m_arm.updateArm();
+    m_oi.checkOtherButtons();
+    //m_frontLight.set(true);
     //System.out.println(m_driveTrain.distanceTravelled()[0]);
     Scheduler.getInstance().run();
   }
@@ -189,8 +202,8 @@ public class Robot extends TimedRobot {
      * if (Robot.m_oi.m_operator.getRawButton(1)){ if (!elbowSwitch.get()){
      * elbow.set(-0.05); } if (!wristSwitch.get()){ wrist.set(-0.05); } } else {
      */
-    wrist.set(m_oi.m_operator.getRawAxis(5) * 0.1);
+    //wrist.set(m_oi.m_operator.getRawAxis(5) * 0.1);
     elbow.set(m_oi.m_operator.getRawAxis(1) * 0.1);
-    
+    //m_frontLight.set(false);
   }
 }

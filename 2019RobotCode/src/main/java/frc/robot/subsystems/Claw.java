@@ -22,7 +22,7 @@ public class Claw extends Subsystem {
   private WPI_VictorSPX m_intake_1, m_intake_2, m_suction;
   private Solenoid m_shooter, m_hatchShooter;
   public double m_startTime;
-  public static double SHOOT_SPEED = 0.95;
+  public double SHOOT_SPEED = 0.4;
   public static double INTAKE_SPEED = 0.8;
 
   public Claw(){

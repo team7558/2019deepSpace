@@ -29,7 +29,7 @@ public class DriveTrain extends Subsystem {
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   private DifferentialDrive m_driveTrain;
   private Solenoid m_shifter;
-  private double m_maxSpeed = 0.4;
+  public double m_maxSpeed = 0.85;
   private double m_leftZeroDistance, m_rightZeroDistance;
 
   /**

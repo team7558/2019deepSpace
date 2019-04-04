@@ -19,7 +19,7 @@ public class TestAuto extends CommandGroup {
     // addSequential(new Command2());
     // these will run in order.
     addSequential(new MoveDistance(500, 0.2, 1));
-  
+    addSequential(new DumbVision());  
     // To run multiple commands at the same time,
     // use addParallel()
     // e.g. addParallel(new Command1());

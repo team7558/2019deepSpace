@@ -12,6 +12,11 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -47,8 +52,8 @@ public class OI {
     Button db6 = new JoystickButton(m_driver, shiftGearUp);
     // Button ob7 = new JoystickButton(m_operator, transportHatchButton);
 
-    ob1.whenPressed(new CollectHatch());
-    ob5.whenPressed(new ReleaseHatch());
+    //ob1.whenPressed(new CollectHatch());
+    //ob5.whenPressed(new ReleaseHatch());
 
     db5.whenPressed(new GearShiftUp());
     db6.whenPressed(new GearShiftDown());
@@ -72,25 +77,31 @@ public class OI {
   public void checkOtherButtons() {
     switch (m_operator.getPOV()) {
     case 180:
-      Robot.m_arm.changePreset("INTAKE_CARGO");
+      Robot.m_arm.changePreset("INTAKE_CARGO_GROUND");
       break;
     case 90:
-      Robot.m_arm.changePreset("SHOOT_CARGO_BACK");
+      Robot.m_arm.changePreset("INTAKE_CARGO_HUMAN");
       break;
     case 270:
-      Robot.m_arm.changePreset("INTAKE_HATCH_HUMAN");
-      CollectHatch collectHatch = new CollectHatch();
-      collectHatch.start();
+      Robot.m_arm.changePreset("HANG");
+      // CollectHatch collectHatch = new CollectHatch();
+      // collectHatch.start();
       break;
     case 0:
-      Robot.m_arm.changePreset("RELEASE_HATCH");
-      ReleaseHatch releaseHatch = new ReleaseHatch();
-      releaseHatch.start();
+      // System.out.println("salad");
+
+      // Robot.m_arm.changePreset("HANG");
+      // ReleaseHatch releaseHatch = new ReleaseHatch();
+      // releaseHatch.start();
       break;
     default:
       break;
     }
-
+/*
+    if (m_operator.getRawButton(3)) {
+      Robot.m_arm.changePreset("INTAKE_CARGO");
+    }
+*/
     if (m_operator.getRawAxis(2) > 0.01) {
       IntakeCargo intakeCargoCommand = new IntakeCargo();
       intakeCargoCommand.start();
@@ -100,10 +111,10 @@ public class OI {
       ShootCargo shootCargoCommand = new ShootCargo();
       shootCargoCommand.start();
     }
-
-    if (m_operator.getRawButton(3)) {
-      Robot.m_arm.changePreset("SHOOT_CARGO_ROCKET");
-    }
+    /*
+     * if (m_operator.getRawButton(3)) {
+     * Robot.m_arm.changePreset("SHOOT_CARGO_ROCKET"); }
+     */
 
     if (m_operator.getRawButton(7) && m_operator.getRawButton(8) && m_driver.getRawButton(7)
         && m_driver.getRawButton(8)) {
@@ -113,27 +124,50 @@ public class OI {
 
     if (m_operator.getRawButton(5)) {
       RetractEndGame retractEndgame = new RetractEndGame();
-      retractEndgame.start();
+      retractEndgame.start();  
     }
-
+/*
     if (m_operator.getRawButton(4)) {
       Robot.m_arm.changePreset("INTAKE_HATCH_GROUND");
       CollectHatch collectHatch = new CollectHatch();
       collectHatch.start();
     }
+*/
+    if (m_operator.getRawButton(1)){
+      Robot.m_arm.changePreset("SHOOT_CARGO_ROCKET");
+    }
+    if (m_operator.getRawButton(6)) {
+      //elbow.set(m_oi.m_operator.getRawAxis(1) * 0.1);
+    
+      /*
+      if (Robot.m_arm.m_presets.get("SHOOT_CARGO_BACK")[1] < 155
+          || Robot.m_arm.m_presets.get("SHOOT_CARGO_BACK")[1] > 135) {
+        Robot.m_arm.m_presets.put("SHOOT_CARGO_BACK", new double[] {
+            Robot.m_arm.m_presets.get("SHOOT_CARGO_BACK")[0] - Robot.m_oi.m_operator.getRawAxis(5), 135 });
+      }
+      */
+    }
+    //System.out.println(m_driver.getRawAxis(2));
+    /*
+    if (m_driver.getRawAxis(2) > 0.4) {
+      //System.out.println("startttttt");
+      Robot.m_driveTrain.m_maxSpeed = 0.2;
+      Robot.m_dumbVision.start();
+      //Robot.m_joyDrive.cancel();
+      Robot.m_dumbVision.linearSpeed = Robot.m_oi.m_driver.getRawAxis(1);
       
-    if (m_driver.getRawAxis(3) > 0.4) {
-      DumbVision track = new DumbVision();
-      track.linearSpeed = m_driver.getRawAxis(3);
-      track.start();
     } else {
+      Robot.m_driveTrain.m_maxSpeed = 0.85;
+      //Robot.m_dumbVision.cancel();
       Robot.m_joyDrive.start();
     }
-    /*
-     * if (m_driver.getRawAxis(3) > 0.4){ Robot.m_joyDrive.setMaxSpeeds(0.3, 0.2);
-     * GearShiftDown shiftDown = new GearShiftDown(); shiftDown.start(); } else {
-     * Robot.m_joyDrive.setMaxSpeeds(0.75, 0.6); }
-     */
+    */
+
+    if (m_driver.getRawAxis(3) > 0.4) {
+      Robot.m_driveTrain.m_maxSpeed = 0.35;
+    } else {
+      Robot.m_driveTrain.m_maxSpeed = 0.85;
+    }
 
   }
 

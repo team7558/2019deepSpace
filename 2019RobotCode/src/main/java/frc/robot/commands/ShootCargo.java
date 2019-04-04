@@ -12,7 +12,6 @@ import frc.robot.Robot;
 
 public class ShootCargo extends Command {
 
-
   public ShootCargo() {
     // Use requires() here to declare subsystem dependencies
     super();
@@ -27,8 +26,13 @@ public class ShootCargo extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if (Robot.m_oi.m_operator.getRawButton(4)) {
+      Robot.m_claw.SHOOT_SPEED = 0.6;
+    } else {
+      Robot.m_claw.SHOOT_SPEED = 0.4 ;
       Robot.m_claw.shootCargo(Robot.m_oi.m_operator.getRawAxis(3));
-
+    }
+    Robot.m_claw.shootCargo(Robot.m_oi.m_operator.getRawAxis(3));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -47,6 +51,6 @@ public class ShootCargo extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    
+
   }
 }

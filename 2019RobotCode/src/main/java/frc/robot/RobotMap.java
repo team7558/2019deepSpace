@@ -28,5 +28,6 @@ public class RobotMap {
   public static final int SHOOT_HATCH = 0, SHOOT_SOLENOID = 1, SHIFT_SOLENOID = 2, LITTLE_ENDGAME_SOLENOID_1 = 3, LITTLE_ENDGAME_SOLENOID_2 = 5, BIG_ENDGAME_SOLENOID_1 = 4, BIG_ENDGAME_SOLENOID_2 = 6;
   public static final int DRIVE_PIGEON = 11;
   public static final int COMPRESSOR = 0;
-  public static final int BACK_WRIST_SWITCH = 0, FRONT_WRIST_SWITCH = 5, BACK_ELBOW_SWITCH = 1, FRONT_ELBOW_SWITCH = 2;
+  public static final int BACK_WRIST_SWITCH = 0, FRONT_WRIST_SWITCH = 3, BACK_ELBOW_SWITCH = 1, FRONT_ELBOW_SWITCH = 2;
+  public static final int FRONT_LIGHT_RELAY = 0;
 }
