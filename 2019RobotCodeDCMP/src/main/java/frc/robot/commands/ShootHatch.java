@@ -17,13 +17,16 @@ public class ShootHatch extends Command {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_arm);
     requires(Robot.m_claw);
-    setTimeout(0.5);
+    //setTimeout(0.5);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_claw.releaseHatch();
+    Robot.m_claw.extendHatch();
+    System.out.println("Extend Hatch");
+    Robot.m_claw.shootHatch();
+    System.out.println("Shoot Hatch");
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -35,19 +38,21 @@ public class ShootHatch extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
-    //return !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.shootHatchButton);
+    //return isTimedOut();
+    return !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.shootHatchButton);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_claw.stopHatchBlow();
+
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-  }
+    Robot.m_claw.intakeHatch();
+    System.out.println("IntakeHatch");
+    }
 }

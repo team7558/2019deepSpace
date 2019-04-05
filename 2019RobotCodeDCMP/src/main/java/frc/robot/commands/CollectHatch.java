@@ -28,7 +28,7 @@ public class CollectHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_claw.suckHatch();
+    //Robot.m_claw.suckHatch();
     //Robot.m_arm.goToPreset("INTAKE_HATCH_HUMAN");
   }
 

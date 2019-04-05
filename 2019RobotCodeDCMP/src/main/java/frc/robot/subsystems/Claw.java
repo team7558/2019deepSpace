@@ -19,8 +19,8 @@ import frc.robot.RobotMap;
  */
 public class Claw extends Subsystem {
 
-  private WPI_VictorSPX m_intake_1, m_intake_2, m_suction;
-  private Solenoid m_shooter, m_hatchShooter;
+  private WPI_VictorSPX m_intake_1, m_intake_2;
+  private Solenoid m_hatchShooter, m_hatchExtender;
   public double m_startTime;
   public double SHOOT_SPEED = 0.4;
   public static double INTAKE_SPEED = 0.8;
@@ -28,9 +28,8 @@ public class Claw extends Subsystem {
   public Claw(){
     m_intake_1 = new WPI_VictorSPX(RobotMap.INTAKE_1);
     m_intake_2 = new WPI_VictorSPX(RobotMap.INTAKE_2);
-    m_suction = new WPI_VictorSPX(RobotMap.HATCH_SUCTION);
-    m_shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
     m_hatchShooter = new Solenoid(RobotMap.SHOOT_HATCH);
+    m_hatchExtender = new Solenoid(RobotMap.EXTEND_HATCH);
     m_startTime = Timer.getFPGATimestamp();
   }
 
@@ -39,7 +38,6 @@ public class Claw extends Subsystem {
   }
 
   public void cargoIntake(double speed){
-    m_shooter.set(true);
     if (speed > INTAKE_SPEED){
       speed = INTAKE_SPEED;
     }
@@ -49,28 +47,26 @@ public class Claw extends Subsystem {
 
   public void shootCargo(double speed){
     if (speed > SHOOT_SPEED){
-      m_shooter.set(false);
       speed = SHOOT_SPEED;  
     }
     m_intake_1.set(-speed);
     m_intake_2.set(speed);
   }
   public void stopShootCargo(){
-    m_shooter.set(true);
     m_intake_1.set(0);
     m_intake_2.set(0);
   }
 
-  public void suckHatch(){
-    m_suction.set(1);
+  public void extendHatch(){
+    m_hatchExtender.set(true);
   }
-
-  public void releaseHatch(){
-    m_suction.set(0);
+  public void retractHatch(){
+    m_hatchExtender.set(false);
+  }
+  public void shootHatch(){
     m_hatchShooter.set(true);
   }
-
-  public void stopHatchBlow(){
+  public void intakeHatch(){
     m_hatchShooter.set(false);
   }
 

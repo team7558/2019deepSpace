@@ -12,11 +12,6 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import frc.robot.Robot;
-
-import frc.robot.RobotMap;
 
 public class PIDMotorJoint extends PIDSubsystem {
   private double m_encoderPerAngle, m_zeroEncoder, m_targetAngle, m_maxAngle, m_minAngle, m_zeroAngle, m_maxSpeed,
