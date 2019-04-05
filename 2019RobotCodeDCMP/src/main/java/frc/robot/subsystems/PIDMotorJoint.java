@@ -80,7 +80,7 @@ public class PIDMotorJoint extends PIDSubsystem {
 
     m_hold = false;
 
-    hasTwoMotors = false;
+    hasTwoMotors = true;
 
     m_prevEncoder = m_jointEncoder.getPosition();
 
