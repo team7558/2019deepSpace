@@ -12,6 +12,7 @@ import frc.robot.Robot;
 
 public class ReleaseHatch extends Command {
   public ReleaseHatch() {
+    super();
     setTimeout(0.5);
     requires(Robot.m_claw);
     // Use requires() here to declare subsystem dependencies

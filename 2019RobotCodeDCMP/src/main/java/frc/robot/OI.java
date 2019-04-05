@@ -39,6 +39,8 @@ public class OI {
   public int shootCargoFrontButton = 0; // A
   public int shootCargoBackButton = 6; // B
   public int shootCargoButton = 3;
+  public int retractHatchButton = 3;
+  public int extendHatchButton = 1;
 
   public OI() {
 
@@ -57,6 +59,8 @@ public class OI {
 
     db5.whenPressed(new GearShiftUp());
     db6.whenPressed(new GearShiftDown());
+
+    ob5.whenPressed(new ShootHatch());
 
     /*
      * ob2.whenPressed(new IntakeCargo()); ob3.whenPressed(new
@@ -110,6 +114,20 @@ public class OI {
     if (m_operator.getRawAxis(3) > 0.01) {
       ShootCargo shootCargoCommand = new ShootCargo();
       shootCargoCommand.start();
+    }
+
+    if(m_operator.getRawButton(shootHatchButton)){
+      ShootHatch shootHatchCommand = new ShootHatch();
+      shootHatchCommand.start();
+    }
+
+    if(m_operator.getRawButton(retractHatchButton)){
+      RetractHatch retractHatchCommand = new RetractHatch();
+      retractHatchCommand.start();
+    }
+
+    if(m_operator.getRawButton(extendHatchButton)){
+      ExtendHatch extendHatchButton = new ExtendHatch();
     }
     /*
      * if (m_operator.getRawButton(3)) {

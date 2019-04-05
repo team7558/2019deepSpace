@@ -39,20 +39,21 @@ public class ShootHatch extends Command {
   @Override
   protected boolean isFinished() {
     //return isTimedOut();
+    //System.out.println(!Robot.m_oi.m_driver.getRawButton(Robot.m_oi.shootHatchButton));
     return !Robot.m_oi.m_operator.getRawButton(Robot.m_oi.shootHatchButton);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
+    Robot.m_claw.intakeHatch();
+    System.out.println("IntakeHatch");
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_claw.intakeHatch();
-    System.out.println("IntakeHatch");
+    
     }
 }

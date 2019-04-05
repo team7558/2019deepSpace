@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Solenoid;
+
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -43,7 +45,10 @@ public class Robot extends TimedRobot {
   public static JoyDrive m_joyDrive;
   public static VisionTargetAlign m_visionTargetAlign;
   public static DumbVision m_dumbVision;
+  public static WPI_VictorSPX m_intake1;
+  public static WPI_VictorSPX m_intake2;
   private CANSparkMax elbow, wrist;
+  public CANSparkMax m_newArm;
 
   public Solenoid shooter;
 
@@ -68,6 +73,9 @@ public class Robot extends TimedRobot {
     m_jetson = new Jetson();
     m_oi = new OI();
     m_lightSensor = new LightSensor();
+    m_intake1 = new WPI_VictorSPX(5);
+    m_intake2 = new WPI_VictorSPX(6);
+    m_newArm = new CANSparkMax(15, MotorType.kBrushless);
 
     // shooter = new Solenoid(RobotMap.SHOOT_SOLENOID);
 
@@ -174,6 +182,11 @@ public class Robot extends TimedRobot {
     m_arm.updateArm();
     //m_jetson.printRawValues();
     Scheduler.getInstance().run();
+
+    m_intake1.set(m_oi.m_operator.getRawAxis(1));
+    m_intake2.set(0.8*m_oi.m_operator.getRawAxis(1));
+    m_newArm.set(0.1*m_oi.m_operator.getRawAxis(5));
+
   }
 
   // DigitalInput elbowSwitch =  new DigitalInput(RobotMap.BACK_ELBOW_SWITCH);
@@ -186,8 +199,9 @@ public class Robot extends TimedRobot {
      * if (Robot.m_oi.m_operator.getRawButton(1)){ if (!elbowSwitch.get()){
      * elbow.set(-0.05); } if (!wristSwitch.get()){ wrist.set(-0.05); } } else {
      */
-    wrist.set(m_oi.m_operator.getRawAxis(5) * 0.1);
-    elbow.set(m_oi.m_operator.getRawAxis(1) * 0.1);
+    m_intake1.set(m_oi.m_driver.getRawAxis(1));
+    m_intake2.set(0.8*m_oi.m_driver.getRawAxis(1));
+    m_newArm.set(0.1*m_oi.m_driver.getRawAxis(5));
 
   }
 }
