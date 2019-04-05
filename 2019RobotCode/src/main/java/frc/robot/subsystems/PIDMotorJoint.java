@@ -21,13 +21,14 @@ import frc.robot.RobotMap;
 public class PIDMotorJoint extends PIDSubsystem {
   private double m_encoderPerAngle, m_zeroEncoder, m_targetAngle, m_maxAngle, m_minAngle, m_zeroAngle, m_maxSpeed,
       m_length;
-  private CANSparkMax m_jointMotor;
+  private CANSparkMax m_jointMotor, m_jointMotor2;
   public CANEncoder m_jointEncoder;
   private boolean m_reverse;
   private DigitalInput m_frontSwitch, m_backSwitch;
   private double m_prevEncoder, m_currEncoder;
-
+  private boolean hasTwoMotors;
   public boolean m_hold;
+  
 
   public PIDMotorJoint(String subsystemName, CANSparkMax jointMotor, double encoderPerAngle, double maxAngle,
       double minAngle, double zeroAngle, double kP, double kD, double kI, boolean reverse, double maxSpeed,
@@ -47,7 +48,39 @@ public class PIDMotorJoint extends PIDSubsystem {
     m_frontSwitch = new DigitalInput(frontSwitch);
     m_backSwitch = new DigitalInput(backSwitch);
 
+    hasTwoMotors = false;
+
     m_hold = false;
+
+    m_prevEncoder = m_jointEncoder.getPosition();
+
+    m_zeroEncoder = 0;
+
+    resetAngle();
+  }
+
+  public PIDMotorJoint(String subsystemName, CANSparkMax jointMotor, CANSparkMax jointMotor2, double encoderPerAngle, double maxAngle,
+      double minAngle, double zeroAngle, double kP, double kD, double kI, boolean reverse, double maxSpeed,
+      double length, int frontSwitch, int backSwitch) {
+
+    super(subsystemName, kP, kD, kI);
+
+    m_jointMotor = jointMotor;
+    m_jointMotor2 = jointMotor2;
+    m_jointEncoder = new CANEncoder(m_jointMotor);
+    m_encoderPerAngle = encoderPerAngle;
+    m_maxAngle = maxAngle;
+    m_minAngle = minAngle;
+    m_zeroAngle = zeroAngle;
+    m_reverse = reverse;
+    m_maxSpeed = maxSpeed;
+    m_length = length;
+    m_frontSwitch = new DigitalInput(frontSwitch);
+    m_backSwitch = new DigitalInput(backSwitch);
+
+    m_hold = false;
+
+    hasTwoMotors = false;
 
     m_prevEncoder = m_jointEncoder.getPosition();
 
@@ -93,6 +126,9 @@ public class PIDMotorJoint extends PIDSubsystem {
     if (!this.getName().equals("wrist")) {
       System.out.println(output);
       m_jointMotor.set(output);
+      if(hasTwoMotors){
+        m_jointMotor2.set(output);
+      }
     }
   }
 

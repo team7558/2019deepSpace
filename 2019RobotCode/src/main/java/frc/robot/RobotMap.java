@@ -24,7 +24,7 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
   public static final int LEFT_MOTOR_1 = 1, LEFT_MOTOR_2 = 2, RIGHT_MOTOR_1 = 4, RIGHT_MOTOR_2 = 5, LEFT_MOTOR_3 = 3, RIGHT_MOTOR_3 = 6;
-  public static final int INTAKE_1 = 9, INTAKE_2 = 10, HATCH_SUCTION = 12, ELBOW_MOTOR = 7, WRIST_MOTOR = 8;
+  public static final int INTAKE_1 = 9, INTAKE_2 = 10, HATCH_SUCTION = 12, ELBOW_MOTOR1 = 7, ELBOW_MOTOR2 = 9, WRIST_MOTOR = 8;
   public static final int SHOOT_HATCH = 0, SHOOT_SOLENOID = 1, SHIFT_SOLENOID = 2, LITTLE_ENDGAME_SOLENOID_1 = 3, LITTLE_ENDGAME_SOLENOID_2 = 5, BIG_ENDGAME_SOLENOID_1 = 4, BIG_ENDGAME_SOLENOID_2 = 6;
   public static final int DRIVE_PIGEON = 11;
   public static final int COMPRESSOR = 0;

@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
     m_Compressor.start();
     m_Compressor.setClosedLoopControl(true);
 */
-    elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
+    elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR1, MotorType.kBrushless);
     wrist = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
   }
 
