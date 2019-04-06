@@ -15,11 +15,12 @@ import com.revrobotics.CANSparkMax;
 public class PIDMotorJoint extends PIDSubsystem {
   private double m_encoderPerAngle, m_zeroEncoder, m_targetAngle, m_maxAngle, m_minAngle, m_zeroAngle, m_maxSpeed,
       m_length;
-  private CANSparkMax m_jointMotor;
+  private CANSparkMax m_jointMotor, m_jointMotor2;
   public CANEncoder m_jointEncoder;
   private boolean m_reverse;
   private DigitalInput m_frontSwitch, m_backSwitch;
   private double m_prevEncoder, m_currEncoder;
+  private boolean m_hasTwoMotors = false;
 
   public boolean m_hold;
 
@@ -41,6 +42,8 @@ public class PIDMotorJoint extends PIDSubsystem {
     m_frontSwitch = new DigitalInput(frontSwitch);
     m_backSwitch = new DigitalInput(backSwitch);
 
+    m_hasTwoMotors = false;
+
     m_hold = false;
 
     m_prevEncoder = m_jointEncoder.getPosition();
@@ -49,6 +52,37 @@ public class PIDMotorJoint extends PIDSubsystem {
 
     resetAngle();
   }
+
+  public PIDMotorJoint(String subsystemName, CANSparkMax jointMotor, CANSparkMax jointMotor2, double encoderPerAngle, double maxAngle,
+      double minAngle, double zeroAngle, double kP, double kD, double kI, boolean reverse, double maxSpeed,
+      double length, int frontSwitch, int backSwitch) {
+
+    super(subsystemName, kP, kD, kI);
+
+    m_jointMotor = jointMotor;
+    m_jointMotor2 = jointMotor2;
+    m_jointEncoder = new CANEncoder(m_jointMotor);
+    m_encoderPerAngle = encoderPerAngle;
+    m_maxAngle = maxAngle;
+    m_minAngle = minAngle;
+    m_zeroAngle = zeroAngle;
+    m_reverse = reverse;
+    m_maxSpeed = maxSpeed;
+    m_length = length;
+    m_frontSwitch = new DigitalInput(frontSwitch);
+    m_backSwitch = new DigitalInput(backSwitch);
+
+    m_hasTwoMotors = true;
+
+    m_hold = false;
+
+    m_prevEncoder = m_jointEncoder.getPosition();
+
+    m_zeroEncoder = 0;
+
+    resetAngle();
+  }
+
 
   public void resetAngle() {
     // System.out.println(m_jointEncoder.getPosition());
@@ -83,7 +117,11 @@ public class PIDMotorJoint extends PIDSubsystem {
       output = m_maxSpeed;
     if (output < -m_maxSpeed)
       output = -m_maxSpeed;
-    m_jointMotor.set(output);
+    if(m_hasTwoMotors){
+      m_jointMotor.set(output);
+      m_jointMotor2.set(-output);
+    }else
+      m_jointMotor.set(output);
   }
 
   public void checkOutOfBounds() {

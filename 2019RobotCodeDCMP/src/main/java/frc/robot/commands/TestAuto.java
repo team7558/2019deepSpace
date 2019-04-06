@@ -14,6 +14,7 @@ public class TestAuto extends CommandGroup {
    * Add your docs here.
    */
   public TestAuto() {
+    addSequential(new ExtendHatch());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

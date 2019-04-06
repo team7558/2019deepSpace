@@ -41,17 +41,18 @@ public class DumbVision extends Command {
   protected void execute() {
     double power1 = 0, power2 = 0;
     double error = Robot.m_jetson.getRawValues()[3];
-    System.out.println(error);
+    //double linearSpeed = 0.3;
+    double linearSpeed = -Robot.m_oi.m_driver.getRawAxis(1);
+    //double joyTurn = Robot.m_oi.m_driver.getRawAxis(4);
     pTerm = kP*error;
     dTerm = kD*(error-prevError);
     iTerm = kI*(errorSum);
     errorSum += error;
     double correction = pTerm + dTerm + iTerm; 
-    power1 = linearSpeed + correction;
-    power2 = linearSpeed - correction;
+    power1 = linearSpeed - correction;
+    power2 = linearSpeed + correction;
     //System.out.println(error + " " + prevError + " " + errorSum);
     Robot.m_driveTrain.tankDrive(power1, power2);
-    //stem.out.println(power1 + "  " + power2 + "  " + linearSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
