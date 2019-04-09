@@ -1,36 +1,32 @@
 	#include "opencv2/opencv.hpp"
-
 	#include "opencv2/core/core.hpp"
-
 	#include <cscore.h>
-
 	#include <iostream>
-
 	#include <chrono>
-
 	#include <cstdio>
-
 	#include <thread>
-
 	#include "ntcore.h"
-
 	#include "networktables/NetworkTable.h"
-
 	#include <fstream>
-
 	#include "MJPEGWriter.h"
 
 	using namespace std;
 	using namespace cv;
 
+	/*min and max HSV values for colour filtering - determined empirically with trackbars*/
 	int hue_min = 55, hue_max = 83, sat_min = 186, sat_max = 255, val_min = 55,
 	    val_max = 255;
 
+	/*min and max areas to look for enclosed contours*/
 	int min_area = 200, max_area = 10000;
 
+	/*ratio of vision targets (widht/height) to look for closest matches*/
 	float targetRatio = 12.0/5.0;
+
+	/*the distance of the previously tracked target to the center of the screen for tracking*/
 	float prevTargetCenter = 320;	
 
+	/*returns height and width of RotatedRect object*/
 	vector<float> getHW(RotatedRect rotatedRect){
 		Point2f rect_points[4];
 		rotatedRect.points(rect_points);
@@ -54,6 +50,7 @@
 		return ret;
 	}
 
+	/*returns angle of RotatedRect wrt vertical y axis*/
 	float getAngle(RotatedRect rotatedRect) {
 	    Point2f rect_points[4];
 	    rotatedRect.points(rect_points);
@@ -81,7 +78,8 @@
 	    }
 	    return -1;
 	}
-
+	
+	/*draws a rectangle and other info in given colour*/
 	void drawRect(Mat mask, RotatedRect rotatedRect, Scalar colour) {
 	    Point2f rect_points[4];
 	    rotatedRect.points(rect_points);
@@ -103,8 +101,9 @@
 
 
 	int main(int argc, char * argv[]) {
-
-	    /*
+	
+		/*trackbars for adjusting HSV values, one time use*/
+		/*
 		namedWindow("bars", 1);
 
 		createTrackbar("Hue_Min", "bars", &hue_min, 180);
@@ -116,14 +115,17 @@
 
 		//Mat imgRgb = imread("color.jpg");
 		*/
-
+	
+	/*connect network tables to roborio*/
 	    NetworkTable::SetClientMode();
 	    NetworkTable::SetTeam(7556);
 	    auto rawValues = NetworkTable::GetTable("rawValues");
 
+	/*start capturing video*/
 	    VideoCapture cap(0);
 	    if (!cap.isOpened()) return -1;
 
+	/*start streaming live feed to port 7558*/
 	    MJPEGWriter streamer(7558); 
 	    Mat frame;
 	    cap >> frame;
@@ -134,11 +136,13 @@
 	    for (;;) {
 		Mat imgRgb;
 		cap >> imgRgb;
-
+		
+		/*convert RGB to HSV for easy colour detection*/
 		Mat imgHsv;
 		// cvtColor(imgRgb, imgHsv, CV_BGR2HSV);
 		cvtColor(imgRgb, imgHsv, COLOR_BGR2HSV);
-
+		
+		/*threshold HSV image based on min max HSV values to produce black/white image*/
 		Mat imgGrey;
 		inRange(imgHsv, Scalar(hue_min, sat_min, val_min),
 		        Scalar(hue_max, sat_max, val_max), imgGrey);
@@ -147,11 +151,14 @@
 		vector < Vec4i > hierarchy;
 
 		vector < RotatedRect > rotatedRects;
-
+		
+		/*find all closed contours on the black/white thresholded image*/
 		findContours(imgGrey, contours, hierarchy, RETR_EXTERNAL,
 		             CHAIN_APPROX_SIMPLE);
+
 		Mat angledImg = imgRgb.clone();
 
+		/*find all rotated rectangles from contours, filtering of which ones are targets is done later*/
 		for (size_t i = 0; i < contours.size(); i++) {
 		    int area = contourArea(contours[i]);
 		    if (area < max_area && area > min_area) {
@@ -161,6 +168,7 @@
 
 		vector < RotatedRect >	pairs; // the pair of rectangles that the robot will track
 
+		/*find all pairs of rectangles that match the shape (both pointing inwards) using angles*/
 		for (size_t i = 0; i < rotatedRects.size(); i++) {
 			for (size_t j = 0; j < rotatedRects.size(); j++){
 				if (i != j) {
@@ -188,6 +196,7 @@
 		float minError = 1000000;		
 		float offset = -1;
 
+		/*find the one pair that is closest to the desired aspect ratio, and that is closest to the previous pair*/
 		for (size_t i = 0; i < pairs.size(); i+= 2){
 			drawRect(angledImg, pairs[i], Scalar(255,0,0));
 			drawRect(angledImg, pairs[i+1], Scalar(0,0,255));

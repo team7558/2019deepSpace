@@ -26,7 +26,13 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Drivetrain m_drivetrain;
-  public static Compressor m_compressor;
+  public static Hatch m_hatch;
+  public static Intake m_intake;
+  public static JoyDrive m_joyDrive;
+  public static JoyPVision m_joyPVision;
+  public static Jetson m_jetson;
+  public static Relay m_visionLight;
+  public static Endgame m_endgame;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -38,11 +44,18 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    //m_drivetrain = new Drivetrain();
-    m_compressor = new Compressor(0);
-    m_compressor.start();
-    //m_chooser.setDefaultOption("Default Auto", new TestAuto());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    m_hatch = new Hatch();
+    m_intake = new Intake();
+    m_drivetrain = new Drivetrain();
+    m_drivetrain.setMaxSpeeds(0.3, 0.3);
+    m_joyDrive = new JoyDrive();
+    m_jetson = new Jetson();
+    m_joyPVision = new JoyPVision();
+    m_visionLight = new Relay(RobotMap.VISION_LIGHT);
+
+    m_endgame.retractAll();
+    
+    m_chooser.setDefaultOption("Front Cargo Side Cargo", new FrontCargoSideCargo());
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
@@ -117,6 +130,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_joyDrive.start();
   }
 
   /**
@@ -124,6 +138,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    m_oi.checkButtons();
     Scheduler.getInstance().run();
   }
 
@@ -132,5 +147,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    System.out.println(m_jetson.getRawValues()[3]);
   }
 }

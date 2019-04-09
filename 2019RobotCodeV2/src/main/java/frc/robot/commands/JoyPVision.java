@@ -8,38 +8,47 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.*;
 import frc.robot.Robot;
 
-public class JoyDrive extends Command {
-  public JoyDrive() {
+public class JoyPVision extends Command {
+
+  private double m_kP, m_power;
+
+  public JoyPVision() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    m_kP = 0.001;
+    m_power = -0.3;
     requires(Robot.m_drivetrain);
+    requires(Robot.m_jetson);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_visionLight.set(Relay.Value.kOn);
+    Robot.m_drivetrain.setMaxSpeeds(0.4, 0.4);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.RT) > 0.4){
-      Robot.m_drivetrain.setMaxSpeeds(0.1, 0.1);
-    } else {
-      Robot.m_drivetrain.setMaxSpeeds(0.3, 0.3);
-    }
-    Robot.m_drivetrain.arcadeDrive(-Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.LJY), Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.RJX));
+    double error = Robot.m_jetson.getRawValues()[3];
+    double kTerm = m_kP*error;
+    Robot.m_drivetrain.tankDrive(m_power+kTerm, m_power-kTerm);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.LT) < 0.4;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_visionLight.set(Relay.Value.kOff);
   }
 
   // Called when another command which requires one or more of the same

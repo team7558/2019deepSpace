@@ -83,11 +83,11 @@ public class Robot extends TimedRobot {
     m_visionTargetAlign = new VisionTargetAlign();
     m_dumbVision = new DumbVision();
     SmartDashboard.putData("Auto mode", m_chooser);
-/*
-    m_Compressor = new Compressor(RobotMap.COMPRESSOR);
+
+    m_Compressor = new Compressor(0);
     m_Compressor.start();
     m_Compressor.setClosedLoopControl(true);
-*/
+
     elbow = new CANSparkMax(RobotMap.ELBOW_MOTOR, MotorType.kBrushless);
     wrist = new CANSparkMax(RobotMap.WRIST_MOTOR, MotorType.kBrushless);
 
