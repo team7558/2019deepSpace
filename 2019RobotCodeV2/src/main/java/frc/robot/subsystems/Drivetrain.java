@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
+import frc.robot.Util;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -36,6 +37,7 @@ public class Drivetrain extends Subsystem {
   private SpeedControllerGroup m_leftMotorGroup, m_rightMotorGroup;
   private DifferentialDrive m_diffDrive;
   private CANEncoder m_leftEncoder, m_rightEncoder;
+  private double m_leftZero, m_rightZero;
 
   private double m_maxStraightSpeed, m_maxTurnSpeed;
 
@@ -52,6 +54,10 @@ public class Drivetrain extends Subsystem {
       }
     }
     switch (RobotMap.NUM_DRIVE_MOTORS) {
+    case (1):
+      m_leftMotorGroup = new SpeedControllerGroup(m_leftMotors[0]);
+      m_rightMotorGroup = new SpeedControllerGroup(m_rightMotors[0]);
+      break;      
     case (2):
       m_leftMotorGroup = new SpeedControllerGroup(m_leftMotors[0], m_leftMotors[1]);
       m_rightMotorGroup = new SpeedControllerGroup(m_rightMotors[0], m_rightMotors[1]);
@@ -65,7 +71,9 @@ public class Drivetrain extends Subsystem {
     if (RobotMap.USING_ENCODERS) {
       if (RobotMap.USING_NEOS) {
         m_leftEncoder = new CANEncoder((CANSparkMax) m_leftMotors[0]);
+        m_leftZero = m_leftEncoder.getPosition();
         m_rightEncoder = new CANEncoder((CANSparkMax) m_rightMotors[0]);
+        m_rightZero = m_rightEncoder.getPosition();
       }
     }
     m_maxStraightSpeed = 0.8;
@@ -78,12 +86,21 @@ public class Drivetrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
+  public void resetEncoders(){
+    m_leftZero = m_leftEncoder.getPosition();
+    m_rightZero = m_rightEncoder.getPosition();
+  }
+
+  public double[] getDistances(){
+    return new double[]{m_leftEncoder.getPosition()-m_leftZero, m_rightEncoder.getPosition()-m_rightZero};
+  } 
+
   public void tankDrive(double leftPower, double rightPower) {
-    m_diffDrive.tankDrive(checkSpeed(leftPower, m_maxStraightSpeed), checkSpeed(rightPower, m_maxStraightSpeed));
+    m_diffDrive.tankDrive(Util.checkSpeed(leftPower, m_maxStraightSpeed), Util.checkSpeed(rightPower, m_maxStraightSpeed));
   }
 
   public void arcadeDrive(double straightSpeed, double turn) {
-    m_diffDrive.arcadeDrive(checkSpeed(straightSpeed, m_maxStraightSpeed), checkSpeed(turn, m_maxTurnSpeed));
+    m_diffDrive.arcadeDrive(Util.checkSpeed(straightSpeed, m_maxStraightSpeed), Util.checkSpeed(turn, m_maxTurnSpeed));
   }
 
   public void setMaxSpeeds(double maxStraightSpeed, double maxTurnSpeed) {
@@ -91,9 +108,6 @@ public class Drivetrain extends Subsystem {
     m_maxTurnSpeed = maxTurnSpeed;
   }
 
-  public double checkSpeed(double speed, double maxSpeed) {
-    if (Math.abs(speed) < maxSpeed)
-      return speed;
-    return speed * Math.abs(maxSpeed / speed);
-  }
+
+
 }

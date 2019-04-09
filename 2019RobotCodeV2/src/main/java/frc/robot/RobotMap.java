@@ -15,21 +15,13 @@ package frc.robot;
  */
 public class RobotMap {
 
-  public static boolean USING_NEOS = false;
-  public static boolean USING_ENCODERS = false;
+  public static boolean USING_NEOS = false, USING_ENCODERS = false;
 
-  /*   
-  public static int[] LEFT_MOTORS = new int[]{1,2,3};
-  public static int[] RIGHT_MOTORS = new int[]{4,5,6};
-  */
-
-  public static int[] LEFT_DRIVE_MOTORS = new int[]{3,4};
-  public static int[] RIGHT_DRIVE_MOTORS = new int[]{1,2};
+  public static int[] LEFT_DRIVE_MOTORS = new int[]{3,4}, RIGHT_DRIVE_MOTORS = new int[]{1,2};
 
   public static int NUM_DRIVE_MOTORS = 2; //per side
 
-  public static int LEFT_DRIVE_ENCODER = 1;
-  public static int RIGHT_DRIVE_ENCODER = 4;
+  public static int LEFT_DRIVE_ENCODER = 1, RIGHT_DRIVE_ENCODER = 4;
 
   public static int HATCH_EXTEND_SOLENOID_1 = 2, HATCH_EXTEND_SOLENOID_2 = 3;
   
@@ -37,7 +29,8 @@ public class RobotMap {
 
   public static int INTAKE_TOP_ROLLERS = 6, INTAKE_BOTTOM_ROLLERS = 5;
 
-  public static int ARM = 15;
+  public static int ARM_MOTOR = 15;
+  public static int ARM_FRONT_SWITCH = 2, ARM_BACK_SWITCH = 1;
 
   public static int VISION_LIGHT = 0;
 
