@@ -47,17 +47,21 @@ public class OI {
     }
     */
     if (m_operator.getRawButton(A)){
-      Robot.m_hatch.collect();
-    } 
-    if (m_operator.getRawButton(B)){
       Robot.m_hatch.release();
-    }
-    if (m_operator.getRawAxis(LT) > 0.4){
-      Robot.m_intake.intake(0.5*m_operator.getRawAxis(LT));
-    } else if (m_operator.getRawAxis(RT) > 0.4){
-      Robot.m_intake.shoot(0.5*m_operator.getRawAxis(RT));
     } else {
-      Robot.m_intake.stop();
+      Robot.m_hatch.collect();
+    }
+    
+    if (m_operator.getRawAxis(LT) > 0.4){
+      Robot.m_intake.intake(Util.checkSpeed(m_operator.getRawAxis(LT), 0.5));
+    } else if (m_operator.getRawAxis(RT) > 0.4){
+      Robot.m_intake.shoot(Util.checkSpeed(m_operator.getRawAxis(RT), 0.3));
+    } else {
+      Robot.m_intake.intake(0.04);
+    }
+
+    if (m_operator.getRawButton(LB)){
+      Robot.m_intake.center(0.75);
     }
 
     if (m_driver.getRawAxis(LT) > 0.4){
@@ -74,6 +78,21 @@ public class OI {
 
     if (m_operator.getRawButton(RB)){
       Robot.m_endgame.retractLittle();
+    }
+
+    switch(m_operator.getPOV()){
+      case(0):
+        Robot.m_arm.goToPreset("HOME");
+        break;
+      case(90):
+        Robot.m_arm.goToPreset("CARGOSHIP");
+        break;
+      case(180):
+        Robot.m_arm.goToPreset("GROUND");
+        break;
+      case(270):
+        Robot.m_arm.goToPreset("ROCKET_1");
+        break;
     }
 
   }

@@ -24,9 +24,9 @@ public class JoyDrive extends Command {
   @Override
   protected void execute() {
     if (Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.RT) > 0.4){
-      Robot.m_drivetrain.setMaxSpeeds(0.1, 0.1);
+      Robot.m_drivetrain.setMaxSpeeds(0.4, 0.5);
     } else {
-      Robot.m_drivetrain.setMaxSpeeds(0.3, 0.3);
+      Robot.m_drivetrain.setMaxSpeeds(0.8, 0.7);
     }
     Robot.m_drivetrain.arcadeDrive(-Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.LJY), Robot.m_oi.m_driver.getRawAxis(Robot.m_oi.RJX));
   }

@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -33,6 +36,7 @@ public class Robot extends TimedRobot {
   public static Jetson m_jetson;
   public static Relay m_visionLight;
   public static Endgame m_endgame;
+  public static Arm m_arm;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -52,6 +56,8 @@ public class Robot extends TimedRobot {
     m_jetson = new Jetson();
     m_joyPVision = new JoyPVision();
     m_visionLight = new Relay(RobotMap.VISION_LIGHT);
+    m_endgame = new Endgame();
+    m_arm = new Arm();
 
     m_endgame.retractAll();
     
@@ -98,6 +104,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    
     m_autonomousCommand = m_chooser.getSelected();
 
     /*
@@ -131,6 +138,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_joyDrive.start();
+    
   }
 
   /**
@@ -138,6 +146,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    
     m_oi.checkButtons();
     Scheduler.getInstance().run();
   }
@@ -147,6 +156,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    System.out.println(m_jetson.getRawValues()[3]);
+    CANSparkMax test = new CANSparkMax(15, MotorType.kBrushless);
+    test.set(0.3*m_oi.m_operator.getRawAxis(m_oi.LJY));
+    //System.out.println(m_jetson.getRawValues()[3]);
   }
 }

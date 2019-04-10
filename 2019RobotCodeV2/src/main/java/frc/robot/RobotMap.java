@@ -27,14 +27,14 @@ public class RobotMap {
   
   public static int HATCH_HOOK_SOLENOID_1 = 0, HATCH_HOOK_SOLENOID_2 = 1;
 
-  public static int INTAKE_TOP_ROLLERS = 6, INTAKE_BOTTOM_ROLLERS = 5;
+  public static int INTAKE_TOP_ROLLERS = 5, INTAKE_BOTTOM_ROLLERS = 6;
 
   public static int ARM_MOTOR = 15;
-  public static int ARM_FRONT_SWITCH = 2, ARM_BACK_SWITCH = 1;
+  public static int ARM_FRONT_SWITCH = 0, ARM_BACK_SWITCH = 1;
 
   public static int VISION_LIGHT = 0;
 
-  public static int SHIFT_SOLENOID = 2;
-  public static int LITTLE_ENDGAME_SOLENOID_1 = 3, LITTLE_ENDGAME_SOLENOID_2 = 5, BIG_ENDGAME_SOLENOID_1 = 4, BIG_ENDGAME_SOLENOID_2 = 6;
+  //public static int SHIFT_SOLENOID = 4;
+  public static int LITTLE_ENDGAME_SOLENOID_1 = 4, LITTLE_ENDGAME_SOLENOID_2 = 5, BIG_ENDGAME_SOLENOID_1 = 6, BIG_ENDGAME_SOLENOID_2 = 7;
   
 }

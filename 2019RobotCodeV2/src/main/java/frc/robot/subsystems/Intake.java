@@ -33,6 +33,11 @@ public class Intake extends Subsystem {
     m_bottomRollers.set(-speed);
   }
   
+  public void center(double speed){
+    m_topRollers.set(speed);
+    m_bottomRollers.set(-0.2*speed);
+  }
+
   public void intake(double speed){
     m_topRollers.set(speed);
     m_bottomRollers.set(speed);

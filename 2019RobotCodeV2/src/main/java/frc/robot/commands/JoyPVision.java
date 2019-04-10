@@ -18,8 +18,8 @@ public class JoyPVision extends Command {
   public JoyPVision() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    m_kP = 0.001;
-    m_power = -0.3;
+    m_kP = -0.001;
+    m_power = -0.4;
     requires(Robot.m_drivetrain);
     requires(Robot.m_jetson);
   }

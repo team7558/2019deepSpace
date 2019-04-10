@@ -16,11 +16,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.robot.RobotMap;
+import frc.robot.Robot;
 import frc.robot.Util;
 
 public class Arm extends PIDSubsystem {
   
-  private double m_zeroEncoder, m_targetPosition, m_maxSpeed;
+  private double m_zeroEncoder, m_deadstopPosition, m_targetPosition, m_maxSpeed;
   private double m_prevEncoder, m_currEncoder;
   private CANSparkMax m_armMotor;
   private CANEncoder m_armEncoder;
@@ -29,7 +30,7 @@ public class Arm extends PIDSubsystem {
   private HashMap<String, Double> m_presets;
 
   public Arm() {
-    super("arm", 0.001, 0, 0);
+    super("arm", 0.0075, 0, 0);
 
     m_armMotor = new CANSparkMax(RobotMap.ARM_MOTOR, MotorType.kBrushless);
     m_armEncoder = new CANEncoder(m_armMotor);
@@ -43,10 +44,14 @@ public class Arm extends PIDSubsystem {
 
     m_maxSpeed = 0.2;
 
-    m_presets.put("GROUND", 0.0);
-    m_presets.put("CARGOSHIP", 0.0);
-    m_presets.put("ROCKET_1", 0.0);
-    m_presets.put("HANG", 0.0);
+    m_deadstopPosition = 0;
+
+    m_presets = new HashMap<String, Double>();
+
+    m_presets.put("GROUND", 50.0);
+    m_presets.put("CARGOSHIP", -10.0);
+    m_presets.put("ROCKET_1", 12.0);
+    m_presets.put("HOME", 0.0);
     
     enable();
   }
@@ -55,7 +60,7 @@ public class Arm extends PIDSubsystem {
     setPosition(m_presets.get(preset));
   }
 
-  private void resetPosition(){
+  public void resetPosition(){
     m_zeroEncoder = m_armEncoder.getPosition();
     setPosition(getPosition());
   }
@@ -79,16 +84,16 @@ public class Arm extends PIDSubsystem {
     } else {
       m_prevEncoder = m_currEncoder;
     }
-    return (m_currEncoder - m_zeroEncoder);
+    return (m_currEncoder - m_zeroEncoder) + m_deadstopPosition;
   }
 
   private void checkOutOfBounds() {
-    boolean goingUp = m_targetPosition - getArmPosition() >= 0;
+    boolean goingUp = m_targetPosition - getArmPosition() <= 0;
     if (goingUp && !m_backSwitch.get()) {
       resetPosition();
-      setPosition(getPosition());
+      setPosition(getArmPosition());
     } else if (!goingUp && !m_frontSwitch.get()) {
-      setPosition(getPosition());
+      setPosition(getArmPosition());
     } 
   }
 
@@ -99,7 +104,10 @@ public class Arm extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
+    //System.out.println(getArmPosition());
     System.out.println(Util.checkSpeed(output, m_maxSpeed));
+    //m_armMotor.set(0.3*Robot.m_oi.m_operator.getRawAxis(Robot.m_oi.LJY));
+    //System.out.println(0.3*Robot.m_oi.m_operator.getRawAxis(Robot.m_oi.LJY));
     m_armMotor.set(Util.checkSpeed(output, m_maxSpeed));
   }
 }
