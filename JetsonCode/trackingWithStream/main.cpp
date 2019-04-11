@@ -118,7 +118,7 @@
 	
 	/*connect network tables to roborio*/
 	    NetworkTable::SetClientMode();
-	    NetworkTable::SetTeam(7556);
+	    NetworkTable::SetTeam(7558);
 	    auto rawValues = NetworkTable::GetTable("rawValues");
 
 	/*start capturing video*/
