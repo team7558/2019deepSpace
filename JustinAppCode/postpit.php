@@ -1,8 +1,4 @@
 <?php 
-$db_HOST = "localhost";
-$db_USER = "team7558_s";
-$db_PASS = "Mr.Roboto11235";
-$db_NAME = "team7558_scouting";
 error_reporting(E_ERROR | E_PARSE);
 session_start();
 
@@ -72,7 +68,7 @@ if(isset($_FILES['image'])){
   
   if(empty($errors)==true) {
     
-     $upload_name = $Username.'_'.$Competition.'_'.$TeamNumber.'.jpg';
+     $upload_name = $_SESSION['username'].'_'.$Competition.'_'.$TeamNumber.'.jpg';
      move_uploaded_file($file_tmp,"uploads/".$upload_name);
      $image = "uploads/"+$upload_name;
      ?><script type="text/javascript">alert('Successful Upload to Competition <?php echo $Competition; ?>!');</script><?php
@@ -87,16 +83,16 @@ if(isset($_FILES['image'])){
 
 
 
-$sql = "SELECT * FROM `pitdata` WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$cid'";
+$sql = "SELECT * FROM `pitdata` WHERE `TeamNumber` = '$TeamNumber' AND `Competition` = '$Competition'";
 
-$search_result = mysqli_query($connect, $sql);
+$search_result = mysqli_query($conn, $sql);
 $exists = false;
 while($row = mysqli_fetch_array($search_result)):
 $exists = true;
 endwhile;
 
 if($exists){
-    $sql = "UPDATE `pitdata` SET `Date` = '$Date', `Time` = '$Time', `Username` = '$Username', `TeamName` = '$TeamName', `TeamNumber` = '$TeamNumber', `GeneralComments` = '$GeneralComments', `DrivetrainType` = '$DrivetrainType', `WheelType` = '$WheelType', `NumberDriveMotors` = '$NumberDriveMotors', `HABStart` = '$HABStart', `SandstormMovement` = '$SandstormMovement', `CargoSandstorm` = '$CargoSandstorm', `PanelSandstorm` = '$PanelSandstorm', `IntakeHatchGround` = '$IntakeHatchGround', `IntakeHatchHuman` = '$IntakeHatchHuman', `ScoreHatchShip` = '$ScoreHatchShip', `ScoreHatchLow` = '$ScoreHatchLow', `ScoreHatchMid` = '$ScoreHatchMid', `ScoreHatchHigh` = '$ScoreHatchHigh', `IntakeCargoGround` = '$IntakeCargoGround', `IntakeCargoHuman` = '$IntakeCargoHuman', `ScoreCargoShip` = '$ScoreCargoShip', `ScoreCargoLow` = '$ScoreCargoLow', `ScoreCargoMid` = '$ScoreCargoMid', `ScoreCargoHigh` = '$ScoreCargoHigh', `HABEnd` = '$HABEnd', `RobotsCarried` = '$RobotsCarried', `LiftType` = '$LiftType', `IsRookie` = '$IsRookie', `RobotWeightPounds` = '$RobotWeightPounds', `image` = '$image'";
+    $sql = "UPDATE `pitdata` SET `Date` = '$Date', `Time` = '$Time', `Username` = '$Username', `TeamName` = '$TeamName', `TeamNumber` = '$TeamNumber', `GeneralComments` = '$GeneralComments', `DrivetrainType` = '$DrivetrainType', `WheelType` = '$WheelType', `NumberDriveMotors` = '$NumberDriveMotors', `HABStart` = '$HABStart', `SandstormMovement` = '$SandstormMovement', `CargoSandstorm` = '$CargoSandstorm', `PanelSandstorm` = '$PanelSandstorm', `IntakeHatchGround` = '$IntakeHatchGround', `IntakeHatchHuman` = '$IntakeHatchHuman', `ScoreHatchShip` = '$ScoreHatchShip', `ScoreHatchLow` = '$ScoreHatchLow', `ScoreHatchMid` = '$ScoreHatchMid', `ScoreHatchHigh` = '$ScoreHatchHigh', `IntakeCargoGround` = '$IntakeCargoGround', `IntakeCargoHuman` = '$IntakeCargoHuman', `ScoreCargoShip` = '$ScoreCargoShip', `ScoreCargoLow` = '$ScoreCargoLow', `ScoreCargoMid` = '$ScoreCargoMid', `ScoreCargoHigh` = '$ScoreCargoHigh', `HABEnd` = '$HABEnd', `RobotsCarried` = '$RobotsCarried', `LiftType` = '$LiftType', `IsRookie` = '$IsRookie', `RobotWeightPounds` = '$RobotWeightPounds', `image` = '$image' WHERE `Competition`='$Competition' AND `TeamNumber`='$TeamNumber'";
 }else{
     
 $sql = "INSERT INTO pitdata (Date, Time, Username, TeamName, TeamNumber, GeneralComments, DrivetrainType, WheelType, NumberDriveMotors, HABStart, SandstormMovement, CargoSandstorm, PanelSandstorm, IntakeHatchGround, IntakeHatchHuman, ScoreHatchShip, ScoreHatchLow, ScoreHatchMid, ScoreHatchHigh, IntakeCargoGround, IntakeCargoHuman, ScoreCargoShip, ScoreCargoLow, ScoreCargoMid, ScoreCargoHigh, HABEnd, RobotsCarried, LiftType, IsRookie, RobotWeightPounds, Competition, image) VALUES ('$Date', '$Time', '$Username', '$TeamName', '$TeamNumber', '$GeneralComments', '$DrivetrainType', '$WheelType', '$NumberDriveMotors', '$HABStart', '$SandstormMovement', '$CargoSandstorm', '$PanelSandstorm', '$IntakeHatchGround', '$IntakeHatchHuman', '$ScoreHatchShip', '$ScoreHatchLow', '$ScoreHatchMid', '$ScoreHatchHigh', '$IntakeCargoGround', '$IntakeCargoHuman', '$ScoreCargoShip', '$ScoreCargoLow', '$ScoreCargoMid', '$ScoreCargoHigh', '$HABEnd', '$RobotsCarried', '$LiftType', '$IsRookie', '$RobotWeightPounds', '$Competition', '$image')";

@@ -260,6 +260,33 @@ textarea {
     background-color: #f49541;
 }
 
+
+
+#loadteambutton {
+    position: absolute;
+    right: 140px;
+    height: 80px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 22px;
+    color: white;
+    background-color: #f47f41;
+    border: 0px solid black;
+    border-radius: 15px;
+    width: 220px;
+}
+
+#loadteambutton:hover {
+    background-color: #f49541;
+}
+
+#loadteamnumber {
+    margin-left: 4px;
+    width: 72px;
+}
+
+
+
 .customupload {
     padding-bottom: 0px;
     height: 58px;

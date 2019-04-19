@@ -32,7 +32,7 @@ br {
 	background-color: rgba(86,86,86,0.8);
 }
 
-#login, #register {
+#login, #register, #registerhome {
 	-webkit-transition-duration: 0.0s;
 	transition-duration: 0.0s;
 	width: 120px;
@@ -45,11 +45,15 @@ br {
 	box-shadow: 0px 0px 20px rgba(0,0,0,.25);
 }
 
-#login:hover, #register:hover {
+#login:hover, #register:hover, #registerhome:hover {
 	-webkit-transition-duration: 0.0s;
 	transition-duration: 0.0s;
 	background-color: rgba(24,24,24,0.8);
 	box-shadow: 0px 0px 20px rgba(0,0,0,.5);
+}
+
+#reghome button {
+    margin-left:-8px;
 }
 
 input[type="password"], input[type="text"], input[type="email"], input[type="number"] {

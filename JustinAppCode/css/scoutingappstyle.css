@@ -1,4 +1,4 @@
-body {
+ body {
   font-family: Courier New, Roboto, sans-serif;
   font-size: 16px;
   background-image: url("../photos/spacewallpaper.png");
@@ -86,9 +86,9 @@ body {
   position: relative;
   vertical-align: middle;
   display: table-cell;
-  width: 80px;
-  margin-left: 12px;
-  margin-right: 12px;
+  width: 52px;
+  margin-left: 6px;
+  margin-right: 6px;
   height: 60px;
   z-index: 3;
   font-size: 12px;
@@ -107,8 +107,8 @@ body {
   vertical-align: middle;
   display: table-cell;
   width: 100px;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 16px;
+  margin-right: 16px;
   border: 2px solid black;
   height: 60px;
   z-index: 10;

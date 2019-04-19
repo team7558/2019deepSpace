@@ -40,38 +40,24 @@ function updateFormData() {
     
     //HAB Movement
     thisData = document.getElementById("datasandstormmovement");
-    console.log(document.getElementById('sandstormmovena').checked);
-    if(document.getElementById("sandstormmovena").checked==true) {
-        console.log("1");
-        if(!thisData.value.length>0) thisData.value+=document.getElementById("sandstormmovena").value;
-        else thisData.value+=" and " + document.getElementById("sandstormmovena").value;
+    if(document.getElementById("sandstormmovestay").checked) thisData.value+="Does Not Move";
+    if(document.getElementById("sandstormmoveauto").checked) {
+        if(thisData.value.length>0) thisData.value += " AND ";
+        thisData.value+="Autonomous";
     }
-    if(document.getElementById("sandstormmoveauto").checked==true) {
-        alert("2");
-        if(!thisData.value.length>0) thisData.value+=document.getElementById("sandstormmoveauto").value;
-        else thisData.value+=" and " + document.getElementById("sandstormmoveauto").value;
+    if(document.getElementById("sandstormmovemanual").checked) {
+        if(thisData.value.length>0) thisData.value += " AND ";
+        thisData.value+="Manual Control";
     }
-    if(document.getElementById("sandstormmovemanual").checked==true) {
-        alert("3");
-        if(!thisData.value.length>0) thisData.value+=document.getElementById("sandstormmovemanual").value;
-        else thisData.value+=" and " + document.getElementById("sandstormmovemanual").value;
-    }
-    if(thisData.value==0) thisData.value="Does Not Move";
+    
+    
+    
     
     thisData = document.getElementById("datacargosandstorm");
     thisData.value = document.getElementById("cargosandstorm").value;
     
     thisData = document.getElementById("datapanelsandstorm");
     thisData.value = document.getElementById("panelsandstorm").value;
-    
-    //HAB End
-    thisData = document.getElementById("datahabstart");
-    var sandstormlevel = document.getElementsByName("sandstormlevel");
-    for(var i = 0; i < sandstormlevel.length; i++){
-        if(sandstormlevel[i].checked){
-            thisData.value = sandstormlevel[i].value;
-        }
-    }
     
     
     //Hatch

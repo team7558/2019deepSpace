@@ -2,7 +2,8 @@
 session_start();
 if (isset($_POST['username'])) {
     
-
+    
+    $conn = new mysqli("", "", "", "");
     
     
     // Form
@@ -17,7 +18,7 @@ if((!isset($user) || trim($user) == '') || (!isset($pass) || trim($pass) == '') 
    $errors = "You did not fill out the required fields.";
 } else{
 	$sql = "SELECT * FROM `users` WHERE `Username` = '$user'";
-	$search_result = mysqli_query($connect, $sql);
+	$search_result = mysqli_query($conn, $sql);
 	$exists = false;
 	while($row = mysqli_fetch_array($search_result)):
 	$exists = true;
@@ -31,12 +32,24 @@ if((!isset($user) || trim($user) == '') || (!isset($pass) || trim($pass) == '') 
 	if (!preg_match("/^[a-zA-Z ]*$/",$schoolname)) {
   		$errors = "Only letters and spaces permitted in school name";
 	}
+	
+	
+	$length = 24;
+	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $verifyID = '';
+    for ($i = 0; $i < $length; $i++) {
+        $verifyID .= $characters[rand(0, $charactersLength - 1)];
+    }
+	
 	if(!isset($errors) || trim($errors) == ''){
-    	$sql = "INSERT INTO `users` (Username, Password, Email, Team Number) VALUES ('$user', '$pass', '$email', '$teamnumber')";
-	
-	if ($connect->query($sql) === TRUE) {
-    echo "Record updated successfully";
-	
+    	$sql = "INSERT INTO `users` (Username, Password, Email, TeamNumber, School, Verified, VerifyID) VALUES ('$user', '$pass', '$email', '$teamnumber', '$schoolname', '1', '$verifyID')";
+    	
+	if ($conn->query($sql) === TRUE) {
+    
+    $link = "https://www.scouting.team7558.com/verify.php?verifyID=".$verifyID;
+    
+    
 	$email_to = "scouting@team7558.com";
  
     $email_subject = "New Account at Team7558.com";

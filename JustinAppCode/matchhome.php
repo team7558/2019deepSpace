@@ -1,18 +1,62 @@
 <?php
 session_start();
+	$connect = mysqli_connect("", "", "Mr.", "");
 	$cid = $_GET['id'];
 	$sortType = $_GET['SortType'];
 	$query = "SELECT * FROM `competitions` WHERE `id` = '$cid'";
+	$name = "";
+	$team = "0";
 	$belongsToUser = false;
 	$_SESSION['cid'] = $cid;
 	$search_result = filterTable($query);
 	while($row = mysqli_fetch_array($search_result)):
 		if($row['Username'] == $_SESSION['username']){
 			$belongsToUser = true;	
+			$name = $row['CompetitionName'];
+			$user = $row['Username'];
 		}
 	endwhile;
+	
+	$query = "SELECT * FROM `users` WHERE `Username` = '$user'";
+	$search_result = filterTable($query);
+	while($row = mysqli_fetch_array($search_result)):
+		$team = $row['TeamNumber'];
+	endwhile;
+	
+	
 	if((isset($_SESSION['username']) && $belongsToUser)){
 	$user = $_SESSION['username'];
+	
+	
+	//Create list of teams that we will play with
+	$teamList="";
+    $search_result = filterTable("SELECT * FROM `matches` WHERE `competition` = '$cid' AND `TeamNumber`= $team ORDER by `MatchNumber`");
+    while($row = mysqli_fetch_array($search_result)):
+            $match = $row['MatchNumber'];
+            $stat = $row['RobotStation'];
+            
+            $thisMatch = filterTable("SELECT * FROM `matches` WHERE `competition` = '$cid' AND `MatchNumber`= $match ORDER by `RobotStation`");
+            //Check every team playing thismatch
+            while($boi = mysqli_fetch_array($thisMatch)):
+                //If we're blue
+                if($stat == "B1" || $stat == "B2" || $stat == "B3") {
+                    if( ($boi['RobotStation'] == "B1" || $boi['RobotStation'] == "B2" || $boi['RobotStation'] == "B3") && $boi['TeamNumber']!==$team) {
+                        
+                        //If on alliance, add to list
+                        if($boi['Updated']==0) $teamList .= "!".$boi['TeamNumber']."x";
+                        else $teamList .= "y".$boi['TeamNumber']."x";
+                    }
+                //If we're red
+                } else {
+                    if( ($boi['RobotStation'] == "R1" || $boi['RobotStation'] == "R2" || $boi['RobotStation'] == "R3") && $boi['TeamNumber']!==$team) {
+                        
+                        //If on alliance, add to list
+                        if($boi['Updated']==0) $teamList .= "!".$boi['TeamNumber']."x";
+                        else $teamList .= "y".$boi['TeamNumber']."x";
+                    }
+                }
+            endwhile;
+    endwhile;
 	
 	if(isset($_GET['SortType'])){
 	    if($sortType == "TeamNumber") $query = "SELECT * FROM `matchAverages` WHERE `competition` = '$cid' ORDER BY $sortType ASC";
@@ -53,7 +97,7 @@ session_start();
 <a href="https://www.scouting.team7558.com/scoutinghome.php"><button id="gohome">Go Home</button></a>
 
 <body>
-<h1 class="matchdataheader">Match Averages @ Competition ID: <?php echo $cid; ?></h1>
+<h1 class="matchdataheader">Match Averages @ <?php echo $name; ?></h1>
 <table class="matchdatatable">
 <tr>
     <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=TeamNumber">Team Number</a></th>
@@ -72,9 +116,22 @@ session_start();
     <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=HABEndScore">HAB End</a></th>
     <th><a href="/matchhome.php?id=<?php echo $cid ?>&SortType=RobotsCarried">Robots Carried</a></th>
   </tr>
+  
+  
 <?php while($row = mysqli_fetch_array($search_result)):?>
   <tr>
-    <td class="defenseitems<?php echo $row['ID'];?>"><a href="/team.php?TeamNumber=<?php echo $row['TeamNumber']; ?>"><?php echo $row['TeamNumber']; ?> </a></td>
+    <td class="defenseitems<?php echo $row['ID'];?>">    
+        <?php 
+        
+        //Check if we work with them
+        $will = strpos($teamList, "!".$row['TeamNumber']."x");
+        $have = strpos($teamList, "y".$row['TeamNumber']."x");
+        if($will>0) echo "!";
+        else if($have>0 || $row['TeamNumber']==$team) echo "&#x2714";
+        else echo "&#x2716";
+        
+        ?>
+        <a href="/team.php?TeamNumber=<?php echo $row['TeamNumber']; ?>">        <?php echo $row['TeamNumber']; ?> </a></td>
     <td class="habitems"><?php echo number_format($row['HABSandstormScore'],2); ?></td>
     <td class="cargoitems"><?php echo number_format($row['SandstormCargo'],2); ?></td>
     <td class="panelitems"><?php echo number_format($row['SandstormPanels'],2); ?></td>

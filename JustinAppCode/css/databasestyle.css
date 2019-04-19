@@ -43,6 +43,18 @@ th,td {
     margin-left: 12px;
 }
 
+#pretable {
+    display: table;
+}
+
+#prerow {
+    display: table-row;
+}
+
+#qualsinsert, #qualsinstructions {
+    display: inline;
+}
+
 
 
 

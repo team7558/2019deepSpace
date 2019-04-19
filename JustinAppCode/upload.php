@@ -48,7 +48,7 @@ window.location.href = 'https://scouting.team7558.com/';
 
 function filterTable($query)
    	{
-       	$connect = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
+       	$connect = mysqli_connect("", "", "", "");
        	$filter_Result = mysqli_query($connect, $query);
       		return $filter_Result;
    	}

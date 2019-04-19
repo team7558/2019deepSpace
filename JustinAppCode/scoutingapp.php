@@ -21,7 +21,7 @@
    }
    	function filterTable($query)
    	{
-       	$connect = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
+       	$connect = mysqli_connect("", "", "", "");
        	$filter_Result = mysqli_query($connect, $query);
       		return $filter_Result;
    	}
@@ -55,13 +55,13 @@
       </div>
       <div id="stations">
          <div id="stationrow">
-            <button class="stationbutton" id="stationR1" onClick="changeStation(0,1);">Station<br>Red 1</button>
-            <button class="stationbutton" id="stationR2" onClick="changeStation(0,2);">Station<br>Red 2</button>
-            <button class="stationbutton" id="stationR3" onClick="changeStation(0,3);">Station<br>Red 3</button>
+            <button class="stationbutton" id="stationR1" onClick="changeStation(0,1);">Red<br>1</button>
+            <button class="stationbutton" id="stationR2" onClick="changeStation(0,2);">Red<br>2</button>
+            <button class="stationbutton" id="stationR3" onClick="changeStation(0,3);">Red<br>3</button>
             <button id="flipsides" onClick="changeButtonPlacement();">Flip Sides</button>
-            <button class="stationbutton" id="stationB1" onClick="changeStation(1,1);">Station<br>Blue 1</button>
-            <button class="stationbutton" id="stationB2" onClick="changeStation(1,2);">Station<br>Blue 2</button>
-            <button class="stationbutton" id="stationB3" onClick="changeStation(1,3);">Station<br>Blue 3</button>
+            <button class="stationbutton" id="stationB1" onClick="changeStation(1,1);">Blue<br>1</button>
+            <button class="stationbutton" id="stationB2" onClick="changeStation(1,2);">Blue<br>2</button>
+            <button class="stationbutton" id="stationB3" onClick="changeStation(1,3);">Blue<br>3</button>
          </div>
       </div>
       <div id="playfield">

@@ -555,14 +555,26 @@ function leaveHAB(level, type) {
 	if(level == -1 || (type==0&&habLevelPreload==-1) || (type==1&&habLevelStart==-1) || (type==2&&habLevelEnd==-1)) {
 
 		if(type == 0) {
-			if(level >= 0 && habLevelPreload==-1) {
-				habLevelPreload = level;
-				changeLevel(level, type);
-				makeSideButtonOn(document.getElementById("habLevel"+type+habLevelPreload));
-			} else {
-				habLevelPreload = -1;
-				changeLevel(level,type);
-			}
+		    
+		    if(habLevelStart==-1) {
+		    
+    			if(level >= 0 && habLevelPreload==-1) {
+    				habLevelPreload = level;
+    				changeLevel(level, type);
+    				makeSideButtonOn(document.getElementById("habLevel"+type+habLevelPreload));
+    				
+    				if(level==1) makeSideButtonStop(document.getElementById("habLevel12"));
+    				if(level==2) makeSideButtonStop(document.getElementById("habLevel11"));
+    			} else {
+    				habLevelPreload = -1;
+    				changeLevel(level,type);
+    				
+    				makeButtonNorm(document.getElementById("habLevel11"));
+    				makeButtonNorm(document.getElementById("habLevel12"));
+    			}
+    			
+		    }
+		    
 		} else if(type == 1) {
 			if(level >= 0 && habLevelStart==-1) {
 				habLevelStart = level;
@@ -571,6 +583,9 @@ function leaveHAB(level, type) {
 			} else {
 				habLevelStart = -1;
 				changeLevel(level,type);
+				
+				if(habLevelPreload==1) makeSideButtonStop(document.getElementById("habLevel12"));
+				if(habLevelPreload==2) makeSideButtonStop(document.getElementById("habLevel11"));
 			}
 		} else {
 			if(level >= 0 && habLevelEnd==-1) {

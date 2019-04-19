@@ -1,17 +1,10 @@
 <?php
-
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-    $link = "https"; 
-else {
-    $link = "http"; 
-    header("Location: https://www.scouting.team7558.com", true, 301);
-}
 session_start();
+$verifyID = strip_tags($_GET['verifyID']);
 if (isset($_POST['username'])) {
     
 
-    $dbCon = mysqli_connect("", "", "Mr.", "");
-    
+    $dbCon = mysqli_connect("", "", "", "");
     
     // Form
     $user = ($_POST['username']);
@@ -22,25 +15,41 @@ if(!isset($user) || trim($user) == '')
 } else{
     
     
-    $sql        = "SELECT * FROM users WHERE Username = '$user' LIMIT 1";
+    $sql        = "SELECT * FROM `users` WHERE Username = '$user'";
     $query      = mysqli_query($dbCon, $sql); //search database
     $row        = mysqli_fetch_row($query);
     $uid        = $row[0];
     $dbUsname   = $row[1];
     $dbPassword = $row[2];
 	$dbVerified = $row[6];
+	$dbVerifyID = $row[7];
     // Check if user=user and pass=pass
   
-    if ($user == $dbUsname && $pass == $dbPassword && $dbVerified == 0) {
+    if ($user == $dbUsname && $pass == $dbPassword && $verifyID == $dbVerifyID) {
     
         // Set session 
         $_SESSION['username'] = $user;
         $_SESSION['id'] = $uid;
-    ?>
-        <script type="text/javascript">
-    window.location.href = 'https://www.scouting.team7558.com/scoutinghome.php';
-    </script>
-        <?php
+        
+        
+        
+        $sql = "SELECT * FROM `users` WHERE `Username` = '$user' AND `Password` = '$pass'";
+
+        $search_result = mysqli_query($dbCon, $sql);
+        $exists = false;
+        while($row = mysqli_fetch_array($search_result)):
+        $exists = true;
+        endwhile;
+        
+        if($exists) $sql = "UPDATE `users` SET `Verified`='0' WHERE `Username` = '$user' AND `Password` = '$pass'";
+        
+        if ($dbCon->query($sql) === TRUE) {
+            ?><script type="text/javascript">
+            alert("Account has been successfully verified!");
+        	window.location.href = 'https://www.scouting.team7558.com/?>';
+        	</script><?php
+        }
+        else echo "Error: " . $sql . "<br>" . $conn->error;
     } else {
 		$errors = " ";
 		if($dbVerified == 1){
@@ -61,14 +70,14 @@ if(!isset($user) || trim($user) == '')
 <head>
     <link rel="stylesheet" type="text/css" href="css/mainstyle.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Login</title>
+    <title>Verify</title>
 </head>
 
 <body>
     <div id="mainbox">
         <div id="outerbox">
-            <form action="/index.php" enctype="multipart/form-data" id="form" method="post" name="form">
-              <h1>TEAM 7558<br>SCOUTING APP<br><i>LOGIN</i></h1>
+            <form action="/verify.php?verifyID=<?php echo $verifyID;?>" enctype="multipart/form-data" id="form" method="post" name="form">
+              <h1>TEAM 7558<br>SCOUTING APP<br><i>VERIFICATION</i></h1>
               <br>
               USERNAME: <br>
               <input name="username" type="text" placeholder="Username" class="form2">
@@ -78,10 +87,10 @@ if(!isset($user) || trim($user) == '')
               <br>
               <br>
               <br>
-              <input type="submit" id="login" name="submit" value="Login">
+              <input type="submit" id="login" name="submit" value="Verify">
               <br>
             </form>
-            <span id="reghome"><a href="http://scouting.team7558.com/register.php"><button id="register">Register</button></a></span>
+            <span id="reghome"><a href="http://scouting.team7558.com/register.php"><button id="register">Register</button></a><br /></span>
             <div id="errors">
             <?php echo $errors; ?>
             </div>

@@ -22,7 +22,7 @@ window.location.href = 'https://scouting.team7558.com/';
 
 function filterTable($query)
    	{
-       	$connect = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
+       	$connect = mysqli_connect("", "", "", "");
        	$filter_Result = mysqli_query($connect, $query);
       		return $filter_Result;
    	}
@@ -55,9 +55,15 @@ function filterTable($query)
       </div>
 
       <div id="inputlist">
-         <span class="label">Number of Quals: </span><input class="inputs" type="number" name="qualsNumber" min=0 max=240 id="inputqualsnumber">
-       
-         <span id="qualscommentbox">Quals List:</span><br><br><textarea id="inputqualslist" rows="200" cols="200" placeholder="Quals 1&#10;123 456 7890 321 654 9870&#10;Quals 2&#10;R1 R2 R3 B1 B2 B3"></textarea></div>
+         <span class="label">Number of Quals: </span><br><input class="inputs" type="number" name="qualsNumber" min=0 max=240 id="inputqualsnumber">
+        <br><br>
+        <div id="pretable">
+            <div id="prerow">
+                <div class="preitem">
+                    <span id="qualsinsert"><span id="qualscommentbox">Quals List:</span><br><textarea id="inputqualslist" rows="40" cols="64" placeholder="Quals 1&#10;771&Tab;1114&Tab;1241&Tab;188&Tab;1310&Tab;907&#10;Quals 2&#10;33&Tab;1&Tab;4343&Tab;610&Tab;7558&Tab;7603&#10;Quals 32&#10;854&Tab;5917&Tab;2708&Tab;6141&Tab;3683&Tab;7735&#10;"></textarea></span>
+                </div>
+            </div>
+        </div>
       </div>
    </body>
 </html>

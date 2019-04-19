@@ -22,7 +22,7 @@ window.location.href = 'https://scouting.team7558.com/';
 
 function filterTable($query)
    	{
-       	$connect = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
+       	$connect = mysqli_connect("", "", "", "");
        	$filter_Result = mysqli_query($connect, $query);
       		return $filter_Result;
    	}
@@ -42,7 +42,25 @@ function filterTable($query)
        
       <div id="modelbltop" class="modelbl"><p>PIT SCOUTING</p></div>
       <div id="showtop">
-         <form id="form" action="" method="post" enctype = "multipart/form-data">
+          
+         <button id="loadteambutton" onclick="if(document.getElementById('loadteamnumber').value!=='Select') window.location.href = 'https://WWW.scouting.team7558.com/pitscouting.php?id=<?php echo $cid;?>&TeamNumber='+document.getElementById('loadteamnumber').value;
+            "><span id="loadteam">Edit Team
+            <select id="loadteamnumber">
+                <option>Select</option>
+                <?php
+                        $query = "SELECT * FROM `pitdata` WHERE `Competition` = '$cid' ORDER BY TeamNumber";
+                        $search_result = filterTable($query);
+                 ?>
+         
+                <?php while($row = mysqli_fetch_array($search_result)):?>
+                
+                <option><?php echo $row['TeamNumber'];?></option>
+
+                <?php endwhile;?>
+            </select>
+            </span></button>
+          
+         <form id="form" action="/postpit.php" method="post" enctype = "multipart/form-data">
              
              <!--Image inputs-->
              <label for="image" class="customupload">
@@ -87,9 +105,11 @@ function filterTable($query)
              <input type="hidden" id="datarobotweight" name="RobotWeightPounds" value="N/A">
              
              
-            <input type="submit" id="submitform" value="Submit" onclick="scoreForm(); alert(document.getElementById('datasandstormmovement').value);">
+            <input type="submit" id="submitform" value="Submit" onclick="scoreForm();">
             
          </form>
+         
+         
             <a href="https://www.scouting.team7558.com/scoutinghome.php"><button id="gohome">Go Home</button></a>
          
          
@@ -120,11 +140,13 @@ function filterTable($query)
                <div class="element"><span class="label">Sandstorm Movement</span></div>
                
                <div id="sandstormrow">
-                  <span class="element"><input class="checkinputs" type="checkbox" name="sandstormMove"><span class="checkelementsand" value="Does Not Move" id="sandstormmovena">N/A</span>
                   
-                  <span class="element"><input class="checkinputs" type="checkbox" name="sandstormMove"><span class="checkelementsand" value="Autonomous" id="sandstormmoveauto">Auto</span>
                   
-                  <span class="element"><input class="checkinputs" type="checkbox" name="sandstormMove"><span class="checkelementsand" value="Manual Control" id="sandstormmovemanual">Manual</span>
+                  <span class="element"><input class="checkinputs" type="checkbox" name="sandstormMove" id="sandstormmovestay"><span class="checkelementsand" value="Does Not Move">Stays</span>
+                  
+                  <span class="element"><input class="checkinputs" type="checkbox" name="sandstormMove" id="sandstormmoveauto"><span class="checkelementsand" value="Autonomous">Auto</span>
+                  
+                  <span class="element"><input class="checkinputs" type="checkbox" name="sandstormMove" id="sandstormmovemanual"><span class="checkelementsand" value="Manual Control">Manual</span>
                </div>
                
                
@@ -207,7 +229,7 @@ function filterTable($query)
                <div class="element"><span class="label">Rookie Team</span></div>
                <div id="rookierow">
                   <span class="element" id="rookieleft">Yes<input class="inputs" type="radio" name="rookieteam" id="rookieteam"></span>
-                  <span class="element">No<input class="inputs" type="radio" name="rookieteam" checked></span>
+                  <span class="element">No<input class="inputs" type="radio" name="rookieteam" id="notrookieteam" checked></span>
                </div>
 
                <div class="element"><span class="label">Robot Weight: </span><input class="inputs" type="text" name="robotWeight" placeholder="In pounds" id="robotweightpounds"></div>
@@ -227,6 +249,97 @@ function filterTable($query)
 
                <div class="element"><span class="label">Lift Type: </span><input class="inputs" type="text" name="liftType" id="lifttype"></div>
             </div>
+            <?php
+           //Load team
+            if(isset($_GET['TeamNumber'])) {
+                $team = $_GET['TeamNumber'];
+                $query = "SELECT * FROM `pitdata` WHERE `competition` = '$cid' AND `TeamNumber`=$team";
+                $search_result = filterTable($query);
+                while($row = mysqli_fetch_array($search_result)):
+                    ?><script>
+                        
+                        document.getElementById("inputteamname").value="<?php echo $row['TeamName'];?>";
+                        document.getElementById("inputteamnumber").value="<?php echo $row['TeamNumber'];?>";
+                        document.getElementById("generalcommentbox").value="<?php echo $row['GeneralComments'];?>";
+                        document.getElementById("drivetraintype").value="<?php echo $row['DrivetrainType'];?>";
+                        document.getElementById("wheeltype").value="<?php echo $row['WheelType'];?>";
+                        document.getElementById("drivemotorcount").value="<?php echo $row['NumberDriveMotors'];?>";
+                        
+                        
+                        //HAB Start
+                        if('<?php echo $row['HABStart'];?>'=="Level 1") {
+                            document.getElementsByName("sandstormlevel")[0].checked=true;
+                            document.getElementsByName("sandstormlevel")[1].checked=false;
+                        } else
+                        if('<?php echo $row['HABStart'];?>'=="Level 2") {
+                            document.getElementsByName("sandstormlevel")[0].checked=false;
+                            document.getElementsByName("sandstormlevel")[1].checked=true;
+                        }
+                        
+                        
+                        //Sandstorm
+                        if("<?php if(strpos($row['SandstormMovement'],"oes")>0) echo "STAYS"; else echo "NO";?>"=="STAYS") document.getElementById("sandstormmovestay").checked = true;
+                        if("<?php if(strpos($row['SandstormMovement'],"uton")>0) echo "AUTO"; else echo "NO";?>"=="AUTO") document.getElementById("sandstormmoveauto").checked = true;
+                        if("<?php if(strpos($row['SandstormMovement'],"anual")>0) echo "MANUAL"; else echo "NO";?>"=="MANUAL") document.getElementById("sandstormmovemanual").checked = true;
+                        
+                        document.getElementById("cargosandstorm").value="<?php echo $row['CargoSandstorm'];?>";
+                        document.getElementById("panelsandstorm").value="<?php echo $row['PanelSandstorm'];?>";
+                        
+                        
+                        //Hatch
+                        if('<?php echo $row['IntakeHatchGround'];?>'=="true") document.getElementById("hatchintakeground").checked=true;
+                        if('<?php echo $row['IntakeHatchHuman'];?>'=="true") document.getElementById("hatchintakehuman").checked=true;
+                        if('<?php echo $row['ScoreHatchShip'];?>'=="true") document.getElementById("hatchscoringship").checked=true;
+                        if('<?php echo $row['ScoreHatchLow'];?>'=="true") document.getElementById("hatchscoringlow").checked=true;
+                        if('<?php echo $row['ScoreHatchMid'];?>'=="true") document.getElementById("hatchscoringmid").checked=true;
+                        if('<?php echo $row['ScoreHatchHigh'];?>'=="true") document.getElementById("hatchscoringhigh").checked=true;
+                        
+                        //Cargo
+                        if('<?php echo $row['IntakeCargoGround'];?>'=="true") document.getElementById("cargointakeground").checked=true;
+                        if('<?php echo $row['IntakeCargoHuman'];?>'=="true") document.getElementById("cargointakehuman").checked=true;
+                        if('<?php echo $row['ScoreCargoShip'];?>'=="true") document.getElementById("cargoscoringship").checked=true;
+                        if('<?php echo $row['ScoreCargoLow'];?>'=="true") document.getElementById("cargoscoringlow").checked=true;
+                        if('<?php echo $row['ScoreCargoMid'];?>'=="true") document.getElementById("cargoscoringmid").checked=true;
+                        if('<?php echo $row['ScoreCargoHigh'];?>'=="true") document.getElementById("cargoscoringhigh").checked=true;
+                        
+                        
+                        
+                        //HAB End
+                        if('<?php echo $row['HABStart'];?>'=="Level 1") {
+                            document.getElementsByName("endgamelevel")[0].checked=true;
+                            document.getElementsByName("endgamelevel")[1].checked=false;
+                            document.getElementsByName("endgamelevel")[2].checked=false;
+                        } else
+                        if('<?php echo $row['HABStart'];?>'=="Level 2") {
+                            document.getElementsByName("endgamelevel")[0].checked=false;
+                            document.getElementsByName("endgamelevel")[1].checked=true;
+                            document.getElementsByName("endgamelevel")[2].checked=false;
+                        } else
+                        if('<?php echo $row['HABStart'];?>'=="Level 3") {
+                            document.getElementsByName("endgamelevel")[0].checked=false;
+                            document.getElementsByName("endgamelevel")[1].checked=false;
+                            document.getElementsByName("endgamelevel")[2].checked=true;
+                        }
+                        
+                        document.getElementById("robotscarried").value="<?php echo $row['RobotsCarried'];?>";
+                        document.getElementById("lifttype").value="<?php echo $row['LiftType'];?>";
+                        
+                        //Rookie Team
+                        if('<?php echo $row['IsRookie'];?>'=="true") {
+                            document.getElementById("rookieteam").checked=true;
+                            document.getElementById("notrookieteam").checked=false;
+                        } else
+                        if('<?php echo $row['HABStart'];?>'=="Level 2") {
+                            document.getElementById("rookieteam").checked=false;
+                            document.getElementById("notrookieteam").checked=true;
+                        }
+                        
+                        document.getElementsByName("robotWeight")[0].value="<?php echo $row['RobotWeightPounds'];?>";
+                    
+                    </script><?php
+                endwhile;
+            }
+            ?>
          </div>
 
       </div>

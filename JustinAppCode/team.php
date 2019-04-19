@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 session_start();
-$db_HOST = "localhost";
-$db_USER = "team7558_s";
-$db_PASS = "Mr.Roboto11235";
-$db_NAME = "team7558_scouting";
+$db_HOST = "";
+$db_USER = "";
+$db_PASS = "";
+$db_NAME = "";
 if(isset($_SESSION['username'])){
 $connect = mysqli_connect($db_HOST, $db_USER, $db_PASS, $db_NAME);
 $cid = $_SESSION['cid'];
@@ -30,7 +30,7 @@ $defCounter=0;
 
 <div id="teamphoto">
 <h2>Team Photo: </h2>
-<img src="/uploads/<?php echo $cid; ?>_<?php echo $TeamNumber; ?>.jpg" height="500" width="500" />
+<img src="/uploads/<?php echo $_SESSION['username']; ?>_<?php echo $cid; ?>_<?php echo $TeamNumber; ?>.jpg" height="500" width="500" />
 </div>
 
 <div id="containerpitdata">

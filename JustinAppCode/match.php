@@ -1,22 +1,63 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 session_start();
-$db_HOST = "localhost";
-$db_USER = "team7558_s";
-$db_PASS = "Mr.Roboto11235";
-$db_NAME = "team7558_scouting";
+
 if(isset($_SESSION['username'])){
 $connect = mysqli_connect($db_HOST, $db_USER, $db_PASS, $db_NAME);
 $cid = $_SESSION['cid'];
 $MatchNumber = strip_tags($_GET['MatchNumber']);
-
-$real = true;
-
-//$sortType = htmlspecialchars($_GET["sortType"]); // Should be a column name
-//$sortOrder = htmlspecialchars($_GET["sortOrder"]); // Should be ASC or DSC
-$sql = "SELECT * FROM `matches` WHERE `MatchNumber` = '$MatchNumber' AND `Competition` = '$cid' ORDER BY RobotStation";
-$search_result = mysqli_query($connect, $sql);
 }
+$real = true;
+function filterTable($query)
+	{
+	    $db_HOST = "localhost";
+$db_USER = "team7558_s";
+$db_PASS = "Mr.Roboto11235";
+$db_NAME = "team7558_scouting";
+	    $connect = mysqli_connect($db_HOST, $db_USER, $db_PASS, $db_NAME);
+    	$filter_Result = mysqli_query($connect, $query);
+   		return $filter_Result;
+	}
+
+	
+	
+	$team = 7558;
+//Create list of teams that we will play with
+	$teamList="";
+    $search_result = filterTable("SELECT * FROM `matches` WHERE `competition` = '$cid' AND `TeamNumber`= '$team' ORDER by `MatchNumber`");
+    while($row = mysqli_fetch_array($search_result)):
+           $match = $row['MatchNumber'];
+            $stat = $row['RobotStation'];
+            
+            $thisMatch = filterTable("SELECT * FROM `matches` WHERE `competition` = '25' AND `MatchNumber`= $match ORDER by `RobotStation`");
+            //Check every team playing thismatch
+            while($boi = mysqli_fetch_array($thisMatch)):
+                //If we're blue
+                if($stat == "B1" || $stat == "B2" || $stat == "B3") {
+                    if( ($boi['RobotStation'] == "B1" || $boi['RobotStation'] == "B2" || $boi['RobotStation'] == "B3") && $boi['TeamNumber']!==$team) {
+                        
+                        //If on alliance, add to list
+                        if($boi['Updated']==0) $teamList .= "!".$boi['TeamNumber']."x";
+                        else $teamList .= "y".$boi['TeamNumber']."x";
+                    }
+                //If we're red
+                } else {
+                    if( ($boi['RobotStation'] == "R1" || $boi['RobotStation'] == "R2" || $boi['RobotStation'] == "R3") && $boi['TeamNumber']!==$team) {
+                        
+                        //If on alliance, add to list
+                        if($boi['Updated']==0) $teamList .= "!".$boi['TeamNumber']."x";
+                        else $teamList .= "y".$boi['TeamNumber']."x";
+                    }
+                }
+            endwhile;
+    endwhile;
+	
+	
+$sql = "SELECT * FROM `matches` WHERE `MatchNumber` = '$MatchNumber' AND `Competition` = '$cid' ORDER BY RobotStation";
+$search_result = filterTable($sql);
+
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -93,7 +134,16 @@ $search_result = mysqli_query($connect, $sql);
         }
     ?>  
     
-    <td class="defenseitems<?php echo $row['ID'];?>"><a href="/team.php?TeamNumber=<?php echo $row['TeamNumber']; ?>"><?php echo $row['TeamNumber']; ?> </a></td>
+    <td class="defenseitems<?php echo $row['ID'];?>"><?php 
+        
+        //Check if we work with them
+        $will = strpos($teamList, "!".$row['TeamNumber']."x");
+        $have = strpos($teamList, "y".$row['TeamNumber']."x");
+        if($will>0) echo "!";
+        else if($have>0 || $row['TeamNumber']==$team) echo "&#x2714";
+        else echo "&#x2716";
+        
+        ?><a href="/team.php?TeamNumber=<?php echo $row['TeamNumber']; ?>"><?php echo $row['TeamNumber']; ?> </a></td>
     
     <td class="habitems habitems<?php echo $row['ID'];?>"><?php if($real) echo $row['HABSandstormScore']; else echo number_format($row['HABSandstormScore'],2); ?></td>
     

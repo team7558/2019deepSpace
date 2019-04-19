@@ -1,8 +1,4 @@
 <?php 
-$db_HOST = "localhost";
-$db_USER = "team7558_s";
-$db_PASS = "Mr.Roboto11235";
-$db_NAME = "team7558_scouting";
 error_reporting(E_ERROR | E_PARSE);
 session_start();
 

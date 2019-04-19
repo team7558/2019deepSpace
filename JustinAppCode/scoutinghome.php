@@ -1,43 +1,40 @@
 <?php
-
 	session_start();
-
 	echo 'Welcome, '.$_SESSION['username']; 
-
 	if(isset($_SESSION['username'])){
-
 	$user = $_SESSION['username'];
-
-    $query = "SELECT * FROM `competitions` WHERE `Username` = '$user'";
-
+    $query = "SELECT * FROM `competitions` WHERE `Username` = '$user' ORDER BY ID";
     $search_result = filterTable($query);
-
 	}else{
-
 	?>
 
    <script type="text/javascript">
-
 window.location.href = 'https://www.scouting.team7558.com';
-
 </script>
 
     <?php
-
 }
-
+    $connect = mysqli_connect("", "", "", "");
 	function filterTable($query)
-
 	{
-
-    	$connect = mysqli_connect("localhost", "team7558_s", "Mr.Roboto11235", "team7558_scouting");
-
+	       $connect = mysqli_connect("", "", "", "");
     	$filter_Result = mysqli_query($connect, $query);
-
    		return $filter_Result;
-
 	}
-
+	
+	if (isset($_POST['CompetitionName'])) {
+	    $uname = $_SESSION['username'];
+	    $compname = strip_tags($_POST['CompetitionName']);
+        
+        $sql = "INSERT INTO `competitions` (Username, CompetitionName) VALUES ('$uname', '$compname')";
+    
+        if ($connect->query($sql) === TRUE) {
+            echo "Success!";
+            ?><script>
+        	window.location.href = 'https://www.scouting.team7558.com/scoutinghome.php';</script>
+            <?php
+        }
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -77,7 +74,7 @@ window.location.href = 'https://www.scouting.team7558.com';
 
                     <th id="homepreload">Preload Teams and Matches</th>
 
-                    <th id="homeedit">Edit/Delete Data</th>
+                    <th id="homedelete">Delete Competition</th>
                     
                     
 
@@ -103,13 +100,19 @@ window.location.href = 'https://www.scouting.team7558.com';
 
                     <td><a href="/preload.php?id=<?php echo $row['ID'];?>">Preload </a></td>
 
-                    <td><a href="/edit.php?id=<?php echo $row['ID'];?>"> Edit/Delete </a></td>
+                    <td><a href="" onclick="alert();"> Edit/Delete </a></td>
 
                 </tr>
 
                 <?php endwhile;?>
 
             </table>
+            
+            <h3>Add Competition</h3>
+            <form action="/scoutinghome.php" enctype="multipart/form-data" id="form" method="post" name="form">
+                <input type="text" name="CompetitionName" id="compname" placeholder="Competition Name">
+                <input type="submit" value="Created">
+            </form>
 
 </body>
 
